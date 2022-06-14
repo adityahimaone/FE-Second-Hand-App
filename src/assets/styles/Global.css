@@ -1,4 +1,5 @@
 @import url("https://fonts.googleapis.com/css2?family=Poppins&display=swap");
+@import url("https://cdn.jsdelivr.net/npm/bootstrap-icons@1.8.3/font/bootstrap-icons.css");
 @font-face {
   font-family: "Poppins";
   src: local("Poppins"), url("https://fonts.googleapis.com/css2?family=Poppins&display=swap");
@@ -18,4 +19,40 @@ body {
 }
 .bg-purple-5 {
   background-color: #4b1979;
+}
+
+.button-primary-1 {
+  background-color: #7126b5;
+  color: #fff;
+  border-radius: 12px;
+  border: none;
+  padding: 12px 14px;
+  font-weight: 400;
+  font-size: 14px;
+  line-height: 20px;
+}
+.button-primary-1:hover {
+  background-color: #4b1979;
+}
+
+.button-outline-1 {
+  color: #000;
+  border-radius: 12px;
+  border: 1px solid #e2d4f0;
+  padding: 12px 14px;
+  font-weight: 400;
+  font-size: 14px;
+  line-height: 20px;
+}
+.button-outline-1:hover {
+  background-color: #7126b5;
+}
+
+.form-input {
+  background: #eeeeee;
+  border-radius: 16px;
+  padding: 10px 22px;
+  font-weight: 400;
+  font-size: 14px;
+  line-height: 20px;
 }/*# sourceMappingURL=Global.css.map */
