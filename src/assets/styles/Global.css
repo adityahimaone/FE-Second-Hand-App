@@ -21,6 +21,19 @@ body {
   background-color: #4b1979;
 }
 
+.color-purple-1 {
+  color: #e2d4f0;
+}
+.color-purple-4 {
+  color: #7126b5;
+}
+.color-purple-5 {
+  color: #4b1979;
+}
+.color-gray {
+  color: #8a8a8a;
+}
+
 .button-primary-1 {
   background-color: #7126b5;
   color: #fff;
@@ -34,8 +47,21 @@ body {
 .button-primary-1:hover {
   background-color: #4b1979;
 }
+.button-primary-2 {
+  background-color: #e2d4f0;
+  color: #000;
+  border-radius: 12px;
+  border: none;
+  padding: 12px 14px;
+  font-weight: 400;
+  font-size: 14px;
+  line-height: 20px;
+}
+.button-primary-2:hover {
+  background-color: #4b1979;
+}
 
-.button-outline-1 {
+.button-outline-2 {
   color: #000;
   border-radius: 12px;
   border: 1px solid #e2d4f0;
@@ -44,7 +70,7 @@ body {
   font-size: 14px;
   line-height: 20px;
 }
-.button-outline-1:hover {
+.button-outline-2:hover {
   background-color: #7126b5;
 }
 
