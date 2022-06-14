@@ -1,0 +1,109 @@
+@import url("https://fonts.googleapis.com/css2?family=Poppins&display=swap");
+
+@import url("https://cdn.jsdelivr.net/npm/bootstrap-icons@1.8.3/font/bootstrap-icons.css");
+
+@font-face {
+  font-family: "Poppins";
+  src: local("Poppins"),
+    url("https://fonts.googleapis.com/css2?family=Poppins&display=swap");
+}
+
+body {
+  margin: 0;
+  font-family: "Poppins", -apple-system, BlinkMacSystemFont, "Segoe UI",
+    "Roboto", "Oxygen", "Ubuntu", "Cantarell", "Fira Sans", "Droid Sans",
+    "Helvetica Neue", sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+$purple1: #e2d4f0;
+$purple4: #7126b5;
+$purple5: #4b1979;
+$gray: #8a8a8a;
+
+.bg {
+  &-purple-1 {
+    background-color: $purple1;
+  }
+  &-purple-4 {
+    background-color: $purple4;
+  }
+  &-purple-5 {
+    background-color: $purple5;
+  }
+}
+
+.color {
+  &-purple-1 {
+    color: $purple1;
+  }
+  &-purple-4 {
+    color: $purple4;
+  }
+  &-purple-5 {
+    color: $purple5;
+  }
+  &-gray {
+    color: $gray;
+  }
+}
+
+.button {
+  &-primary-1 {
+    background-color: $purple4;
+    color: #fff;
+    border-radius: 12px;
+    border: none;
+    padding: 12px 14px;
+    font-weight: 400;
+    font-size: 14px;
+    line-height: 20px;
+
+    &:hover {
+      background-color: $purple5;
+    }
+  }
+
+  &-primary-2 {
+    background-color: $purple1;
+    color: #000;
+    border-radius: 12px;
+    border: none;
+    padding: 12px 14px;
+    font-weight: 400;
+    font-size: 14px;
+    line-height: 20px;
+
+    &:hover {
+      background-color: $purple5;
+    }
+  }
+}
+
+.button {
+  &-outline-2 {
+    color: #000;
+    border-radius: 12px;
+    border: 1px solid $purple1;
+    padding: 12px 14px;
+    font-weight: 400;
+    font-size: 14px;
+    line-height: 20px;
+
+    &:hover {
+      background-color: $purple4;
+    }
+  }
+}
+
+.form {
+  &-input {
+    background: #eeeeee;
+    border-radius: 16px;
+    padding: 10px 22px;
+    font-weight: 400;
+    font-size: 14px;
+    line-height: 20px;
+  }
+}
