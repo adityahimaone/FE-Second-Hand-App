@@ -1,0 +1,28 @@
+.card-status {
+    width: 23rem;
+    height: 22.75rem !important;
+    transform: translate(-50%,-50%);
+    left: 50%;
+    top: 50%;
+    border-radius: 16px !important;
+}
+.button-primary-1:disabled {
+    background-color: #8A8A8A;
+   }
+
+.input-status:checked{
+    background-color: #7126b5 !important;
+    border-color: #e2d4f0 !important;
+    background-image: none !important;
+    border-width: 3px;
+}
+/* Responsive */
+@media only screen and (max-width: 360px) {
+    .card-status {
+        transform: translateX(-50%);
+        left: 50vw;
+        bottom: -1.5vh;
+        top: auto;
+        border-radius: 16px 16px 0 0 !important;
+    }
+  }
