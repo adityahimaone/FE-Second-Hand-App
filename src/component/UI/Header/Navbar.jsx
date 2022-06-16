@@ -15,7 +15,7 @@ function Navbar() {
               type="text"
               id="inputPassword5"
               aria-describedby="search"
-              className="form-input"
+              className="form-input-search"
               placeholder="Cari di sini ..."
             />
           </div>
