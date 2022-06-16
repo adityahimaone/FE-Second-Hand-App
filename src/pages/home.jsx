@@ -24,25 +24,25 @@ function Home() {
       price: 250000,
     },
     {
-      id: 3,
+      id: 4,
       name: "Jam Tangan Casio",
       category: "Aksesoris",
       price: 250000,
     },
     {
-      id: 4,
+      id: 5,
       name: "Jam Tangan Casio",
       category: "Aksesoris",
       price: 2500000,
     },
     {
-      id: 5,
+      id: 6,
       name: "Jam Tangan Casio",
       category: "Aksesoris",
       price: 25000,
     },
     {
-      id: 6,
+      id: 7,
       name: "Jam Tangan Casio",
       category: "Aksesoris",
       price: 25000,
@@ -63,12 +63,12 @@ function Home() {
             <h6 className="fw-bold">Telusuri Kategori</h6>
             <div className="d-flex gap-2">
               <Button className="button-primary-1">
-                <i class="bi bi-search"></i>
+                <i className="bi bi-search"></i>
                 <span className="px-2">Semua</span>
               </Button>
               {categoryList.map((item, index) => (
-                <Button key={index} className="button-primary-2">
-                  <i class="bi bi-search"></i>
+                <Button key={index + 1} className="button-primary-2">
+                  <i className="bi bi-search"></i>
                   <span className="px-2">{item}</span>
                 </Button>
               ))}
@@ -76,9 +76,8 @@ function Home() {
           </div>
           <div className="my-3 row row-cols-2 row-cols-lg-6 g-2">
             {cardData.map((item) => (
-              <div className="col">
+              <div key={item.id} className="col">
                 <CardHome
-                  key={item.id}
                   title={item.name}
                   category={item.category}
                   price={item.price}
@@ -87,7 +86,7 @@ function Home() {
             ))}
           </div>
           <Button className={`button-primary-1 ${Style["button-float"]}`}>
-            <i class="bi bi-plus-lg"></i>
+            <i className="bi bi-plus-lg"></i>
             <span className="px-2">Jual</span>
           </Button>
         </div>
