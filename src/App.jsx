@@ -1,10 +1,13 @@
 import RoutesPage from "./routes";
-import { BrowserRouter, Route, Routes } from "react-router-dom";
-import Home from "./pages/home";
-import Login from "./pages/Login/Login";
+import store from "./store/store";
+import { Provider } from "react-redux";
 
 function App() {
-  return <RoutesPage />;
+  return (
+    <Provider store={store}>
+      <RoutesPage />
+    </Provider>
+  );
 }
 
 export default App;
