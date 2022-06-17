@@ -15,5 +15,7 @@
 @media only screen and (max-width: 360px) {
     .card-notif {
         margin-right: -10px;
+        border: none !important;
+        border-radius: 0 !important;
     }
   }
