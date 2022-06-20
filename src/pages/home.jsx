@@ -2,6 +2,7 @@ import React from "react";
 import { Button } from "react-bootstrap";
 import CardHome from "../component/UI/Card/CardHome";
 import Style from "../assets/styles/Home.module.css";
+import Carousel from "../component/elements/Home/Carousel";
 
 function Home() {
   const cardData = [
@@ -53,8 +54,13 @@ function Home() {
   return (
     <>
       <section id="banner" className="my-4">
-        <div className="d-flex justify-content-center">
-          <img src="/images/img_banner.png" alt="" />
+        <div
+          className="d-flex justify-content-center"
+          style={{ overflow: "hidden" }}
+        >
+          <div className={Style["section-carousel"]}>
+            <Carousel />
+          </div>
         </div>
       </section>
       <section id="main" className={Style["section-main"]}>
