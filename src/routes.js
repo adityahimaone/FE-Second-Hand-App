@@ -1,12 +1,12 @@
 import React from "react";
-import Home from "./pages/Home";
-// import Modal from "./component/UI/Modal/Modal"
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import LayoutDefault from "./components/layout/default";
-// import ModalNotif from "./component/UI/Modal_Notif/ModalNotif";
-// import ModalStatus from "./component/UI/Modal_Status/ModalStatus";
+import Home from "./pages/Home";
 import Login from "./pages/Login/Login";
 import ProductDetail from "./pages/ProductDetail";
+// import Modal from "./component/UI/Modal/Modal"
+// import ModalNotif from "./component/UI/Modal_Notif/ModalNotif";
+// import ModalStatus from "./component/UI/Modal_Status/ModalStatus";
 
 function RoutesPage() {
   return (
