@@ -1,7 +1,8 @@
-import { Button } from "react-bootstrap";
+import React from "react";
 import CardHome from "../components/UI/Card/CardHome";
 import Style from "../assets/styles/Home.module.css";
 import Carousel from "../components/elements/Home/Carousel";
+import { Button } from "react-bootstrap";
 
 const cardData = [
   {
@@ -56,7 +57,7 @@ const cardData = [
 
 const categoryList = ["Hobi", "Kendaran", "Aksesoris", "Elektronik"];
 
-function Home() {
+function HomePage() {
   return (
     <>
       <section id="banner" className="my-4">
@@ -107,4 +108,4 @@ function Home() {
   );
 }
 
-export default Home;
+export default HomePage;
