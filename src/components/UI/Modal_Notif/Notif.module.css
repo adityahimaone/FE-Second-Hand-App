@@ -1,0 +1,21 @@
+.card-notif {
+    width: 23.5rem;
+    height: auto;
+    right: 0;
+    margin-right: 10vw;
+}
+.txt {
+    margin-left: 7rem !important;
+}
+.img {
+    width: 3rem;
+    height: 3rem;
+}
+/* Responsive */
+@media only screen and (max-width: 360px) {
+    .card-notif {
+        margin-right: -10px;
+        border: none !important;
+        border-radius: 0 !important;
+    }
+  }

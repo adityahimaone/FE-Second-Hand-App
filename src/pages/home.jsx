@@ -1,42 +1,100 @@
 import React from "react";
 import { Button } from "react-bootstrap";
-import Card from "react-bootstrap/Card";
+import CardHome from "../components/UI/Card/CardHome";
+import Style from "../assets/styles/Home.module.css";
+import Carousel from "../components/elements/Home/Carousel";
 
 function Home() {
+  const cardData = [
+    {
+      id: 1,
+      name: "Jam Tangan Casio",
+      category: "Aksesoris",
+      price: 250000,
+    },
+    {
+      id: 2,
+      name: "Jam Tangan Casio",
+      category: "Aksesoris",
+      price: 250000,
+    },
+    {
+      id: 3,
+      name: "Jam Tangan Casio",
+      category: "Aksesoris",
+      price: 250000,
+    },
+    {
+      id: 4,
+      name: "Jam Tangan Casio",
+      category: "Aksesoris",
+      price: 250000,
+    },
+    {
+      id: 5,
+      name: "Jam Tangan Casio",
+      category: "Aksesoris",
+      price: 2500000,
+    },
+    {
+      id: 6,
+      name: "Jam Tangan Casio",
+      category: "Aksesoris",
+      price: 25000,
+    },
+    {
+      id: 7,
+      name: "Jam Tangan Casio",
+      category: "Aksesoris",
+      price: 25000,
+    },
+  ];
+
+  const categoryList = ["Hobi", "Kendaran", "Aksesoris", "Elektronik"];
   return (
     <>
       <section id="banner" className="my-4">
-        <div className="d-flex justify-content-center">
-          <img src="/images/img_banner.png" alt="" />
+        <div
+          className="d-flex justify-content-center"
+          style={{ overflow: "hidden" }}
+        >
+          <div className={Style["section-carousel"]}>
+            <Carousel />
+          </div>
         </div>
       </section>
-      <section id="main">
+      <section id="main" className={Style["section-main"]}>
         <div className="container">
           <div>
             <h6 className="fw-bold">Telusuri Kategori</h6>
             <div className="d-flex gap-2">
               <Button className="button-primary-1">
-                <i class="bi bi-search"></i>
+                <i className="bi bi-search"></i>
                 <span className="px-2">Semua</span>
               </Button>
-              <Button className="button-primary-2">
-                <i class="bi bi-search"></i>
-                <span className="px-2">Baju</span>
-              </Button>
+              {categoryList.map((item, index) => (
+                <Button key={index + 1} className="button-primary-2">
+                  <i className="bi bi-search"></i>
+                  <span className="px-2">{item}</span>
+                </Button>
+              ))}
             </div>
           </div>
-          <div className="my-3">
-            <Card style={{ width: "18rem" }}>
-              <Card.Img variant="top" className="p-2" src="/images/dummy.png" />
-              <Card.Body>
-                <Card.Title>Jam Tangan Casio</Card.Title>
-                <Card.Text>
-                  <p className="color-gray">Aksesoris</p>
-                  <p>Rp 250.000</p>
-                </Card.Text>
-              </Card.Body>
-            </Card>
+          <div className="my-3 row row-cols-2 row-cols-lg-6 g-2">
+            {cardData.map((item) => (
+              <div key={item.id} className="col">
+                <CardHome
+                  title={item.name}
+                  category={item.category}
+                  price={item.price}
+                />
+              </div>
+            ))}
           </div>
+          <Button className={`button-primary-1 ${Style["button-float"]}`}>
+            <i className="bi bi-plus-lg"></i>
+            <span className="px-2">Jual</span>
+          </Button>
         </div>
       </section>
     </>

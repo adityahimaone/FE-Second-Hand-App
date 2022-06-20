@@ -49,6 +49,21 @@ $gray: #8a8a8a;
   }
 }
 
+.font {
+  font-weight: 400;
+  line-height: 20px;
+  font-style: normal;
+  &-10 {
+    font-size: 0.6rem;
+  }
+  &-12 {
+    font-size: 0.8rem;
+  }
+  &-14 {
+    font-size: 0.9rem;
+  }
+}
+
 .button {
   &-primary-1 {
     background-color: $purple4;
@@ -99,11 +114,26 @@ $gray: #8a8a8a;
 
 .form {
   &-input {
-    background: #eeeeee;
+    background: #fff;
     border-radius: 16px;
     padding: 10px 22px;
     font-weight: 400;
     font-size: 14px;
     line-height: 20px;
+
+    &-search {
+      background: #eeeeee;
+      border-radius: 16px;
+      padding: 10px 22px;
+      font-weight: 400;
+      font-size: 14px;
+      line-height: 20px;
+    }
   }
+}
+
+.card {
+  background: #ffffff;
+  box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.15);
+  border-radius: 16px;
 }

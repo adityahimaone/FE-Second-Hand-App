@@ -1,0 +1,18 @@
+.section-main {
+  position: relative;
+}
+
+.section-carousel {
+  overflow: hidden;
+
+  width: 100%;
+}
+
+.button-float {
+  position: fixed;
+  bottom: 0px;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  margin: 0 auto;
+  box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.15);
+}
