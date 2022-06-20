@@ -1,8 +1,8 @@
 import React from "react";
 import { Button } from "react-bootstrap";
-import CardHome from "../component/UI/Card/CardHome";
+import CardHome from "../components/UI/Card/CardHome";
 import Style from "../assets/styles/Home.module.css";
-import Carousel from "../component/elements/Home/Carousel";
+import Carousel from "../components/elements/Home/Carousel";
 
 function Home() {
   const cardData = [
