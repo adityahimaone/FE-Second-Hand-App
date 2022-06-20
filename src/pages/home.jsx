@@ -48,6 +48,12 @@ function Home() {
       category: "Aksesoris",
       price: 25000,
     },
+    {
+      id: 8,
+      name: "Jam Tangan Casio",
+      category: "Aksesoris",
+      price: 25000,
+    },
   ];
 
   const categoryList = ["Hobi", "Kendaran", "Aksesoris", "Elektronik"];
