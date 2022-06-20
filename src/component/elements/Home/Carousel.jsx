@@ -17,7 +17,7 @@ function Carousel() {
       breakpoints={{
         576: {
           width: 576,
-          slidesPerView: 2,
+          slidesPerView: 3,
         },
         1024: {
           width: 968,
@@ -30,7 +30,7 @@ function Carousel() {
       onSlideChange={() => console.log("slide change")}
     >
       <SwiperSlide>
-        <img src="/images/img_banner.png" alt="" className="" />
+        <img src="/images/img_banner.png" alt="" />
       </SwiperSlide>
       <SwiperSlide>
         <img src="/images/img_banner.png" alt="" />
