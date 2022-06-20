@@ -23,5 +23,5 @@ jobs:
         with:
           args: deploy --dir=build --prod
           heroku_api_key: ${{ secrets.HEROKU_API_KEY }}
-          heroku_app_name: "obn-staging"
+          heroku_app_name: "fe-old-but-new-staging"
           heroku_email: "spenaga007@gmail.com"
