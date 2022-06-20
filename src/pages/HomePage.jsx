@@ -1,56 +1,63 @@
 import React from "react";
-import { Button } from "react-bootstrap";
 import CardHome from "../components/UI/Card/CardHome";
 import Style from "../assets/styles/Home.module.css";
 import Carousel from "../components/elements/Home/Carousel";
+import { Button } from "react-bootstrap";
 
-function Home() {
-  const cardData = [
-    {
-      id: 1,
-      name: "Jam Tangan Casio",
-      category: "Aksesoris",
-      price: 250000,
-    },
-    {
-      id: 2,
-      name: "Jam Tangan Casio",
-      category: "Aksesoris",
-      price: 250000,
-    },
-    {
-      id: 3,
-      name: "Jam Tangan Casio",
-      category: "Aksesoris",
-      price: 250000,
-    },
-    {
-      id: 4,
-      name: "Jam Tangan Casio",
-      category: "Aksesoris",
-      price: 250000,
-    },
-    {
-      id: 5,
-      name: "Jam Tangan Casio",
-      category: "Aksesoris",
-      price: 2500000,
-    },
-    {
-      id: 6,
-      name: "Jam Tangan Casio",
-      category: "Aksesoris",
-      price: 25000,
-    },
-    {
-      id: 7,
-      name: "Jam Tangan Casio",
-      category: "Aksesoris",
-      price: 25000,
-    },
-  ];
+const cardData = [
+  {
+    id: 1,
+    name: "Jam Tangan Casio",
+    category: "Aksesoris",
+    price: 250000,
+  },
+  {
+    id: 2,
+    name: "Jam Tangan Casio",
+    category: "Aksesoris",
+    price: 250000,
+  },
+  {
+    id: 3,
+    name: "Jam Tangan Casio",
+    category: "Aksesoris",
+    price: 250000,
+  },
+  {
+    id: 4,
+    name: "Jam Tangan Casio",
+    category: "Aksesoris",
+    price: 250000,
+  },
+  {
+    id: 5,
+    name: "Jam Tangan Casio",
+    category: "Aksesoris",
+    price: 2500000,
+  },
+  {
+    id: 6,
+    name: "Jam Tangan Casio",
+    category: "Aksesoris",
+    price: 25000,
+  },
+  {
+    id: 7,
+    name: "Jam Tangan Casio",
+    category: "Aksesoris",
+    price: 25000,
+  },
+  {
+    id: 8,
+    name: "Jam Tangan Casio",
+    category: "Aksesoris",
+    price: 25000,
+  },
+];
 
-  const categoryList = ["Hobi", "Kendaran", "Aksesoris", "Elektronik"];
+const categoryList = ["Hobi", "Kendaran", "Aksesoris", "Elektronik"];
+
+function HomePage() {
   return (
     <>
       <section id="banner" className="my-4">
@@ -101,4 +108,4 @@ function Home() {
   );
 }
 
-export default Home;
+export default HomePage;
