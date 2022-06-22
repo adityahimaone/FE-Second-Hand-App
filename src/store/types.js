@@ -1,2 +1,2 @@
 // types here
-// export const GET_POST = "GET_POST";
+export const POST_LOGIN = "POST_LOGIN";

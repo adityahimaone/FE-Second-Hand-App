@@ -7,6 +7,7 @@ import HomePage from "./pages/HomePage";
 // import Modal from "./component/UI/Modal/Modal"
 // import ModalNotif from "./component/UI/Modal_Notif/ModalNotif";
 // import ModalStatus from "./component/UI/Modal_Status/ModalStatus";
+import BuyerProduct from "./pages/buyer-product/buyer-product";
 
 function RoutesPage() {
   return (
@@ -15,8 +16,9 @@ function RoutesPage() {
         <Route path="/" element={<LayoutDefault />}>
           <Route index element={<HomePage />} />
           <Route path="product/:id" element={<ProductDetail />} />
+          <Route path="/login" element={<Login />} />
+          <Route path="/bproduct" element={<BuyerProduct />} />
         </Route>
-        <Route path="/login" element={<Login />} />
       </Routes>
     </BrowserRouter>
   );
