@@ -11,6 +11,7 @@ import BuyerProduct from "./pages/buyer-product/BuyerProduct";
 // import { useReducer } from 'react';
 import store from "./store/store";
 import BuyerNotification from "./pages/buyer-product/BuyerNotification";
+import SellerSemuaProduk from "./pages/seller/SellerSemuaProduk";
 
 
 function RoutesPage() {
@@ -23,6 +24,7 @@ function RoutesPage() {
           <Route path="/login" element={<Login />} />
           <Route path="/bproduct" element={<BuyerProduct />} />
           <Route path="/notifbuyer" element={<BuyerNotification />} />
+          <Route path="/seller" element={<SellerSemuaProduk />} />
         </Route>
       </Routes>
     </BrowserRouter>
