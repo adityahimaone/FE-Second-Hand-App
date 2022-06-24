@@ -1,5 +1,6 @@
 import React from "react";
 import CardHome from "../components/UI/Card/CardHome";
+import Style from "../assets/styles/ProductSellingList.module.css";
 
 const cardData = [
   {
@@ -54,8 +55,8 @@ const cardData = [
 
 function ProductSellingList() {
   return (
-    <div className="container">
-      <div className="mt-4">
+    <div className="container my-4">
+      <div className="">
         <h1 className="font-20">Daftar Jual Saya</h1>
       </div>
       <div>
@@ -78,18 +79,19 @@ function ProductSellingList() {
         <div className="col-3">
           <div className="card p-4">
             <h5>Kategori</h5>
-            <ul>
-              <li>Semua Produk</li>
-              <li>Diminati</li>
-              <li>Terjual</li>
+            <ul className="list-group list-group-flush">
+              <li className="list-group-item">Semua Produk</li>
+              <li className="list-group-item">Diminati</li>
+              <li className="list-group-item">Terjual</li>
             </ul>
           </div>
         </div>
         <div className="col-9 ">
           <div className="row row-cols-2 row-cols-lg-3 g-4">
             <div className="col">
-              <div className="card d-flex justify-content-center align-items-center h-100">
-                Tambah Produk
+              <div className="card-dot d-flex flex-column justify-content-center align-items-center h-100">
+                <i className="bi bi-plus-lg fs-3"></i>
+                <span>Tambah Produk</span>
               </div>
             </div>
             {cardData.map((item) => (

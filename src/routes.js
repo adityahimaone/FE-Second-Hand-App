@@ -21,7 +21,6 @@ function RoutesPage() {
         <Route path="/" element={<LayoutDefault />}>
           <Route index element={<HomePage />} />
           <Route path="product/:id" element={<ProductDetail />} />
-
           <Route path="/bproduct" element={<BuyerProduct />} />
           <Route path="/notifbuyer" element={<BuyerNotification />} />
           <Route path="/productsellinglist" element={<ProductSellingList />} />
