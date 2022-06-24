@@ -2,6 +2,7 @@ import React, { useReducer } from "react";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import LayoutDefault from "./components/layout/default";
 import Login from "./pages/Login/Login";
+import Register from "./pages/Register/Register";
 import ProductDetail from "./pages/ProductDetail";
 import HomePage from "./pages/HomePage";
 // import Modal from "./component/UI/Modal/Modal"
@@ -21,6 +22,7 @@ function RoutesPage() {
           <Route index element={<HomePage />} />
           <Route path="product/:id" element={<ProductDetail />} />
           <Route path="/login" element={<Login />} />
+          <Route path="/Register" element={<Register />} />
           <Route path="/bproduct" element={<BuyerProduct />} />
           <Route path="/notifbuyer" element={<BuyerNotification />} />
           <Route path="/productsellinglist" element={<ProductSellingList />} />

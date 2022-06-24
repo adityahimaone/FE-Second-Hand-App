@@ -5,16 +5,17 @@ import { useEffect } from "react";
 // import { useNavigate } from "react-router-dom";
 import { Button } from "react-bootstrap";
 import { useNavigate } from "react-router-dom";
-import Style from "./Login.module.css";
+import Style from "./Register.module.css";
 import axios from "axios";
 import { useDispatch, useSelector } from "react-redux";
 import { postLogin } from "../../store/action/loginAction";
 
-function Login() {
+function Register() {
   const token = localStorage.getItem("token");
   const navigate = useNavigate();
 
   const [loginData, setLoginData] = useState({
+    nama: "",
     email: "",
     password: "",
   });
@@ -57,8 +58,8 @@ function Login() {
   return (
     <>
       <div className="container-fluid">
-        <div className={`row ${Style["container-login"]}`}>
-          <div className={`col-lg-6 col-12 ${Style["login-bg"]}`}>
+        <div className={`row ${Style["container-register"]}`}>
+          <div className={`col-lg-6 col-12 ${Style["register-bg"]}`}>
             {/* <img src={loginimg} alt="loginbanner" className="" /> */}
           </div>
           <div
@@ -67,7 +68,23 @@ function Login() {
             <div
               className={`${Style[""]} col-10 col-lg-8 d-flex flex-column my-1`}
             >
-              <h1 className="fw-bold">Masuk</h1>
+              <h1 className="fw-bold">Daftar</h1>
+              <div>
+                <p>Nama</p>
+                <input
+                  className="form-input w-100"
+                  required
+                  style={{ marginButtom: "1rem" }}
+                  placeholder="Contoh: toni"
+                  value={loginData.nama}
+                  onChange={(e) =>
+                    setLoginData({
+                      ...loginData,
+                      email: e.target.value,
+                    })
+                  }
+                />
+              </div>
               <div>
                 <p>Email</p>
                 <input
@@ -110,10 +127,10 @@ function Login() {
               </Button>
               <div className="account">
                 <p style={{ textAlign: "center " }}>
-                  Belum punya akun?{" "}
-                  <a href="Register">
+                  Sudah punya akun?{" "}
+                  <a href="login">
                     {" "}
-                    <span className="fw-bold daftar"> Daftar di sini</span>
+                    <span className="fw-bold daftar"> Masuk di sini</span>
                   </a>
                 </p>
               </div>
@@ -125,4 +142,4 @@ function Login() {
   );
 }
 
-export default Login;
+export default Register;
