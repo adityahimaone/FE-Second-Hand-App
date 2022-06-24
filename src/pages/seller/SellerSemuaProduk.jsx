@@ -2,7 +2,7 @@ import React from 'react'
 import { useState } from 'react'
 import { ListGroup } from 'react-bootstrap';
 import Card from "react-bootstrap/Card";
-import Product from '../../components/UI/Card/CardHome'
+import CardHome from '../../components/UI/Card/CardHome';
 import Style from "./sellersemuaproduk.module.css"
 
 function SellerSemuaProduk() {
@@ -90,25 +90,25 @@ function SellerSemuaProduk() {
 
         <div className="col text-center">
                 {myOption === "produk" && (
-                    <div className="row row-cols-4 row-cols-lg-4 g-4">
-                        <div className='col'>
-                            <Card style={{border: 'dashed 2px #D0D0D0', height:'16.25vw'}} >
-                                <Card.Body style={{marginTop: '35%'}}>
-                                    <Card.Text style={{fontSize: '30px'}} className="m-0">+</Card.Text>
-                                    <Card.Text>Tambah Produk</Card.Text>
-                                </Card.Body>
-                            </Card>
+                    <div className="col-9 w-100">
+                    <div className="row row-cols-2 row-cols-lg-3 g-4">
+                      <div className="col">
+                        <div className="card-dot d-flex flex-column justify-content-center align-items-center h-100">
+                          <i className="bi bi-plus-lg fs-3"></i>
+                          <span>Tambah Produk</span>
                         </div>
-                        {cardData.map((item) => (
+                      </div>
+                      {cardData.map((item) => (
                         <div key={item.id} className="col">
-                            <Product
+                          <CardHome
                             title={item.name}
                             category={item.category}
                             price={item.price}
-                            />
+                          />
                         </div>
-                        ))}
+                      ))}
                     </div>
+                  </div>
                 )}
                 {myOption === "diminati" && (
                     <div>Halaman Diminati</div>
