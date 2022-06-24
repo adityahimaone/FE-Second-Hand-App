@@ -8,7 +8,7 @@ import { useNavigate } from "react-router-dom";
 import Style from "./Register.module.css";
 import axios from "axios";
 import { useDispatch, useSelector } from "react-redux";
-import { postLogin } from "../../store/action/loginAction";
+import { postRegister } from "../../store/action/registerAction";
 
 function Register() {
   const token = localStorage.getItem("token");
@@ -25,7 +25,7 @@ function Register() {
     try {
       const res = await axios({
         method: 'POST',
-        url: 'https://old-but-new.herokuapp.com/api/v1/auth/login',
+        url: 'https://old-but-new.herokuapp.com/api/v1/auth/register',
         data: registerData,
       });
 
@@ -46,12 +46,12 @@ function Register() {
   };
 
   const dispatch = useDispatch();
-  const { isLoading, data: login } =
-    useSelector((state) => state.login);
+  const { isLoading, data: register } =
+    useSelector((state) => state.register);
 
   useEffect(() => {
     console.log("1. use effect component did mount");
-    dispatch(postLogin());
+    dispatch(postRegister());
   }, [dispatch]);
 
 
@@ -120,10 +120,10 @@ function Register() {
 
               <Button
                 className="button-primary-1 w-100 my-4"
-                href="#"
+                href="login"
                 onClick={handleSubmit}
               >
-                Masuk
+                Daftar
               </Button>
               <div className="account">
                 <p style={{ textAlign: "center " }}>
