@@ -14,19 +14,19 @@ function Register() {
   const token = localStorage.getItem("token");
   const navigate = useNavigate();
 
-  const [loginData, setLoginData] = useState({
+  const [registerData, setRegisterData] = useState({
     nama: "",
     email: "",
     password: "",
   });
 
   const handleSubmit = async () => {
-    console.log(loginData);
+    console.log(registerData);
     try {
       const res = await axios({
         method: 'POST',
         url: 'https://old-but-new.herokuapp.com/api/v1/auth/login',
-        data: loginData,
+        data: registerData,
       });
 
       if (res.status === 201) {
@@ -76,11 +76,11 @@ function Register() {
                   required
                   style={{ marginButtom: "1rem" }}
                   placeholder="Contoh: toni"
-                  value={loginData.nama}
+                  value={registerData.nama}
                   onChange={(e) =>
-                    setLoginData({
-                      ...loginData,
-                      email: e.target.value,
+                    setRegisterData({
+                      ...registerData,
+                      nama: e.target.value,
                     })
                   }
                 />
@@ -92,10 +92,10 @@ function Register() {
                   required
                   style={{ marginButtom: "1rem" }}
                   placeholder="Contoh: johndee@gmail.com"
-                  value={loginData.email}
+                  value={registerData.email}
                   onChange={(e) =>
-                    setLoginData({
-                      ...loginData,
+                    setRegisterData({
+                      ...registerData,
                       email: e.target.value,
                     })
                   }
@@ -108,10 +108,10 @@ function Register() {
                   style={{ marginButtom: "1rem" }}
                   placeholder="Masukkan password"
                   type="password"
-                  value={loginData.password}
+                  value={registerData.password}
                   onChange={(e) =>
-                    setLoginData({
-                      ...loginData,
+                    setRegisterData({
+                      ...registerData,
                       password: e.target.value,
                     })
                   }
