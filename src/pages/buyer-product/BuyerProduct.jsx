@@ -2,16 +2,31 @@ import React from "react";
 import style from "./buyerproduct.module.css";
 import Button from "react-bootstrap/esm/Button";
 import { Component } from "react";
+import Alert from "../../components/UI/Alert/Alert";
+import { useState } from "react";
+// import { Alert } from "bootstrap";
 
 
 
-class BuyerProduct extends Component {
-    state = {
-        disabled: true
-    }
-    render() {
+function BuyerProduct() {
+    const [text, enableButton] = useState("");
+    // state = {
+    //     disabled: true
+    // }
+
+    const [tawarSuccess, setTawarSuccess] = useState(false);
+
+    console.log(tawarSuccess, "tawarSuccess");
+    // render() {
         return (
             <div className="container-sm w-75 my-5">
+                {tawarSuccess && (
+                    <Alert 
+                        title=" Tawaran Success"
+                        text="Harga tawarmu berhasil dikirim ke penjual"
+                    />
+                    
+                )}
                 <div className="row">
                     <div className="col-12 col-lg-8">
                         <div className="mb-4">
@@ -27,6 +42,7 @@ class BuyerProduct extends Component {
                                 reprehenderit in voluptate velit esse cillum dolore eu fugiat
                                 nulla pariatur. Excepteur sint occaecat cupidatat non proident,
                                 sunt in culpa qui officia deserunt mollit anim id est laborum.
+                                
                                 Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
                                 eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut
                                 enim ad minim veniam, quis nostrud exercitation ullamco laboris
@@ -51,7 +67,7 @@ class BuyerProduct extends Component {
                         </div>
                     </div> */}
                         <div className="col-12 col-lg-4">
-                            <div className="card p-3">
+                            <div className={`card p-3 jam ${style["jam"]}`}>
                                 <h4 className="font-16 fw-bolder">Jam Tangan</h4>
                                 <h3 className="font-14 color-gray">Aksesoris</h3>
                                 <h2 className="font-16">Rp. 250.000</h2>
@@ -59,7 +75,7 @@ class BuyerProduct extends Component {
                                     <p>Menunggu respon penjual</p> 
                                 </button>
                             </div>
-                            <div className="card p-3 mt-4 d-flex flex-row justify-content-start align-items-center gap-2">
+                            <div className={`card p-3 mt-4 d-flex flex-row justify-content-start align-items-center gap-2 ${style["seller"]}`}>
                                 <div>
                                     <img src="/images/person.png" className="img-fluid" alt="" />
                                 </div>
@@ -73,7 +89,7 @@ class BuyerProduct extends Component {
                 </div>
             </div>
         )
-    }
+    // }
 }
 
 export default BuyerProduct;
