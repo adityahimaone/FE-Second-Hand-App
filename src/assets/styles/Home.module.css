@@ -2,6 +2,11 @@
   position: relative;
 }
 
+.section-carousel {
+  overflow: hidden;
+  width: 100%;
+}
+
 .button-float {
   position: fixed;
   bottom: 0px;

@@ -62,6 +62,15 @@ $gray: #8a8a8a;
   &-14 {
     font-size: 0.9rem;
   }
+  &-16 {
+    font-size: 1rem;
+  }
+  &-18 {
+    font-size: 1.1rem;
+  }
+  &-20 {
+    font-size: 1.2rem;
+  }
 }
 
 .button {
@@ -100,11 +109,12 @@ $gray: #8a8a8a;
   &-outline-2 {
     color: #000;
     border-radius: 12px;
-    border: 1px solid $purple1;
+    border: 2px solid $purple1;
     padding: 12px 14px;
     font-weight: 400;
     font-size: 14px;
     line-height: 20px;
+    background-color: #fff;
 
     &:hover {
       background-color: $purple4;
@@ -134,6 +144,17 @@ $gray: #8a8a8a;
 
 .card {
   background: #ffffff;
-  box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.15);
+  box-shadow: 0px 0px 4px rgba(0, 0, 0, 0.15);
   border-radius: 16px;
+
+  &-2 {
+    background: #ffffff;
+    box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.15);
+    border-radius: 4px;
+  }
+
+  &-dot {
+    border-radius: 4px;
+    border: 3px dashed #d0d0d0;
+  }
 }
