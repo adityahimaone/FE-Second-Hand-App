@@ -8,7 +8,6 @@ import { useNavigate } from "react-router-dom";
 import Style from "./Login.module.css";
 import axios from "axios";
 
-
 function Login() {
   const token = localStorage.getItem("token");
   const navigate = useNavigate();
@@ -17,7 +16,6 @@ function Login() {
     email: "",
     password: "",
   });
-
 
   const handleSubmit = async () => {
     console.log(loginData);
@@ -48,7 +46,7 @@ function Login() {
     if (token) {
       navigate("/");
     }
-  })
+  });
 
   return (
     <>
@@ -82,23 +80,26 @@ function Login() {
               </div>
               <div>
                 <p>Password</p>
-                  <input
-                    className="form-input w-100"
-                    style={{ marginButtom: "1rem" }}
-                    placeholder="Masukkan password"
-                    type="password"
-                    value={loginData.password}
-                    onChange={(e) =>
-                      setLoginData({
-                        ...loginData,
-                        password: e.target.value,
-                      })
-                    }
-                  />
+                <input
+                  className="form-input w-100"
+                  style={{ marginButtom: "1rem" }}
+                  placeholder="Masukkan password"
+                  type="password"
+                  value={loginData.password}
+                  onChange={(e) =>
+                    setLoginData({
+                      ...loginData,
+                      password: e.target.value,
+                    })
+                  }
+                />
               </div>
 
-
-              <Button className="button-primary-1 w-100 my-4" href="#" onClick={handleSubmit}>
+              <Button
+                className="button-primary-1 w-100 my-4"
+                href="#"
+                onClick={handleSubmit}
+              >
                 Masuk
               </Button>
               <div className="account">
