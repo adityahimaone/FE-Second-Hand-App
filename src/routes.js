@@ -12,7 +12,7 @@ import BuyerProduct from "./pages/buyer-product/BuyerProduct";
 // import { useReducer } from 'react';
 import store from "./store/store";
 import BuyerNotification from "./pages/buyer-product/BuyerNotification";
-
+import ProductSellingList from "./pages/ProductSellingList";
 
 function RoutesPage() {
   return (
@@ -21,11 +21,13 @@ function RoutesPage() {
         <Route path="/" element={<LayoutDefault />}>
           <Route index element={<HomePage />} />
           <Route path="product/:id" element={<ProductDetail />} />
-          <Route path="/login" element={<Login />} />
-          <Route path="/Register" element={<Register />} />
+
           <Route path="/bproduct" element={<BuyerProduct />} />
           <Route path="/notifbuyer" element={<BuyerNotification />} />
+          <Route path="/productsellinglist" element={<ProductSellingList />} />
         </Route>
+        <Route path="/login" element={<Login />} />
+        <Route path="/Register" element={<Register />} />
       </Routes>
     </BrowserRouter>
   );

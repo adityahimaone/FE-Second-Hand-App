@@ -42,8 +42,8 @@ function ProductDetail() {
               <img src="/images/person.png" className="img-fluid" alt="" />
             </div>
             <div className="d-flex flex-column">
-              <label>Nama Penjual</label>
-              <label>Kota</label>
+              <span>Nama Penjual</span>
+              <span>Kota</span>
             </div>
           </div>
         </div>
