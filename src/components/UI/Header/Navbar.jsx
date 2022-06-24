@@ -1,7 +1,7 @@
 import React from "react";
 import { Button } from "react-bootstrap";
 import { Form } from "react-bootstrap";
-
+import { Link } from "react-router-dom";
 function Navbar() {
   return (
     <nav className="shadow">
@@ -15,15 +15,17 @@ function Navbar() {
               type="text"
               id="inputPassword5"
               aria-describedby="search"
-              className="form-input"
+              className="form-input-search"
               placeholder="Cari di sini ..."
             />
           </div>
           <div className="col-6 d-flex justify-content-end">
-            <Button className="button-primary-1">
-              <i className="bi bi-box-arrow-in-right"></i>
-              <span className="px-2">Masuk</span>
-            </Button>
+            <Link to="/login">
+              <Button className="button-primary-1">
+                <i className="bi bi-box-arrow-in-right"></i>
+                <span className="px-2">Masuk</span>
+              </Button>
+            </Link>
           </div>
         </div>
       </div>
