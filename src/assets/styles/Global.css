@@ -88,11 +88,12 @@ body {
 .button-outline-2 {
   color: #000;
   border-radius: 12px;
-  border: 1px solid #e2d4f0;
+  border: 2px solid #e2d4f0;
   padding: 12px 14px;
   font-weight: 400;
   font-size: 14px;
   line-height: 20px;
+  background-color: #fff;
 }
 .button-outline-2:hover {
   background-color: #7126b5;
@@ -117,6 +118,15 @@ body {
 
 .card {
   background: #ffffff;
-  box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.15);
+  box-shadow: 0px 0px 4px rgba(0, 0, 0, 0.15);
   border-radius: 16px;
+}
+.card-2 {
+  background: #ffffff;
+  box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.15);
+  border-radius: 4px;
+}
+.card-dot {
+  border-radius: 4px;
+  border: 3px dashed #d0d0d0;
 }/*# sourceMappingURL=Global.css.map */
