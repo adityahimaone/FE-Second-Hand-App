@@ -14,6 +14,7 @@ import store from "./store/store";
 import BuyerNotification from "./pages/buyer-product/BuyerNotification";
 import ProductSellingList from "./pages/ProductSellingList";
 import SellerSemuaProduk from "./pages/seller/SellerSemuaProduk";
+import SellerInfoProduk from "./pages/seller/SellerInfoProduk";
 
 function RoutesPage() {
   return (
@@ -26,6 +27,7 @@ function RoutesPage() {
           <Route path="/notifbuyer" element={<BuyerNotification />} />
           <Route path="/productsellinglist" element={<ProductSellingList />} />
           <Route path="/seller" element={<SellerSemuaProduk />} />
+          <Route path="/sellerinfo" element={<SellerInfoProduk />} />
         </Route>
         <Route path="/login" element={<Login />} />
         <Route path="/Register" element={<Register />} />
