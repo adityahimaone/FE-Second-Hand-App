@@ -7,6 +7,8 @@ import { Button } from "react-bootstrap";
 import { useNavigate } from "react-router-dom";
 import Style from "./Login.module.css";
 import axios from "axios";
+import { useDispatch, useSelector } from "react-redux";
+import { postLogin } from "../../store/action/loginAction";
 
 
 function Login() {
@@ -44,11 +46,14 @@ function Login() {
     }
   };
 
+  const dispatch = useDispatch();
+  const { isLoading, data: login } =
+    useSelector((state) => state.login);
+
   useEffect(() => {
-    if (token) {
-      navigate("/");
-    }
-  })
+    console.log("1. use effect component did mount");
+    dispatch(postLogin());
+  }, [dispatch]);
 
   return (
     <>
