@@ -1,13 +1,11 @@
 import React, { useState } from "react";
-// import loginimg from "../../assets/image/loginimg.png";
-// import "./Login.css";
-// import { useNavigate } from "react-router-dom";
 import { Button } from "react-bootstrap";
-import Style from "./Login.module.css";
+import Style from "./Register.module.css";
 
-function Login() {
-  // const navigate = useNavigate();
-  const [loginData, setLoginData] = useState({
+function Register() {
+ 
+  const [registerData, setLoginData] = useState({
+    nama: "",
     email: "",
     password: "",
     role: "",
@@ -16,8 +14,8 @@ function Login() {
   return (
     <>
       <div className="container-fluid">
-        <div className={`row ${Style["container-login"]}`}>
-          <div className={`col-lg-6 col-12 ${Style["login-bg"]}`}>
+        <div className={`row ${Style["container-register"]}`}>
+          <div className={`col-lg-6 col-12 ${Style["register-bg"]}`}>
             {/* <img src={loginimg} alt="loginbanner" className="" /> */}
           </div>
           <div
@@ -26,7 +24,23 @@ function Login() {
             <div
               className={`${Style[""]} col-10 col-lg-8 d-flex flex-column my-1`}
             >
-              <h1>Masuk</h1>
+              <h1>Daftar</h1>
+              <div>
+                <p>Nama</p>
+                <input
+                  className="form-input w-100"
+                  required
+                  style={{ marginButtom: "1rem" }}
+                  placeholder="Contoh: Toni"
+                  value={registerData.nama}
+                  onChange={(e) =>
+                    setLoginData({
+                      ...registerData,
+                      nama: e.target.value,
+                    })
+                  }
+                />
+              </div>
               <div>
                 <p>Email</p>
                 <input
@@ -34,10 +48,10 @@ function Login() {
                   required
                   style={{ marginButtom: "1rem" }}
                   placeholder="Contoh: johndee@gmail.com"
-                  value={loginData.email}
+                  value={registerData.email}
                   onChange={(e) =>
                     setLoginData({
-                      ...loginData,
+                      ...registerData,
                       email: e.target.value,
                     })
                   }
@@ -49,26 +63,26 @@ function Login() {
                   className="form-input w-100"
                   required
                   style={{ marginButtom: "1rem" }}
-                  placeholder="Masukkan password"
+                  placeholder="Masukkan password" 
                   type="password"
-                  value={loginData.password}
+                  value={registerData.password}
                   onChange={(e) =>
                     setLoginData({
-                      ...loginData,
+                      ...registerData,
                       password: e.target.value,
                     })
                   }
                 />
               </div>
-              <Button className="button-primary-1 w-100 my-4" href="#">
-                Masuk
+              <Button className="button-primary-1 w-100 my-4" href="Login">
+                Daftar
               </Button>
               <div className="account">
                 <p style={{ textAlign: "center " }}>
-                  Belum punya akun?{" "}
-                  <a href="Register">
+                  Sudah punya akun?{" "}
+                  <a href="Login">
                     {" "}
-                    <span className="fw-bold daftar"> Daftar di sini</span>
+                    <span className="fw-bold daftar"> Masuk di sini</span>
                   </a>
                 </p>
               </div>
@@ -80,4 +94,4 @@ function Login() {
   );
 }
 
-export default Login;
+export default Register;
