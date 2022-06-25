@@ -17,7 +17,7 @@ function Register() {
   const navigate = useNavigate();
 
   const [Success, setTawarSuccess] = useState(false);
-  const [error, setError] = useState(false);
+  const [error, setError] = useState('');
   const [registerData, setRegisterData] = useState({
     nama: "",
     email: "",
@@ -53,8 +53,8 @@ function Register() {
             }
       
     } catch (error) {
-        setError(true);
-      console.log(error);
+        
+      setError('error',error.response.data.message);
     }
   };
 
