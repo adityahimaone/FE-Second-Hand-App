@@ -1,8 +1,32 @@
 import React from "react";
+import style from "./buyerproduct.module.css";
+import Button from "react-bootstrap/esm/Button";
+import { Component } from "react";
+import Alert from "../../components/UI/Alert/Alert";
+import { useState } from "react";
+// import { Alert } from "bootstrap";
 
-function ProductDetail() {
+
+
+function BuyerHalamanProduk() {
+  const [text, enableButton] = useState("");
+  // state = {
+  //     disabled: true
+  // }
+
+  // const [tawarSuccess, setTawarSuccess] = useState(false);
+
+  // console.log(tawarSuccess, "tawarSuccess");
+  // render() {
   return (
     <div className="container-sm w-75 my-5">
+      {/* {tawarSuccess && (
+                    <Alert 
+                        title=" Tawaran Success"
+                        text="Harga tawarmu berhasil dikirim ke penjual"
+                    />
+                    
+                )} */}
       <div className="row">
         <div className="col-12 col-lg-8">
           <div className="mb-4">
@@ -18,6 +42,7 @@ function ProductDetail() {
               reprehenderit in voluptate velit esse cillum dolore eu fugiat
               nulla pariatur. Excepteur sint occaecat cupidatat non proident,
               sunt in culpa qui officia deserunt mollit anim id est laborum.
+
               Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
               eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut
               enim ad minim veniam, quis nostrud exercitation ullamco laboris
@@ -34,25 +59,26 @@ function ProductDetail() {
             <h3 className="font-14 color-gray">Aksesoris</h3>
             <h2 className="font-16">Rp. 250.000</h2>
             <button className="button-primary-1">
-              Terbitkan
-            </button>
-            <button className="button-outline-2 gap-4px"> 
-              Edit
+              Saya Tertarik dan ingin nego
             </button>
           </div>
-          <div className="card p-3 mt-2 d-flex flex-row justify-content-start align-items-center gap-2">
+          <div className="card p-3 mt-2 d-flex flex-row justify-content-start align-items-center gap-3">
             <div>
               <img src="/images/person.png" className="img-fluid" alt="" />
             </div>
             <div className="d-flex flex-column">
-              <span>Nama Penjual</span>
-              <span>Kota</span>
+              <label>Nama Penjual</label>
+              <label>Kota</label>
             </div>
           </div>
         </div>
+
       </div>
     </div>
-  );
+  )
+  // }
 }
 
-export default ProductDetail;
+export default BuyerHalamanProduk;
+
+//{`card p-3 mt-4 d-flex flex-row justify-content-start align-items-center gap-2 ${style["seller"]}`}

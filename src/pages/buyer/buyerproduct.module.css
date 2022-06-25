@@ -164,7 +164,7 @@
     /* align-items: flex-start; */
     padding: 16px 0px 16px 16px;
     /* gap: 10px; */
-/* 
+    /* 
     position: absolute; */
     width: 336px;
     height: 80px;
@@ -179,3 +179,26 @@
     box-shadow: 0px 0px 4px rgba(0, 0, 0, 0.15);
     border-radius: 16px;
 }
+
+/* <-- responsive css -->  */
+/* 
+@media screen and (max-width: 425px) {
+    .jam {
+        display: flex;
+        flex-direction: row;
+        align-items: center;
+        padding: 12px 24px;
+        gap: 4px;
+
+        /* position: absolute; */
+        /* width: 328px; */
+        /* height: 48px; */
+        /* left: 16px; */
+        /* top: 634px; */
+
+        /* Neutral/02 */
+
+        /* background: #D0D0D0;
+        border-radius: 16px; */
+    /* } */
+/* } */ 

@@ -6,27 +6,25 @@ import Alert from "../../components/UI/Alert/Alert";
 import { useState } from "react";
 // import { Alert } from "bootstrap";
 
-
-
 function BuyerProduct() {
     const [text, enableButton] = useState("");
     // state = {
     //     disabled: true
     // }
 
-    const [tawarSuccess, setTawarSuccess] = useState(false);
+    // const [tawarSuccess, setTawarSuccess] = useState(false);
 
-    console.log(tawarSuccess, "tawarSuccess");
+    // console.log(tawarSuccess, "tawarSuccess");
     // render() {
         return (
             <div className="container-sm w-75 my-5">
-                {tawarSuccess && (
+                {/* {tawarSuccess && (
                     <Alert 
                         title=" Tawaran Success"
                         text="Harga tawarmu berhasil dikirim ke penjual"
                     />
                     
-                )}
+                )} */}
                 <div className="row">
                     <div className="col-12 col-lg-8">
                         <div className="mb-4">
@@ -53,21 +51,8 @@ function BuyerProduct() {
                             </p>
                         </div>
                     </div>
-                        {/* </div>
-                        <div className={`col-12 col-lg-4 ${style["detail"]}`}>
-                            <h4>Jam Tangan Casio</h4>
-                            <p>Aksesoris</p>
-                            <h2>Rp 250.000</h2>
-                            <Button className="button-primary-1 w-100 my-4" href="#" disabled="this.state.disabled" >
-                                Saya tertarik dan ingin nego
-                            </Button>
-                        </div>
-                        <div className={`d-flex flex-column ${style["Identity"]}`}>
-
-                        </div>
-                    </div> */}
                         <div className="col-12 col-lg-4">
-                            <div className={`card p-3 jam ${style["jam"]}`}>
+                            <div className="card p-3">
                                 <h4 className="font-16 fw-bolder">Jam Tangan</h4>
                                 <h3 className="font-14 color-gray">Aksesoris</h3>
                                 <h2 className="font-16">Rp. 250.000</h2>
@@ -75,7 +60,7 @@ function BuyerProduct() {
                                     <p>Menunggu respon penjual</p> 
                                 </button>
                             </div>
-                            <div className={`card p-3 mt-4 d-flex flex-row justify-content-start align-items-center gap-2 ${style["seller"]}`}>
+                            <div className="card p-3 mt-2 d-flex flex-row justify-content-start align-items-center gap-2">
                                 <div>
                                     <img src="/images/person.png" className="img-fluid" alt="" />
                                 </div>
@@ -93,3 +78,5 @@ function BuyerProduct() {
 }
 
 export default BuyerProduct;
+
+//{`card p-3 mt-4 d-flex flex-row justify-content-start align-items-center gap-2 ${style["seller"]}`}
