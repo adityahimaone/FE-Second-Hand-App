@@ -1,31 +1,35 @@
-import axios from "axios";
 import { POST_LOGIN } from "../types";
+import { AxiosCustom } from "src/utils/axiosCustom";
 
-
-export const postLogin= ()=> {
-    console.log("2. masuk action");
-    return (dispatch) => {
-
-        dispatch({ type: `${POST_LOGIN}_LOADING` });
-
-        //get API
-        axios({
-            method: 'POST',
-            url: 'https://old-but-new.herokuapp.com/api/v1/auth/login',
-        })
-        .then((response) => {
-            console.log("3. berhasil dapat data : ", response.data);
-            dispatch({
-                type: `${POST_LOGIN}_FULFILLED`,
-                payload: response.data
-            });
-        })
-        .catch((error) => {
-            console.log("3. gagal dapat data : ", error);
-            dispatch({
-                type: `${POST_LOGIN}_ERROR`,
-                error: error.message,
-            });
+export const authLogin = (payload) => {
+  return (dispatch) => {
+    dispatch({ type: `${POST_LOGIN}_LOADING` });
+    AxiosCustom.post(`auth/login`, payload)
+      .then((response) => {
+        dispatch({
+          type: `${POST_LOGIN}_FULFILLED`,
+          payload: response.data,
         });
-    };
+      })
+      .catch((error) => {
+        dispatch({
+          type: `${POST_LOGIN}_ERROR`,
+          error: error.message,
+        });
+      });
+  };
+};
+
+export const authLogout = () => {
+  return (dispatch) => {
+    dispatch({
+      type: `${POST_LOGIN}_FULFILLED`,
+      payload: {
+        data: {
+          token: null,
+          id: null,
+        },
+      },
+    });
+  };
 };

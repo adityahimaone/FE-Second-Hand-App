@@ -1,8 +1,33 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { Button } from "react-bootstrap";
 import { Form } from "react-bootstrap";
 import { Link } from "react-router-dom";
+import { useSelector, useDispatch } from "react-redux";
+import { authLogout } from "src/store/action/loginAction";
+import { Dropdown } from "react-bootstrap";
+
 function Navbar() {
+  const dispatch = useDispatch();
+
+  const [loginState, setLoginState] = useState(false);
+  const { isLoading, data: loginData } = useSelector((state) => state.login);
+
+  const handleLogout = () => {
+    dispatch(authLogout());
+    setLoginState(false);
+  };
+
+  useEffect(() => {
+    if (loginData.data) {
+      if (loginData?.data?.id !== 0 && loginData?.data?.token !== null) {
+        // eslint-disable-next-line react-hooks/exhaustive-deps
+        setLoginState(true);
+      }
+    }
+  }, [loginData]);
+
+  console.log(loginState, loginData);
+
   return (
     <nav className="shadow">
       <div className="container p-2">
@@ -20,12 +45,54 @@ function Navbar() {
             />
           </div>
           <div className="col-6 d-flex justify-content-end">
-            <Link to="/login">
-              <Button className="button-primary-1">
-                <i className="bi bi-box-arrow-in-right"></i>
-                <span className="px-2">Masuk</span>
-              </Button>
-            </Link>
+            {loginState === false && (
+              <Link to="/login">
+                <Button className="button-primary-1">
+                  <i className="bi bi-box-arrow-in-right"></i>
+                  <span className="px-2">Masuk</span>
+                </Button>
+              </Link>
+            )}
+            {loginState === true && (
+              <div className="d-flex">
+                <Dropdown>
+                  <Dropdown.Toggle id="dropdown-basic" variant="none">
+                    <i className="bi bi-list-ul fs-5"></i>
+                  </Dropdown.Toggle>
+                  <Dropdown.Menu>
+                    <Dropdown.Item href="#/action-1">Action</Dropdown.Item>
+                    <Dropdown.Item href="#/action-2">
+                      Another action
+                    </Dropdown.Item>
+                    <Dropdown.Item href="#/action-3">
+                      Something else
+                    </Dropdown.Item>
+                  </Dropdown.Menu>
+                </Dropdown>
+                <Dropdown>
+                  <Dropdown.Toggle id="dropdown-basic" variant="none">
+                    <i className="bi bi-bell fs-5"></i>
+                  </Dropdown.Toggle>
+                  <Dropdown.Menu>
+                    <Dropdown.Item href="#/action-1">Action</Dropdown.Item>
+                    <Dropdown.Item href="#/action-2">
+                      Another action
+                    </Dropdown.Item>
+                    <Dropdown.Item href="#/action-3">
+                      Something else
+                    </Dropdown.Item>
+                  </Dropdown.Menu>
+                </Dropdown>
+                <Dropdown>
+                  <Dropdown.Toggle id="dropdown-basic" variant="none">
+                    <i className="bi bi-person fs-5"></i>
+                  </Dropdown.Toggle>
+                  <Dropdown.Menu>
+                    <Dropdown.Item onClick={handleLogout}>Logout</Dropdown.Item>
+                  </Dropdown.Menu>
+                </Dropdown>
+              </div>
+            )}
           </div>
         </div>
       </div>

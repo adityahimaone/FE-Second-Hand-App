@@ -32,7 +32,7 @@ function RoutesPage() {
           <Route path="/buyerhalaman" element={<BuyerHalamanProduk />} />
         </Route>
         <Route path="/login" element={<Login />} />
-        <Route path="/Register" element={<Register />} />
+        <Route path="/register" element={<Register />} />
       </Routes>
     </BrowserRouter>
   );

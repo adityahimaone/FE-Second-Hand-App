@@ -1,123 +1,106 @@
-import React, { useState } from "react";
-import { useEffect } from "react";
-// import loginimg from "../../assets/image/loginimg.png";
-// import "./Login.css";
-// import { useNavigate } from "react-router-dom";
+import React, { useState, useEffect } from "react";
 import { Button } from "react-bootstrap";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, Link } from "react-router-dom";
 import Style from "./Login.module.css";
-import axios from "axios";
 import { useDispatch, useSelector } from "react-redux";
-import { postLogin } from "../../store/action/loginAction";
+import { authLogin } from "../../store/action/loginAction";
+import { Formik, Form } from "formik";
+import * as yup from "yup";
 
 function Login() {
-  const token = localStorage.getItem("token");
   const navigate = useNavigate();
+  const dispatch = useDispatch();
+  const {
+    isLoading,
+    data: loginData,
+    error,
+  } = useSelector((state) => state.login);
 
-  const [loginData, setLoginData] = useState({
-    email: "",
-    password: "",
+  let schema = yup.object().shape({
+    email: yup.string().email().required("Email harus di isi"),
+    password: yup.string().required("Password Harus di isi"),
   });
 
-  const handleSubmit = async () => {
-    console.log(loginData);
-    try {
-      const res = await axios({
-        method: 'POST',
-        url: 'https://old-but-new.herokuapp.com/api/v1/auth/login',
-        data: loginData,
-      });
-
-      if (res.status === 201) {
-        localStorage.setItem("role", "buyer", 'token', res.data.access_token);
-        navigate("/bproduct", { replace: true });
-        console.log(res.data.email);
-      }
-
-      if (res.status === 201) {
-        localStorage.setItem("role", "seller", 'token', res.data.access_token);
-        navigate("/", { replace: true });
-        console.log(res.data.email);
-      }
-    } catch (error) {
-      console.log(error);
-    }
+  const handleSubmit = (values) => {
+    dispatch(authLogin(values));
   };
 
-  const dispatch = useDispatch();
-  const { isLoading, data: login } =
-    useSelector((state) => state.login);
-
   useEffect(() => {
-    console.log("1. use effect component did mount");
-    dispatch(postLogin());
-  }, [dispatch]);
-
+    if (loginData.data.token !== null) {
+      navigate("/");
+    }
+  }, [error, loginData.data.token]);
 
   return (
     <>
       <div className="container-fluid">
         <div className={`row ${Style["container-login"]}`}>
-          <div className={`col-lg-6 col-12 ${Style["login-bg"]}`}>
-            {/* <img src={loginimg} alt="loginbanner" className="" /> */}
-          </div>
+          <div className={`col-sm-6 col-12 ${Style["login-bg"]}`}></div>
           <div
-            className={`col-lg-6 col-12 d-flex justify-content-center align-items-center`}
+            className={`col-sm-6 col-12 d-flex justify-content-center align-items-center`}
           >
-            <div
-              className={`${Style[""]} col-10 col-lg-8 d-flex flex-column my-1`}
+            <Formik
+              validationSchema={schema}
+              initialValues={{
+                email: "",
+                password: "",
+              }}
+              onSubmit={(values) => {
+                console.log(values);
+                handleSubmit(values);
+              }}
             >
-              <h1 className="fw-bold">Masuk</h1>
-              <div>
-                <p>Email</p>
-                <input
-                  className="form-input w-100"
-                  required
-                  style={{ marginButtom: "1rem" }}
-                  placeholder="Contoh: johndee@gmail.com"
-                  value={loginData.email}
-                  onChange={(e) =>
-                    setLoginData({
-                      ...loginData,
-                      email: e.target.value,
-                    })
-                  }
-                />
-              </div>
-              <div>
-                <p>Password</p>
-                <input
-                  className="form-input w-100"
-                  style={{ marginButtom: "1rem" }}
-                  placeholder="Masukkan password"
-                  type="password"
-                  value={loginData.password}
-                  onChange={(e) =>
-                    setLoginData({
-                      ...loginData,
-                      password: e.target.value,
-                    })
-                  }
-                />
-              </div>
-
-              <Button
-                className="button-primary-1 w-100 my-4"
-                href="#"
-                onClick={handleSubmit}
-              >
-                Masuk
-              </Button>
-              <div className="account">
-                <p style={{ textAlign: "center " }}>
-                  Belum punya akun?{" "}
-                  <a href="Register">
-                    {" "}
-                    <span className="fw-bold daftar"> Daftar di sini</span>
-                  </a>
-                </p>
-              </div>
-            </div>
+              {({ handleSubmit, errors, handleChange }) => (
+                <Form
+                  onSubmit={handleSubmit}
+                  className={`col-10 col-sm-7 d-flex flex-column my-1`}
+                >
+                  <h1 className="fw-bold">Masuk</h1>
+                  <div>
+                    <p>Email</p>
+                    <input
+                      className="form-input w-100"
+                      style={{ marginButtom: "1rem" }}
+                      placeholder="Contoh: johndee@gmail.com"
+                      type="email"
+                      name="email"
+                      onChange={handleChange}
+                    />
+                    <span className="font-12 text-danger py-1">
+                      {errors.email}
+                    </span>
+                  </div>
+                  <div>
+                    <p>Password</p>
+                    <input
+                      className="form-input w-100"
+                      style={{ marginButtom: "1rem" }}
+                      placeholder="Masukkan password"
+                      type="password"
+                      name="password"
+                      onChange={handleChange}
+                    />
+                    <span className="font-12 text-danger py-1">
+                      {errors.password}
+                    </span>
+                  </div>
+                  <span className="font-12 text-danger py-2">
+                    {error && "Maaf Email atau Password Salah"}
+                  </span>
+                  <Button className="button-primary-1 w-100 my-4" type="submit">
+                    Masuk
+                  </Button>
+                  <div className="account">
+                    <p style={{ textAlign: "center " }}>
+                      Belum punya akun?
+                      <Link to="/register">
+                        <span className="fw-bold daftar">Daftar di sini</span>
+                      </Link>
+                    </p>
+                  </div>
+                </Form>
+              )}
+            </Formik>
           </div>
         </div>
       </div>

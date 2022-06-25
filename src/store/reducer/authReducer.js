@@ -1,27 +1,31 @@
-import { POST_REGISTER } from "../types";
+import { POST_LOGIN } from "../types";
 
 const initialState = {
-  data: [],
+  data: {
+    data: {
+      id: null,
+      token: null,
+    },
+  },
   isLoading: true,
   error: null,
 };
 
-const registerReducer = (state = initialState, action) => {
+const loginReducer = (state = initialState, action) => {
   const { type, payload, error } = action;
   switch (type) {
-    case `${POST_REGISTER}_LOADING`:
-      console.log("4. masuk reducer");
+    case `${POST_LOGIN}_LOADING`:
       return {
         ...state,
       };
 
-    case `${POST_REGISTER}_FULFILLED`:
+    case `${POST_LOGIN}_FULFILLED`:
       return {
         ...state,
         data: payload,
         isLoading: false,
       };
-    case `${POST_REGISTER}_ERROR`:
+    case `${POST_LOGIN}_ERROR`:
       return {
         ...state,
         isLoading: false,
@@ -32,4 +36,4 @@ const registerReducer = (state = initialState, action) => {
   }
 };
 
-export default registerReducer;
+export default loginReducer;
