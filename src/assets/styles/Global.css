@@ -84,6 +84,21 @@ body {
 .button-primary-2:hover {
   background-color: #4b1979;
 }
+.button-primary-3 {
+  background-color: white;
+  color: #000;
+  border-radius: 12px;
+  border-style: solid;
+  border-width: medium;
+  border-color: #7126b5;
+  padding: 12px 14px;
+  font-weight: 400;
+  font-size: 14px;
+  line-height: 20px;
+}
+.button-primary-3:hover {
+  background-color: #e2d4f0;
+}
 
 .button-outline-2 {
   color: #000;

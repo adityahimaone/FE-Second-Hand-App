@@ -1,0 +1,11 @@
+.images {
+    width: 48px;
+    height: 48px;
+}
+
+.width-left {
+    margin-left: -5rem !important;
+}
+.width-right {
+    margin-left: 5rem !important;
+}
