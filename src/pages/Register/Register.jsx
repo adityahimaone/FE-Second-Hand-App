@@ -9,15 +9,23 @@ import Style from "./Register.module.css";
 import axios from "axios";
 import { useDispatch, useSelector } from "react-redux";
 import { postRegister } from "../../store/action/registerAction";
+import Alert from "../../components/UI/Alert/Alert";
+
 
 function Register() {
   const token = localStorage.getItem("token");
   const navigate = useNavigate();
 
+  const [Success, setTawarSuccess] = useState(false);
+  const [error, setError] = useState(false);
   const [registerData, setRegisterData] = useState({
     nama: "",
     email: "",
     password: "",
+    alamat: "",
+    kota: "",
+    no_hp: "",
+    role: "",
   });
 
   const handleSubmit = async () => {
@@ -40,7 +48,12 @@ function Register() {
         navigate("/", { replace: true });
         console.log(res.data.email);
       }
+       if(res.status === 201){
+         setTawarSuccess(true)
+            }
+      
     } catch (error) {
+        setError(true);
       console.log(error);
     }
   };
@@ -68,7 +81,26 @@ function Register() {
             <div
               className={`${Style[""]} col-10 col-lg-8 d-flex flex-column my-1`}
             >
+                  
+                
               <h1 className="fw-bold">Daftar</h1>
+             {Success && (
+                    <Alert 
+                        title=" Pendaftaran succes"
+                        text="akun terdaftar"
+                    />
+                    
+                )}
+
+                {
+                error && (
+                    <div className="alert alert-danger" >
+                  <p>{error}</p>  
+                  </div>
+                )
+                }
+               
+
               <div>
                 <p>Nama</p>
                 <input
@@ -81,6 +113,54 @@ function Register() {
                     setRegisterData({
                       ...registerData,
                       nama: e.target.value,
+                    })
+                  }
+                />
+              </div>
+                <div>
+                <p>No HP</p>
+                <input
+                  className="form-input w-100"
+                  required
+                  style={{ marginButtom: "1rem" }}
+                  placeholder="Contoh: 081xxxxx"
+                  value={registerData.nohp}
+                  onChange={(e) =>
+                    setRegisterData({
+                      ...registerData,
+                      nohp: e.target.value,
+                    })
+                  }
+                />
+              </div>
+               <div>
+                <p>Kota</p>
+                <input
+                  className="form-input w-100"
+                  required
+                  style={{ marginButtom: "1rem" }}
+                  placeholder="Contoh: semarang"
+                  value={registerData.kota}
+                  onChange={(e) =>
+                    setRegisterData({
+                      ...registerData,
+                      kota: e.target.value,
+                    })
+                  }
+                />
+              </div>
+              <div>
+                <p>Alamat</p>
+                <input
+                  className="form-input w-100"
+                  required
+                  style={{ marginButtom: "1rem" }}
+                  placeholder="Contoh:desa"
+                  value={registerData.alamat}
+                  onChange={(e) =>
+                    setRegisterData({
+                      ...registerData,
+                      alamat: e.target.value,
                     })
                   }
                 />
@@ -106,7 +186,7 @@ function Register() {
                 <input
                   className="form-input w-100"
                   style={{ marginButtom: "1rem" }}
-                  placeholder="Masukkan password"
+                  placeholder="contoh:Rudi@12345678"
                   type="password"
                   value={registerData.password}
                   onChange={(e) =>
@@ -120,7 +200,6 @@ function Register() {
 
               <Button
                 className="button-primary-1 w-100 my-4"
-                href="login"
                 onClick={handleSubmit}
               >
                 Daftar
