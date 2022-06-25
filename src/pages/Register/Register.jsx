@@ -16,8 +16,8 @@ function Register() {
   const token = localStorage.getItem("token");
   const navigate = useNavigate();
 
-  const [Success, setTawarSuccess] = useState(false);
-  const [error, setError] = useState('');
+  
+  const [error, setError] = useState(true);
   const [registerData, setRegisterData] = useState({
     nama: "",
     email: "",
@@ -48,13 +48,11 @@ function Register() {
         navigate("/", { replace: true });
         console.log(res.data.email);
       }
-       if(res.status === 201){
-         setTawarSuccess(true)
-            }
+     
       
     } catch (error) {
-        
-      setError('error',error.response.data.message);
+        setError('error',error.response.data.message);
+      console.log(error);
     }
   };
 
@@ -84,13 +82,7 @@ function Register() {
                   
                 
               <h1 className="fw-bold">Daftar</h1>
-             {Success && (
-                    <Alert 
-                        title=" Pendaftaran succes"
-                        text="akun terdaftar"
-                    />
-                    
-                )}
+           
 
                 {
                 error && (
