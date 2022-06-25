@@ -8,13 +8,14 @@ import HomePage from "./pages/HomePage";
 // import Modal from "./component/UI/Modal/Modal"
 // import ModalNotif from "./component/UI/Modal_Notif/ModalNotif";
 // import ModalStatus from "./component/UI/Modal_Status/ModalStatus";
-import BuyerProduct from "./pages/buyer-product/BuyerProduct";
+import BuyerProduct from "./pages/buyer/BuyerProduct";
 // import { useReducer } from 'react';
 import store from "./store/store";
-import BuyerNotification from "./pages/buyer-product/BuyerNotification";
+import BuyerNotification from "./pages/buyer/BuyerNotification";
 import ProductSellingList from "./pages/ProductSellingList";
 import SellerSemuaProduk from "./pages/seller/SellerSemuaProduk";
 import SellerInfoProduk from "./pages/seller/SellerInfoProduk";
+import BuyerHalamanProduk from "./pages/buyer/BuyerHalamanProduk";
 
 function RoutesPage() {
   return (
@@ -28,6 +29,7 @@ function RoutesPage() {
           <Route path="/productsellinglist" element={<ProductSellingList />} />
           <Route path="/seller" element={<SellerSemuaProduk />} />
           <Route path="/sellerinfo" element={<SellerInfoProduk />} />
+          <Route path="/buyerhalaman" element={<BuyerHalamanProduk />} />
         </Route>
         <Route path="/login" element={<Login />} />
         <Route path="/Register" element={<Register />} />
