@@ -17,6 +17,7 @@ function Login() {
   } = useSelector((state) => state.login);
 
   let schema = yup.object().shape({
+    
     email: yup.string().email().required("Email harus di isi"),
     password: yup.string().required("Password Harus di isi"),
   });

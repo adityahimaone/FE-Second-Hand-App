@@ -10,14 +10,15 @@ import axios from "axios";
 import { useDispatch, useSelector } from "react-redux";
 import { postRegister } from "../../store/action/registerAction";
 import Alert from "../../components/UI/Alert/Alert";
+import * as yup from "yup";
+import { Formik, Form } from "formik";
 
 
 function Register() {
   const token = localStorage.getItem("token");
   const navigate = useNavigate();
 
-  
-  const [error, setError] = useState(true);
+   
   const [registerData, setRegisterData] = useState({
     nama: "",
     email: "",
@@ -26,7 +27,26 @@ function Register() {
     kota: "",
     no_hp: "",
     role: "",
+
+
   });
+
+ let schema = yup.object().shape({
+    nama: yup.string().required("Nama haruw di isi"),
+    email: yup.string().email().required("Email harus di isi"),
+    password: yup.string().required("Password Harus di isi")
+    .min(8, 'Should more than 8 characters')
+    .matches(/[a-z]/g, 'Should contain at least 1 lowercase')
+    .matches(/[A-Z]/g, 'Should contain at least 1 uppercase')
+    .matches(/[0-9]/g, 'Should contain at least 1 number')
+    .matches(/^\S*$/, 'Should not contain spaces'),
+    alamat: yup.string().required(),
+    kota: yup.string().required(),
+    no_hp: yup.string().required("cantumkan Nomor telepon")
+    .min(12, 'Should more than 12 characters')
+    .matches(/[0-9]/g, 'Should contain at least 1 number')
+  });
+       
 
   const handleSubmit = async () => {
     console.log(registerData);
@@ -51,7 +71,6 @@ function Register() {
      
       
     } catch (error) {
-        setError('error',error.response.data.message);
       console.log(error);
     }
   };
@@ -65,7 +84,7 @@ function Register() {
     dispatch(postRegister());
   }, [dispatch]);
 
-
+  
   return (
     <>
       <div className="container-fluid">
@@ -79,28 +98,37 @@ function Register() {
             <div
               className={`${Style[""]} col-10 col-lg-8 d-flex flex-column my-1`}
             >
-                  
-                
-              <h1 className="fw-bold">Daftar</h1>
+             <Formik
+              validationSchema={schema}
+              initialValues={{
+                nama: "",
+                email: "",
+                password: "",
+                alamat: "",
+                kota: "",
+                no_hp: "",
+              }}
+                onSubmit={(values) => {
+                console.log(values);
+                handleSubmit(values);
+              }}
+            >    
+              {({ handleSubmit,  errors, handleChange}) => (
+            <Form
+            onSubmit={handleSubmit}
+            className={`col-10 col-sm-7 d-flex flex-column my-1`}
+            >
+             <h1 className="fw-bold">Daftar</h1>
            
-
-                {
-                error && (
-                    <div className="alert alert-danger" >
-                  <p>{error}</p>  
-                  </div>
-                )
-                }
-               
-
               <div>
                 <p>Nama</p>
                 <input
                   className="form-input w-100"
-                  required
+                
                   style={{ marginButtom: "1rem" }}
                   placeholder="Contoh: toni"
                   value={registerData.nama}
+                  
                   onChange={(e) =>
                     setRegisterData({
                       ...registerData,
@@ -108,6 +136,9 @@ function Register() {
                     })
                   }
                 />
+               <span className="font-12 text-danger py-1">
+                      {errors.nama}
+                    </span>
               </div>
                 <div>
                 <p>No HP</p>
@@ -116,14 +147,17 @@ function Register() {
                   required
                   style={{ marginButtom: "1rem" }}
                   placeholder="Contoh: 081xxxxx"
-                  value={registerData.nohp}
+                  value={registerData.no_hp}
                   onChange={(e) =>
                     setRegisterData({
                       ...registerData,
-                      nohp: e.target.value,
+                      no_hp: e.target.value,
                     })
                   }
                 />
+                <span className="font-12 text-danger py-1">
+                      {errors.no_hp}
+                    </span>
               </div>
                <div>
                 <p>Kota</p>
@@ -140,6 +174,9 @@ function Register() {
                     })
                   }
                 />
+                <span className="font-12 text-danger py-1">
+                      {errors.kota}
+                    </span>
               </div>
               <div>
                 <p>Alamat</p>
@@ -156,6 +193,9 @@ function Register() {
                     })
                   }
                 />
+                <span className="font-12 text-danger py-1">
+                      {errors.alamat}
+                    </span>
               </div>
               <div>
                 <p>Email</p>
@@ -172,6 +212,9 @@ function Register() {
                     })
                   }
                 />
+                <span className="font-12 text-danger py-1">
+                      {errors.email}
+                    </span>
               </div>
               <div>
                 <p>Password</p>
@@ -188,6 +231,9 @@ function Register() {
                     })
                   }
                 />
+                <span className="font-12 text-danger py-1">
+                      {errors.password}
+                    </span>
               </div>
 
               <Button
@@ -205,7 +251,11 @@ function Register() {
                   </a>
                 </p>
               </div>
+              </Form>
+              )}
+              </Formik> 
             </div>
+            
           </div>
         </div>
       </div>
