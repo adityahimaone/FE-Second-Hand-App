@@ -79,11 +79,7 @@ function Register() {
   const { isLoading, data: register } =
     useSelector((state) => state.register);
 
-  useEffect(() => {
-    console.log("1. use effect component did mount");
-    dispatch(postRegister());
-  }, [dispatch]);
-
+  
   
   return (
     <>
@@ -113,9 +109,9 @@ function Register() {
                 handleSubmit(values);
               }}
             >    
-              {({ handleSubmit,  errors, handleChange}) => (
+              {({   errors}) => (
             <Form
-            onSubmit={handleSubmit}
+            
             className={`col-10 col-sm-7 d-flex flex-column my-1`}
             >
              <h1 className="fw-bold">Daftar</h1>

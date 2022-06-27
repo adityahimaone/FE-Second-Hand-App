@@ -1,7 +1,12 @@
 import { POST_REGISTER } from "../types";
 
 const initialState = {
-  data: [],
+  data: {
+    data: {
+      id: null,
+      token: null,
+    },
+  },
   isLoading: true,
   error: null,
 };
@@ -10,7 +15,6 @@ const registerReducer = (state = initialState, action) => {
   const { type, payload, error } = action;
   switch (type) {
     case `${POST_REGISTER}_LOADING`:
-      console.log("4. masuk reducer");
       return {
         ...state,
       };
