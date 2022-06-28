@@ -1,7 +1,6 @@
 import React from 'react'
 import { useState } from 'react'
 import { ListGroup } from 'react-bootstrap';
-import Card from "react-bootstrap/Card";
 import CardHome from '../../components/UI/Card/CardHome';
 import Style from "./sellersemuaproduk.module.css"
 
@@ -15,45 +14,51 @@ function SellerSemuaProduk() {
           name: "Jam Tangan Casio",
           category: "Aksesoris",
           price: 250000,
+          diminati: false,
         },
         {
           id: 2,
           name: "Jam Tangan Casio",
           category: "Aksesoris",
           price: 250000,
+          diminati: false,
         },
         {
           id: 3,
           name: "Jam Tangan Casio",
           category: "Aksesoris",
           price: 250000,
+          diminati: false,
         },
         {
           id: 4,
           name: "Jam Tangan Casio",
           category: "Aksesoris",
           price: 250000,
+          diminati: false,
         },
         {
           id: 5,
           name: "Jam Tangan Casio",
           category: "Aksesoris",
           price: 2500000,
+          diminati: false,
         },
         {
           id: 6,
           name: "Jam Tangan Casio",
           category: "Aksesoris",
           price: 2500000,
+          diminati: false,
         },
         {
           id: 7,
           name: "Jam Tangan Casio",
           category: "Aksesoris",
           price: 2500000,
+          diminati: false,
         }
       ];
-      
       
   return (
     <div className='container'>
@@ -110,7 +115,19 @@ function SellerSemuaProduk() {
                     </div>
                   </div>
                 )}
-                {myOption === "diminati" && (
+                {myOption === "diminati" &&(
+                    // <div onChange={cardDiminati}>
+                    //   {cardData.map((item) => (
+                    //   <div key={item.id} className="col">
+                    //     <CardHome
+                    //       title={item.name}
+                    //       category={item.category}
+                    //       price={item.price}
+                    //     />
+                    //   </div>
+                    // ))}
+                    // </div>
+                    
                     <div>Halaman Diminati</div>
                 )}
                 {myOption === "terjual" && (
