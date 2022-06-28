@@ -29,7 +29,7 @@ function RoutesPage() {
           <Route path="/productsellinglist" element={<ProductSellingList />} />
           <Route path="/seller" element={<SellerSemuaProduk />} />
           <Route path="/sellerinfo" element={<SellerInfoProduk />} />
-          <Route path="/buyerhalaman" element={<BuyerHalamanProduk />} />
+          <Route path="/buyerproductpage" element={<BuyerHalamanProduk />} />
         </Route>
         <Route path="/login" element={<Login />} />
         <Route path="/register" element={<Register />} />
