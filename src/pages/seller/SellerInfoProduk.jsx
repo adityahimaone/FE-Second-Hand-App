@@ -43,7 +43,7 @@ function SellerInfoProduk() {
                     </div>
                 </div>
                 <div className='d-flex mt-5'>
-                    <button type="submit" className="button-primary-3 w-50 me-2">Submit</button>
+                    <button type="submit" className={`${Style['button-primary-3']} w-50 me-2`}>Submit</button>
                     <button type="submit" className="button-primary-1 w-50 ms-2">Submit</button>
                 </div>
                 </form>
