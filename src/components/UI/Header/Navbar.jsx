@@ -64,20 +64,9 @@ function Navbar() {
                 <Link to="/product/list" className="btn">
                   <i className="bi bi-list-ul fs-5"></i>
                 </Link>
-                <Dropdown>
-                  <Dropdown.Toggle id="dropdown-basic" variant="none">
-                    <i className="bi bi-bell fs-5"></i>
-                  </Dropdown.Toggle>
-                  <Dropdown.Menu>
-                    <Dropdown.Item href="#/action-1">Action</Dropdown.Item>
-                    <Dropdown.Item href="#/action-2">
-                      Another action
-                    </Dropdown.Item>
-                    <Dropdown.Item href="#/action-3">
-                      Something else
-                    </Dropdown.Item>
-                  </Dropdown.Menu>
-                </Dropdown>
+                <Link to="/notification" className="btn">
+                  <i className="bi bi-bell fs-5"></i>
+                </Link>
                 <Dropdown>
                   <Dropdown.Toggle id="dropdown-basic" variant="none">
                     <i className="bi bi-person fs-5"></i>
