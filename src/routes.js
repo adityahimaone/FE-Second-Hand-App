@@ -29,8 +29,8 @@ function RoutesPage() {
           <Route path="/bproduct" element={<BuyerProduct />} />
           <Route path="/notifbuyer" element={<BuyerNotification />} />
           {/* <Route path="/product" element={<ProductSellingList />} /> */}
-          <Route path="/product/sell" element={<SellerSemuaProduk />} />
-          <Route path="/product/create" element={<SellerInfoProduk />} />
+          <Route path="/product/list" element={<SellerSemuaProduk />} />
+          <Route path="/product/sell" element={<SellerInfoProduk />} />
           <Route path="/user/profile" element={<InfoProfil />} />
           <Route path="/product/buy/:id" element={<BuyerHalamanProduk />} />
         </Route>

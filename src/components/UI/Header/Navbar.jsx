@@ -1,11 +1,10 @@
 import React, { useEffect, useState } from "react";
 import { Button } from "react-bootstrap";
 import { Form } from "react-bootstrap";
-import { Link } from "react-router-dom";
 import { useSelector, useDispatch } from "react-redux";
 import { authLogout } from "src/store/action/loginAction";
 import { Dropdown } from "react-bootstrap";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, Link } from "react-router-dom";
 
 function Navbar() {
   const dispatch = useDispatch();
@@ -62,20 +61,9 @@ function Navbar() {
             )}
             {loginState === true && (
               <div className="d-flex">
-                <Dropdown>
-                  <Dropdown.Toggle id="dropdown-basic" variant="none">
-                    <i className="bi bi-list-ul fs-5"></i>
-                  </Dropdown.Toggle>
-                  <Dropdown.Menu>
-                    <Dropdown.Item href="#/action-1">Action</Dropdown.Item>
-                    <Dropdown.Item href="#/action-2">
-                      Another action
-                    </Dropdown.Item>
-                    <Dropdown.Item href="#/action-3">
-                      Something else
-                    </Dropdown.Item>
-                  </Dropdown.Menu>
-                </Dropdown>
+                <Link to="/product/list" className="btn">
+                  <i className="bi bi-list-ul fs-5"></i>
+                </Link>
                 <Dropdown>
                   <Dropdown.Toggle id="dropdown-basic" variant="none">
                     <i className="bi bi-bell fs-5"></i>
