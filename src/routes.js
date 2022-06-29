@@ -28,11 +28,11 @@ function RoutesPage() {
           <Route path="product/:id" element={<ProductDetail />} />
           <Route path="/bproduct" element={<BuyerProduct />} />
           <Route path="/notifbuyer" element={<BuyerNotification />} />
-          <Route path="/productsellinglist" element={<ProductSellingList />} />
-          <Route path="/seller" element={<SellerSemuaProduk />} />
-          <Route path="/sellerinfo" element={<SellerInfoProduk />} />
-          <Route path="/infoprofil" element={<InfoProfil />} />
-          <Route path="/buyerhalaman" element={<BuyerHalamanProduk />} />
+          {/* <Route path="/product" element={<ProductSellingList />} /> */}
+          <Route path="/product/sell" element={<SellerSemuaProduk />} />
+          <Route path="/product/create" element={<SellerInfoProduk />} />
+          <Route path="/user/profile" element={<InfoProfil />} />
+          <Route path="/product/buy/:id" element={<BuyerHalamanProduk />} />
         </Route>
         <Route path="/login" element={<Login />} />
         <Route path="/register" element={<Register />} />
