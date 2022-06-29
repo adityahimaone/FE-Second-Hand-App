@@ -5,9 +5,11 @@ import { Link } from "react-router-dom";
 import { useSelector, useDispatch } from "react-redux";
 import { authLogout } from "src/store/action/loginAction";
 import { Dropdown } from "react-bootstrap";
+import { useNavigate } from "react-router-dom";
 
 function Navbar() {
   const dispatch = useDispatch();
+  const navigate = useNavigate();
 
   const [loginState, setLoginState] = useState(false);
   const { isLoading, data: loginData } = useSelector((state) => state.login);
@@ -33,7 +35,12 @@ function Navbar() {
       <div className="container p-2">
         <div className="row d-flex justify-content-between align-items-center">
           <div className="col-2">
-            <h5 className="w-100">Old But New</h5>
+            <button
+              className="btn d-flex align-content-center"
+              onClick={() => navigate("/")}
+            >
+              <span className="fs-5 w-100">Old But New</span>
+            </button>
           </div>
           <div className="col-4">
             <Form.Control
