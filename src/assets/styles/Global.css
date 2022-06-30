@@ -140,4 +140,8 @@ body {
 
 .dropdown-toggle::after {
   display: none !important;
+}
+
+.w-max-570 {
+  max-width: 570px;
 }/*# sourceMappingURL=Global.css.map */

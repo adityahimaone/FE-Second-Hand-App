@@ -172,3 +172,9 @@ $gray: #8a8a8a;
 .dropdown-toggle::after {
   display: none !important;
 }
+
+.w {
+  &-max-570 {
+    max-width: 570px;
+  }
+}
