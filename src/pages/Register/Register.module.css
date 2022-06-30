@@ -102,7 +102,7 @@
 
 /* <-- responsive css -->  */
 
-@media screen and (max-width: 960px) {
+@media screen and (max-width: 425px) {
   .form-content {
     display: flex;
     flex-direction: column;
@@ -116,7 +116,7 @@
     left: 16px;
     top: 166px;
   }
-  .login-bg {
+  .register-bg {
     display: none;
   }
 }
