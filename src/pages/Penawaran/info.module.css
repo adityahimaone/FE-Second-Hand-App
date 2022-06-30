@@ -11,17 +11,20 @@
 }
 .button-primary-3 {
   background-color: #e2d4f0;
-  border-radius: 12px; 
+  border-radius: 12px;
   border-color: #7126b5;
   border-width: 2px;
   border-style: solid;
   padding: 12px 14px;
   font-size: 14px;
-  line-height: 20px;
+  line-height: 5px;
+  margin-left:20px;
+  width: 10%;
 }
 .button-primary-3:hover {
   background-color: #7126b5;
 }
+
 
 .color {
   background-color: #e2d4f0 !important;

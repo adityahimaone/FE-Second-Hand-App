@@ -41,8 +41,21 @@ function infoPenawaran() {
                         <p className='m-0 fw-normal font-14'>Ditawar Rp. 200.000</p>
                     </div>
                 </div>
-                <div className={`d-flex justify-content-center rounded-4 mt-4 ${Style["button"]}`}>
-            <button type="submit" className={`button-primary-1 w-100 ${Style["button-primary-1"]}`} >Kirim</button>
+                <div className="d-flex mt-4">
+              <button
+                type="button"
+                className={`${Style["button-primary-3"]} w-50 me-2`}
+                onClick={''}
+              >
+                Tolak
+              </button>
+              <button
+                type="button"
+                className="button-primary-1 w-50 ms-2"
+                onClick={''}
+              >
+                Terima
+              </button>
             </div>
             </div>
     </div>
