@@ -42,6 +42,7 @@ function RoutesPage() {
           <Route path="/product/list" element={<SellerSemuaProduk />} />
           <Route path="/product/sell" element={<AddProduct />} />
           <Route path="/user/profile" element={<InfoProfil />} />
+          <Route path="/penawaran" element={<InfoPenawaran />} />
           <Route path="/product/buy/:id" element={<BuyerHalamanProduk />} />
         </Route>
         <Route path="/notification" element={<NotificationSeller />} />
