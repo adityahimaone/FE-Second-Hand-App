@@ -16,6 +16,7 @@ import ProductSellingList from "./pages/ProductSellingList";
 import SellerSemuaProduk from "./pages/seller/SellerSemuaProduk";
 import SellerInfoProduk from "./pages/seller/SellerInfoProduk";
 import BuyerHalamanProduk from "./pages/buyer/BuyerHalamanProduk";
+import InfoPenawaran from "./pages/Penawaran/infoPenawaran";
 import InfoProfil from "./pages/InfoProfil";
 // import ModalNotifBuyer from "./components/UI/Modal_Notif_Buyer/ModalNotifBuyer";
 
@@ -30,6 +31,7 @@ function RoutesPage() {
           <Route path="/notifbuyer" element={<BuyerNotification />} />
           <Route path="/productsellinglist" element={<ProductSellingList />} />
           <Route path="/seller" element={<SellerSemuaProduk />} />
+           <Route path="/Penawaran" element={<InfoPenawaran />} />
           <Route path="/sellerinfo" element={<SellerInfoProduk />} />
           <Route path="/infoprofil" element={<InfoProfil />} />
           <Route path="/buyerhalaman" element={<BuyerHalamanProduk />} />
