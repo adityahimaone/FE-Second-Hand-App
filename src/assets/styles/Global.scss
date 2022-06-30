@@ -74,6 +74,15 @@ $gray: #8a8a8a;
 }
 
 .button {
+  &-card {
+    text-decoration: none;
+    border: none;
+    cursor: pointer;
+    outline: none;
+
+    // background-color: $purple5;
+  }
+
   &-primary-1 {
     background-color: $purple4;
     color: #fff;
@@ -143,6 +152,7 @@ $gray: #8a8a8a;
 }
 
 .card {
+  cursor: pointer;
   background: #ffffff;
   box-shadow: 0px 0px 4px rgba(0, 0, 0, 0.15);
   border-radius: 16px;
@@ -161,4 +171,10 @@ $gray: #8a8a8a;
 
 .dropdown-toggle::after {
   display: none !important;
+}
+
+.w {
+  &-max-570 {
+    max-width: 570px;
+  }
 }

@@ -3,6 +3,7 @@ import CardHome from "../components/UI/Card/CardHome";
 import Style from "../assets/styles/Home.module.css";
 import Carousel from "../components/elements/Home/Carousel";
 import { Button } from "react-bootstrap";
+import { useNavigate } from "react-router-dom";
 
 const cardData = [
   {
@@ -58,6 +59,7 @@ const cardData = [
 const categoryList = ["Hobi", "Kendaran", "Aksesoris", "Elektronik"];
 
 function HomePage() {
+  const navigate = useNavigate();
   return (
     <>
       <section id="banner" className="my-4">
@@ -91,6 +93,7 @@ function HomePage() {
             {cardData.map((item) => (
               <div key={item.id} className="col">
                 <CardHome
+                  id={item.id}
                   title={item.name}
                   category={item.category}
                   price={item.price}
@@ -98,7 +101,10 @@ function HomePage() {
               </div>
             ))}
           </div>
-          <Button className={`button-primary-1 ${Style["button-float"]}`}>
+          <Button
+            onClick={() => navigate("/product/sell")}
+            className={`button-primary-1 ${Style["button-float"]}`}
+          >
             <i className="bi bi-plus-lg"></i>
             <span className="px-2">Jual</span>
           </Button>

@@ -7,14 +7,14 @@ import Style from "./sellersemuaproduk.module.css"
 function SellerSemuaProduk() {
     const option = ["produk", "diminati", "terjual"];
     const [myOption, setMyOption] = useState("produk");
-
+    
     const cardData = [
         {
           id: 1,
           name: "Jam Tangan Casio",
           category: "Aksesoris",
           price: 250000,
-          diminati: false,
+          diminati: true,
         },
         {
           id: 2,
@@ -128,7 +128,19 @@ function SellerSemuaProduk() {
                     // ))}
                     // </div>
                     
-                    <div>Halaman Diminati</div>
+                    <div>
+                      {cardData.map((item) => {
+                        if (item.diminati === true) {
+                          return <div key={item.id} className="col">
+                          <CardHome
+                            title={item.name}
+                            category={item.category}
+                            price={item.price}
+                          />
+                        </div>
+                        }
+                      })}
+                    </div>
                 )}
                 {myOption === "terjual" && (
                     <div>Halaman Terjual</div>
