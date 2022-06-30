@@ -1,13 +1,14 @@
 import React, { useEffect, useState } from "react";
 import { Button } from "react-bootstrap";
 import { Form } from "react-bootstrap";
-import { Link } from "react-router-dom";
 import { useSelector, useDispatch } from "react-redux";
 import { authLogout } from "src/store/action/loginAction";
 import { Dropdown } from "react-bootstrap";
+import { useNavigate, Link } from "react-router-dom";
 
 function Navbar() {
   const dispatch = useDispatch();
+  const navigate = useNavigate();
 
   const [loginState, setLoginState] = useState(false);
   const { isLoading, data: loginData } = useSelector((state) => state.login);
@@ -33,7 +34,12 @@ function Navbar() {
       <div className="container p-2">
         <div className="row d-flex justify-content-between align-items-center">
           <div className="col-2">
-            <h5 className="w-100">Old But New</h5>
+            <button
+              className="btn d-flex align-content-center"
+              onClick={() => navigate("/")}
+            >
+              <span className="fs-5 w-100">Old But New</span>
+            </button>
           </div>
           <div className="col-4">
             <Form.Control
@@ -55,34 +61,12 @@ function Navbar() {
             )}
             {loginState === true && (
               <div className="d-flex">
-                <Dropdown>
-                  <Dropdown.Toggle id="dropdown-basic" variant="none">
-                    <i className="bi bi-list-ul fs-5"></i>
-                  </Dropdown.Toggle>
-                  <Dropdown.Menu>
-                    <Dropdown.Item href="#/action-1">Action</Dropdown.Item>
-                    <Dropdown.Item href="#/action-2">
-                      Another action
-                    </Dropdown.Item>
-                    <Dropdown.Item href="#/action-3">
-                      Something else
-                    </Dropdown.Item>
-                  </Dropdown.Menu>
-                </Dropdown>
-                <Dropdown>
-                  <Dropdown.Toggle id="dropdown-basic" variant="none">
-                    <i className="bi bi-bell fs-5"></i>
-                  </Dropdown.Toggle>
-                  <Dropdown.Menu>
-                    <Dropdown.Item href="#/action-1">Action</Dropdown.Item>
-                    <Dropdown.Item href="#/action-2">
-                      Another action
-                    </Dropdown.Item>
-                    <Dropdown.Item href="#/action-3">
-                      Something else
-                    </Dropdown.Item>
-                  </Dropdown.Menu>
-                </Dropdown>
+                <Link to="/product/list" className="btn">
+                  <i className="bi bi-list-ul fs-5"></i>
+                </Link>
+                <Link to="/notification" className="btn">
+                  <i className="bi bi-bell fs-5"></i>
+                </Link>
                 <Dropdown>
                   <Dropdown.Toggle id="dropdown-basic" variant="none">
                     <i className="bi bi-person fs-5"></i>
