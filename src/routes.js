@@ -17,6 +17,8 @@ import SellerSemuaProduk from "./pages/seller/SellerSemuaProduk";
 import AddProduct from "./pages/seller/AddProduct";
 import BuyerHalamanProduk from "./pages/buyer/BuyerHalamanProduk";
 import InfoProfil from "./pages/InfoProfil";
+// import SellerInfoProduk from "./pages/seller/SellerInfoProduk";
+import NotificationSeller from "./pages/NotificationSeller";
 // import ModalNotifBuyer from "./components/UI/Modal_Notif_Buyer/ModalNotifBuyer";
 
 function RoutesPage() {
@@ -28,12 +30,13 @@ function RoutesPage() {
           <Route path="product/:id" element={<ProductDetail />} />
           <Route path="/bproduct" element={<BuyerProduct />} />
           <Route path="/notifbuyer" element={<BuyerNotification />} />
-          <Route path="/productsellinglist" element={<ProductSellingList />} />
-          <Route path="/seller" element={<SellerSemuaProduk />} />
-          <Route path="/addproduct" element={<AddProduct />} />
-          <Route path="/infoprofil" element={<InfoProfil />} />
-          <Route path="/buyerhalaman" element={<BuyerHalamanProduk />} />
+          {/* <Route path="/product" element={<ProductSellingList />} /> */}
+          <Route path="/product/list" element={<SellerSemuaProduk />} />
+          <Route path="/product/sell" element={<AddProduct />} />
+          <Route path="/user/profile" element={<InfoProfil />} />
+          <Route path="/product/buy/:id" element={<BuyerHalamanProduk />} />
         </Route>
+        <Route path="/notification" element={<NotificationSeller />} />
         <Route path="/login" element={<Login />} />
         <Route path="/register" element={<Register />} />
       </Routes>
