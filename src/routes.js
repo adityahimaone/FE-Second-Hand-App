@@ -27,14 +27,12 @@ function RoutesPage() {
         <Route path="/" element={<LayoutDefault />}>
           <Route index element={<HomePage />} />
           <Route path="product/:id" element={<ProductDetail />} />
-          <Route path="/bproduct" element={<BuyerProduct />} />
+          <Route path="/buyerproduct" element={<BuyerProduct />} />
           <Route path="/notifbuyer" element={<BuyerNotification />} />
           <Route path="/productsellinglist" element={<ProductSellingList />} />
           <Route path="/seller" element={<SellerSemuaProduk />} />
           <Route path="/sellerinfo" element={<SellerInfoProduk />} />
-          <Route path="/buyerproductpage" element={<BuyerHalamanProduk />} />
           <Route path="/infoprofil" element={<InfoProfil />} />
-          <Route path="/buyerhalaman" element={<BuyerHalamanProduk />} />
           {/* <Route path="/product" element={<ProductSellingList />} /> */}
           <Route path="/product/list" element={<SellerSemuaProduk />} />
           <Route path="/product/sell" element={<SellerInfoProduk />} />

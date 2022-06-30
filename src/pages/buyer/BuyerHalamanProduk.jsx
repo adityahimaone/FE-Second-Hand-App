@@ -4,29 +4,17 @@ import Button from "react-bootstrap/esm/Button";
 import { Component } from "react";
 import Alert from "../../components/UI/Alert/Alert";
 import { useState } from "react";
+import { useNavigate } from "react-router-dom";
 // import { Alert } from "bootstrap";
 
 
 
 function BuyerHalamanProduk() {
   const [text, enableButton] = useState("");
-  // state = {
-  //     disabled: true
-  // }
-
-  // const [tawarSuccess, setTawarSuccess] = useState(false);
-
-  // console.log(tawarSuccess, "tawarSuccess");
-  // render() {
+  // const navigate = useNavigate ();
   return (
     <div className="container-sm w-75 my-5">
-      {/* {tawarSuccess && (
-                    <Alert 
-                        title=" Tawaran Success"
-                        text="Harga tawarmu berhasil dikirim ke penjual"
-                    />
-                    
-                )} */}
+     
       <div className="row">
         <div className="col-12 col-lg-8">
           <div className="mb-4">
@@ -58,9 +46,11 @@ function BuyerHalamanProduk() {
             <h4 className="font-16 fw-bolder">Jam Tangan</h4>
             <h3 className="font-14 color-gray">Aksesoris</h3>
             <h2 className="font-16">Rp. 250.000</h2>
-            <button className="button-primary-1">
+            <Button 
+              // onClick={() => navigate("/buyerproduct") }
+              className="button-primary-1">
               Saya Tertarik dan ingin nego
-            </button>
+            </Button>
           </div>
           <div className="card p-3 mt-2 d-flex flex-row justify-content-start align-items-center gap-3">
             <div>

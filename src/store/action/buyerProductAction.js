@@ -1,6 +1,8 @@
 import { GET_PRODUCT } from "../types";
 import { AxiosCustom } from "src/utils/axiosCustom";
 
+export const GET_PRODUCT = "GET_PRODUCT";
+
 export const buyerProductAction = (payload) => {
     return (dispatch) => {
         dispatch({ type: `${GET_PRODUCT}_LOADING` });
