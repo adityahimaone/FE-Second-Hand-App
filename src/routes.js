@@ -20,6 +20,7 @@ import InfoPenawaran from "./pages/Penawaran/infoPenawaran";
 import InfoProfil from "./pages/InfoProfil";
 // import SellerInfoProduk from "./pages/seller/SellerInfoProduk";
 import NotificationSeller from "./pages/NotificationSeller";
+import InfoProduct from "./pages/InfoProductBuyer/InfoProduct";
 // import ModalNotifBuyer from "./components/UI/Modal_Notif_Buyer/ModalNotifBuyer";
 // import ModalTawar from "./components/UI/Modal_Tawar/ModalTawar";
 
@@ -40,6 +41,7 @@ function RoutesPage() {
           <Route path="/product/buy/:id" element={<BuyerHalamanProduk />} />
         </Route>
         <Route path="/notification" element={<NotificationSeller />} />
+        <Route path="/infoproduct" element={<InfoProduct />} />
         <Route path="/login" element={<Login />} />
         <Route path="/register" element={<Register />} />
       </Routes>

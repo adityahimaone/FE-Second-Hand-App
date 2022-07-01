@@ -40,6 +40,10 @@
   background-color: #7126b5;
 }
 
+.button-primary-1:hover {
+  background-color: #7126b5;
+}
+
 
 .color {
   background-color: #e2d4f0 !important;
@@ -68,6 +72,7 @@
     left: 30%;
     top: 50%;
     border-radius: 16px !important;
+    
 }
 .close {
     background: transparent;
@@ -82,7 +87,7 @@
 /* Product Match */
 .card-body {
     height: 12.5rem;
-    background-color: #EEEEEE;
+    background-color: #fff;
     margin-top:50px;
     margin-left:-20%;
     margin-right:30%;
