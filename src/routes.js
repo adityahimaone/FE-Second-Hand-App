@@ -8,7 +8,7 @@ import HomePage from "./pages/HomePage";
 // import Modal from "./component/UI/Modal/Modal"
 // import ModalNotif from "./component/UI/Modal_Notif/ModalNotif";
 // import ModalStatus from "./component/UI/Modal_Status/ModalStatus";
-import BuyerProduct from "./pages/buyer/BuyerProduct";
+import BuyerOffer from "./pages/buyer/BuyerOffer";
 // import { useReducer } from 'react';
 import store from "./store/store";
 import BuyerNotification from "./pages/buyer/BuyerNotification";
@@ -21,6 +21,7 @@ import InfoProfil from "./pages/InfoProfil";
 // import SellerInfoProduk from "./pages/seller/SellerInfoProduk";
 import NotificationSeller from "./pages/NotificationSeller";
 // import ModalNotifBuyer from "./components/UI/Modal_Notif_Buyer/ModalNotifBuyer";
+// import ModalTawar from "./components/UI/Modal_Tawar/ModalTawar";
 
 function RoutesPage() {
   return (
@@ -29,15 +30,8 @@ function RoutesPage() {
         <Route path="/" element={<LayoutDefault />}>
           <Route index element={<HomePage />} />
           <Route path="product/:id" element={<ProductDetail />} />
-          <Route path="/buyerproduct" element={<BuyerProduct />} />
+          <Route path="/buyeroffer" element={<BuyerOffer />} />
           <Route path="/notifbuyer" element={<BuyerNotification />} />
-<<<<<<< HEAD
-          <Route path="/productsellinglist" element={<ProductSellingList />} />
-          <Route path="/seller" element={<SellerSemuaProduk />} />
-          <Route path="/sellerinfo" element={<SellerInfoProduk />} />
-          <Route path="/infoprofil" element={<InfoProfil />} />
-=======
->>>>>>> 87bb389cc587a1b4607e63bfa388d74d4d198906
           {/* <Route path="/product" element={<ProductSellingList />} /> */}
           <Route path="/product/list" element={<SellerSemuaProduk />} />
           <Route path="/product/sell" element={<AddProduct />} />

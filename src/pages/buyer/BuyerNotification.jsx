@@ -1,5 +1,5 @@
 import React from "react";
-import BuyerProduct from "./BuyerProduct";
+import BuyerProduct from "./BuyerOffer";
 
 // import Alert from "src/components/UI/Alert/Alert";
 
