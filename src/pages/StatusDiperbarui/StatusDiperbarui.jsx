@@ -51,7 +51,7 @@ function StatusDiperbarui() {
               <div className="col-2 d-flex justify-content-center">
                 <div>
                   <img
-                    src="/images/person.png"
+                    src="/images/detail.png"
                     className="img-fluid rounded-2"
                     alt=""
                   />
