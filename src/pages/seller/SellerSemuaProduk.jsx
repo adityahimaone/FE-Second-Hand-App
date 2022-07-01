@@ -15,7 +15,8 @@ function SellerSemuaProduk() {
       name: "Jam Tangan Casio",
       category: "Aksesoris",
       price: 250000,
-      diminati: true,
+      diminati: false,
+      terjual: false,
     },
     {
       id: 2,
@@ -23,6 +24,7 @@ function SellerSemuaProduk() {
       category: "Aksesoris",
       price: 250000,
       diminati: false,
+      terjual: false,
     },
     {
       id: 3,
@@ -30,36 +32,24 @@ function SellerSemuaProduk() {
       category: "Aksesoris",
       price: 250000,
       diminati: false,
+      terjual: false,
     },
-    // {
-    //   id: 4,
-    //   name: "Jam Tangan Casio",
-    //   category: "Aksesoris",
-    //   price: 250000,
-    //   diminati: false,
-    // },
-    // {
-    //   id: 5,
-    //   name: "Jam Tangan Casio",
-    //   category: "Aksesoris",
-    //   price: 2500000,
-    //   diminati: false,
-    // },
-    // {
-    //   id: 6,
-    //   name: "Jam Tangan Casio",
-    //   category: "Aksesoris",
-    //   price: 2500000,
-    //   diminati: false,
-    // },
-    // {
-    //   id: 7,
-    //   name: "Jam Tangan Casio",
-    //   category: "Aksesoris",
-    //   price: 2500000,
-    //   diminati: false,
-    // },
   ];
+
+  const removeByAttr = function (arr, attr, value) {
+    let i = arr.length;
+    while (i--) {
+      if (
+        arr[i] &&
+        arr[i].hasOwnProperty(attr) &&
+        arguments.length > 2 &&
+        arr[i][attr] === value
+      ) {
+        arr.splice(i, 1);
+      }
+    }
+    return arr;
+  };
 
   return (
     <div className="container">
@@ -89,29 +79,41 @@ function SellerSemuaProduk() {
             <ListGroup.Item
               key={option}
               onClick={() => setMyOption("produk")}
-              className={`bg-white fw-semibold border-0 border-bottom ${
-                myOption === "produk" && "color-purple-5"
+              className={`d-flex align-items-center justify-content-between bg-white fw-semibold border-0 border-bottom ${
+                myOption === "produk" && "color-purple-4"
               }`}
             >
-              Semua Produk
+              <div className="d-flex align-items-center">
+                <i className={`${Style["icon-size"]} bi-box`}></i>
+                <p className="m-0 ms-2">Semua Produk</p>
+              </div>
+              <i className={`${Style["icon-size"]} bi-chevron-right`}></i>
             </ListGroup.Item>
             <ListGroup.Item
               key={option}
               onClick={() => setMyOption("diminati")}
               className={`${
-                myOption === "diminati" && "color-purple-5"
-              } bg-white fw-semibold border-0 border-bottom`}
+                myOption === "diminati" && "color-purple-4"
+              } d-flex align-items-center justify-content-between bg-white fw-semibold border-0 border-bottom`}
             >
-              Diminati
+              <div className="d-flex align-items-center">
+                <i className={`${Style["icon-size"]} bi-heart`}></i>
+                <p className="m-0 ms-2">Diminati</p>
+              </div>
+              <i className={`${Style["icon-size"]} bi-chevron-right`}></i>
             </ListGroup.Item>
             <ListGroup.Item
               key={option}
               onClick={() => setMyOption("terjual")}
               className={`${
-                myOption === "terjual" && "color-purple-5"
-              } bg-white fw-semibold border-0 `}
+                myOption === "terjual" && "color-purple-4"
+              } d-flex align-items-center justify-content-between bg-white fw-semibold border-0 `}
             >
-              Terjual
+              <div className="d-flex align-items-center">
+                <i className={`${Style["icon-size"]} bi-currency-dollar`}></i>
+                <p className="m-0 ms-2">Terjual</p>
+              </div>
+              <i className={`${Style["icon-size"]} bi-chevron-right`}></i>
             </ListGroup.Item>
           </ListGroup>
         </div>
@@ -143,21 +145,81 @@ function SellerSemuaProduk() {
               <div className="col-9 w-100">
                 <div className="row row-cols-2 row-cols-lg-3 g-4">
                   {cardData.map((item) => {
-                        if (item.diminati === true) {
-                          return <div key={item.id} className="col">
+                    if (item.diminati === true) {
+                      removeByAttr(cardData, "diminati", false);
+                      return (
+                        <div key={item.id} className="col">
                           <CardHome
                             title={item.name}
                             category={item.category}
                             price={item.price}
                           />
                         </div>
-                        }
-                      })}
+                      );
+                    }
+                  })}
                 </div>
               </div>
+              {cardData.map((item) => {
+                if (item.diminati !== true) {
+                  cardData.length = 0;
+                  return (
+                    <div className="mt-4">
+                      <img
+                        src="/images/undraw_selection_re_ycpo 1.png"
+                        alt=""
+                        style={{ width: "300px" }}
+                      />
+                      <p className="mt-3">
+                        Belum ada produkmu yang diminati nih, <br /> Sabar ya
+                        rejeki nggak kemana kok
+                      </p>
+                    </div>
+                  );
+                }
+              })}
             </div>
           )}
-          {myOption === "terjual" && <div>Halaman Terjual</div>}
+          {myOption === "terjual" && (
+            <div>
+              <div className="col-9 w-100">
+                <div className="row row-cols-2 row-cols-lg-3 g-4">
+                  {cardData.map((item) => {
+                    if (item.terjual === true) {
+                      removeByAttr(cardData, "terjual", false);
+                      return (
+                        <div key={item.id} className="col">
+                          <CardHome
+                            title={item.name}
+                            category={item.category}
+                            price={item.price}
+                          />
+                        </div>
+                      );
+                    }
+                  })}
+                </div>
+              </div>
+              {cardData.map((item) => {
+                if (item.terjual !== true) {
+                  cardData.length = 0;
+                  return (
+                    <div className="mt-4">
+                      <img
+                        src="/images/undraw_selection_re_ycpo 1.png"
+                        alt=""
+                        style={{ width: "300px" }}
+                      />
+                      <p className="mt-3">
+                        Belum ada produkmu yang terjual nih, <br /> Sabar ya
+                        rejeki nggak kemana kok
+                      </p>
+                    </div>
+                  );
+                }
+              })}
+            </div>
+          )}
         </div>
       </div>
     </div>

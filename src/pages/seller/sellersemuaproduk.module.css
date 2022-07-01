@@ -2,7 +2,6 @@
   width: 48px;
   height: 48px;
 }
-
 .width-left {
   margin-left: -5rem !important;
 }
@@ -22,12 +21,26 @@
 .button-primary-3:hover {
   background-color: #7126b5;
 }
-
 .color {
   background-color: #e2d4f0 !important;
   border: none !important;
 }
+.icon-size {
+  font-size: 20px;
+}
+.display{
+  visibility: hidden;
+}
+
+/* Custom input Add Product */
+.input-opacity {
+  opacity: 0;
+}
 .custom-file-input {
+  cursor: pointer;
+  color: transparent;
+  width: -webkit-fill-available;
+  /* position: absolute; */
 }
 .custom-file-input::-webkit-file-upload-button {
   visibility: hidden;
