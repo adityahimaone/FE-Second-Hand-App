@@ -6,10 +6,10 @@ function Alert({ title, text, icon, confirmText, navigation }) {
   const navigate = useNavigate();
   const MySwal = withReactContent(Swal);
   const titleAlert = title ? title : "Alert";
-  const textAlert = text ? text : "This is a simple alert";
+  const textAlert = text ? text : "Harga tawarmu berhasil dikirim ke penjual";
   const iconAlert = icon ? icon : "success";
   const confirmTextAlert = confirmText ? confirmText : "OK";
-  const navigationLink = navigation ? navigation + "" : "";
+  const navigationLink = navigation ? navigation + "/notifbuyer" : "";
 
   const alertOpen = () => {
     MySwal.fire({
@@ -22,7 +22,7 @@ function Alert({ title, text, icon, confirmText, navigation }) {
       confirmButtonText: confirmTextAlert,
     }).then((result) => {
       if (result.value) {
-        navigate(navigationLink);
+        navigate("/notifbuyer");
       }
     });
   };

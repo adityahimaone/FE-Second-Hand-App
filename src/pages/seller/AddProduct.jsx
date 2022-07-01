@@ -1,7 +1,6 @@
 import axios from "axios";
 import React from "react";
 import { useState } from "react";
-import { Button } from "react-bootstrap";
 import Style from "./sellersemuaproduk.module.css";
 
 function AddProduct() {
@@ -26,7 +25,7 @@ function AddProduct() {
 
     axios.post('https://old-but-new.herokuapp.com/api/v1/product/add', data, {
       headers: {
-        'Content-Type': 'application/json'
+        'Content-Type': 'multipart/form-data'
       }
     })
     .then(res => {

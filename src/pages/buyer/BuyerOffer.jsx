@@ -1,12 +1,12 @@
 import React from "react";
-import style from "./buyerproduct.module.css";
+import style from "./buyeroffer.module.css";
 import Button from "react-bootstrap/esm/Button";
 import { Component } from "react";
 import Alert from "../../components/UI/Alert/Alert";
 import { useState } from "react";
 // import { Alert } from "bootstrap";
 
-function BuyerProduct() {
+function BuyerOffert() {
     const [text, enableButton] = useState("");
     // state = {
     //     disabled: true
@@ -77,6 +77,6 @@ function BuyerProduct() {
     // }
 }
 
-export default BuyerProduct;
+export default BuyerOffert;
 
 //{`card p-3 mt-4 d-flex flex-row justify-content-start align-items-center gap-2 ${style["seller"]}`}

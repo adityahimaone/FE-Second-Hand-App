@@ -1,14 +1,14 @@
 import React from "react";
-import BuyerProduct from "./BuyerProduct";
-// import ModalNotif from "../../components/UI/Modal_Notif/ModalNotif";
+import BuyerProduct from "./BuyerOffer";
 
+// import Alert from "src/components/UI/Alert/Alert";
 
 
 function BuyerNotification() {
     return (
         <div>
             <BuyerProduct/>
-            {/* <ModalNotif /> */}
+            {/* <Alert /> */}
         </div>
     )
 }
