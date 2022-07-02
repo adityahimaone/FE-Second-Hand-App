@@ -5,6 +5,7 @@ import { useSelector, useDispatch } from "react-redux";
 import { authLogout } from "src/store/action/loginAction";
 import { Dropdown } from "react-bootstrap";
 import { useNavigate, Link } from "react-router-dom";
+import Style from "./Navbar.module.css";
 
 function Navbar() {
   const dispatch = useDispatch();
@@ -30,7 +31,7 @@ function Navbar() {
   console.log(loginState, loginData);
 
   return (
-    <nav className="shadow">
+    <nav className={`${Style["nav-header"]}`}>
       <div className="container p-2">
         <div className="row d-flex justify-content-between align-items-center">
           <div className="col-2">

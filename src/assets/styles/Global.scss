@@ -7,6 +7,7 @@
   src: local("Poppins"),
     url("https://fonts.googleapis.com/css2?family=Poppins&display=swap");
 }
+@import "./_tiny_slider.css";
 
 body {
   margin: 0;
@@ -83,6 +84,15 @@ $gray: #8a8a8a;
     // background-color: $purple5;
   }
 
+  &-nav-home {
+    background: #ffffff;
+    border-radius: 16px;
+    padding: 4px;
+    width: 48px;
+    height: 48px;
+    border: none;
+  }
+
   &-primary-1 {
     background-color: $purple4;
     color: #fff;
@@ -141,13 +151,21 @@ $gray: #8a8a8a;
     line-height: 20px;
 
     &-search {
-      background: #eeeeee;
+      background: #fff;
       border-radius: 16px;
+      border: none;
       padding: 10px 22px;
       font-weight: 400;
       font-size: 14px;
       line-height: 20px;
     }
+  }
+}
+
+.search {
+  & button {
+    top: 4px;
+    color: #8a8a8a;
   }
 }
 
@@ -176,5 +194,18 @@ $gray: #8a8a8a;
 .w {
   &-max-570 {
     max-width: 570px;
+  }
+}
+.nav {
+  &-home {
+    display: none;
+  }
+}
+
+@media screen and (max-width: 450px) {
+  .nav {
+    &-home {
+      display: block;
+    }
   }
 }
