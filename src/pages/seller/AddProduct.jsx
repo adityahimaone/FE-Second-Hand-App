@@ -2,14 +2,20 @@ import axios from "axios";
 import React from "react";
 import { useState } from "react";
 import Style from "./sellersemuaproduk.module.css";
+import { useSelector, useDispatch } from "react-redux";
+import { AxiosWithAuth } from "../../utils/axiosWithAuth";
 
 function AddProduct() {
+  const { isLoading, data: loginData } = useSelector((state) => state.login);
+
   const [nama, setNama] = useState("");
   const [harga, setHarga] = useState("");
   const [deskripsi, setDeskripsi] = useState("");
   const [image, setImage] = useState("");
   const [imagePrev, setImagePrev] = useState("");
   const [myOption, setMyOption] = useState("");
+
+  let token = loginData?.data?.token;
 
   const handleSubmit = () => {
     console.log("nama: ", nama);
@@ -18,22 +24,23 @@ function AddProduct() {
     console.log("image: ", image);
 
     const data = new FormData();
-    data.append('nama', nama)
-    data.append('harga', harga)
-    data.append('deskripsi', deskripsi)
-    data.append('image', image)
+    data.append("nama", nama);
+    data.append("harga", harga);
+    data.append("deskripsi", deskripsi);
+    data.append("image", image);
 
-    axios.post('https://old-but-new.herokuapp.com/api/v1/product/add', data, {
-      headers: {
-        'Content-Type': 'multipart/form-data'
-      }
-    })
-    .then(res => {
-      console.log('post success: ', res)
-    })
-    .catch(err => {
-      console.log('err: ', err)
-    })
+    AxiosWithAuth(token)
+      .post("/product/add", data, {
+        headers: {
+          "Content-Type": "multipart/form-data",
+        },
+      })
+      .then((res) => {
+        console.log("post success: ", res);
+      })
+      .catch((err) => {
+        console.log("err: ", err);
+      });
   };
 
   const handleImagePrev = (e) => {
