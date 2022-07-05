@@ -30,7 +30,7 @@ function AddProduct() {
     data.append("image", image);
 
     AxiosWithAuth(token)
-      .post("/product/add", data, {
+      .post("/product/add-product", data, {
         headers: {
           "Content-Type": "multipart/form-data",
         },

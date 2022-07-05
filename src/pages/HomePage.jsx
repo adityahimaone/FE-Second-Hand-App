@@ -4,7 +4,6 @@ import Style from "../assets/styles/Home.module.css";
 import Carousel from "../components/elements/Home/Carousel.jsx";
 import { Button } from "react-bootstrap";
 import { useNavigate } from "react-router-dom";
-import Slider from "src/components/elements/Home/Slider/Slider";
 import { HiMenu, HiSearch } from "react-icons/hi";
 
 const cardData = [
