@@ -1,10 +1,12 @@
-import React from "react";
+import React, { useEffect } from "react";
 import CardHome from "../components/UI/Card/CardHome";
 import Style from "../assets/styles/Home.module.css";
 import Carousel from "../components/elements/Home/Carousel.jsx";
 import { Button } from "react-bootstrap";
 import { useNavigate } from "react-router-dom";
 import { HiMenu, HiSearch } from "react-icons/hi";
+import { getAllProduct } from "src/store/action/productAction";
+import { useDispatch, useSelector } from "react-redux";
 
 const cardData = [
   {
@@ -61,6 +63,19 @@ const categoryList = ["Hobi", "Kendaran", "Aksesoris", "Elektronik"];
 
 function HomePage() {
   const navigate = useNavigate();
+  const dispatch = useDispatch();
+
+  const {
+    isLoading,
+    data: productData,
+    error,
+  } = useSelector((state) => state.all_product);
+
+  useEffect(() => {
+    dispatch(getAllProduct());
+  }, []);
+
+  console.log(productData.data.data);
   return (
     <>
       <section
@@ -117,14 +132,9 @@ function HomePage() {
             </div>
           </div>
           <div className="my-3 row row-cols-2 row-cols-xss-4 row-cols-lg-6 g-2">
-            {cardData.map((item) => (
+            {productData?.data?.data?.map((item) => (
               <div key={item.id} className="col">
-                <CardHome
-                  id={item.id}
-                  title={item.name}
-                  category={item.category}
-                  price={item.price}
-                />
+                <CardHome item={item} />
               </div>
             ))}
           </div>

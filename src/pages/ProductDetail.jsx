@@ -1,6 +1,19 @@
-import React from "react";
+import React, { useEffect } from "react";
+import { useDispatch, useSelector } from "react-redux";
+import { getProductByID, getAllProduct } from "src/store/action/productAction";
+import { useParams } from "react-router-dom";
 
 function ProductDetail() {
+  const dispatch = useDispatch();
+  const { id } = useParams();
+
+  let result = {};
+  useEffect(() => {
+    dispatch(getProductByID(id));
+  }, []);
+
+  console.log(result, "result");
+
   return (
     <div className="container-sm w-75 my-5">
       <div className="row">
@@ -33,12 +46,8 @@ function ProductDetail() {
             <h4 className="font-16 fw-bolder">Jam Tangan</h4>
             <h3 className="font-14 color-gray">Aksesoris</h3>
             <h2 className="font-16">Rp. 250.000</h2>
-            <button className="button-primary-1">
-              Terbitkan
-            </button>
-            <button className="button-outline-2 gap-4px"> 
-              Edit
-            </button>
+            <button className="button-primary-1">Terbitkan</button>
+            <button className="button-outline-2 gap-4px">Edit</button>
           </div>
           <div className="card p-3 mt-2 d-flex flex-row justify-content-start align-items-center gap-2">
             <div>
