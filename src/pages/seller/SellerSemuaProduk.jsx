@@ -130,11 +130,11 @@ function SellerSemuaProduk() {
                 </div>
                 {cardData.map((item) => (
                   <div key={item.id} className="col">
-                    <CardHome
+                    {/* <CardHome
                       title={item.name}
                       category={item.category}
                       price={item.price}
-                    />
+                    /> */}
                   </div>
                 ))}
               </div>
@@ -149,11 +149,11 @@ function SellerSemuaProduk() {
                       removeByAttr(cardData, "diminati", false);
                       return (
                         <div key={item.id} className="col">
-                          <CardHome
+                          {/* <CardHome
                             title={item.name}
                             category={item.category}
                             price={item.price}
-                          />
+                          /> */}
                         </div>
                       );
                     }
