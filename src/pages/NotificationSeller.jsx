@@ -5,24 +5,6 @@ function NotificationSeller() {
   const navigate = useNavigate();
   return (
     <>
-      <nav className="shadow">
-        <div className="container p-2">
-          <div className="row d-flex justify-content-between align-items-center">
-            <div className="col-2">
-              <button
-                className="btn d-flex align-content-center"
-                onClick={() => navigate("/")}
-              >
-                <span className="fs-5 w-100">Old But New</span>
-              </button>
-            </div>
-            <div className="col-8 text-center">
-              <span className="font-16">Info Penawar</span>
-            </div>
-            <div className="col-2"></div>
-          </div>
-        </div>
-      </nav>
       <div className="container d-flex justify-content-center">
         <div className="w-max-570 w-100 my-4 position-relative">
           <button

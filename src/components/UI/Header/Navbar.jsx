@@ -4,12 +4,13 @@ import { Form } from "react-bootstrap";
 import { useSelector, useDispatch } from "react-redux";
 import { authLogout } from "src/store/action/loginAction";
 import { Dropdown } from "react-bootstrap";
-import { useNavigate, Link } from "react-router-dom";
+import { useNavigate, Link, useLocation } from "react-router-dom";
 import Style from "./Navbar.module.css";
 
 function Navbar() {
   const dispatch = useDispatch();
   const navigate = useNavigate();
+  const location = useLocation();
 
   const [loginState, setLoginState] = useState(false);
   const { isLoading, data: loginData } = useSelector((state) => state.login);
@@ -18,6 +19,8 @@ function Navbar() {
     dispatch(authLogout());
     setLoginState(false);
   };
+
+  console.log(location.pathname);
 
   useEffect(() => {
     if (loginData.data) {
@@ -30,26 +33,55 @@ function Navbar() {
 
   console.log(loginState, loginData);
 
+  const userSearch =
+    location.pathname !== "/notification" &&
+    location.pathname !== "/user/profile";
+
+  const userNav =
+    loginState === true &&
+    location.pathname !== "/notification" &&
+    location.pathname !== "/user/profile";
+
+  const pathnameNotification = location.pathname === "/notification";
+  const pathnameUserProfile = location.pathname === "/user/profile";
+
+  console.log(userNav, "userNav");
+
   return (
     <nav className={`${Style["nav-header"]}`}>
       <div className="container p-2">
         <div className="row d-flex justify-content-between align-items-center">
           <div className="col-2">
-            <button
-              className="btn d-flex align-content-center"
-              onClick={() => navigate("/")}
-            >
-              <span className="fs-5 w-100">Old But New</span>
-            </button>
+            <Link className="d-flex align-content-center" to="/">
+              <img className="w-50" src="/images/loak.id.png" alt="" />
+            </Link>
           </div>
+          {pathnameNotification && (
+            <>
+              <div className="col-8 text-center">
+                <span className="fs-6">Notifikasi</span>
+              </div>
+              <div className="col-2"></div>
+            </>
+          )}
+          {pathnameUserProfile && (
+            <>
+              <div className="col-8 text-center">
+                <span className="fs-6">Lengkapi Info Akun</span>
+              </div>
+              <div className="col-2"></div>
+            </>
+          )}
           <div className="col-4">
-            <Form.Control
-              type="text"
-              id="inputPassword5"
-              aria-describedby="search"
-              className="form-input-search"
-              placeholder="Cari di sini ..."
-            />
+            {userSearch && (
+              <Form.Control
+                type="text"
+                id="inputPassword5"
+                aria-describedby="search"
+                className="form-input-search"
+                placeholder="Cari di sini ..."
+              />
+            )}
           </div>
           <div className="col-6 d-flex justify-content-end">
             {loginState === false && (
@@ -60,7 +92,7 @@ function Navbar() {
                 </Button>
               </Link>
             )}
-            {loginState === true && (
+            {userNav && (
               <div className="d-flex">
                 <Link to="/product/list" className="btn">
                   <i className="bi bi-list-ul fs-5"></i>
@@ -73,6 +105,9 @@ function Navbar() {
                     <i className="bi bi-person fs-5"></i>
                   </Dropdown.Toggle>
                   <Dropdown.Menu>
+                    <Dropdown.Item onClick={() => navigate("/user/profile")}>
+                      Edit Profile
+                    </Dropdown.Item>
                     <Dropdown.Item onClick={handleLogout}>Logout</Dropdown.Item>
                   </Dropdown.Menu>
                 </Dropdown>
