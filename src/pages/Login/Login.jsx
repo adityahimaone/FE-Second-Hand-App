@@ -42,8 +42,8 @@ function Login() {
             <Formik
               validationSchema={schema}
               initialValues={{
-                email: "",
-                password: "",
+                email: "iqbalux@gmail.com",
+                password: "#SafeIqbal99",
               }}
               onSubmit={(values) => {
                 console.log(values);
