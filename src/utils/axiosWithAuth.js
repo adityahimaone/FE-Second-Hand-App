@@ -7,7 +7,7 @@ export const AxiosWithAuth = (token) => {
     baseURL: mainAPI,
     headers: {
       "Content-Type": "application/json",
-      Authorization: `Bearer ${token}`,
+      Authorization: `${token}`,
       "Access-Control-Allow-Origin": "*",
       "Accest-Control-Allow-Credentials": true,
       "Access-Control-Allow-Methods": "GET,PUT,POST,DELETE,PATCH,OPTIONS",

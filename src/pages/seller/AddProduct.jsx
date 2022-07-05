@@ -20,9 +20,9 @@ function AddProduct() {
 
   let schema = yup.object().shape({
     nama: yup.string().required("nama harus di isi"),
-    harga: yup.string().required("harga Harus di isi"),
+    harga: yup.number().required("harga Harus di isi"),
     deskripsi: yup.string().required("deskripsi Harus di isi"),
-    kategori: yup.string().required("pilih kategori"),
+    category_id: yup.number().required("pilih kategori"),
     // image: yup.mixed().required("pillih gambar"),
   });
 
@@ -48,7 +48,6 @@ function AddProduct() {
     const file = e.currentTarget.files[0];
     setImage(file);
     setImagePrev(URL.createObjectURL(file));
-
   };
   return (
     <div className="mt-3">
@@ -63,7 +62,7 @@ function AddProduct() {
               nama: "",
               deskripsi: "",
               harga: "",
-              kategori: "",
+              category_id: 1,
               // image: null,
             }}
             onSubmit={(values) => {
@@ -105,20 +104,20 @@ function AddProduct() {
                   <label className="form-label">Kategori</label>
                   <select
                     class="form-select"
-                    name="kategori"
+                    name="category_id"
                     placeholder="pilih kategori"
                     onChange={handleChange}
-                    value={values.kategori}
+                    value={values.category_id}
                   >
                     <option value="" selected disabled>
                       Pilih Kategori
                     </option>
-                    <option value="Kemeja">Kemeja</option>
-                    <option value="Celana">Celana</option>
-                    <option value="Kaos">Kaos</option>
+                    <option value="1">Kemeja</option>
+                    <option value="2">Celana</option>
+                    <option value="3">Kaos</option>
                   </select>
                   <span className="font-12 text-danger py-1">
-                    {errors.kategori}
+                    {errors.kategcategory_idori}
                   </span>
                 </div>
                 <div className="mb-3">
@@ -156,7 +155,9 @@ function AddProduct() {
                   >
                     <input
                       type="file"
-                      onChange={(e) => {handleImagePrev(e)}}
+                      onChange={(e) => {
+                        handleImagePrev(e);
+                      }}
                       className={`${Style["custom-file-input"]} ms-4 `}
                     />
                   </div>
