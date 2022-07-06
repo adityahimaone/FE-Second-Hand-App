@@ -49,7 +49,7 @@ function BuyerHalamanProduk() {
           <div className="mb-4">
             <img
               src={
-                productData.product_image
+                productData?.product_image
                   ? productData.product_image[0].url
                   : "/images/detail.png"
               }
@@ -59,14 +59,16 @@ function BuyerHalamanProduk() {
           </div>
           <div className="card p-3">
             <h5 className="font-14 fw-bolder">Deskripsi</h5>
-            <p className="font-14 color-gray">{productData.deskripsi}</p>
+            <p className="font-14 color-gray">{productData?.deskripsi}</p>
           </div>
         </div>
         <div className="col-12 col-lg-4">
           <div className="card p-3">
-            <h4 className="font-16 fw-bolder">Jam Tangan</h4>
-            <h3 className="font-14 color-gray">{productData.category.nama}</h3>
-            <h2 className="font-16">{ConvertToIDR(productData.harga)}</h2>
+            <h4 className="font-16 fw-bolder">{productData?.nama}</h4>
+            <h3 className="font-14 color-gray">
+              {productData?.category?.nama}
+            </h3>
+            <h2 className="font-16">{ConvertToIDR(productData?.harga)}</h2>
             <Button
               onClick={handleShow}
               // onClick={() => {setOpenModalTawar(true);
@@ -80,13 +82,15 @@ function BuyerHalamanProduk() {
           <div className="card p-3 mt-2 d-flex flex-row justify-content-start align-items-center gap-3">
             <div>
               <img
-                src={ownerData.avatar ? ownerData.avatar : "/images/person.png"}
+                src={
+                  ownerData?.avatar ? ownerData.avatar : "/images/person.png"
+                }
                 className="avatar-circle"
                 alt=""
               />
             </div>
             <div className="d-flex flex-column">
-              <label>{ownerData.nama}</label>
+              <label>{ownerData?.nama}</label>
               <label>Kota</label>
             </div>
           </div>
