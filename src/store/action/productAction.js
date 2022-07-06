@@ -1,10 +1,10 @@
 import { AxiosCustom } from "src/utils/axiosCustom";
 import { GET_ALL_PRODUCT, GET_PRODUCT_BY_ID } from "../types";
 
-export const getAllProduct = () => {
+export const getAllProduct = (page, size) => {
   return (dispatch) => {
     dispatch({ type: `${GET_ALL_PRODUCT}_LOADING` });
-    AxiosCustom.get(`/product/all-product?page=1&size=12`)
+    AxiosCustom.get(`/product/all-product?page=${page}&size=${size}`)
       .then((response) => {
         dispatch({
           type: `${GET_ALL_PRODUCT}_FULFILLED`,

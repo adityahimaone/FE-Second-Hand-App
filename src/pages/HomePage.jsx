@@ -8,12 +8,15 @@ import { HiMenu, HiSearch } from "react-icons/hi";
 import { getAllProduct } from "src/store/action/productAction";
 import { getAllProductByCategories } from "src/store/action/productCategoriesAction";
 import { useDispatch, useSelector } from "react-redux";
+import { Pagination } from "react-bootstrap";
 
 function HomePage() {
   const navigate = useNavigate();
   const dispatch = useDispatch();
   const [categoryListMap, setCategoryList] = useState([]);
   const [tabCategory, setTabCategory] = useState(0);
+  const [pageTotal, setPageTotal] = useState(0);
+  const [pageNow, setPageNow] = useState(1);
 
   const {
     isLoading: isLoadingGetAllProduct,
@@ -28,36 +31,80 @@ function HomePage() {
   } = useSelector((state) => state.all_product_categories);
 
   useEffect(() => {
-    dispatch(getAllProduct());
+    dispatch(getAllProduct(pageNow, 12));
     dispatch(getAllProductByCategories());
+
+    if (!errorGetAllProduct) {
+      setPageTotal(productData?.data?.pageTotal);
+    }
 
     if (!errorGetAllCategories) {
       setCategoryList(productCategoriesData);
     }
-  }, []);
+  }, [, pageNow]);
 
   // console.log(productData.data.data);
 
   // console.log(categoryListMap?.data[1]?.product, "categoryListMap");
-  console.log(tabCategory, "tabCategory");
 
+  const pageItemArray = [];
+  for (let i = 1; i <= pageTotal; i++) {
+    pageItemArray.push(i);
+  }
+
+  const goFirstPage = () => {
+    setPageNow(1);
+  };
+
+  const goLastPage = () => {
+    setPageNow(pageTotal);
+  };
+
+  const goNextPage = () => {
+    if (pageNow < pageTotal) {
+      setPageNow((prevPage) => prevPage + 1);
+    }
+  };
+
+  const goPrevPage = () => {
+    if (pageNow > 1) {
+      setPageNow((prevPage) => prevPage - 1);
+    }
+  };
+
+  console.log(productData.data, pageTotal, pageItemArray, "productData");
   const SwitchTabCategory = ({ idCategory }) => {
-    console.log(idCategory.idCategory, tabCategory, "idCategory");
+    console.log(idCategory, tabCategory);
     if (tabCategory === 0) {
       return (
         <>
           {productData?.data?.data?.map((item) => (
-            <div key={item.id} className="col">
-              <CardHome item={item} />
-            </div>
+            <>
+              <div key={item.id} className="col">
+                <CardHome item={item} />
+              </div>
+            </>
           ))}
+          <div className="w-100 d-flex justify-content-end my-5">
+            <Pagination>
+              <Pagination.First onClick={goFirstPage} />
+              <Pagination.Prev onClick={goPrevPage} />
+              {pageItemArray.map((item) => (
+                <Pagination.Item onClick={() => setPageNow(item)}>
+                  {item}
+                </Pagination.Item>
+              ))}
+              <Pagination.Next onClick={goNextPage} />
+              <Pagination.Last onClick={goLastPage} />
+            </Pagination>
+          </div>
         </>
       );
     }
     if (tabCategory === idCategory) {
       return (
         <>
-          {categoryListMap?.data[idCategory]?.product?.map((item) => (
+          {categoryListMap?.data[idCategory - 1]?.product?.map((item) => (
             <div key={item.id} className="col">
               <CardHome item={item} />
             </div>

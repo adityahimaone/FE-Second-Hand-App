@@ -15,7 +15,7 @@ function CardHome({ item }) {
       <Card.Img
         variant="top"
         className="img-card"
-        src={product_image ? product_image[0].url : "/images/detail.png"}
+        src={product_image ? product_image[0]?.url : "/images/detail.png"}
       />
       <Card.Body>
         <Card.Title className="font-14">{nama ? nama : "Nama"}</Card.Title>

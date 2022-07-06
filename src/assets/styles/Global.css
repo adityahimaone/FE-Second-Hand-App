@@ -172,8 +172,8 @@ body {
   max-height: 120px;
   -o-object-fit: cover;
      object-fit: cover;
-  -o-object-position: top;
-     object-position: top;
+  -o-object-position: center;
+     object-position: center;
   border-radius: 4px;
   padding: 8px;
 }
