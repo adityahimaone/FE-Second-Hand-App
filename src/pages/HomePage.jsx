@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState, useCallback } from "react";
 import CardHome from "../components/UI/Card/CardHome";
 import Style from "../assets/styles/Home.module.css";
 import Carousel from "../components/elements/Home/Carousel.jsx";
@@ -9,6 +9,7 @@ import { getAllProduct } from "src/store/action/productAction";
 import { getAllProductByCategories } from "src/store/action/productCategoriesAction";
 import { useDispatch, useSelector } from "react-redux";
 import { Pagination } from "react-bootstrap";
+import { Spinner } from "react-bootstrap";
 
 function HomePage() {
   const navigate = useNavigate();
@@ -52,25 +53,25 @@ function HomePage() {
     pageItemArray.push(i);
   }
 
-  const goFirstPage = () => {
+  const goFirstPage = useCallback(() => {
     setPageNow(1);
-  };
+  });
 
-  const goLastPage = () => {
+  const goLastPage = useCallback(() => {
     setPageNow(pageTotal);
-  };
+  });
 
-  const goNextPage = () => {
+  const goNextPage = useCallback(() => {
     if (pageNow < pageTotal) {
       setPageNow((prevPage) => prevPage + 1);
     }
-  };
+  });
 
-  const goPrevPage = () => {
+  const goPrevPage = useCallback(() => {
     if (pageNow > 1) {
       setPageNow((prevPage) => prevPage - 1);
     }
-  };
+  });
 
   console.log(productData.data, pageTotal, pageItemArray, "productData");
   const SwitchTabCategory = ({ idCategory }) => {
@@ -78,6 +79,15 @@ function HomePage() {
     if (tabCategory === 0) {
       return (
         <>
+          <div className="w-100 d-flex justify-content-center">
+            {isLoadingGetAllProduct ? (
+              <div className="gap-2">
+                <Spinner animation="grow" variant="primary" />
+                <Spinner animation="grow" variant="primary" />
+                <Spinner animation="grow" variant="primary" />
+              </div>
+            ) : null}
+          </div>
           {productData?.data?.data?.map((item) => (
             <>
               <div key={item.id} className="col">
@@ -104,6 +114,15 @@ function HomePage() {
     if (tabCategory === idCategory) {
       return (
         <>
+          <div className="w-100 d-flex justify-content-center">
+            {isLoadingGetAllCategories ? (
+              <div className="gap-2">
+                <Spinner animation="grow" variant="primary" />
+                <Spinner animation="grow" variant="primary" />
+                <Spinner animation="grow" variant="primary" />
+              </div>
+            ) : null}
+          </div>
           {categoryListMap?.data[idCategory - 1]?.product?.map((item) => (
             <div key={item.id} className="col">
               <CardHome item={item} />
