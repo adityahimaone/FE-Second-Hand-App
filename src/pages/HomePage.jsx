@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import CardHome from "../components/UI/Card/CardHome";
 import Style from "../assets/styles/Home.module.css";
 import Carousel from "../components/elements/Home/Carousel.jsx";
@@ -6,76 +6,67 @@ import { Button } from "react-bootstrap";
 import { useNavigate } from "react-router-dom";
 import { HiMenu, HiSearch } from "react-icons/hi";
 import { getAllProduct } from "src/store/action/productAction";
+import { getAllProductByCategories } from "src/store/action/productCategoriesAction";
 import { useDispatch, useSelector } from "react-redux";
-
-const cardData = [
-  {
-    id: 1,
-    name: "Jam Tangan Casio",
-    category: "Aksesoris",
-    price: 250000,
-  },
-  {
-    id: 2,
-    name: "Jam Tangan Casio",
-    category: "Aksesoris",
-    price: 250000,
-  },
-  {
-    id: 3,
-    name: "Jam Tangan Casio",
-    category: "Aksesoris",
-    price: 250000,
-  },
-  {
-    id: 4,
-    name: "Jam Tangan Casio",
-    category: "Aksesoris",
-    price: 250000,
-  },
-  {
-    id: 5,
-    name: "Jam Tangan Casio",
-    category: "Aksesoris",
-    price: 2500000,
-  },
-  {
-    id: 6,
-    name: "Jam Tangan Casio",
-    category: "Aksesoris",
-    price: 25000,
-  },
-  {
-    id: 7,
-    name: "Jam Tangan Casio",
-    category: "Aksesoris",
-    price: 25000,
-  },
-  {
-    id: 8,
-    name: "Jam Tangan Casio",
-    category: "Aksesoris",
-    price: 25000,
-  },
-];
-
-const categoryList = ["Hobi", "Kendaran", "Aksesoris", "Elektronik"];
 
 function HomePage() {
   const navigate = useNavigate();
   const dispatch = useDispatch();
+  const [categoryListMap, setCategoryList] = useState([]);
+  const [tabCategory, setTabCategory] = useState(0);
 
   const {
-    isLoading,
+    isLoading: isLoadingGetAllProduct,
     data: productData,
-    error,
+    errorGetAllProduct,
   } = useSelector((state) => state.all_product);
+
+  const {
+    isLoading: isLoadingGetAllCategories,
+    data: productCategoriesData,
+    error: errorGetAllCategories,
+  } = useSelector((state) => state.all_product_categories);
 
   useEffect(() => {
     dispatch(getAllProduct());
+    dispatch(getAllProductByCategories());
+
+    if (!errorGetAllCategories) {
+      setCategoryList(productCategoriesData);
+    }
   }, []);
 
-  console.log(productData.data.data);
+  // console.log(productData.data.data);
+
+  // console.log(categoryListMap?.data[1]?.product, "categoryListMap");
+  console.log(tabCategory, "tabCategory");
+
+  const SwitchTabCategory = ({ idCategory }) => {
+    console.log(idCategory.idCategory, tabCategory, "idCategory");
+    if (tabCategory === 0) {
+      return (
+        <>
+          {productData?.data?.data?.map((item) => (
+            <div key={item.id} className="col">
+              <CardHome item={item} />
+            </div>
+          ))}
+        </>
+      );
+    }
+    if (tabCategory === idCategory) {
+      return (
+        <>
+          {categoryListMap?.data[idCategory]?.product?.map((item) => (
+            <div key={item.id} className="col">
+              <CardHome item={item} />
+            </div>
+          ))}
+        </>
+      );
+    }
+  };
+
   return (
     <>
       <section
@@ -118,25 +109,33 @@ function HomePage() {
             <h6 className="fw-bold">Telusuri Kategori</h6>
             <div className={Style["category__overflow-scroll-x"]}>
               <div className="d-flex gap-2 ">
-                <button className="button-primary-1">
+                <button
+                  onClick={() => setTabCategory(0)}
+                  className="button-primary-1"
+                >
                   <i className="bi bi-search"></i>
                   <span className="px-2">Semua</span>
                 </button>
-                {categoryList.map((item, index) => (
-                  <button key={index + 1} className="button-primary-2">
+                {categoryListMap?.data?.map((item) => (
+                  <button
+                    key={item.id}
+                    onClick={() => setTabCategory(item.id)}
+                    className="button-primary-2"
+                  >
                     <i className="bi bi-search"></i>
-                    <span className="px-2">{item}</span>
+                    <span className="px-2">{item.nama}</span>
                   </button>
                 ))}
               </div>
             </div>
           </div>
           <div className="my-3 row row-cols-2 row-cols-xss-4 row-cols-lg-6 g-2">
-            {productData?.data?.data?.map((item) => (
+            {/* {productData?.data?.data?.map((item) => (
               <div key={item.id} className="col">
                 <CardHome item={item} />
               </div>
-            ))}
+            ))} */}
+            <SwitchTabCategory idCategory={tabCategory} />
           </div>
           <button
             onClick={() => navigate("/product/sell")}
