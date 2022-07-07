@@ -49,7 +49,11 @@ function BuyerHalamanProduk() {
   return (
     <>
       {ReactDOM.createPortal(
-        <ModalOffer show={show} handleClose={handleClose} />,
+        <ModalOffer
+          show={show}
+          handleClose={handleClose}
+          data={productByIdData?.data}
+        />,
         portalDiv
       )}
       <div className="container-sm w-75 my-5">

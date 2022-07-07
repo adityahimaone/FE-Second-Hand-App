@@ -1,14 +1,18 @@
 import React from "react";
 import { Modal } from "react-bootstrap";
-import { Button } from "react-bootstrap";
+import { ConvertToIDR } from "../../../utils/helper";
 
-function ModalOffer({ show, handleClose }) {
+function ModalOffer({ show, handleClose, data }) {
+  const { product_image, deskripsi, id, seller_id, nama, harga } = data;
+
+  console.log(data, "data");
   return (
     <Modal
       show={show}
       onHide={handleClose}
       centered
-      contentClassName="w-max-360"
+      dialogClassName="d-flex justify-content-center"
+      contentClassName="w-max-360 "
     >
       <Modal.Header className="border-0" closeButton>
         {/* <Modal.Title>Modal heading</Modal.Title> */}
@@ -24,7 +28,7 @@ function ModalOffer({ show, handleClose }) {
         <div className="d-flex flex-row p-2 rounded-3 gap-2 bg-color-gray2 shadow">
           <div>
             <img
-              src="/images/dummy.png"
+              src={product_image ? product_image[0].url : "/images/dummy.png"}
               className="rounded-1"
               style={{
                 width: "48px",
@@ -34,8 +38,8 @@ function ModalOffer({ show, handleClose }) {
             />
           </div>
           <div className="d-flex flex-column">
-            <span className="font-14 fw-bold">Jam Tangan Casio</span>
-            <span className="font-14">Rp 250.000</span>
+            <span className="font-14 fw-bold">{nama}</span>
+            <span className="font-14">{ConvertToIDR(harga)}</span>
           </div>
         </div>
         <div className="mt-3">
