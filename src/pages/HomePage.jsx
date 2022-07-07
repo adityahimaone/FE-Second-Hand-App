@@ -10,6 +10,7 @@ import { getAllProductByCategories } from "src/store/action/productCategoriesAct
 import { useDispatch, useSelector } from "react-redux";
 import { Pagination } from "react-bootstrap";
 import { Spinner } from "react-bootstrap";
+import classNames from "classnames";
 
 function HomePage() {
   const navigate = useNavigate();
@@ -100,7 +101,10 @@ function HomePage() {
               <Pagination.First onClick={goFirstPage} />
               <Pagination.Prev onClick={goPrevPage} />
               {pageItemArray.map((item) => (
-                <Pagination.Item onClick={() => setPageNow(item)}>
+                <Pagination.Item
+                  onClick={() => setPageNow(item)}
+                  active={item === pageNow}
+                >
                   {item}
                 </Pagination.Item>
               ))}
@@ -177,7 +181,10 @@ function HomePage() {
               <div className="d-flex gap-2 ">
                 <button
                   onClick={() => setTabCategory(0)}
-                  className="button-primary-1"
+                  className={classNames({
+                    "button-primary-1": tabCategory === 0,
+                    "button-primary-2": tabCategory !== 0,
+                  })}
                 >
                   <i className="bi bi-search"></i>
                   <span className="px-2">Semua</span>
@@ -186,7 +193,10 @@ function HomePage() {
                   <button
                     key={item.id}
                     onClick={() => setTabCategory(item.id)}
-                    className="button-primary-2"
+                    className={classNames({
+                      "button-primary-1": tabCategory === item.id,
+                      "button-primary-2": tabCategory !== item.id,
+                    })}
                   >
                     <i className="bi bi-search"></i>
                     <span className="px-2">{item.nama}</span>

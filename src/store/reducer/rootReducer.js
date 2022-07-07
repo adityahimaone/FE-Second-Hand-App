@@ -4,6 +4,8 @@ import registerReducer from "./registerReducer";
 import allProductReducer from "./allProductReducer";
 import productByIdReducer from "./productByIdReducer";
 import allProductCategoriesReducer from "./allProductCategoriesReducer";
+import profileReducer from "./profileReducer";
+import offerReducer from "./offeringReducer";
 
 export default combineReducers({
   login: loginReducer,
@@ -11,4 +13,6 @@ export default combineReducers({
   all_product: allProductReducer,
   product_by_id: productByIdReducer,
   all_product_categories: allProductCategoriesReducer,
+  profile: profileReducer,
+  offer: offerReducer,
 });
