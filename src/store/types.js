@@ -14,3 +14,7 @@ export const GET_PRODUCT_BY_ALL_CATEGORY = "GET_PRODUCT_BY_ALL_CATEGORY";
 
 // Profile
 export const GET_PROFILE = "GET_PROFILE";
+
+// Offering Product
+
+export const POST_PRODUCT_OFFERING = "POST_PRODUCT_OFFERING";
