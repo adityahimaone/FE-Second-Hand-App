@@ -1,21 +1,31 @@
 import React from "react";
 import Style from "./seller/sellersemuaproduk.module.css";
+import { useNavigate } from "react-router-dom";
 
 function InfoProfil() {
+  const navigate = useNavigate();
   return (
-    <div className="">
-      <div className="d-flex mt-5 w-50 position-absolute start-50 translate-middle-x">
-        <div className={`${Style["width-left"]}`}>
-          <img src="/images/fi_arrow-left.png" alt="" />
-        </div>
-        <div className={`${Style["width-right"]} w-100`}>
+    <div className="container d-flex justify-content-center">
+      <div className="d-flex w-max-570 mt-5 w-100 position-relative">
+        <button
+          onClick={() => navigate(-1)}
+          className="btn position-absolute"
+          style={{ left: "-4.375rem", top: "-20px" }}
+        >
+          <i className="bi bi-arrow-left fs-4"></i>
+        </button>
+        <div className={`w-100`}>
           <form>
-            <div className="mb-3 ms-3 position-absolute top-0 start-50 translate-middle-x">
+            <div className="d-flex justify-content-center">
               <div style={{ maxWidth: "8rem" }}>
                 <div
-                  className={`${Style["color"]} card d-flex justify-content-center align-items-center`} style={{width: '8rem'}}
+                  className={`${Style["color"]} card d-flex justify-content-center align-items-center`}
+                  style={{ width: "8rem" }}
                 >
-                  <input type="file" className={`${Style["custom-file-input"]} ${Style['input-opacity']} position-absolute`}/>
+                  <input
+                    type="file"
+                    className={`${Style["custom-file-input"]} ${Style["input-opacity"]} position-absolute`}
+                  />
                   <img
                     src="/images/fi_camera.svg"
                     alt=""
@@ -25,7 +35,7 @@ function InfoProfil() {
                 </div>
               </div>
             </div>
-            <div className="mb-3" style={{ marginTop: "20vh" }}>
+            <div className="mb-3">
               <label className="form-label">Nama*</label>
               <input
                 type="text"
