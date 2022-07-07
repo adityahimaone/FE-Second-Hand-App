@@ -1,9 +1,28 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import Style from "./seller/sellersemuaproduk.module.css";
 import { useNavigate } from "react-router-dom";
+import { getUserProfile } from "../store/action/profileAction";
+import { useDispatch, useSelector } from "react-redux";
 
 function InfoProfil() {
   const navigate = useNavigate();
+  const dispatch = useDispatch();
+
+  const { data: dataLogin } = useSelector((state) => state.login);
+  const {
+    isLoading,
+    data: dataProfile,
+    error,
+  } = useSelector((state) => state.profile);
+
+  const [token, setToken] = useState(dataLogin?.data?.token);
+
+  useEffect(() => {
+    dispatch(getUserProfile(token));
+  }, []);
+
+  console.log(dataProfile.data, "dataProfile");
+
   return (
     <div className="container d-flex justify-content-center">
       <div className="d-flex w-max-570 mt-5 w-100 position-relative">

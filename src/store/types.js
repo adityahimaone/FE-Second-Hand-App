@@ -11,3 +11,6 @@ export const GET_PRODUCT_BY_ID = "GET_PRODUCT_BY_ID";
 
 //Category
 export const GET_PRODUCT_BY_ALL_CATEGORY = "GET_PRODUCT_BY_ALL_CATEGORY";
+
+// Profile
+export const GET_PROFILE = "GET_PROFILE";
