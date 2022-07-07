@@ -34,6 +34,25 @@ body {
 .color-gray {
   color: #8a8a8a;
 }
+.color-gray2 {
+  color: #eeeeee;
+}
+
+.bg-color-purple-1 {
+  background-color: #e2d4f0;
+}
+.bg-color-purple-4 {
+  background-color: #7126b5;
+}
+.bg-color-purple-5 {
+  background-color: #4b1979;
+}
+.bg-color-gray {
+  background-color: #8a8a8a;
+}
+.bg-color-gray2 {
+  background-color: #eeeeee;
+}
 
 .font {
   font-weight: 400;
@@ -59,6 +78,10 @@ body {
   font-size: 1.2rem;
 }
 
+.bd-radius-1 {
+  border-radius: 16px;
+}
+
 .button-card {
   text-decoration: none;
   border: none;
@@ -76,7 +99,7 @@ body {
 .button-primary-1 {
   background-color: #7126b5;
   color: #fff;
-  border-radius: 12px;
+  border-radius: 16px;
   border: none;
   padding: 12px 14px;
   font-weight: 400;
@@ -89,7 +112,7 @@ body {
 .button-primary-2 {
   background-color: #e2d4f0;
   color: #000;
-  border-radius: 12px;
+  border-radius: 16px;
   border: none;
   padding: 12px 14px;
   font-weight: 400;
@@ -103,7 +126,7 @@ body {
 
 .button-outline-2 {
   color: #000;
-  border-radius: 12px;
+  border-radius: 16px;
   border: 2px solid #e2d4f0;
   padding: 12px 14px;
   font-weight: 400;
@@ -123,6 +146,7 @@ body {
   font-weight: 400;
   font-size: 14px;
   line-height: 20px;
+  border: 1px solid #d0d0d0;
 }
 .form-input-search {
   background: #fff;
@@ -161,6 +185,9 @@ body {
 
 .w-max-570 {
   max-width: 570px;
+}
+.w-max-360 {
+  max-width: 360px;
 }
 
 .nav-home {
