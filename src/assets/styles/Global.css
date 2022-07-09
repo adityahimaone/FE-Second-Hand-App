@@ -189,6 +189,9 @@ body {
 .w-max-360 {
   max-width: 360px;
 }
+.w-max-376 {
+  width: 376;
+}
 
 .nav-home {
   display: none;
@@ -212,6 +215,15 @@ body {
   -o-object-position: center;
      object-position: center;
   border-radius: 16px;
+}
+.img-small-product {
+  width: 48px;
+  height: 48px;
+  -o-object-fit: cover;
+     object-fit: cover;
+  -o-object-position: center;
+     object-position: center;
+  border-radius: 12px;
 }
 
 .avatar-circle {

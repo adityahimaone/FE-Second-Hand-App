@@ -228,6 +228,10 @@ $gray2: #eeeeee;
   &-max-360 {
     max-width: 360px;
   }
+  &-max-376 {
+    width: 376;
+    // max-width: 376px;
+  }
 }
 .nav {
   &-home {
@@ -251,6 +255,14 @@ $gray2: #eeeeee;
     object-fit: fill;
     object-position: center;
     border-radius: 16px;
+  }
+
+  &-small-product {
+    width: 48px;
+    height: 48px;
+    object-fit: cover;
+    object-position: center;
+    border-radius: 12px;
   }
 }
 

@@ -6,14 +6,29 @@ import { authLogout } from "src/store/action/loginAction";
 import { Dropdown } from "react-bootstrap";
 import { useNavigate, Link, useLocation } from "react-router-dom";
 import Style from "./Navbar.module.css";
+import { getAllNotification } from "../../../store/action/notificationAction";
 
 function Navbar() {
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const location = useLocation();
 
+  const { isLoadingLogin, data: loginData } = useSelector(
+    (state) => state.login
+  );
+  const { isLoadingNotif, data: notificationData } = useSelector(
+    (state) => state.notification
+  );
+
   const [loginState, setLoginState] = useState(false);
-  const { isLoading, data: loginData } = useSelector((state) => state.login);
+  const [token, setToken] = useState(loginData?.data?.token);
+  const [notifSeller, setNotifSeller] = useState([
+    {
+      id: 0,
+      negotation_id: 0,
+      product_id: 0,
+    },
+  ]);
 
   const handleLogout = () => {
     dispatch(authLogout());
@@ -22,6 +37,8 @@ function Navbar() {
 
   console.log(location.pathname);
 
+  console.log(notificationData, notifSeller, "notificationData");
+
   useEffect(() => {
     if (loginData.data) {
       if (loginData?.data?.id !== 0 && loginData?.data?.token !== null) {
@@ -29,6 +46,8 @@ function Navbar() {
         setLoginState(true);
       }
     }
+    dispatch(getAllNotification(token));
+    setNotifSeller(notificationData?.data?.notif_seller);
   }, [loginData]);
 
   console.log(loginState, loginData);
@@ -97,9 +116,53 @@ function Navbar() {
                 <Link to="/product/list" className="btn">
                   <i className="bi bi-list-ul fs-5"></i>
                 </Link>
-                <Link to="/notification" className="btn">
+                {/* <Link to="/notification" className="btn">
                   <i className="bi bi-bell fs-5"></i>
-                </Link>
+                </Link> */}
+                <Dropdown>
+                  <Dropdown.Toggle
+                    id="dropdown-basic"
+                    align="end"
+                    variant="none"
+                  >
+                    <i className="bi bi-bell fs-5"></i>
+                  </Dropdown.Toggle>
+                  <Dropdown.Menu
+                    className=""
+                    style={{
+                      width: "376px",
+                    }}
+                  >
+                    {notifSeller.map((item) => (
+                      <Dropdown.Item
+                        onClick={() => navigate(`/notification/{${item.id}}`)}
+                      >
+                        <div className="d-flex gap-3 p-1">
+                          <div>
+                            <img
+                              src="/images/dummy.png"
+                              className="img-small-product"
+                              alt=""
+                            />
+                          </div>
+                          <div className="d-flex flex-column w-100">
+                            <div className="d-flex justify-content-between font-10 color-gray">
+                              <span>Penawaran produk</span>
+                              <span>20 April </span>
+                            </div>
+                            <div className="d-flex flex-column font-14 fw-bold">
+                              <span>Jam Tangan Casio</span>
+                              <span>Rp 250.000</span>
+                              <span>Ditawar Rp. 250.000</span>
+                            </div>
+                          </div>
+                        </div>
+                      </Dropdown.Item>
+                    ))}
+
+                    <Dropdown.Divider />
+                  </Dropdown.Menu>
+                </Dropdown>
                 <Dropdown>
                   <Dropdown.Toggle id="dropdown-basic" variant="none">
                     <i className="bi bi-person fs-5"></i>

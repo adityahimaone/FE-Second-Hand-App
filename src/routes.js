@@ -40,7 +40,7 @@ function RoutesPage() {
           <Route path="/user/profile" element={<InfoProfil />} />
           <Route path="/penawaran" element={<InfoPenawaran />} />
           <Route path="/product/buy/:id" element={<BuyerHalamanProduk />} />
-          <Route path="/notification" element={<NotificationSeller />} />
+          <Route path="/notification/:id" element={<NotificationSeller />} />
         </Route>
         <Route path="/status" element={<StatusDiperbarui />} />
         <Route path="/infoproduct" element={<InfoProduct />} />
