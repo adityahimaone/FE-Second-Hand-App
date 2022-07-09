@@ -1,10 +1,9 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import ReactDOM from "react-dom";
 import style from "./buyeroffer.module.css";
 import Button from "react-bootstrap/esm/Button";
 import { Component } from "react";
 // import Alert from "../../components/UI/Alert/Alert";
-import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { Modal } from "react-bootstrap";
 import ModalTawar from "src/components/UI/Modal_Tawar/ModalTawar";

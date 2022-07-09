@@ -8,6 +8,14 @@ import { useNavigate, Link, useLocation } from "react-router-dom";
 import Style from "./Navbar.module.css";
 import { getAllNotification } from "../../../store/action/notificationAction";
 
+const initialStateNotif = [
+  {
+    id: 0,
+    negotation_id: 0,
+    product_id: 0,
+  },
+];
+
 function Navbar() {
   const dispatch = useDispatch();
   const navigate = useNavigate();
@@ -22,13 +30,8 @@ function Navbar() {
 
   const [loginState, setLoginState] = useState(false);
   const [token, setToken] = useState(loginData?.data?.token);
-  const [notifSeller, setNotifSeller] = useState([
-    {
-      id: 0,
-      negotation_id: 0,
-      product_id: 0,
-    },
-  ]);
+  const [notifSeller, setNotifSeller] = useState(initialStateNotif);
+  const [notifBuyer, setnotifBuyer] = useState(initialStateNotif);
 
   const handleLogout = () => {
     dispatch(authLogout());
@@ -48,6 +51,7 @@ function Navbar() {
     }
     dispatch(getAllNotification(token));
     setNotifSeller(notificationData?.data?.notif_seller);
+    setnotifBuyer(notificationData?.data?.notif_buyer);
   }, [loginData]);
 
   console.log(loginState, loginData);
@@ -134,33 +138,72 @@ function Navbar() {
                     }}
                   >
                     {notifSeller.map((item) => (
-                      <Dropdown.Item
-                        onClick={() => navigate(`/notification/${item.id}`)}
-                      >
-                        <div className="d-flex gap-3 p-1">
-                          <div>
-                            <img
-                              src="/images/dummy.png"
-                              className="img-small-product"
-                              alt=""
-                            />
-                          </div>
-                          <div className="d-flex flex-column w-100">
-                            <div className="d-flex justify-content-between font-10 color-gray">
-                              <span>Penawaran produk</span>
-                              <span>20 April </span>
+                      <>
+                        <Dropdown.Item
+                          onClick={() => navigate(`/notification/${item.id}`)}
+                        >
+                          <div className="d-flex gap-3 p-1">
+                            <div>
+                              <img
+                                src="/images/dummy.png"
+                                className="img-small-product"
+                                alt=""
+                              />
                             </div>
-                            <div className="d-flex flex-column font-14 fw-bold">
-                              <span>Jam Tangan Casio</span>
-                              <span>Rp 250.000</span>
-                              <span>Ditawar Rp. 250.000</span>
+                            <div className="d-flex flex-column w-100">
+                              <div className="d-flex justify-content-between font-10 color-gray">
+                                <span>Penawaran produk</span>
+                                <span>{item?.createdAt}</span>
+                              </div>
+                              <div className="d-flex flex-column font-14 fw-bold">
+                                <span>{item?.product_notif?.nama}</span>
+                                <span>{item?.product_notif?.harga}</span>
+                                <span>
+                                  Ditawar {item?.data_nego?.harga_tawar}
+                                </span>
+                              </div>
                             </div>
                           </div>
-                        </div>
-                      </Dropdown.Item>
+                        </Dropdown.Item>
+                        <Dropdown.Divider />
+                      </>
                     ))}
-
-                    <Dropdown.Divider />
+                    {notifBuyer.map((item) => (
+                      <>
+                        <Dropdown.Item>
+                          <div className="d-flex gap-3 p-1">
+                            <div>
+                              <img
+                                src="/images/dummy.png"
+                                className="img-small-product"
+                                alt=""
+                              />
+                            </div>
+                            <div className="d-flex flex-column w-100">
+                              <div className="d-flex justify-content-between font-10 color-gray">
+                                <span>Penawaran produk</span>
+                                <span>{item?.createdAt}</span>
+                              </div>
+                              <div className="d-flex flex-column font-14 fw-bold">
+                                <span>J{item?.product_notif?.nama}</span>
+                                <span className="text-decoration-line-through">
+                                  {item?.product_notif?.harga}
+                                </span>
+                                <span>
+                                  Berhasil Ditawar{" "}
+                                  {item?.data_nego?.harga_tawar}
+                                </span>
+                                <span className="font-10 color-gray fw-normal">
+                                  Kamu akan segera dihubungi penjual via
+                                  whatsapp
+                                </span>
+                              </div>
+                            </div>
+                          </div>
+                        </Dropdown.Item>
+                        <Dropdown.Divider />
+                      </>
+                    ))}
                   </Dropdown.Menu>
                 </Dropdown>
                 <Dropdown>
