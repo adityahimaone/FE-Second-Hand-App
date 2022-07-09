@@ -1,8 +1,28 @@
-import React from "react";
-import { useNavigate } from "react-router-dom";
+import React, { useState, useEffect } from "react";
+import { useNavigate, useParams } from "react-router-dom";
+import { useSelector, useDispatch } from "react-redux";
+import { getDetailNotification } from "src/store/action/notificationAction";
 
 function NotificationSeller() {
   const navigate = useNavigate();
+  const dispatch = useDispatch();
+  const { id } = useParams();
+
+  const { isLoading: isLoadingLogin, data: loginData } = useSelector(
+    (state) => state.login
+  );
+
+  const { isLoading: isLoadingNotifByID, data: notificationByIDData } =
+    useSelector((state) => state.notification_by_id);
+
+  const [token, setToken] = useState(loginData?.data?.token);
+
+  useEffect(() => {
+    dispatch(getDetailNotification(token, id));
+  }, []);
+
+  console.log(id, notificationByIDData, "id");
+
   return (
     <>
       <div className="container d-flex justify-content-center">

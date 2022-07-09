@@ -13,10 +13,10 @@ function Navbar() {
   const navigate = useNavigate();
   const location = useLocation();
 
-  const { isLoadingLogin, data: loginData } = useSelector(
+  const { isLoading: isLoadingLogin, data: loginData } = useSelector(
     (state) => state.login
   );
-  const { isLoadingNotif, data: notificationData } = useSelector(
+  const { isLoading: isLoadingNotif, data: notificationData } = useSelector(
     (state) => state.notification
   );
 
@@ -135,7 +135,7 @@ function Navbar() {
                   >
                     {notifSeller.map((item) => (
                       <Dropdown.Item
-                        onClick={() => navigate(`/notification/{${item.id}}`)}
+                        onClick={() => navigate(`/notification/${item.id}`)}
                       >
                         <div className="d-flex gap-3 p-1">
                           <div>
