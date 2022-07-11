@@ -138,7 +138,7 @@ function Navbar() {
                       width: "376px",
                     }}
                   >
-                    {notifSeller.map((item) => (
+                    {notifSeller?.map((item) => (
                       <>
                         <Dropdown.Item
                           key={item.id}
@@ -177,7 +177,7 @@ function Navbar() {
                         <Dropdown.Divider />
                       </>
                     ))}
-                    {notifBuyer.map((item) => (
+                    {notifBuyer?.map((item) => (
                       <>
                         <Dropdown.Item>
                           <div className="d-flex gap-3 p-1">
