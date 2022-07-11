@@ -185,7 +185,7 @@ function Navbar() {
                                 <span>{item?.createdAt}</span>
                               </div>
                               <div className="d-flex flex-column font-14 fw-bold">
-                                <span>J{item?.product_notif?.nama}</span>
+                                <span>{item?.product_notif?.nama}</span>
                                 <span className="text-decoration-line-through">
                                   {item?.product_notif?.harga}
                                 </span>
