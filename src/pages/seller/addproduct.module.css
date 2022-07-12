@@ -1,0 +1,100 @@
+.width-left {
+    margin-left: -5rem ;
+}
+.width-right {
+    margin-left: 5rem ;
+}
+.button-primary-3 {
+  background-color: #e2d4f0;
+  border-radius: 12px;
+  border-color: #7126b5;
+  border-width: 2px;
+  border-style: solid;
+  padding: 12px 14px;
+  font-size: 14px;
+  line-height: 20px;
+}
+.button-primary-3:hover {
+  background-color: #7126b5;
+}
+.custom-file-input {
+  /* color: transparent; */
+  display: flex;
+  width: 7rem;
+}
+.custom-file-input::-webkit-file-upload-button {
+  visibility: hidden;
+  display: flex;
+  margin-top: -1vw;
+}
+.custom-file-input::before {
+  width: 6rem;
+  content: "+";
+  align-items: center;
+  color: gray;
+  display: flex;
+  justify-content: center;
+  padding: 2vw 0 2vw 0;
+  border: 3px dashed #999;
+  border-radius: 5px;
+  outline: none;
+  white-space: nowrap;
+  -webkit-user-select: none;
+  cursor: pointer;
+  text-shadow: 1px 1px #fff;
+  font-weight: 500;
+  font-size: 30pt;
+}
+.custom-file-input:hover::before {
+  border-color: gray;
+}
+.custom-file-input:active {
+  outline: 0;
+}
+.custom-file-input:active::before {
+  background: -webkit-linear-gradient(top, #e3e3e3, #f9f9f9);
+}
+.responsive{
+    width: 50%;
+}
+.title-responsive{
+    display: none ;
+}
+
+@media only screen and (max-width: 820px) {
+    .custom-file-input::before{
+        width: 5rem;
+    }
+}
+@media only screen and (max-width: 720px) {
+    .custom-file-input::before{
+        width: 4.5rem;
+    }
+    .title-responsive{
+        display: flex;
+    }
+    .width-left{
+        display: none;
+        margin-left: 0;
+    }
+    .width-right{
+        margin-left: 0;
+    }
+    .responsive{
+        width: 75%;
+    }
+}
+@media only screen and (max-width: 540px) {
+    .custom-file-input::before{
+        width: 4rem;
+    }
+    .responsive{
+        width: 75%;
+    }
+    
+}
+@media only screen and (max-width: 450px) {
+    .responsive{
+        width: 90%;
+    }
+}

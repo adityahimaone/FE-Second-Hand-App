@@ -1,7 +1,7 @@
 import axios from "axios";
 import React, { useEffect } from "react";
 import { useState } from "react";
-import Style from "./sellersemuaproduk.module.css";
+import Style from "./addproduct.module.css";
 import { useSelector, useDispatch } from "react-redux";
 import { AxiosWithAuth } from "../../utils/axiosWithAuth";
 import { Formik, Form, replace } from "formik";
@@ -11,11 +11,13 @@ import { useNavigate } from "react-router-dom";
 
 function AddProduct() {
   const navigate = useNavigate();
-  
+
   const { isLoading, data: loginData } = useSelector((state) => state.login);
   let token = loginData?.data?.token;
 
   const [myOption, setMyOption] = useState("");
+
+  const [disable, setDisable] = useState(true);
 
   const validationSchema = yup.object({
     nama: yup.string().required("Name is Required!"),
@@ -67,7 +69,7 @@ function AddProduct() {
       .then((res) => {
         console.log("post success: ", res);
         if (res.status === 201) {
-          navigate("/", {replace: true})
+          navigate("/", { replace: true });
         }
       })
       .catch((err) => {
@@ -76,7 +78,13 @@ function AddProduct() {
   };
   return (
     <div className="mt-3">
-      <div className="d-flex mt-3 w-50 position-absolute start-50 translate-middle-x">
+      <div className={`justify-content-center align-items-center mb-3 ${Style['title-responsive']}`}>
+        <img src="/images/fi_arrow-left.png" alt=""/>
+        <p className="m-0 ms-3 fs-6">Lengkapi Detail Produk</p>
+      </div>
+      <div
+        className={`d-flex mt-3 position-absolute start-50 translate-middle-x ${Style["responsive"]}`}
+      >
         <div className={`${Style["width-left"]}`}>
           <img src="/images/fi_arrow-left.png" alt="" />
         </div>
@@ -169,30 +177,34 @@ function AddProduct() {
                       className={`${Style["custom-file-input"]}`}
                       type="file"
                       name="image"
-                      multiple
                       onChange={(e) => {
                         setFieldValue("image", e.target.files[0]);
+                      }}
+                      onClick={() => {
+                        setDisable(false);
                       }}
                     />
                   </div>
                   <span className="font-12 text-danger py-1">
                     {errors.image}
                   </span>
-                  {myOption === "show" && values.image && (
+                  {myOption === "show" && (
                     <div className="mt-3">
                       <ImagePreview file={values.image} />
                     </div>
                   )}
                 </div>
-                <div className="d-flex mt-5">
+                <div className="d-flex mt-5 mb-5">
                   <button
                     type="button"
-                    className={`${Style["button-primary-3"]} w-50 me-2`}
+                    disabled={disable}
+                    // disabled
+                    className={`${Style["button-primary-3"]} w-50 me-2 fs-6`}
                     onClick={() => setMyOption("show")}
                   >
                     Preview
                   </button>
-                  <button type="submit" className="button-primary-1 w-50 ms-2">
+                  <button type="submit" className="button-primary-1 w-50 ms-2 fs-6">
                     Submit
                   </button>
                 </div>

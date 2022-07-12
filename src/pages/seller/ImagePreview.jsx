@@ -9,6 +9,7 @@ function ImagePreview({ file }) {
       setPreview(reader.result);
     };
   }
+
   return (
     <div>
         <img src={preview} alt="" style={{ width: "300px" }} />
