@@ -4,6 +4,8 @@ import { useNavigate, useParams } from "react-router-dom";
 import { useSelector, useDispatch } from "react-redux";
 import { getDetailNotification } from "src/store/action/notificationAction";
 import ModalAccept from "src/components/UI/Modal_Accept/ModalAccept";
+import { ConvertToDate } from "src/utils/helper";
+import { putProductAcceptNegotiation } from "src/store/action/acceptNegotiationAction";
 
 function NotificationSeller() {
   const navigate = useNavigate();
@@ -17,6 +19,9 @@ function NotificationSeller() {
   const { isLoading: isLoadingNotifByID, data: notificationByIDData } =
     useSelector((state) => state.notification_by_id);
 
+  const { data: dataNegotation } = useSelector(
+    (state) => state.acceptNegotation
+  );
   const [token, setToken] = useState(loginData?.data?.token);
   const [dataNotifByID, setdataNotifByID] = useState(
     notificationByIDData?.data
@@ -29,7 +34,14 @@ function NotificationSeller() {
     dispatch(getDetailNotification(token, id));
   }, []);
 
-  console.log(id, notificationByIDData.data, "id");
+  const handleAcceptNegotation = () => {
+    dispatch(putProductAcceptNegotiation(token, dataNotifByID?.data_nego?.id));
+    if (dataNegotation.status === true) {
+      handleShow();
+    }
+  };
+
+  console.log(dataNotifByID, notificationByIDData.data, "id");
   const portalDiv = document.getElementById("modal");
 
   return (
@@ -54,11 +66,19 @@ function NotificationSeller() {
           <div className="card d-flex flex-row p-2 justify-content-between align-items-center">
             <div className="d-flex align-items-center">
               <div className="pe-2">
-                <img src="/images/person.png" className="img-fluid" alt="" />
+                <img
+                  src={
+                    dataNotifByID?.buyer?.avatar
+                      ? dataNotifByID?.buyer?.avatar
+                      : "/images/person.png"
+                  }
+                  className="img-small-product"
+                  alt=""
+                />
               </div>
               <div className="d-flex flex-column">
-                <span className="font-14">Nama Penjual</span>
-                <span className="font-10">Kota</span>
+                <span className="font-14">{dataNotifByID?.buyer?.nama}</span>
+                <span className="font-10">{dataNotifByID?.buyer?.kota}</span>
               </div>
             </div>
           </div>
@@ -71,8 +91,12 @@ function NotificationSeller() {
                 <div className="col-2 d-flex justify-content-center">
                   <div>
                     <img
-                      src="/images/person.png"
-                      className="img-fluid rounded-2"
+                      src={
+                        dataNotifByID?.product_notif
+                          ? dataNotifByID?.product_notif?.product_image[0]?.url
+                          : "/images/person.png"
+                      }
+                      className="img-small-product "
                       alt=""
                     />
                   </div>
@@ -80,7 +104,9 @@ function NotificationSeller() {
                 <div className="col-10 d-flex flex-column">
                   <div className="d-flex justify-content-between">
                     <span className="font-10">Penawaran produk</span>
-                    <span className="font-10">20 Apr, 14:04</span>
+                    <span className="font-10">
+                      {ConvertToDate(dataNotifByID?.createdAt)}
+                    </span>
                   </div>
                   <div className="d-flex flex-column">
                     <span className="font-14">
@@ -89,13 +115,15 @@ function NotificationSeller() {
                     <span className="font-14">
                       {dataNotifByID?.product_notif?.harga}
                     </span>
-                    <span className="font-14">Ditawar Rp.200.00</span>
+                    <span className="font-14">
+                      Ditawar {dataNotifByID?.data_nego?.harga_tawar}
+                    </span>
                   </div>
                   <div className="d-flex justify-content-end gap-2">
                     <button className="button-outline-2 px-5">Tolak</button>
                     <button
                       type="button"
-                      onClick={handleShow}
+                      onClick={handleAcceptNegotation}
                       className="button-primary-1 px-5"
                     >
                       Terima

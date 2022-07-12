@@ -1,4 +1,4 @@
-import { POST_PRODUCT_OFFERING_NEGOTATION } from "../types";
+import { PUT_PRODUCT_ACCEPT_NEGOTATION } from "../types";
 
 const initialState = {
   data: {
@@ -10,22 +10,22 @@ const initialState = {
   error: null,
 };
 
-const offeringReducer = (state = initialState, action) => {
+const acceptReducer = (state = initialState, action) => {
   const { type, payload, error } = action;
   switch (type) {
-    case `${POST_PRODUCT_OFFERING_NEGOTATION}_LOADING`:
+    case `${PUT_PRODUCT_ACCEPT_NEGOTATION}_LOADING`:
       return {
         ...state,
         isLoading: true,
         error: null,
       };
-    case `${POST_PRODUCT_OFFERING_NEGOTATION}_FULFILLED`:
+    case `${PUT_PRODUCT_ACCEPT_NEGOTATION}_FULFILLED`:
       return {
         ...state,
         data: payload,
         isLoading: false,
       };
-    case `${POST_PRODUCT_OFFERING_NEGOTATION}_ERROR`:
+    case `${PUT_PRODUCT_ACCEPT_NEGOTATION}_ERROR`:
       return {
         ...state,
         isLoading: false,
@@ -37,4 +37,4 @@ const offeringReducer = (state = initialState, action) => {
   }
 };
 
-export default offeringReducer;
+export default acceptReducer;
