@@ -178,7 +178,7 @@ function SellerSemuaProduk() {
                       category={item.category}
                       price={item.price}
                     /> */}
-                      <Card className="card-1">
+                      {/* <Card className="card-1">
                         <Card.Img
                           variant="top"
                           className="img-card"
@@ -196,7 +196,7 @@ function SellerSemuaProduk() {
                             {item.price}
                           </Card.Text>
                         </Card.Body>
-                      </Card>
+                      </Card> */}
                     </div>
                   ))}
                 </div>
