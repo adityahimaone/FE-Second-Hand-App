@@ -17,6 +17,10 @@
 .button-primary-3:hover {
   background-color: #7126b5;
 }
+.button-primary-3:disabled{
+    background-color: rgb(188, 188, 188);
+    border-color: #999;
+}
 .custom-file-input {
   /* color: transparent; */
   display: flex;
