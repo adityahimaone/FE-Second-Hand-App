@@ -1,9 +1,9 @@
-import React from "react";
-import style from "./buyeroffer.module.css";
+import React, { Component, useState } from "react";
 import Button from "react-bootstrap/esm/Button";
-import { Component } from "react";
+
 import Alert from "components/UI/Alert/Alert";
-import { useState } from "react";
+import style from "./buyeroffer.module.css";
+
 // import { Alert } from "bootstrap";
 
 function BuyerOffert() {
@@ -56,8 +56,8 @@ function BuyerOffert() {
             <h3 className="font-14 color-gray">Aksesoris</h3>
             <h2 className="font-16">Rp. 250.000</h2>
             <button
-              className={`button-primary-1 w-100 my-3 disabled ${style["disabled"]}`}
-              href="#"
+              type="button"
+              className={`button-primary-1 w-100 my-3 disabled ${style.disabled}`}
               disabled="this.state.disabled"
             >
               <p>Menunggu respon penjual</p>
@@ -68,8 +68,8 @@ function BuyerOffert() {
               <img src="/images/person.png" className="img-fluid" alt="" />
             </div>
             <div className="d-flex flex-column">
-              <label>Nama Penjual</label>
-              <label>Kota</label>
+              <span>Nama Penjual</span>
+              <span>Kota</span>
             </div>
           </div>
         </div>
@@ -81,4 +81,4 @@ function BuyerOffert() {
 
 export default BuyerOffert;
 
-//{`card p-3 mt-4 d-flex flex-row justify-content-start align-items-center gap-2 ${style["seller"]}`}
+// {`card p-3 mt-4 d-flex flex-row justify-content-start align-items-center gap-2 ${style["seller"]}`}

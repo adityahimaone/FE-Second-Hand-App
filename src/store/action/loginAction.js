@@ -1,8 +1,7 @@
-import { POST_LOGIN } from "../types";
 import { AxiosCustom } from "utils/axiosCustom";
+import { POST_LOGIN } from "../types";
 
-export const authLogin = (payload) => {
-  return (dispatch) => {
+export const authLogin = (payload) => (dispatch) => {
     dispatch({ type: `${POST_LOGIN}_LOADING` });
     AxiosCustom.post(`auth/login`, payload)
       .then((response) => {
@@ -18,10 +17,8 @@ export const authLogin = (payload) => {
         });
       });
   };
-};
 
-export const authLogout = () => {
-  return (dispatch) => {
+export const authLogout = () => (dispatch) => {
     dispatch({
       type: `${POST_LOGIN}_FULFILLED`,
       payload: {
@@ -32,4 +29,3 @@ export const authLogout = () => {
       },
     });
   };
-};

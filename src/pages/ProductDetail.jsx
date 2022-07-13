@@ -7,7 +7,7 @@ function ProductDetail() {
   const dispatch = useDispatch();
   const { id } = useParams();
 
-  let result = {};
+  const result = {};
   useEffect(() => {
     dispatch(getProductByID(id));
   }, []);
@@ -46,8 +46,12 @@ function ProductDetail() {
             <h4 className="font-16 fw-bolder">Jam Tangan</h4>
             <h3 className="font-14 color-gray">Aksesoris</h3>
             <h2 className="font-16">Rp. 250.000</h2>
-            <button className="button-primary-1">Terbitkan</button>
-            <button className="button-outline-2 gap-4px">Edit</button>
+            <button type="button" className="button-primary-1">
+              Terbitkan
+            </button>
+            <button type="button" className="button-outline-2 gap-4px">
+              Edit
+            </button>
           </div>
           <div className="card p-3 mt-2 d-flex flex-row justify-content-start align-items-center gap-2">
             <div>

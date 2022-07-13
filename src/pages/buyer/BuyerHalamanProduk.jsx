@@ -1,18 +1,17 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState, Component } from "react";
 import ReactDOM from "react-dom";
-import style from "./buyeroffer.module.css";
 import Button from "react-bootstrap/esm/Button";
-import { Component } from "react";
 // import Alert from "../../components/UI/Alert/Alert";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 import { Modal } from "react-bootstrap";
 import ModalTawar from "components/UI/Modal_Tawar/ModalTawar";
 import Style from "components/UI/Modal_Tawar/Tawar.module.css";
 import { useDispatch, useSelector } from "react-redux";
 import { getProductByID, getAllProduct } from "store/action/productAction";
-import { useParams } from "react-router-dom";
+
 import { ConvertToIDR } from "utils/helper";
 import ModalOffer from "components/UI/Modal_Tawar/ModalOffer";
+import style from "./buyeroffer.module.css";
 
 function BuyerHalamanProduk() {
   const dispatch = useDispatch();
@@ -81,6 +80,7 @@ function BuyerHalamanProduk() {
               </h3>
               <h2 className="font-16">{ConvertToIDR(productData?.harga)}</h2>
               <button
+                type="button"
                 onClick={handleShow}
                 // onClick={() => {setOpenModalTawar(true);
                 // }}
@@ -101,8 +101,8 @@ function BuyerHalamanProduk() {
                 />
               </div>
               <div className="d-flex flex-column">
-                <label>{ownerData?.nama}</label>
-                <label>Kota</label>
+                <span>{ownerData?.nama}</span>
+                <span>Kota</span>
               </div>
             </div>
           </div>

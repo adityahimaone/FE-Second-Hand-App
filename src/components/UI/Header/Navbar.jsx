@@ -6,9 +6,9 @@ import { useSelector, useDispatch } from "react-redux";
 import { useNavigate, Link, useLocation } from "react-router-dom";
 import { authLogout } from "store/action/loginAction";
 
-import Style from "./Navbar.module.css";
 import { getAllNotification } from "store/action/notificationAction";
 import { ConvertToDate, ConvertToIDR } from "utils/helper";
+import Style from "./Navbar.module.css";
 import NotificationDropdown from "./Notification/NotificationDropdown";
 
 const initialStateNotif = [

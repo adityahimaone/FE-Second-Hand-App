@@ -1,3 +1,4 @@
+/* eslint-disable react/no-unstable-nested-components */
 import React, { useEffect, useState, useCallback } from "react";
 import { useNavigate } from "react-router-dom";
 import { HiMenu, HiSearch } from "react-icons/hi";
@@ -5,10 +6,10 @@ import { useDispatch, useSelector } from "react-redux";
 import { Pagination, Spinner, Button } from "react-bootstrap";
 import classNames from "classnames";
 import { getAllProductByCategories } from "store/action/productCategoriesAction";
-import { getAllProduct } from "../store/action/productAction";
 import CardHome from "components/UI/Card/CardHome";
 import Carousel from "components/elements/Home/Carousel";
 import Style from "assets/styles/Home.module.css";
+import { getAllProduct } from "store/action/productAction";
 
 function HomePage() {
   const navigate = useNavigate();
@@ -72,9 +73,7 @@ function HomePage() {
     }
   });
 
-  console.log(productData.data, pageTotal, pageItemArray, "productData");
   function SwitchTabCategory({ idCategory }) {
-    console.log(idCategory, tabCategory);
     if (tabCategory === 0) {
       return (
         <>
