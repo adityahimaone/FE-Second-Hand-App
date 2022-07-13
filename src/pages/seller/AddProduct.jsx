@@ -1,19 +1,20 @@
+/* eslint-disable jsx-a11y/label-has-associated-control */
 import axios from "axios";
-import React, { useEffect } from "react";
-import { useState } from "react";
-import Style from "./addproduct.module.css";
+import React, { useEffect, useState } from "react";
+
 import { useSelector, useDispatch } from "react-redux";
-import { AxiosWithAuth } from "../../utils/axiosWithAuth";
 import { Formik, Form, replace } from "formik";
 import * as yup from "yup";
-import ImagePreview from "./ImagePreview";
 import { useNavigate } from "react-router-dom";
+import ImagePreview from "./ImagePreview";
+import { AxiosWithAuth } from "../../utils/axiosWithAuth";
+import Style from "./addproduct.module.css";
 
 function AddProduct() {
   const navigate = useNavigate();
 
   const { isLoading, data: loginData } = useSelector((state) => state.login);
-  let token = loginData?.data?.token;
+  const token = loginData?.data?.token;
 
   const [myOption, setMyOption] = useState("");
 
@@ -78,12 +79,14 @@ function AddProduct() {
   };
   return (
     <div className="mt-3">
-      <div className={`justify-content-center align-items-center mb-3 ${Style['title-responsive']}`}>
-        <img src="/images/fi_arrow-left.png" alt=""/>
+      <div
+        className={`justify-content-center align-items-center mb-3 ${Style["title-responsive"]}`}
+      >
+        <img src="/images/fi_arrow-left.png" alt="" />
         <p className="m-0 ms-3 fs-6">Lengkapi Detail Produk</p>
       </div>
       <div
-        className={`d-flex mt-3 position-absolute start-50 translate-middle-x ${Style["responsive"]}`}
+        className={`d-flex mt-3 position-absolute start-50 translate-middle-x ${Style.responsive}`}
       >
         <div className={`${Style["width-left"]}`}>
           <img src="/images/fi_arrow-left.png" alt="" />
@@ -133,7 +136,7 @@ function AddProduct() {
                 <div className="mb-3">
                   <label className="form-label">Kategori</label>
                   <select
-                    class="form-select"
+                    className="form-select"
                     name="category_id"
                     placeholder="pilih kategori"
                     onChange={handleChange}
@@ -164,7 +167,7 @@ function AddProduct() {
                       onChange={handleChange}
                       value={values.deskripsi}
                     />
-                    <label for="floatingTextarea">Deskripsi</label>
+                    <label htmlFor="floatingTextarea">Deskripsi</label>
                     <span className="font-12 text-danger py-1">
                       {errors.deskripsi}
                     </span>
@@ -204,7 +207,10 @@ function AddProduct() {
                   >
                     Preview
                   </button>
-                  <button type="submit" className="button-primary-1 w-50 ms-2 fs-6">
+                  <button
+                    type="submit"
+                    className="button-primary-1 w-50 ms-2 fs-6"
+                  >
                     Submit
                   </button>
                 </div>

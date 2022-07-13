@@ -53,64 +53,87 @@ function BuyerHalamanProduk() {
         />,
         portalDiv
       )}
-      <div className="container-sm w-75 my-5">
-        <div className="row">
-          <div className="col-12 col-lg-8">
-            <div className="mb-4">
-              <img
-                src={
-                  productData?.product_image
-                    ? productData.product_image[0].url
-                    : "/images/detail.png"
-                }
-                className="img-detail"
-                alt=""
-              />
-            </div>
-            <div className="card p-3">
-              <h5 className="font-14 fw-bolder">Deskripsi</h5>
-              <p className="font-14 color-gray">{productData?.deskripsi}</p>
-            </div>
-          </div>
-          <div className="col-12 col-lg-4">
-            <div className="card p-3">
-              <h4 className="font-16 fw-bolder">{productData?.nama}</h4>
-              <h3 className="font-14 color-gray">
-                {productData?.category?.nama}
-              </h3>
-              <h2 className="font-16">{ConvertToIDR(productData?.harga)}</h2>
-              <button
-                type="button"
-                onClick={handleShow}
-                // onClick={() => {setOpenModalTawar(true);
-                // }}
-                className="button-primary-1"
-              >
-                Saya Tertarik dan ingin nego
-              </button>
-              {/* {openModalTawar && <ModalTawar setOpenModalTawar={setOpenModalTawar} />} */}
-            </div>
-            <div className="card p-3 mt-2 d-flex flex-row justify-content-start align-items-center gap-3">
-              <div>
+      <div className="container position-relative">
+        <div className="w-max-968 mx-auto w-100 my-lg-5">
+          <div className="row">
+            <div className="col-12 p-0 p-xss-2 col-lg-8">
+              <div className="mb-4 position-relative">
+                <button
+                  type="button"
+                  onClick={() => navigate(-1)}
+                  className="button-icon bg-white rounded-circle position-absolute d-block d-xss-none"
+                  style={{ top: "10px", left: "5px" }}
+                >
+                  <i className="bi bi-arrow-left fs-5" />
+                </button>
                 <img
                   src={
-                    ownerData?.avatar ? ownerData.avatar : "/images/person.png"
+                    productData?.product_image
+                      ? productData.product_image[0].url
+                      : "/images/detail.png"
                   }
-                  className="avatar-circle"
+                  className="img-detail"
                   alt=""
                 />
               </div>
-              <div className="d-flex flex-column">
-                <span>{ownerData?.nama}</span>
-                <span>Kota</span>
+              <div className="card p-3 d-none d-xss-block">
+                <h5 className="font-14 fw-bolder">Deskripsi</h5>
+                <p className="font-14 color-gray">{productData?.deskripsi}</p>
+              </div>
+            </div>
+            <div className="col-12 col-lg-4">
+              <div className="card p-3 detail-section">
+                <h4 className="font-16 fw-bolder">{productData?.nama}</h4>
+                <h3 className="font-14 color-gray">
+                  {productData?.category?.nama}
+                </h3>
+                <h2 className="font-16">{ConvertToIDR(productData?.harga)}</h2>
+                <button
+                  type="button"
+                  onClick={handleShow}
+                  // onClick={() => {setOpenModalTawar(true);
+                  // }}
+                  className="button-primary-1 d-none d-xss-block"
+                >
+                  Saya Tertarik dan ingin nego
+                </button>
+                {/* {openModalTawar && <ModalTawar setOpenModalTawar={setOpenModalTawar} />} */}
+              </div>
+              <div className="card p-3 mt-2 d-flex flex-row justify-content-start align-items-center gap-3">
+                <div>
+                  <img
+                    src={
+                      ownerData?.avatar
+                        ? ownerData.avatar
+                        : "/images/person.png"
+                    }
+                    className="avatar-circle"
+                    alt=""
+                  />
+                </div>
+                <div className="d-flex flex-column">
+                  <span>{ownerData?.nama}</span>
+                  <span>Kota</span>
+                </div>
+              </div>
+              <div className="card p-3 my-2 d-block d-xss-none">
+                <h5 className="font-14 fw-bolder">Deskripsi</h5>
+                <p className="font-14 color-gray">{productData?.deskripsi}</p>
               </div>
             </div>
           </div>
+          <div className="fixed-bottom m-2">
+            <button
+              type="button"
+              onClick={handleShow}
+              // onClick={() => {setOpenModalTawar(true);
+              // }}
+              className="button-primary-1 w-100 d-block d-xss-none "
+            >
+              Saya Tertarik dan ingin nego
+            </button>
+          </div>
         </div>
-
-        {/* <ModalTawar show={show} >
-
-      </ModalTawar> */}
       </div>
     </>
   );

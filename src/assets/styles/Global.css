@@ -123,6 +123,13 @@ body {
   background-color: #4b1979;
   color: #fff;
 }
+.button-icon {
+  width: 30px;
+  height: 30px;
+  border-radius: 20px;
+  border: none;
+  padding: 0;
+}
 
 .button-outline-2 {
   color: #000;
@@ -167,7 +174,7 @@ body {
   cursor: pointer;
   background: #ffffff;
   box-shadow: 0px 0px 4px rgba(0, 0, 0, 0.15);
-  border-radius: 16px;
+  border-radius: 16px !important;
 }
 .card-2 {
   background: #ffffff;
@@ -191,6 +198,9 @@ body {
 }
 .w-max-376 {
   width: 376;
+}
+.w-max-968 {
+  max-width: 968px;
 }
 
 .nav-home {
@@ -239,8 +249,24 @@ body {
      object-position: center;
 }
 
+.detail-section {
+  margin-top: 0px;
+}
+
 @media screen and (max-width: 450px) {
   .nav-home {
     display: block;
+  }
+  .img-detail {
+    width: 100%;
+    max-height: 300px;
+    -o-object-fit: fill;
+       object-fit: fill;
+    -o-object-position: center;
+       object-position: center;
+    border-radius: 0px;
+  }
+  .detail-section {
+    margin-top: -50px;
   }
 }/*# sourceMappingURL=Global.css.map */
