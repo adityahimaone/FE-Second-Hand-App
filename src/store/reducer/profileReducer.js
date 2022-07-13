@@ -29,7 +29,7 @@ const profileReducer = (state = initialState, action) => {
       return {
         ...state,
         isLoading: false,
-        error: error,
+        error,
       };
 
     default:

@@ -1,6 +1,7 @@
+/* eslint-disable camelcase */
 import React from "react";
 import Card from "react-bootstrap/Card";
-import { ConvertToIDR } from "../../../utils/helper";
+import { ConvertToIDR } from "utils/helper";
 import { useNavigate } from "react-router-dom";
 
 function CardHome({ item }) {
@@ -18,7 +19,7 @@ function CardHome({ item }) {
         src={product_image ? product_image[0]?.url : "/images/detail.png"}
       />
       <Card.Body>
-        <Card.Title className="font-14">{nama ? nama : "Nama"}</Card.Title>
+        <Card.Title className="font-14">{nama || "Nama"}</Card.Title>
         <Card.Text className="color-gray font-10">
           {" "}
           {category ? category.nama : "X"}

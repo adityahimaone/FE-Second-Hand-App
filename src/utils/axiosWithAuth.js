@@ -1,9 +1,10 @@
+/* eslint-disable import/prefer-default-export */
 import axios from "axios";
 
 const mainAPI = process.env.REACT_APP_API_URL;
 
-export const AxiosWithAuth = (token) => {
-  return axios.create({
+export const AxiosWithAuth = (token) =>
+  axios.create({
     baseURL: mainAPI,
     headers: {
       "Content-Type": "application/json",
@@ -15,4 +16,3 @@ export const AxiosWithAuth = (token) => {
         "append,delete,entries,foreach,get,has,keys,set,values,Authorization,Content-Type",
     },
   });
-};

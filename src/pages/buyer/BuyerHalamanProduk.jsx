@@ -4,8 +4,6 @@ import Button from "react-bootstrap/esm/Button";
 // import Alert from "../../components/UI/Alert/Alert";
 import { useNavigate, useParams } from "react-router-dom";
 import { Modal } from "react-bootstrap";
-import ModalTawar from "components/UI/Modal_Tawar/ModalTawar";
-import Style from "components/UI/Modal_Tawar/Tawar.module.css";
 import { useDispatch, useSelector } from "react-redux";
 import { getProductByID, getAllProduct } from "store/action/productAction";
 

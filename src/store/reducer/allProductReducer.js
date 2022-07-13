@@ -29,7 +29,7 @@ const allProductReducer = (state = initialState, action) => {
       return {
         ...state,
         isLoading: false,
-        error: error,
+        error,
       };
     default:
       return state;

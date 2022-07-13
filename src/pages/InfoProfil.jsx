@@ -1,8 +1,9 @@
+/* eslint-disable jsx-a11y/label-has-associated-control */
 import React, { useEffect, useState } from "react";
-import Style from "./seller/sellersemuaproduk.module.css";
 import { useNavigate } from "react-router-dom";
-import { getUserProfile } from "../store/action/profileAction";
 import { useDispatch, useSelector } from "react-redux";
+import Style from "./seller/sellersemuaproduk.module.css";
+import { getUserProfile } from "../store/action/profileAction";
 
 function InfoProfil() {
   const navigate = useNavigate();
@@ -27,18 +28,19 @@ function InfoProfil() {
     <div className="container d-flex justify-content-center">
       <div className="d-flex w-max-570 mt-5 w-100 position-relative">
         <button
+        type="button"
           onClick={() => navigate(-1)}
           className="btn position-absolute"
           style={{ left: "-4.375rem", top: "-20px" }}
         >
-          <i className="bi bi-arrow-left fs-4"></i>
+          <i className="bi bi-arrow-left fs-4" />
         </button>
-        <div className={`w-100`}>
+        <div className="w-100">
           <form>
             <div className="d-flex justify-content-center">
               <div style={{ maxWidth: "8rem" }}>
                 <div
-                  className={`${Style["color"]} card d-flex justify-content-center align-items-center`}
+                  className={`${Style.color} card d-flex justify-content-center align-items-center`}
                   style={{ width: "8rem" }}
                 >
                   <input
@@ -48,7 +50,7 @@ function InfoProfil() {
                   <img
                     src="/images/fi_camera.svg"
                     alt=""
-                    srcset=""
+                    srcSet=""
                     className="mt-5 mb-5"
                   />
                 </div>
@@ -64,7 +66,10 @@ function InfoProfil() {
             </div>
             <div className="mb-3">
               <label className="form-label">Kota*</label>
-              <select class="form-select" aria-label="Default select example">
+              <select
+                className="form-select"
+                aria-label="Default select example"
+              >
                 <option selected disabled>
                   Pilih Kota
                 </option>
@@ -81,8 +86,10 @@ function InfoProfil() {
                   placeholder="Leave a comment here"
                   id="floatingTextarea"
                   style={{ height: "5rem" }}
-                ></textarea>
-                <label for="floatingTextarea">Contoh: Jalan Ikan Hiu 33</label>
+                />
+                <label htmlFor="floatingTextarea">
+                  Contoh: Jalan Ikan Hiu 33
+                </label>
               </div>
             </div>
             <div className="mb-3">

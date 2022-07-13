@@ -71,7 +71,9 @@ function ProductSellingList() {
             </div>
           </div>
           <div>
-            <button className="button-outline-2">Edit</button>
+            <button type="button" className="button-outline-2">
+              Edit
+            </button>
           </div>
         </div>
       </div>
@@ -90,7 +92,7 @@ function ProductSellingList() {
           <div className="row row-cols-2 row-cols-lg-3 g-4">
             <div className="col">
               <div className="card-dot d-flex flex-column justify-content-center align-items-center h-100">
-                <i className="bi bi-plus-lg fs-3"></i>
+                <i className="bi bi-plus-lg fs-3" />
                 <span>Tambah Produk</span>
               </div>
             </div>

@@ -5,11 +5,11 @@ import { useNavigate } from "react-router-dom";
 function Alert({ title, text, icon, confirmText, navigation }) {
   const navigate = useNavigate();
   const MySwal = withReactContent(Swal);
-  const titleAlert = title ? title : "Alert";
-  const textAlert = text ? text : "Harga tawarmu berhasil dikirim ke penjual";
-  const iconAlert = icon ? icon : "success";
-  const confirmTextAlert = confirmText ? confirmText : "OK";
-  const navigationLink = navigation ? navigation + "/notifbuyer" : "";
+  const titleAlert = title || "Alert";
+  const textAlert = text || "Harga tawarmu berhasil dikirim ke penjual";
+  const iconAlert = icon || "success";
+  const confirmTextAlert = confirmText || "OK";
+  const navigationLink = navigation ? `${navigation}/notifbuyer` : "";
 
   const alertOpen = () => {
     MySwal.fire({

@@ -1,3 +1,4 @@
+/* eslint-disable import/prefer-default-export */
 import axios from "axios";
 
 const mainAPI = process.env.REACT_APP_API_URL;

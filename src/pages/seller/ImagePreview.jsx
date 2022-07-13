@@ -1,4 +1,4 @@
-import { useState } from "react";
+import React, { useState } from "react";
 
 function ImagePreview({ file }) {
   const [preview, setPreview] = useState({});
@@ -12,7 +12,7 @@ function ImagePreview({ file }) {
 
   return (
     <div>
-        <img src={preview} alt="" style={{ width: "300px" }} />
+      <img src={preview} alt="" style={{ width: "300px" }} />
     </div>
   );
 }

@@ -29,7 +29,7 @@ const notificationByIDReducer = (state = initialState, action) => {
       return {
         ...state,
         isLoading: false,
-        error: error,
+        error,
       };
 
     default:
