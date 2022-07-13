@@ -1,11 +1,15 @@
-import React, { useState } from "react";
+/* eslint-disable jsx-a11y/label-has-associated-control */
+/* eslint-disable camelcase */
+import React, { useState, useId } from "react";
 import { Modal } from "react-bootstrap";
-import { ConvertToIDR } from "../../../utils/helper";
+import { ConvertToIDR } from "utils/helper";
 import { useDispatch, useSelector } from "react-redux";
-import { postProductOffer } from "../../../store/action/offeringAction";
+import { postProductOffer } from "store/action/offeringAction";
 
 function ModalOffer({ show, handleClose, data }) {
   const dispatch = useDispatch();
+
+  const inputOfferInput = useId();
 
   const { product_image, deskripsi, id, seller_id, nama, harga } = data;
 
@@ -23,8 +27,8 @@ function ModalOffer({ show, handleClose, data }) {
     dispatch(
       postProductOffer(token, {
         product_id: id,
-        seller_id: seller_id,
-        harga_tawar: parseInt(priceOffer),
+        seller_id,
+        harga_tawar: parseInt(priceOffer, 10),
       })
     );
     handleClose();
@@ -69,10 +73,11 @@ function ModalOffer({ show, handleClose, data }) {
             </div>
           </div>
           <div className="mt-3">
-            <label className="font-12 fw-bold mb-1" htmlFor="offer-price">
+            <label className="font-12 fw-bold mb-1" htmlFor={inputOfferInput}>
               Harga Tawar
             </label>
             <input
+              id={inputOfferInput}
               className="form-input w-100 shadow"
               style={{ marginButtom: "1rem" }}
               placeholder="Rp. 0,00"

@@ -1,8 +1,7 @@
-import { AxiosCustom } from "src/utils/axiosCustom";
+import { AxiosCustom } from "utils/axiosCustom";
 import { GET_ALL_PRODUCT, GET_PRODUCT_BY_ID } from "../types";
 
-export const getAllProduct = (page, size) => {
-  return (dispatch) => {
+export const getAllProduct = (page, size) => (dispatch) => {
     dispatch({ type: `${GET_ALL_PRODUCT}_LOADING` });
     AxiosCustom.get(`/product/all-product?page=${page}&size=${size}`)
       .then((response) => {
@@ -18,10 +17,8 @@ export const getAllProduct = (page, size) => {
         });
       });
   };
-};
 
-export const getProductByID = (id) => {
-  return (dispatch) => {
+export const getProductByID = (id) => (dispatch) => {
     dispatch({ type: `${GET_PRODUCT_BY_ID}_LOADING` });
     AxiosCustom.get(`/product/detail-product/${id}`)
       .then((response) => {
@@ -37,4 +34,3 @@ export const getProductByID = (id) => {
         });
       });
   };
-};

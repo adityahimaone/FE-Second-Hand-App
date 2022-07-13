@@ -1,13 +1,16 @@
+/* eslint-disable import/extensions */
 import React, { useEffect, useState } from "react";
-import { Button } from "react-bootstrap";
-import { Form } from "react-bootstrap";
+import { Dropdown, Button, Form } from "react-bootstrap";
+
 import { useSelector, useDispatch } from "react-redux";
-import { authLogout } from "src/store/action/loginAction";
-import { Dropdown } from "react-bootstrap";
-import { useNavigate, Link, useLocation } from "react-router-dom";
+import { useNavigate, Link, useLocation, useMatch } from "react-router-dom";
+import { authLogout } from "store/action/loginAction";
+
+import { getAllNotification } from "store/action/notificationAction";
+import { ConvertToDate, ConvertToIDR } from "utils/helper";
+import { HiMenu, HiSearch } from "react-icons/hi";
 import Style from "./Navbar.module.css";
-import { getAllNotification } from "../../../store/action/notificationAction";
-import { ConvertToDate, ConvertToIDR } from "src/utils/helper";
+import NotificationDropdown from "./Notification/NotificationDropdown";
 
 const initialStateNotif = [
   {
@@ -33,20 +36,37 @@ function Navbar() {
   const [token, setToken] = useState(loginData?.data?.token);
   const [notifSeller, setNotifSeller] = useState(initialStateNotif);
   const [notifBuyer, setnotifBuyer] = useState(initialStateNotif);
+  const [titlePage, setTitlePage] = useState("Title");
+
+  const matchHome = useMatch("/");
+  const matchProductBuyDetail = useMatch("/product/buy/:id");
+  const matchNotification = useMatch("/notification/:id");
+
+  const navbarHome = !matchHome && !matchProductBuyDetail;
+
+  const getTitlePage = () => {
+    if (matchNotification) {
+      setTitlePage("Notification");
+    }
+  };
 
   const handleLogout = () => {
     dispatch(authLogout());
     setLoginState(false);
   };
 
-  console.log(location.pathname);
+  console.log(
+    matchHome,
+    matchProductBuyDetail,
+    matchNotification,
+    "location.pathname"
+  );
 
   console.log(notificationData, notifSeller, "notificationData");
 
   useEffect(() => {
     if (loginData.data) {
       if (loginData?.data?.id !== 0 && loginData?.data?.token !== null) {
-        // eslint-disable-next-line react-hooks/exhaustive-deps
         setLoginState(true);
       }
     }
@@ -54,6 +74,10 @@ function Navbar() {
     setNotifSeller(notificationData?.data?.notif_seller);
     setnotifBuyer(notificationData?.data?.notif_buyer);
   }, [loginData]);
+
+  useEffect(() => {
+    getTitlePage();
+  }, []);
 
   console.log(loginState, loginData);
 
@@ -73,7 +97,17 @@ function Navbar() {
 
   return (
     <nav className={`${Style["nav-header"]}`}>
-      <div className="container p-2">
+      <div className="d-flex align-items-center d-xss-none">
+        {navbarHome && (
+          <>
+            <button type="button" className="button-nav-home">
+              <HiMenu className="fs-5" />
+            </button>
+            <span className="font-20 fw-bolder">{titlePage}</span>
+          </>
+        )}
+      </div>
+      <div className="container p-2 d-none d-xss-block">
         <div className="row d-flex justify-content-between align-items-center">
           <div className="col-2">
             <Link className="d-flex align-content-center" to="/">
@@ -85,7 +119,7 @@ function Navbar() {
               <div className="col-8 text-center">
                 <span className="fs-6">Notifikasi</span>
               </div>
-              <div className="col-2"></div>
+              <div className="col-2" />
             </>
           )}
           {pathnameUserProfile && (
@@ -93,7 +127,7 @@ function Navbar() {
               <div className="col-8 text-center">
                 <span className="fs-6">Lengkapi Info Akun</span>
               </div>
-              <div className="col-2"></div>
+              <div className="col-2" />
             </>
           )}
           <div className="col-4">
@@ -111,7 +145,7 @@ function Navbar() {
             {loginState === false && (
               <Link to="/login">
                 <Button className="button-primary-1">
-                  <i className="bi bi-box-arrow-in-right"></i>
+                  <i className="bi bi-box-arrow-in-right" />
                   <span className="px-2">Masuk</span>
                 </Button>
               </Link>
@@ -119,7 +153,7 @@ function Navbar() {
             {userNav && (
               <div className="d-flex">
                 <Link to="/product/list" className="btn">
-                  <i className="bi bi-list-ul fs-5"></i>
+                  <i className="bi bi-list-ul fs-5" />
                 </Link>
                 {/* <Link to="/notification" className="btn">
                   <i className="bi bi-bell fs-5"></i>
@@ -130,7 +164,7 @@ function Navbar() {
                     align="end"
                     variant="none"
                   >
-                    <i className="bi bi-bell fs-5"></i>
+                    <i className="bi bi-bell fs-5" />
                   </Dropdown.Toggle>
                   <Dropdown.Menu
                     className=""
@@ -138,90 +172,15 @@ function Navbar() {
                       width: "376px",
                     }}
                   >
-                    {notifSeller?.map((item) => (
-                      <>
-                        <Dropdown.Item
-                          key={item.id}
-                          onClick={() => navigate(`/notification/${item.id}`)}
-                        >
-                          <div className="d-flex gap-3 p-1">
-                            <div>
-                              <img
-                                src={
-                                  item?.product_notif?.product_image
-                                    ? item?.product_notif?.product_image[0]?.url
-                                    : "/images/dummy.png"
-                                }
-                                className="img-small-product"
-                                alt=""
-                              />
-                            </div>
-                            <div className="d-flex flex-column w-100">
-                              <div className="d-flex justify-content-between font-10 color-gray">
-                                <span>Penawaran produk</span>
-                                <span>{ConvertToDate(item?.createdAt)}</span>
-                              </div>
-                              <div className="d-flex flex-column font-14 fw-bold">
-                                <span>{item?.product_notif?.nama}</span>
-                                <span>
-                                  {ConvertToIDR(item?.product_notif?.harga)}
-                                </span>
-                                <span>
-                                  Ditawar{" "}
-                                  {ConvertToIDR(item?.data_nego?.harga_tawar)}
-                                </span>
-                              </div>
-                            </div>
-                          </div>
-                        </Dropdown.Item>
-                        <Dropdown.Divider />
-                      </>
-                    ))}
-                    {notifBuyer?.map((item) => (
-                      <>
-                        <Dropdown.Item>
-                          <div className="d-flex gap-3 p-1">
-                            <div>
-                              <img
-                                src={
-                                  item?.product_notif?.product_image
-                                    ? item?.product_notif?.product_image[0]?.url
-                                    : "/images/dummy.png"
-                                }
-                                className="img-small-product"
-                                alt=""
-                              />
-                            </div>
-                            <div className="d-flex flex-column w-100">
-                              <div className="d-flex justify-content-between font-10 color-gray">
-                                <span>Penawaran produk</span>
-                                <span>{ConvertToDate(item?.createdAt)}</span>
-                              </div>
-                              <div className="d-flex flex-column font-14 fw-bold">
-                                <span>{item?.product_notif?.nama}</span>
-                                <span className="text-decoration-line-through">
-                                  {ConvertToIDR(item?.product_notif?.harga)}
-                                </span>
-                                <span>
-                                  Berhasil Ditawar{" "}
-                                  {ConvertToIDR(item?.data_nego?.harga_tawar)}
-                                </span>
-                                <span className="font-10 color-gray fw-normal">
-                                  Kamu akan segera dihubungi penjual via
-                                  whatsapp
-                                </span>
-                              </div>
-                            </div>
-                          </div>
-                        </Dropdown.Item>
-                        <Dropdown.Divider />
-                      </>
-                    ))}
+                    <NotificationDropdown
+                      notifSeller={notifSeller}
+                      notifBuyer={notifBuyer}
+                    />
                   </Dropdown.Menu>
                 </Dropdown>
                 <Dropdown>
                   <Dropdown.Toggle id="dropdown-basic" variant="none">
-                    <i className="bi bi-person fs-5"></i>
+                    <i className="bi bi-person fs-5" />
                   </Dropdown.Toggle>
                   <Dropdown.Menu>
                     <Dropdown.Item onClick={() => navigate("/user/profile")}>

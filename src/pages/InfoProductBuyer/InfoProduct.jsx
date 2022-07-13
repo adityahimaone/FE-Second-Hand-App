@@ -10,6 +10,7 @@ function InfoProduct() {
           <div className="row d-flex justify-content-between align-items-center">
             <div className="col-2">
               <button
+                type="button"
                 className="btn d-flex align-content-center"
                 onClick={() => navigate("/")}
               >
@@ -19,17 +20,18 @@ function InfoProduct() {
             <div className="col-8 text-center">
               <span className="font-16">Info Penawar</span>
             </div>
-            <div className="col-2"></div>
+            <div className="col-2" />
           </div>
         </div>
       </nav>
       <div className="container w-max-570 my-4 position-relative">
         <button
+          type="button"
           onClick={() => navigate(-1)}
           className="btn position-absolute"
           style={{ left: "-4.375rem" }}
         >
-          <i className="bi bi-arrow-left fs-4"></i>
+          <i className="bi bi-arrow-left fs-4" />
         </button>
         <div className="card d-flex flex-row p-2 justify-content-between align-items-center">
           <div className="d-flex align-items-center">
@@ -68,8 +70,17 @@ function InfoProduct() {
                   <span className="font-14">Ditawar Rp.200.00</span>
                 </div>
                 <div className="d-flex justify-content-end gap-2">
-                  <button className="button-outline-2 px-5">Status</button>
-                  <button className="button-primary-1 px-5 ">Hubungi di<img src="/images/whatsapp icon.svg" alt="" className='ms-2'/></button>
+                  <button type="button" className="button-outline-2 px-5">
+                    Status
+                  </button>
+                  <butto type="button" className="button-primary-1 px-5 ">
+                    Hubungi di
+                    <img
+                      src="/images/whatsapp icon.svg"
+                      alt=""
+                      className="ms-2"
+                    />
+                  </butto>
                 </div>
               </div>
             </div>

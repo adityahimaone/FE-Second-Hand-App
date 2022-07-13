@@ -1,6 +1,7 @@
+/* eslint-disable camelcase */
 import React, { useState } from "react";
 import { Modal } from "react-bootstrap";
-import { ConvertToIDR } from "../../../utils/helper";
+import { ConvertToIDR } from "utils/helper";
 import { useDispatch, useSelector } from "react-redux";
 import { BsWhatsapp } from "react-icons/bs";
 
@@ -66,9 +67,7 @@ function ModalAccept({ show, handleClose, data }) {
                 />
               </div>
               <div className="d-flex flex-column">
-                <span className="font-14 fw-bold">
-                  {nama ? nama : "Nama Produk"}
-                </span>
+                <span className="font-14 fw-bold">{nama || "Nama Produk"}</span>
                 <span className="font-14 text-decoration-line-through">
                   {ConvertToIDR(harga)}
                 </span>
@@ -76,7 +75,7 @@ function ModalAccept({ show, handleClose, data }) {
               </div>
             </div>
           </div>
-          <div className="mt-3"></div>
+          <div className="mt-3" />
         </Modal.Body>
         <Modal.Footer className="border-0 pt-0">
           <button

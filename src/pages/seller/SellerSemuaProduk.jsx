@@ -1,8 +1,8 @@
+/* eslint-disable consistent-return */
 /* eslint-disable array-callback-return */
-import React from "react";
-import { useState } from "react";
+import React, { useState } from "react";
 import { ListGroup } from "react-bootstrap";
-import CardHome from "../../components/UI/Card/CardHome";
+import CardHome from "components/UI/Card/CardHome";
 import { HiMenu, HiSearch } from "react-icons/hi";
 import Card from "react-bootstrap/Card";
 import Style from "./sellersemuaproduk.module.css";
@@ -40,9 +40,11 @@ function SellerSemuaProduk() {
 
   const removeByAttr = function (arr, attr, value) {
     let i = arr.length;
+    // eslint-disable-next-line no-plusplus
     while (i--) {
       if (
         arr[i] &&
+        // eslint-disable-next-line no-prototype-builtins
         arr[i].hasOwnProperty(attr) &&
         arguments.length > 2 &&
         arr[i][attr] === value
@@ -55,29 +57,29 @@ function SellerSemuaProduk() {
 
   return (
     <section>
-      <div className={` ${Style['nav']}`}>
-          <div className="nav-home pt-3">
-            <nav className="d-flex justify-content-between px-4">
-              <button className="button-nav-home">
-                <HiMenu className="fs-5" />
-              </button>
-              <div className="search w-100">
-                <span className="position-relative d-flex justify-content-end h-100">
-                  <input
-                    className="form-input-search h-100 w-75"
-                    placeholder="Cari di sini ..."
-                    type="text"
-                  />
-                  <button className="btn position-absolute">
-                    <HiSearch className="fs-3" />
-                  </button>
-                </span>
-              </div>
-            </nav>
-          </div>
+      <div className={` ${Style.nav}`}>
+        <div className="nav-home pt-3">
+          <nav className="d-flex justify-content-between px-4">
+            <button type="button" className="button-nav-home">
+              <HiMenu className="fs-5" />
+            </button>
+            <div className="search w-100">
+              <span className="position-relative d-flex justify-content-end h-100">
+                <input
+                  className="form-input-search h-100 w-75"
+                  placeholder="Cari di sini ..."
+                  type="text"
+                />
+                <button type="button" className="btn position-absolute">
+                  <HiSearch className="fs-3" />
+                </button>
+              </span>
+            </div>
+          </nav>
         </div>
+      </div>
       <div className="container">
-        <div className={`${Style["profile"]}`}>
+        <div className={`${Style.profile}`}>
           <h1 className="fw-bold fs-4 mt-3">Daftar Jual Saya</h1>
           <div className="card p-3 mt-3">
             <div className="d-flex justify-content-between">
@@ -85,24 +87,27 @@ function SellerSemuaProduk() {
                 <img
                   src="/images/person.png"
                   alt=""
-                  className={`${Style["images"]}`}
+                  className={`${Style.images}`}
                 />
                 <div className="">
                   <p className="font-14 m-0 p-0 ms-2">Nama Penjual</p>
                   <p className="font-10 color-gray m-0 p-0 ms-2">Kota</p>
                 </div>
               </div>
-              <button className="button-outline-2">Edit</button>
+              <button type="button" className="button-outline-2">
+                Edit
+              </button>
             </div>
           </div>
         </div>
         <div className={`mt-3 ${Style["responsive-option"]}`}>
-          <div className={Style["category__wrapper"]}>
+          <div className={Style.category__wrapper}>
             <div className={Style["category__overflow-scroll-x"]}>
               <div className="w-100">
-                <div className={`${Style["option"]} mb-3`}>
+                <div className={`${Style.option} mb-3`}>
                   <h4 className={`${Style["title-option"]} mb-3`}>Kategori</h4>
                   <button
+                    type="button"
                     key={option}
                     onClick={() => setMyOption("produk")}
                     className={`w-100 d-flex align-items-center justify-content-between fw-semibold ${
@@ -112,12 +117,13 @@ function SellerSemuaProduk() {
                     }`}
                   >
                     <div className="d-flex align-items-center">
-                      <i className={`${Style["icon-size"]} bi-box`}></i>
+                      <i className={`${Style["icon-size"]} bi-box`} />
                       <p className="m-0 ms-2">Semua Produk</p>
                     </div>
-                    <i className={`${Style["icon-size"]} bi-chevron-right`}></i>
+                    <i className={`${Style["icon-size"]} bi-chevron-right`} />
                   </button>
                   <button
+                    type="button"
                     key={option}
                     onClick={() => setMyOption("diminati")}
                     className={`${
@@ -127,12 +133,13 @@ function SellerSemuaProduk() {
                     } ${Style["bg-option"]} `}
                   >
                     <div className="d-flex align-items-center">
-                      <i className={`${Style["icon-size"]} bi-heart`}></i>
+                      <i className={`${Style["icon-size"]} bi-heart`} />
                       <p className="m-0 ms-2">Diminati</p>
                     </div>
-                    <i className={`${Style["icon-size"]} bi-chevron-right`}></i>
+                    <i className={`${Style["icon-size"]} bi-chevron-right`} />
                   </button>
                   <button
+                    type="button"
                     key={option}
                     onClick={() => setMyOption("terjual")}
                     className={`${
@@ -144,10 +151,10 @@ function SellerSemuaProduk() {
                     <div className="d-flex align-items-center">
                       <i
                         className={`${Style["icon-size"]} bi-currency-dollar`}
-                      ></i>
+                      />
                       <p className="m-0 ms-2">Terjual</p>
                     </div>
-                    <i className={`${Style["icon-size"]} bi-chevron-right`}></i>
+                    <i className={`${Style["icon-size"]} bi-chevron-right`} />
                   </button>
                 </div>
               </div>
@@ -160,8 +167,8 @@ function SellerSemuaProduk() {
                 <div className="row row-cols-2 row-cols-lg-3 g-4 ">
                   <div className="col">
                     <div className="card-dot d-flex flex-column justify-content-center align-items-center h-100 pt-5 pb-5">
-                      <i className="bi bi-plus-lg fs-3 mt-4"></i>
-                      <span className="mb-4">Tambah Produk</span>
+                      <i className="bi bi-plus-lg fs-3" />
+                      <span>Tambah Produk</span>
                     </div>
                   </div>
                   {cardData.map((item) => (

@@ -2,10 +2,10 @@ import React, { useState, useEffect } from "react";
 import ReactDOM from "react-dom";
 import { useNavigate, useParams } from "react-router-dom";
 import { useSelector, useDispatch } from "react-redux";
-import { getDetailNotification } from "src/store/action/notificationAction";
-import ModalAccept from "src/components/UI/Modal_Accept/ModalAccept";
-import { ConvertToDate } from "src/utils/helper";
-import { putProductAcceptNegotiation } from "src/store/action/acceptNegotiationAction";
+import { getDetailNotification } from "store/action/notificationAction";
+import ModalAccept from "components/UI/Modal_Accept/ModalAccept";
+import { ConvertToDate } from "utils/helper";
+import { putProductAcceptNegotiation } from "store/action/acceptNegotiationAction";
 
 function NotificationSeller() {
   const navigate = useNavigate();
@@ -57,11 +57,12 @@ function NotificationSeller() {
       <div className="container d-flex justify-content-center">
         <div className="w-max-570 w-100 my-4 position-relative">
           <button
+            type="button"
             onClick={() => navigate(-1)}
             className="btn position-absolute"
             style={{ left: "-4.375rem" }}
           >
-            <i className="bi bi-arrow-left fs-4"></i>
+            <i className="bi bi-arrow-left fs-4" />
           </button>
           <div className="card d-flex flex-row p-2 justify-content-between align-items-center">
             <div className="d-flex align-items-center">
@@ -120,7 +121,9 @@ function NotificationSeller() {
                     </span>
                   </div>
                   <div className="d-flex justify-content-end gap-2">
-                    <button className="button-outline-2 px-5">Tolak</button>
+                    <button type="button" className="button-outline-2 px-5">
+                      Tolak
+                    </button>
                     <button
                       type="button"
                       onClick={handleAcceptNegotation}
