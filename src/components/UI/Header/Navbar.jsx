@@ -3,11 +3,12 @@ import React, { useEffect, useState } from "react";
 import { Dropdown, Button, Form } from "react-bootstrap";
 
 import { useSelector, useDispatch } from "react-redux";
-import { useNavigate, Link, useLocation } from "react-router-dom";
+import { useNavigate, Link, useLocation, useMatch } from "react-router-dom";
 import { authLogout } from "store/action/loginAction";
 
 import { getAllNotification } from "store/action/notificationAction";
 import { ConvertToDate, ConvertToIDR } from "utils/helper";
+import { HiMenu, HiSearch } from "react-icons/hi";
 import Style from "./Navbar.module.css";
 import NotificationDropdown from "./Notification/NotificationDropdown";
 
@@ -35,13 +36,31 @@ function Navbar() {
   const [token, setToken] = useState(loginData?.data?.token);
   const [notifSeller, setNotifSeller] = useState(initialStateNotif);
   const [notifBuyer, setnotifBuyer] = useState(initialStateNotif);
+  const [titlePage, setTitlePage] = useState("Title");
+
+  const matchHome = useMatch("/");
+  const matchProductBuyDetail = useMatch("/product/buy/:id");
+  const matchNotification = useMatch("/notification/:id");
+
+  const navbarHome = !matchHome && !matchProductBuyDetail;
+
+  const getTitlePage = () => {
+    if (matchNotification) {
+      setTitlePage("Notification");
+    }
+  };
 
   const handleLogout = () => {
     dispatch(authLogout());
     setLoginState(false);
   };
 
-  console.log(location.pathname);
+  console.log(
+    matchHome,
+    matchProductBuyDetail,
+    matchNotification,
+    "location.pathname"
+  );
 
   console.log(notificationData, notifSeller, "notificationData");
 
@@ -55,6 +74,10 @@ function Navbar() {
     setNotifSeller(notificationData?.data?.notif_seller);
     setnotifBuyer(notificationData?.data?.notif_buyer);
   }, [loginData]);
+
+  useEffect(() => {
+    getTitlePage();
+  }, []);
 
   console.log(loginState, loginData);
 
@@ -74,7 +97,17 @@ function Navbar() {
 
   return (
     <nav className={`${Style["nav-header"]}`}>
-      <div className="container p-2">
+      <div className="d-flex align-items-center d-xss-none">
+        {navbarHome && (
+          <>
+            <button type="button" className="button-nav-home">
+              <HiMenu className="fs-5" />
+            </button>
+            <span className="font-20 fw-bolder">{titlePage}</span>
+          </>
+        )}
+      </div>
+      <div className="container p-2 d-none d-xss-block">
         <div className="row d-flex justify-content-between align-items-center">
           <div className="col-2">
             <Link className="d-flex align-content-center" to="/">

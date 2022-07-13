@@ -1,10 +1,4 @@
 .nav-header {
   background: #ffffff;
   box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.15);
-}
-
-@media screen and (max-width: 450px) {
-  .nav-header {
-    display: none;
-  }
 }/*# sourceMappingURL=Navbar.module.css.map */
