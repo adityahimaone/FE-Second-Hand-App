@@ -1,5 +1,5 @@
 import { POST_PRODUCT_OFFERING_NEGOTATION } from "../types";
-import { AxiosWithAuth } from "src/utils/axiosWithAuth";
+import { AxiosWithAuth } from "utils/axiosWithAuth";
 
 export const postProductOffer = (token, data) => {
   return (dispatch) => {

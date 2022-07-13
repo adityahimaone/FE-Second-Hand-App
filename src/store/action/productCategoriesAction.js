@@ -1,4 +1,4 @@
-import { AxiosCustom } from "src/utils/axiosCustom";
+import { AxiosCustom } from "utils/axiosCustom";
 import { GET_PRODUCT_BY_ALL_CATEGORY } from "../types";
 
 export const getAllProductByCategories = () => {

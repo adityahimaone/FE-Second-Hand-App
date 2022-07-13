@@ -6,14 +6,13 @@ import { Component } from "react";
 // import Alert from "../../components/UI/Alert/Alert";
 import { useNavigate } from "react-router-dom";
 import { Modal } from "react-bootstrap";
-import ModalTawar from "src/components/UI/Modal_Tawar/ModalTawar";
-import Style from "../../components/UI/Modal_Tawar/Tawar.module.css";
+import ModalTawar from "components/UI/Modal_Tawar/ModalTawar";
+import Style from "components/UI/Modal_Tawar/Tawar.module.css";
 import { useDispatch, useSelector } from "react-redux";
-import { getProductByID, getAllProduct } from "src/store/action/productAction";
+import { getProductByID, getAllProduct } from "store/action/productAction";
 import { useParams } from "react-router-dom";
-import { ConvertToIDR } from "../../utils/helper";
-
-import ModalOffer from "src/components/UI/Modal_Tawar/ModalOffer";
+import { ConvertToIDR } from "utils/helper";
+import ModalOffer from "components/UI/Modal_Tawar/ModalOffer";
 
 function BuyerHalamanProduk() {
   const dispatch = useDispatch();

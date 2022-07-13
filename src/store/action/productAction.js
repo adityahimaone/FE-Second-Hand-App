@@ -1,4 +1,4 @@
-import { AxiosCustom } from "src/utils/axiosCustom";
+import { AxiosCustom } from "utils/axiosCustom";
 import { GET_ALL_PRODUCT, GET_PRODUCT_BY_ID } from "../types";
 
 export const getAllProduct = (page, size) => {

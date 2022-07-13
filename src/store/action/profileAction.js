@@ -1,5 +1,5 @@
 import { GET_PROFILE } from "../types";
-import { AxiosWithAuth } from "src/utils/axiosWithAuth";
+import { AxiosWithAuth } from "utils/axiosWithAuth";
 
 export const getUserProfile = (token) => {
   return (dispatch) => {

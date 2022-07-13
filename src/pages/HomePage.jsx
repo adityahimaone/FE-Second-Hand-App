@@ -1,16 +1,14 @@
 import React, { useEffect, useState, useCallback } from "react";
-import CardHome from "../components/UI/Card/CardHome";
-import Style from "../assets/styles/Home.module.css";
-import Carousel from "../components/elements/Home/Carousel.jsx";
-import { Button } from "react-bootstrap";
 import { useNavigate } from "react-router-dom";
 import { HiMenu, HiSearch } from "react-icons/hi";
-import { getAllProduct } from "src/store/action/productAction";
-import { getAllProductByCategories } from "src/store/action/productCategoriesAction";
 import { useDispatch, useSelector } from "react-redux";
-import { Pagination } from "react-bootstrap";
-import { Spinner } from "react-bootstrap";
+import { Pagination, Spinner, Button } from "react-bootstrap";
 import classNames from "classnames";
+import { getAllProductByCategories } from "store/action/productCategoriesAction";
+import { getAllProduct } from "../store/action/productAction";
+import CardHome from "components/UI/Card/CardHome";
+import Carousel from "components/elements/Home/Carousel";
+import Style from "assets/styles/Home.module.css";
 
 function HomePage() {
   const navigate = useNavigate();
@@ -43,14 +41,14 @@ function HomePage() {
     if (!errorGetAllCategories) {
       setCategoryList(productCategoriesData);
     }
-  }, [, pageNow]);
+  }, [pageNow]);
 
   // console.log(productData.data.data);
 
   // console.log(categoryListMap?.data[1]?.product, "categoryListMap");
 
   const pageItemArray = [];
-  for (let i = 1; i <= pageTotal; i++) {
+  for (let i = 1; i <= pageTotal; i += 1) {
     pageItemArray.push(i);
   }
 
@@ -75,7 +73,7 @@ function HomePage() {
   });
 
   console.log(productData.data, pageTotal, pageItemArray, "productData");
-  const SwitchTabCategory = ({ idCategory }) => {
+  function SwitchTabCategory({ idCategory }) {
     console.log(idCategory, tabCategory);
     if (tabCategory === 0) {
       return (
@@ -90,11 +88,9 @@ function HomePage() {
             ) : null}
           </div>
           {productData?.data?.data?.map((item) => (
-            <>
-              <div key={item.id} className="col">
-                <CardHome item={item} />
-              </div>
-            </>
+            <div key={item.id} className="col">
+              <CardHome item={item} />
+            </div>
           ))}
           <div className="w-100 d-flex justify-content-end my-5">
             <Pagination>
@@ -135,7 +131,7 @@ function HomePage() {
         </>
       );
     }
-  };
+  }
 
   return (
     <>
@@ -146,7 +142,7 @@ function HomePage() {
         <div className="mx-2">
           <div className="nav-home pt-3">
             <nav className="d-flex justify-content-between px-4">
-              <button className="button-nav-home">
+              <button type="button" className="button-nav-home">
                 <HiMenu className="fs-5" />
               </button>
               <div className="search w-100">
@@ -156,7 +152,7 @@ function HomePage() {
                     placeholder="Cari di sini ..."
                     type="text"
                   />
-                  <button className="btn position-absolute">
+                  <button type="button" className="btn position-absolute">
                     <HiSearch className="fs-3" />
                   </button>
                 </span>
@@ -175,22 +171,24 @@ function HomePage() {
       </section>
       <section id="main" className={Style["section-main"]}>
         <div className="container">
-          <div className={Style["category__wrapper"]}>
+          <div className={Style.category__wrapper}>
             <h6 className="fw-bold">Telusuri Kategori</h6>
             <div className={Style["category__overflow-scroll-x"]}>
               <div className="d-flex gap-2 ">
                 <button
+                  type="button"
                   onClick={() => setTabCategory(0)}
                   className={classNames({
                     "button-primary-1": tabCategory === 0,
                     "button-primary-2": tabCategory !== 0,
                   })}
                 >
-                  <i className="bi bi-search"></i>
+                  <i className="bi bi-search" />
                   <span className="px-2">Semua</span>
                 </button>
                 {categoryListMap?.data?.map((item) => (
                   <button
+                    type="button"
                     key={item.id}
                     onClick={() => setTabCategory(item.id)}
                     className={classNames({
@@ -198,7 +196,7 @@ function HomePage() {
                       "button-primary-2": tabCategory !== item.id,
                     })}
                   >
-                    <i className="bi bi-search"></i>
+                    <i className="bi bi-search" />
                     <span className="px-2">{item.nama}</span>
                   </button>
                 ))}
@@ -214,10 +212,11 @@ function HomePage() {
             <SwitchTabCategory idCategory={tabCategory} />
           </div>
           <button
+            type="button"
             onClick={() => navigate("/product/sell")}
             className={`button-primary-1 ${Style["button-float"]}`}
           >
-            <i className="bi bi-plus-lg"></i>
+            <i className="bi bi-plus-lg" />
             <span className="px-2">Jual</span>
           </button>
         </div>

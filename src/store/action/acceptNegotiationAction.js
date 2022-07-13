@@ -1,5 +1,5 @@
 import { PUT_PRODUCT_ACCEPT_NEGOTATION } from "../types";
-import { AxiosWithAuth } from "src/utils/axiosWithAuth";
+import { AxiosWithAuth } from "utils/axiosWithAuth";
 
 export const putProductAcceptNegotiation = (token, id) => {
   return (dispatch) => {

@@ -2,10 +2,10 @@ import React, { useState, useEffect } from "react";
 import ReactDOM from "react-dom";
 import { useNavigate, useParams } from "react-router-dom";
 import { useSelector, useDispatch } from "react-redux";
-import { getDetailNotification } from "src/store/action/notificationAction";
-import ModalAccept from "src/components/UI/Modal_Accept/ModalAccept";
-import { ConvertToDate } from "src/utils/helper";
-import { putProductAcceptNegotiation } from "src/store/action/acceptNegotiationAction";
+import { getDetailNotification } from "store/action/notificationAction";
+import ModalAccept from "components/UI/Modal_Accept/ModalAccept";
+import { ConvertToDate } from "utils/helper";
+import { putProductAcceptNegotiation } from "store/action/acceptNegotiationAction";
 
 function NotificationSeller() {
   const navigate = useNavigate();

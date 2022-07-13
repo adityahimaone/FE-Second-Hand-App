@@ -1,5 +1,5 @@
 import { GET_NOTIFICATION, GET_DETAIL_NOTIFICATION } from "../types";
-import { AxiosWithAuth } from "src/utils/axiosWithAuth";
+import { AxiosWithAuth } from "utils/axiosWithAuth";
 
 export const getAllNotification = (token) => {
   return (dispatch) => {

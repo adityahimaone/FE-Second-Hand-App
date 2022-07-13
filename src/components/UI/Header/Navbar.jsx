@@ -1,13 +1,14 @@
+/* eslint-disable import/extensions */
 import React, { useEffect, useState } from "react";
-import { Button } from "react-bootstrap";
-import { Form } from "react-bootstrap";
+import { Dropdown, Button, Form } from "react-bootstrap";
+
 import { useSelector, useDispatch } from "react-redux";
-import { authLogout } from "src/store/action/loginAction";
-import { Dropdown } from "react-bootstrap";
 import { useNavigate, Link, useLocation } from "react-router-dom";
+import { authLogout } from "store/action/loginAction";
+
 import Style from "./Navbar.module.css";
-import { getAllNotification } from "../../../store/action/notificationAction";
-import { ConvertToDate, ConvertToIDR } from "src/utils/helper";
+import { getAllNotification } from "store/action/notificationAction";
+import { ConvertToDate, ConvertToIDR } from "utils/helper";
 import NotificationDropdown from "./Notification/NotificationDropdown";
 
 const initialStateNotif = [
@@ -47,7 +48,6 @@ function Navbar() {
   useEffect(() => {
     if (loginData.data) {
       if (loginData?.data?.id !== 0 && loginData?.data?.token !== null) {
-        // eslint-disable-next-line react-hooks/exhaustive-deps
         setLoginState(true);
       }
     }
@@ -86,7 +86,7 @@ function Navbar() {
               <div className="col-8 text-center">
                 <span className="fs-6">Notifikasi</span>
               </div>
-              <div className="col-2"></div>
+              <div className="col-2" />
             </>
           )}
           {pathnameUserProfile && (
@@ -94,7 +94,7 @@ function Navbar() {
               <div className="col-8 text-center">
                 <span className="fs-6">Lengkapi Info Akun</span>
               </div>
-              <div className="col-2"></div>
+              <div className="col-2" />
             </>
           )}
           <div className="col-4">
@@ -112,7 +112,7 @@ function Navbar() {
             {loginState === false && (
               <Link to="/login">
                 <Button className="button-primary-1">
-                  <i className="bi bi-box-arrow-in-right"></i>
+                  <i className="bi bi-box-arrow-in-right" />
                   <span className="px-2">Masuk</span>
                 </Button>
               </Link>
@@ -120,7 +120,7 @@ function Navbar() {
             {userNav && (
               <div className="d-flex">
                 <Link to="/product/list" className="btn">
-                  <i className="bi bi-list-ul fs-5"></i>
+                  <i className="bi bi-list-ul fs-5" />
                 </Link>
                 {/* <Link to="/notification" className="btn">
                   <i className="bi bi-bell fs-5"></i>
@@ -131,7 +131,7 @@ function Navbar() {
                     align="end"
                     variant="none"
                   >
-                    <i className="bi bi-bell fs-5"></i>
+                    <i className="bi bi-bell fs-5" />
                   </Dropdown.Toggle>
                   <Dropdown.Menu
                     className=""
@@ -139,18 +139,15 @@ function Navbar() {
                       width: "376px",
                     }}
                   >
-                    <>
-                      <NotificationDropdown
-                      
-                        notifSeller={notifSeller}
-                        notifBuyer={notifBuyer}
-                      />
-                    </>
+                    <NotificationDropdown
+                      notifSeller={notifSeller}
+                      notifBuyer={notifBuyer}
+                    />
                   </Dropdown.Menu>
                 </Dropdown>
                 <Dropdown>
                   <Dropdown.Toggle id="dropdown-basic" variant="none">
-                    <i className="bi bi-person fs-5"></i>
+                    <i className="bi bi-person fs-5" />
                   </Dropdown.Toggle>
                   <Dropdown.Menu>
                     <Dropdown.Item onClick={() => navigate("/user/profile")}>

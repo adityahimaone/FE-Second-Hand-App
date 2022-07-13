@@ -1,5 +1,5 @@
 import { GET_PRODUCT } from "../types";
-import { AxiosCustom } from "src/utils/axiosCustom";
+import { AxiosCustom } from "utils/axiosCustom";
 
 // export const GET_PRODUCT = "GET_PRODUCT";
 
