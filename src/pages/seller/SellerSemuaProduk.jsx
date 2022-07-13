@@ -160,8 +160,8 @@ function SellerSemuaProduk() {
                 <div className="row row-cols-2 row-cols-lg-3 g-4 ">
                   <div className="col">
                     <div className="card-dot d-flex flex-column justify-content-center align-items-center h-100 pt-5 pb-5">
-                      <i className="bi bi-plus-lg fs-3"></i>
-                      <span>Tambah Produk</span>
+                      <i className="bi bi-plus-lg fs-3 mt-4"></i>
+                      <span className="mb-4">Tambah Produk</span>
                     </div>
                   </div>
                   {cardData.map((item) => (
@@ -171,7 +171,7 @@ function SellerSemuaProduk() {
                       category={item.category}
                       price={item.price}
                     /> */}
-                      <Card className="card-1">
+                      {/* <Card className="card-1">
                         <Card.Img
                           variant="top"
                           className="img-card"
@@ -189,7 +189,7 @@ function SellerSemuaProduk() {
                             {item.price}
                           </Card.Text>
                         </Card.Body>
-                      </Card>
+                      </Card> */}
                     </div>
                   ))}
                 </div>

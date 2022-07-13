@@ -8,6 +8,7 @@ import { Formik, Form, replace } from "formik";
 import * as yup from "yup";
 import ImagePreview from "./ImagePreview";
 import { useNavigate } from "react-router-dom";
+// import AlertProduct from "./AlertProduct";
 
 function AddProduct() {
   const navigate = useNavigate();
@@ -16,6 +17,9 @@ function AddProduct() {
   let token = loginData?.data?.token;
 
   const [myOption, setMyOption] = useState("");
+  const [error, setError] = useState("");
+  const [success, setSuccess] = useState("")
+  const [closed, setClosed] = useState(true);
 
   const [disable, setDisable] = useState(true);
 
@@ -69,17 +73,71 @@ function AddProduct() {
       .then((res) => {
         console.log("post success: ", res);
         if (res.status === 201) {
-          navigate("/", { replace: true });
+          // navigate("/product/list", { replace: true });
+          setSuccess("Produk berhasil diterbitkan.")
         }
       })
       .catch((err) => {
         console.log("err: ", err);
+        if (err.response.status === 400) {
+          setError("Batas upload produk adalah 4");
+        }
       });
   };
   return (
     <div className="mt-3">
-      <div className={`justify-content-center align-items-center mb-3 ${Style['title-responsive']}`}>
-        <img src="/images/fi_arrow-left.png" alt=""/>
+      {error && closed && (
+        <div
+          className="w-100 d-flex justify-content-center fixed-top"
+          style={{
+            backgroundColor: "rgba(0, 0, 0, 0)",
+            width: "100%",
+            height: '100%'
+          }}
+        >
+          <div
+            className="alert w-50 d-flex justify-content-between ps-3 pe-3 align-items-center mt-5 ms-4"
+            style={{ backgroundColor: "#ffc9cd", height: '4rem'}}
+          >
+            <p className="m-0 fs-6 " style={{ color: "#842029" }}>
+              {error}
+            </p>
+            <i
+              class="bi bi-x fs-2 ms-2"
+              style={{ color: "#842029", cursor: 'pointer'}}
+              onClick={() => setClosed(navigate("/product/list"))}
+            ></i>
+          </div>
+        </div>
+      )}
+      {success && closed && (
+        <div
+          className="w-100 d-flex justify-content-center fixed-top"
+          style={{
+            backgroundColor: "rgba(0, 0, 0, 0)",
+            width: "100%",
+            height: '100%'
+          }}
+        >
+          <div
+            className="alert w-50 d-flex justify-content-between ps-3 pe-3 align-items-center mt-5 ms-4"
+            style={{ backgroundColor: "#73CA5C", height: '4rem'}}
+          >
+            <p className="m-0 fs-6 text-white">
+              {success}
+            </p>
+            <i
+              class="bi bi-x fs-2 ms-2 text-white"
+              style={{ cursor: 'pointer'}}
+              onClick={() => setClosed(navigate("/product/list"))}
+            ></i>
+          </div>
+        </div>
+      )}
+      <div
+        className={`justify-content-center align-items-center mb-3 ${Style["title-responsive"]}`}
+      >
+        <img src="/images/fi_arrow-left.png" alt="" />
         <p className="m-0 ms-3 fs-6">Lengkapi Detail Produk</p>
       </div>
       <div
@@ -98,7 +156,10 @@ function AddProduct() {
               category_id: 0,
               image: [],
             }}
-            onSubmit={handleSubmit}
+            onSubmit={(values, { resetForm }) => {
+              handleSubmit(values);
+              resetForm({ initialValues: "" });
+            }}
           >
             {({ errors, values, setFieldValue, handleChange }) => (
               <Form>
@@ -204,7 +265,10 @@ function AddProduct() {
                   >
                     Preview
                   </button>
-                  <button type="submit" className="button-primary-1 w-50 ms-2 fs-6">
+                  <button
+                    type="submit"
+                    className="button-primary-1 w-50 ms-2 fs-6"
+                  >
                     Submit
                   </button>
                 </div>
