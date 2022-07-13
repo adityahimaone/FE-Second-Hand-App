@@ -1,24 +1,27 @@
+/* eslint-disable jsx-a11y/label-has-associated-control */
+/* eslint-disable jsx-a11y/click-events-have-key-events */
+/* eslint-disable jsx-a11y/no-static-element-interactions */
 import axios from "axios";
-import React, { useEffect } from "react";
-import { useState } from "react";
-import Style from "./addproduct.module.css";
+import React, { useEffect, useState } from "react";
+
 import { useSelector, useDispatch } from "react-redux";
-import { AxiosWithAuth } from "../../utils/axiosWithAuth";
 import { Formik, Form, replace } from "formik";
 import * as yup from "yup";
-import ImagePreview from "./ImagePreview";
 import { useNavigate } from "react-router-dom";
+import ImagePreview from "./ImagePreview";
+import { AxiosWithAuth } from "../../utils/axiosWithAuth";
+import Style from "./addproduct.module.css";
 // import AlertProduct from "./AlertProduct";
 
 function AddProduct() {
   const navigate = useNavigate();
 
   const { isLoading, data: loginData } = useSelector((state) => state.login);
-  let token = loginData?.data?.token;
+  const token = loginData?.data?.token;
 
   const [myOption, setMyOption] = useState("");
   const [error, setError] = useState("");
-  const [success, setSuccess] = useState("")
+  const [success, setSuccess] = useState("");
   const [closed, setClosed] = useState(true);
 
   const [disable, setDisable] = useState(true);
@@ -74,7 +77,7 @@ function AddProduct() {
         console.log("post success: ", res);
         if (res.status === 201) {
           // navigate("/product/list", { replace: true });
-          setSuccess("Produk berhasil diterbitkan.")
+          setSuccess("Produk berhasil diterbitkan.");
         }
       })
       .catch((err) => {
@@ -92,21 +95,21 @@ function AddProduct() {
           style={{
             backgroundColor: "rgba(0, 0, 0, 0)",
             width: "100%",
-            height: '100%'
+            height: "100%",
           }}
         >
           <div
             className="alert w-50 d-flex justify-content-between ps-3 pe-3 align-items-center mt-5 ms-4"
-            style={{ backgroundColor: "#ffc9cd", height: '4rem'}}
+            style={{ backgroundColor: "#ffc9cd", height: "4rem" }}
           >
             <p className="m-0 fs-6 " style={{ color: "#842029" }}>
               {error}
             </p>
             <i
-              class="bi bi-x fs-2 ms-2"
-              style={{ color: "#842029", cursor: 'pointer'}}
+              className="bi bi-x fs-2 ms-2"
+              style={{ color: "#842029", cursor: "pointer" }}
               onClick={() => setClosed(navigate("/product/list"))}
-            ></i>
+            />
           </div>
         </div>
       )}
@@ -116,21 +119,19 @@ function AddProduct() {
           style={{
             backgroundColor: "rgba(0, 0, 0, 0)",
             width: "100%",
-            height: '100%'
+            height: "100%",
           }}
         >
           <div
             className="alert w-50 d-flex justify-content-between ps-3 pe-3 align-items-center mt-5 ms-4"
-            style={{ backgroundColor: "#73CA5C", height: '4rem'}}
+            style={{ backgroundColor: "#73CA5C", height: "4rem" }}
           >
-            <p className="m-0 fs-6 text-white">
-              {success}
-            </p>
+            <p className="m-0 fs-6 text-white">{success}</p>
             <i
-              class="bi bi-x fs-2 ms-2 text-white"
-              style={{ cursor: 'pointer'}}
+              className="bi bi-x fs-2 ms-2 text-white"
+              style={{ cursor: "pointer" }}
               onClick={() => setClosed(navigate("/product/list"))}
-            ></i>
+            />
           </div>
         </div>
       )}
@@ -141,7 +142,7 @@ function AddProduct() {
         <p className="m-0 ms-3 fs-6">Lengkapi Detail Produk</p>
       </div>
       <div
-        className={`d-flex mt-3 position-absolute start-50 translate-middle-x ${Style["responsive"]}`}
+        className={`d-flex mt-3 position-absolute start-50 translate-middle-x ${Style.responsive}`}
       >
         <div className={`${Style["width-left"]}`}>
           <img src="/images/fi_arrow-left.png" alt="" />
@@ -194,7 +195,7 @@ function AddProduct() {
                 <div className="mb-3">
                   <label className="form-label">Kategori</label>
                   <select
-                    class="form-select"
+                    className="form-select"
                     name="category_id"
                     placeholder="pilih kategori"
                     onChange={handleChange}
@@ -225,7 +226,7 @@ function AddProduct() {
                       onChange={handleChange}
                       value={values.deskripsi}
                     />
-                    <label for="floatingTextarea">Deskripsi</label>
+                    <label htmlFor="floatingTextarea">Deskripsi</label>
                     <span className="font-12 text-danger py-1">
                       {errors.deskripsi}
                     </span>
