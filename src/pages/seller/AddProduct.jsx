@@ -1,3 +1,12 @@
+/* eslint-disable dot-notation */
+/* eslint-disable jsx-a11y/click-events-have-key-events */
+/* eslint-disable jsx-a11y/no-static-element-interactions */
+/* eslint-disable react/self-closing-comp */
+/* eslint-disable prefer-const */
+/* eslint-disable import/order */
+/* eslint-disable import/no-duplicates */
+/* eslint-disable react/no-unknown-property */
+/* eslint-disable jsx-a11y/label-has-associated-control */
 import axios from "axios";
 import React, { useEffect } from "react";
 import { useState } from "react";
