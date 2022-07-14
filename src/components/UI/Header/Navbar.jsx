@@ -10,7 +10,8 @@ import { getAllNotification } from "store/action/notificationAction";
 import { ConvertToDate, ConvertToIDR } from "utils/helper";
 import { HiMenu, HiSearch } from "react-icons/hi";
 import Style from "./Navbar.module.css";
-import NotificationDropdown from "./Notification/NotificationDropdown";
+import NotificationDropdown from "./components/NotificationDropdown";
+import Sidebar from "./components/Sidebar";
 
 const initialStateNotif = [
   {
@@ -37,10 +38,12 @@ function Navbar() {
   const [notifSeller, setNotifSeller] = useState(initialStateNotif);
   const [notifBuyer, setnotifBuyer] = useState(initialStateNotif);
   const [titlePage, setTitlePage] = useState("Title");
+  const [showSidebar, setShowSidebar] = useState(false);
 
   const matchHome = useMatch("/");
   const matchProductBuyDetail = useMatch("/product/buy/:id");
   const matchNotification = useMatch("/notification/:id");
+  const matchProductList = useMatch("/product/list");
 
   const navbarHome = !matchHome && !matchProductBuyDetail;
 
@@ -48,12 +51,18 @@ function Navbar() {
     if (matchNotification) {
       setTitlePage("Notification");
     }
+    if (matchProductList) {
+      setTitlePage("Daftar Jual Saya");
+    }
   };
 
   const handleLogout = () => {
     dispatch(authLogout());
     setLoginState(false);
   };
+
+  const handleSidebarClose = () => setShowSidebar(false);
+  const handleSidebarShow = () => setShowSidebar(true);
 
   console.log(
     matchHome,
@@ -100,13 +109,18 @@ function Navbar() {
       <div className="d-flex align-items-center d-xss-none">
         {navbarHome && (
           <>
-            <button type="button" className="button-nav-home">
+            <button
+              type="button"
+              className="button-nav-home"
+              onClick={handleSidebarShow}
+            >
               <HiMenu className="fs-5" />
             </button>
             <span className="font-20 fw-bolder">{titlePage}</span>
           </>
         )}
       </div>
+      <Sidebar show={showSidebar} handleClose={handleSidebarClose} />
       <div className="container p-2 d-none d-xss-block">
         <div className="row d-flex justify-content-between align-items-center">
           <div className="col-2">

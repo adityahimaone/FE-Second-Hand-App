@@ -57,7 +57,7 @@ function SellerSemuaProduk() {
 
   return (
     <section>
-      <div className={` ${Style.nav}`}>
+      {/* <div className={` ${Style.nav}`}>
         <div className="nav-home pt-3">
           <nav className="d-flex justify-content-between px-4">
             <button type="button" className="button-nav-home">
@@ -77,10 +77,12 @@ function SellerSemuaProduk() {
             </div>
           </nav>
         </div>
-      </div>
+      </div> */}
       <div className="container">
         <div className={`${Style.profile}`}>
-          <h1 className="fw-bold fs-4 mt-3">Daftar Jual Saya</h1>
+          <h1 className="fw-bold fs-4 mt-3 d-none d-xss-block">
+            Daftar Jual Saya
+          </h1>
           <div className="card p-3 mt-3">
             <div className="d-flex justify-content-between">
               <div className="d-flex align-items-center">
