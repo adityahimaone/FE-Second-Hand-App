@@ -1,4 +1,3 @@
-<<<<<<< HEAD
 /* eslint-disable dot-notation */
 /* eslint-disable jsx-a11y/click-events-have-key-events */
 /* eslint-disable jsx-a11y/no-static-element-interactions */
@@ -8,11 +7,6 @@
 /* eslint-disable import/no-duplicates */
 /* eslint-disable react/no-unknown-property */
 /* eslint-disable jsx-a11y/label-has-associated-control */
-=======
-/* eslint-disable jsx-a11y/label-has-associated-control */
-/* eslint-disable jsx-a11y/click-events-have-key-events */
-/* eslint-disable jsx-a11y/no-static-element-interactions */
->>>>>>> 1315b747c14b18da3454c1e226eb44bad00e0e3f
 import axios from "axios";
 import React, { useEffect, useState } from "react";
 
