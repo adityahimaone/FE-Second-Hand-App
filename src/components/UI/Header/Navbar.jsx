@@ -94,7 +94,7 @@ function Navbar() {
 
   useEffect(() => {
     getTitlePage();
-  }, []);
+  }, [showSidebar]);
 
   console.log(loginState, loginData);
 
