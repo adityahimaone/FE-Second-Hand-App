@@ -22,6 +22,7 @@ import InfoProfil from "./pages/InfoProfil";
 import NotificationSeller from "./pages/NotificationSeller";
 import StatusDiperbarui from "./pages/StatusDiperbarui/StatusDiperbarui";
 import InfoProduct from "./pages/InfoProductBuyer/InfoProduct";
+import NotificationAll from "./pages/NotificationAll";
 // import ModalNotifBuyer from "./components/UI/Modal_Notif_Buyer/ModalNotifBuyer";
 // import ModalTawar from "./components/UI/Modal_Tawar/ModalTawar";
 
@@ -40,6 +41,7 @@ function RoutesPage() {
           <Route path="/user/profile" element={<InfoProfil />} />
           <Route path="/penawaran" element={<InfoPenawaran />} />
           <Route path="/product/buy/:id" element={<BuyerHalamanProduk />} />
+          <Route path="/notification" element={<NotificationAll />} />
           <Route path="/notification/:id" element={<NotificationSeller />} />
         </Route>
         <Route path="/status" element={<StatusDiperbarui />} />

@@ -11,9 +11,9 @@ function Sidebar({ show, handleClose }) {
 
   const matchHome = useMatch("/");
   const matchProductBuyDetail = useMatch("/product/buy/:id");
-  const matchNotification = useMatch("/notification/:id");
   const matchProductList = useMatch("/product/list");
   const matchUserProfile = useMatch("/user/profile");
+  const matchNotificationAll = useMatch("/notification");
 
   const { isLoading: isLoadingLogin, data: loginData } = useSelector(
     (state) => state.login
@@ -53,8 +53,8 @@ function Sidebar({ show, handleClose }) {
               <li className="list-group-item border-0 py-0 px-1">
                 <Link
                   className={classnames("btn btn-link text-decoration-none", {
-                    "text-primary fw-bold": matchNotification,
-                    "text-black": !matchNotification,
+                    "text-primary fw-bold": matchNotificationAll,
+                    "text-black": !matchNotificationAll,
                   })}
                   to="/notification"
                 >
