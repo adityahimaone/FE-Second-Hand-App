@@ -3,10 +3,17 @@ import Offcanvas from "react-bootstrap/Offcanvas";
 import Accordion from "react-bootstrap/Accordion";
 import { Button } from "react-bootstrap";
 import { useSelector, useDispatch } from "react-redux";
-import { Link } from "react-router-dom";
+import { Link, useMatch } from "react-router-dom";
+import classnames from "classnames";
 
 function Sidebar({ show, handleClose }) {
   const [loginState, setLoginState] = useState(false);
+
+  const matchHome = useMatch("/");
+  const matchProductBuyDetail = useMatch("/product/buy/:id");
+  const matchNotification = useMatch("/notification/:id");
+  const matchProductList = useMatch("/product/list");
+  const matchUserProfile = useMatch("/user/profile");
 
   const { isLoading: isLoadingLogin, data: loginData } = useSelector(
     (state) => state.login
@@ -45,7 +52,10 @@ function Sidebar({ show, handleClose }) {
             <>
               <li className="list-group-item border-0 py-0 px-1">
                 <Link
-                  className="btn btn-link text-decoration-none text-black"
+                  className={classnames("btn btn-link text-decoration-none", {
+                    "text-primary fw-bold": matchNotification,
+                    "text-black": !matchNotification,
+                  })}
                   to="/notification"
                 >
                   Notifikasi
@@ -53,7 +63,10 @@ function Sidebar({ show, handleClose }) {
               </li>
               <li className="list-group-item border-0 py-0 px-1">
                 <Link
-                  className="btn btn-link text-decoration-none text-black"
+                  className={classnames("btn btn-link text-decoration-none", {
+                    "text-primary fw-bold": matchProductList,
+                    "text-black": !matchProductList,
+                  })}
                   to="/product/list"
                 >
                   Daftar Jual
@@ -65,7 +78,13 @@ function Sidebar({ show, handleClose }) {
                     <Accordion.Header>Akun Saya</Accordion.Header>
                     <Accordion.Body>
                       <Link
-                        className="btn btn-link text-decoration-none text-black"
+                        className={classnames(
+                          "btn btn-link text-decoration-none",
+                          {
+                            "text-primary fw-bold": matchUserProfile,
+                            "text-black": !matchUserProfile,
+                          }
+                        )}
                         to="/user/profile"
                       >
                         Edit Profile

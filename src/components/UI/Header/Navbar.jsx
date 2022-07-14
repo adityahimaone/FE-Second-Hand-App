@@ -44,6 +44,7 @@ function Navbar() {
   const matchProductBuyDetail = useMatch("/product/buy/:id");
   const matchNotification = useMatch("/notification/:id");
   const matchProductList = useMatch("/product/list");
+  const matchUserProfile = useMatch("/user/profile");
 
   const navbarHome = !matchHome && !matchProductBuyDetail;
 
@@ -53,6 +54,9 @@ function Navbar() {
     }
     if (matchProductList) {
       setTitlePage("Daftar Jual Saya");
+    }
+    if (matchUserProfile) {
+      setTitlePage("Lengkapi Info Akun");
     }
   };
 
