@@ -1,20 +1,19 @@
 import React, { useState } from "react";
 
 function ImagePreview({ file }) {
-  const [preview, setPreview] = useState({});
+  const [preview, setPreview] = useState();
   if (file) {
     const reader = new FileReader();
     reader.readAsDataURL(file);
     reader.onload = () => {
       setPreview(reader.result);
     };
+    return (
+      <div>
+        <img src={preview} alt="" style={{ width: "300px" }} />
+      </div>
+    );
   }
-
-  return (
-    <div>
-      <img src={preview} alt="" style={{ width: "300px" }} />
-    </div>
-  );
 }
 
 export default ImagePreview;

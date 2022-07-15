@@ -1,4 +1,8 @@
-<<<<<<< HEAD
+/* eslint-disable react/jsx-no-duplicate-props */
+/* eslint-disable jsx-a11y/control-has-associated-label */
+/* eslint-disable arrow-body-style */
+/* eslint-disable react/button-has-type */
+/* eslint-disable no-param-reassign */
 /* eslint-disable dot-notation */
 /* eslint-disable jsx-a11y/click-events-have-key-events */
 /* eslint-disable jsx-a11y/no-static-element-interactions */
@@ -8,28 +12,28 @@
 /* eslint-disable import/no-duplicates */
 /* eslint-disable react/no-unknown-property */
 /* eslint-disable jsx-a11y/label-has-associated-control */
-=======
-/* eslint-disable jsx-a11y/label-has-associated-control */
-/* eslint-disable jsx-a11y/click-events-have-key-events */
-/* eslint-disable jsx-a11y/no-static-element-interactions */
->>>>>>> 1315b747c14b18da3454c1e226eb44bad00e0e3f
 import axios from "axios";
-import React, { useEffect, useState } from "react";
-
+import React, { useEffect } from "react";
+import { useState } from "react";
+import Style from "./addproduct.module.css";
 import { useSelector, useDispatch } from "react-redux";
+import { AxiosWithAuth } from "../../utils/axiosWithAuth";
 import { Formik, Form, replace } from "formik";
 import * as yup from "yup";
-import { useNavigate } from "react-router-dom";
 import ImagePreview from "./ImagePreview";
-import { AxiosWithAuth } from "../../utils/axiosWithAuth";
-import Style from "./addproduct.module.css";
+import { useNavigate } from "react-router-dom";
 // import AlertProduct from "./AlertProduct";
 
 function AddProduct() {
   const navigate = useNavigate();
 
   const { isLoading, data: loginData } = useSelector((state) => state.login);
-  const token = loginData?.data?.token;
+  let token = loginData?.data?.token;
+
+  const [imagePrev, setImagePrev] = useState();
+  const [imagePreview, setImagePreview] = useState();
+  const [msgErr, setmsgErr] = useState("");
+  const [isSubmit, setIsSubmit] = useState(false);
 
   const [myOption, setMyOption] = useState("");
   const [error, setError] = useState("");
@@ -43,109 +47,147 @@ function AddProduct() {
     harga: yup.number().required("Harga is Required!"),
     deskripsi: yup
       .string()
-      .min(30, "too small!")
-      .max(500, "Too Long String")
-      .required("Required"),
-    category_id: yup.number().min(1, "pilih kategori").required("Required"),
-    image: yup
-      .mixed()
-      .required("Pilih gambar")
-      .test(
-        "FILE_SIZE",
-        "ukuran file max 2 mb",
-        (value) => value && value.size < 2e6
-      )
-      .test(
-        "FILE_TYPE",
-        "Tipe file hanya berupa jpg, jpeg, png",
-        (value) =>
-          value && ["image/png", "image/jpg", "image/jpeg"].includes(value.type)
-      ),
+      .min(30, "Deskripsi terlalu pendek")
+      .max(500, "Deskripsi terlalu panjang")
+      .required("Deskripsi is Required!"),
+    category_id: yup.number().min(1, "pilih kategori").required("Required!"),
   });
 
-  const handleSubmit = (values) => {
-    console.log(values);
-    // try {
-    //   const res = await AxiosWithAuth(token)
-    //   .post("/product/add-product", values, {
-    //     headers: {
-    //       "Content-Type": "multipart/form-data",
-    //     }
-    //   })
-    //   if (res.status === 201) {
-    //     navigate("/", {replace: true})
-    //   }
-    // } catch (error) {
-    //   console.log("err: ", error);
-    // }
+  const [style, setStyle] = useState({});
 
-    AxiosWithAuth(token)
-      .post("/product/add-product", values, {
-        headers: {
-          "Content-Type": "multipart/form-data",
-        },
-      })
-      .then((res) => {
-        console.log("post success: ", res);
-        if (res.status === 201) {
-          // navigate("/product/list", { replace: true });
-          setSuccess("Produk berhasil diterbitkan.");
-        }
-      })
-      .catch((err) => {
-        console.log("err: ", err);
-        if (err.response.status === 400) {
-          setError("Batas upload produk adalah 4");
-        }
-      });
+  const handleSubmit = (values) => {
+    values.image = imagePrev;
+    const data = new FormData();
+    data.append("image", imagePrev);
+    console.log(values);
+
+    if (values.image === undefined) {
+      setIsSubmit(true);
+      setmsgErr("Pilih Gambar");
+    }
+    if (values.image.length > 4) {
+      setIsSubmit(true);
+      setmsgErr("Maksimal upload gambar 4");
+    } else {
+      setIsSubmit(false);
+      AxiosWithAuth(token)
+        .post("/product/add-product", values, {
+          headers: {
+            "Content-Type": "multipart/form-data",
+          },
+        })
+        .then((res) => {
+          if (res.status === 201) {
+            setSuccess("Produk berhasil diterbitkan.");
+            setTimeout(() => navigate("/product/list"), 5000);
+          }
+          console.log("post success: ", res);
+        })
+        .catch((err) => {
+          console.log("err: ", err);
+          if (err.response.status === 400) {
+            setError("Batas upload produk adalah 4");
+            setTimeout(() => {
+              navigate("/product/list");
+            }, 5000);
+            setTimeout(() => {
+              const newStyle = {
+                opacity: 1,
+                width: `${100}%`,
+              };
+              setStyle(newStyle);
+            }, 100);
+          }
+        });
+    }
+  };
+  const handleImagePrev = (e) => {
+    setImagePrev(e.target.files);
+    const file = e.target.files;
+    const filesArray = Array.from(file);
+    setImagePreview(filesArray);
+    if (e !== undefined) {
+      setIsSubmit(false);
+    }
   };
   return (
     <div className="mt-3">
       {error && closed && (
-        <div
-          className="w-100 d-flex justify-content-center fixed-top"
-          style={{
-            backgroundColor: "rgba(0, 0, 0, 0)",
-            width: "100%",
-            height: "100%",
-          }}
-        >
+        <div className="">
           <div
-            className="alert w-50 d-flex justify-content-between ps-3 pe-3 align-items-center mt-5 ms-4"
-            style={{ backgroundColor: "#ffc9cd", height: "4rem" }}
+            className="fixed-top"
+            style={{
+              backgroundColor: "rgba(0, 0, 0, 0)",
+              width: "100%",
+              height: "100%",
+            }}
           >
-            <p className="m-0 fs-6 " style={{ color: "#842029" }}>
-              {error}
-            </p>
-            <i
-              className="bi bi-x fs-2 ms-2"
-              style={{ color: "#842029", cursor: "pointer" }}
-              onClick={() => setClosed(navigate("/product/list"))}
-            />
+            <div className="row mb-0">
+              <div className="col-12">
+                <div
+                  className={`${Style["responsive-alert"]} rounded-top d-flex justify-content-between ps-3 pe-3 pt-3 pb-3 align-items-center`}
+                >
+                  <p className="m-0 fs-6 " style={{ color: "#842029" }}>
+                    Batas upload produk adalah 4
+                  </p>
+                  <i
+                    className="bi bi-x fs-2 ms-2"
+                    style={{ color: "#842029", cursor: "pointer" }}
+                    onClick={() => setClosed(navigate("/product/list"))}
+                  ></i>
+                </div>
+              </div>
+            </div>
+            <div className="row">
+              <div className="col-12">
+                <div className={`${Style["progress"]}`}>
+                  <div
+                    className={`${Style["progress-done"]}`}
+                    style={style}
+                  ></div>
+                </div>
+              </div>
+            </div>
           </div>
         </div>
       )}
       {success && closed && (
+        <div className="">
         <div
-          className="w-100 d-flex justify-content-center fixed-top"
+          className="fixed-top"
           style={{
             backgroundColor: "rgba(0, 0, 0, 0)",
             width: "100%",
             height: "100%",
           }}
         >
-          <div
-            className="alert w-50 d-flex justify-content-between ps-3 pe-3 align-items-center mt-5 ms-4"
-            style={{ backgroundColor: "#73CA5C", height: "4rem" }}
-          >
-            <p className="m-0 fs-6 text-white">{success}</p>
-            <i
-              className="bi bi-x fs-2 ms-2 text-white"
-              style={{ cursor: "pointer" }}
-              onClick={() => setClosed(navigate("/product/list"))}
-            />
+          <div className="row mb-0">
+            <div className="col-12">
+              <div
+                className={`${Style["responsive-alert-success"]} rounded-top d-flex justify-content-between ps-3 pe-3 pt-3 pb-3 align-items-center`}
+              >
+                <p className="m-0 fs-6 text-white" >
+                  Batas upload produk adalah 4
+                </p>
+                <i
+                  className="bi bi-x fs-2 ms-2 text-white"
+                  onClick={() => setClosed(navigate("/product/list"))}
+                ></i>
+              </div>
+            </div>
+          </div>
+          <div className="row">
+            <div className="col-12">
+              <div className={`${Style["progress"]}`}>
+                <div
+                  className={`${Style["progress-done"]}`}
+                  style={style}
+                ></div>
+              </div>
+            </div>
           </div>
         </div>
+      </div>
       )}
       <div
         className={`justify-content-center align-items-center mb-3 ${Style["title-responsive"]}`}
@@ -154,7 +196,7 @@ function AddProduct() {
         <p className="m-0 ms-3 fs-6">Lengkapi Detail Produk</p>
       </div>
       <div
-        className={`d-flex mt-3 position-absolute start-50 translate-middle-x ${Style.responsive}`}
+        className={`d-flex mt-3 position-absolute start-50 translate-middle-x ${Style["responsive"]}`}
       >
         <div className={`${Style["width-left"]}`}>
           <img src="/images/fi_arrow-left.png" alt="" />
@@ -169,9 +211,8 @@ function AddProduct() {
               category_id: 0,
               image: [],
             }}
-            onSubmit={(values, { resetForm }) => {
+            onSubmit={(values) => {
               handleSubmit(values);
-              resetForm({ initialValues: "" });
             }}
           >
             {({ errors, values, setFieldValue, handleChange }) => (
@@ -207,7 +248,7 @@ function AddProduct() {
                 <div className="mb-3">
                   <label className="form-label">Kategori</label>
                   <select
-                    className="form-select"
+                    class="form-select"
                     name="category_id"
                     placeholder="pilih kategori"
                     onChange={handleChange}
@@ -238,7 +279,7 @@ function AddProduct() {
                       onChange={handleChange}
                       value={values.deskripsi}
                     />
-                    <label htmlFor="floatingTextarea">Deskripsi</label>
+                    <label for="floatingTextarea">Deskripsi</label>
                     <span className="font-12 text-danger py-1">
                       {errors.deskripsi}
                     </span>
@@ -251,20 +292,44 @@ function AddProduct() {
                       className={`${Style["custom-file-input"]}`}
                       type="file"
                       name="image"
+                      multiple
                       onChange={(e) => {
-                        setFieldValue("image", e.target.files[0]);
+                        // setFieldValue("image", e.target.files[0]);
+                        handleImagePrev(e);
                       }}
                       onClick={() => {
-                        setDisable(false);
+                        if (values.image === null) {
+                          setDisable(true);
+                          setIsSubmit(true);
+                        } else {
+                          setDisable(false);
+                          setIsSubmit(false);
+                        }
                       }}
                     />
                   </div>
                   <span className="font-12 text-danger py-1">
                     {errors.image}
                   </span>
+                  {isSubmit && (
+                    <span className="font-12 text-danger py-1">{msgErr}</span>
+                  )}
+                  <span className="font-12 text-danger py-1"></span>
                   {myOption === "show" && (
-                    <div className="mt-3">
-                      <ImagePreview file={values.image} />
+                    // <div className="mt-3">
+                    //   <ImagePreview file={imagePrev} />
+                    // </div>
+                    <div className="mb-3 d-flex flex-wrap">
+                      {imagePreview &&
+                        imagePreview.map((image) => {
+                          return (
+                            <div className="pe-3 mt-3">
+                              <div key={image} className="image grid">
+                                <ImagePreview file={image} />
+                              </div>
+                            </div>
+                          );
+                        })}
                     </div>
                   )}
                 </div>
