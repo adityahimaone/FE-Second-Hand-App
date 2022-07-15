@@ -1,11 +1,8 @@
-<<<<<<< HEAD
 /* eslint-disable react/jsx-no-duplicate-props */
 /* eslint-disable jsx-a11y/control-has-associated-label */
 /* eslint-disable arrow-body-style */
 /* eslint-disable react/button-has-type */
 /* eslint-disable no-param-reassign */
-=======
->>>>>>> 9b7738722488284ccf7a22b311c0276c99aaa9c2
 /* eslint-disable dot-notation */
 /* eslint-disable jsx-a11y/click-events-have-key-events */
 /* eslint-disable jsx-a11y/no-static-element-interactions */
