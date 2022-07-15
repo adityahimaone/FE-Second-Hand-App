@@ -9,6 +9,7 @@ import offerReducer from "./offeringReducer";
 import notificationReducer from "./notificationReducer";
 import notificationByIDReducer from "./notificationByIDReducer";
 import acceptReducer from "./acceptReducer";
+import addProductSeller from "./addProductSellerReducer";
 
 export default combineReducers({
   login: loginReducer,
@@ -21,4 +22,5 @@ export default combineReducers({
   notification: notificationReducer,
   notification_by_id: notificationByIDReducer,
   acceptNegotation: acceptReducer,
+  add_product_seller: addProductSeller,
 });

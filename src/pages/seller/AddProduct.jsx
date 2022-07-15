@@ -22,7 +22,6 @@ import { Formik, Form, replace } from "formik";
 import * as yup from "yup";
 import ImagePreview from "./ImagePreview";
 import { useNavigate } from "react-router-dom";
-// import AlertProduct from "./AlertProduct";
 
 function AddProduct() {
   const navigate = useNavigate();
@@ -38,6 +37,7 @@ function AddProduct() {
   const [myOption, setMyOption] = useState("");
   const [error, setError] = useState("");
   const [success, setSuccess] = useState("");
+  const [style, setStyle] = useState({});
   const [closed, setClosed] = useState(true);
 
   const [disable, setDisable] = useState(true);
@@ -52,8 +52,6 @@ function AddProduct() {
       .required("Deskripsi is Required!"),
     category_id: yup.number().min(1, "pilih kategori").required("Required!"),
   });
-
-  const [style, setStyle] = useState({});
 
   const handleSubmit = (values) => {
     values.image = imagePrev;
