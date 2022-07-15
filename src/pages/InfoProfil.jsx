@@ -1,13 +1,17 @@
 /* eslint-disable jsx-a11y/label-has-associated-control */
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState, useRef } from "react";
 import { useNavigate } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
+import CloseButton from "react-bootstrap/CloseButton";
 import Style from "./seller/sellersemuaproduk.module.css";
 import { getUserProfile } from "../store/action/profileAction";
 
 function InfoProfil() {
   const navigate = useNavigate();
   const dispatch = useDispatch();
+
+  const inputRef = useRef(null);
+  const [file, setFile] = useState("/images/camera1.png");
 
   const { data: dataLogin } = useSelector((state) => state.login);
   const {
@@ -17,6 +21,20 @@ function InfoProfil() {
   } = useSelector((state) => state.profile);
 
   const [token, setToken] = useState(dataLogin?.data?.token);
+
+  const handleOpenFileInput = () => {
+    inputRef.current.click();
+  };
+
+  const onImageChange = (event) => {
+    if (event.target.files && event.target.files[0]) {
+      setFile(URL.createObjectURL(event.target.files[0]));
+    }
+  };
+
+  const onImageDelete = () => {
+    setFile("/images/camera1.png");
+  };
 
   useEffect(() => {
     dispatch(getUserProfile(token));
@@ -28,7 +46,7 @@ function InfoProfil() {
     <div className="container d-flex justify-content-center">
       <div className="d-flex w-max-570 mt-5 w-100 position-relative">
         <button
-        type="button"
+          type="button"
           onClick={() => navigate(-1)}
           className="btn position-absolute"
           style={{ left: "-4.375rem", top: "-20px" }}
@@ -40,18 +58,28 @@ function InfoProfil() {
             <div className="d-flex justify-content-center">
               <div style={{ maxWidth: "8rem" }}>
                 <div
-                  className={`${Style.color} card d-flex justify-content-center align-items-center`}
+                  className={`${Style.color} card d-flex justify-content-center align-items-center position-relative`}
                   style={{ width: "8rem" }}
                 >
                   <input
                     type="file"
-                    className={`${Style["custom-file-input"]} ${Style["input-opacity"]} position-absolute`}
+                    accept="image/*"
+                    ref={inputRef}
+                    className="d-none"
+                    onChange={onImageChange}
                   />
                   <img
-                    src="/images/fi_camera.svg"
-                    alt=""
-                    srcSet=""
-                    className="mt-5 mb-5"
+                    src={file}
+                    alt="img-uploud"
+                    onClick={handleOpenFileInput}
+                    aria-hidden="true"
+                    className="bg-purple-1 rounded-3 shadow"
+                    style={{ width: "132px", height: "132px" }}
+                  />
+                  <CloseButton
+                    style={{ top: "-10px", right: "-10px", zIndex: 10 }}
+                    className="position-absolute rounded-circle bg-secondary p-1"
+                    onClick={onImageDelete}
                   />
                 </div>
               </div>

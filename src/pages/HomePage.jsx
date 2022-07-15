@@ -10,6 +10,7 @@ import CardHome from "components/UI/Card/CardHome";
 import Carousel from "components/elements/Home/Carousel";
 import Style from "assets/styles/Home.module.css";
 import { getAllProduct } from "store/action/productAction";
+import Sidebar from "components/UI/Header/components/Sidebar";
 
 function HomePage() {
   const navigate = useNavigate();
@@ -18,6 +19,7 @@ function HomePage() {
   const [tabCategory, setTabCategory] = useState(0);
   const [pageTotal, setPageTotal] = useState(0);
   const [pageNow, setPageNow] = useState(1);
+  const [showSidebar, setShowSidebar] = useState(false);
 
   const {
     isLoading: isLoadingGetAllProduct,
@@ -72,6 +74,9 @@ function HomePage() {
       setPageNow((prevPage) => prevPage - 1);
     }
   });
+
+  const handleSidebarClose = () => setShowSidebar(false);
+  const handleSidebarShow = () => setShowSidebar(true);
 
   function SwitchTabCategory({ idCategory }) {
     if (tabCategory === 0) {
@@ -141,7 +146,11 @@ function HomePage() {
         <div className="mx-2">
           <div className="nav-home pt-3">
             <nav className="d-flex justify-content-between px-4">
-              <button type="button" className="button-nav-home">
+              <button
+                type="button"
+                className="button-nav-home"
+                onClick={handleSidebarShow}
+              >
                 <HiMenu className="fs-5" />
               </button>
               <div className="search w-100">
@@ -157,6 +166,7 @@ function HomePage() {
                 </span>
               </div>
             </nav>
+            <Sidebar show={showSidebar} handleClose={handleSidebarClose} />
           </div>
         </div>
         <div
