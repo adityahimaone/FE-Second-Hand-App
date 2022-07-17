@@ -72,8 +72,20 @@
     margin-left: 50vw;
 }
 
-.progress-done {
+.progress-done-error {
 	background: #842029;
+	border-radius: 20px;
+	color: #fff;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	height: 100%;
+	width: 0;
+	opacity: 1;
+	transition: 5s;
+}
+.progress-done-success {
+	background: #1a7700;
 	border-radius: 20px;
 	color: #fff;
 	display: flex;

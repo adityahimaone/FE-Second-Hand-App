@@ -12,21 +12,21 @@
 /* eslint-disable import/no-duplicates */
 /* eslint-disable react/no-unknown-property */
 /* eslint-disable jsx-a11y/label-has-associated-control */
-import axios from "axios";
 import React, { useEffect } from "react";
 import { useState } from "react";
 import Style from "./addproduct.module.css";
 import { useSelector, useDispatch } from "react-redux";
-import { AxiosWithAuth } from "../../utils/axiosWithAuth";
-import { Formik, Form, replace } from "formik";
+import { Formik, Form } from "formik";
 import * as yup from "yup";
 import ImagePreview from "./ImagePreview";
 import { useNavigate } from "react-router-dom";
+import { postAddProductSeller } from "store/action/addProductSellerAction";
 
 function AddProduct() {
   const navigate = useNavigate();
+  const dispatch = useDispatch();
 
-  const { isLoading, data: loginData } = useSelector((state) => state.login);
+  const { data: loginData } = useSelector((state) => state.login);
   let token = loginData?.data?.token;
 
   const [imagePrev, setImagePrev] = useState([]);
@@ -35,25 +35,25 @@ function AddProduct() {
   const [isSubmit, setIsSubmit] = useState(false);
 
   const [myOption, setMyOption] = useState("");
-  const [error, setError] = useState("");
+  const [errorValidation, setError] = useState("");
   const [success, setSuccess] = useState("");
   const [style, setStyle] = useState({});
   const [closed, setClosed] = useState(true);
-
   const [disable, setDisable] = useState(true);
+
+  const [errorHandler, setErrorHandler] = useState();
+  const [successHandler, setSuccessHandler] = useState();
 
   const validationSchema = yup.object({
     nama: yup.string().required("Name is Required!"),
     harga: yup.number().required("Harga is Required!"),
     deskripsi: yup
       .string()
-      // .min(30, "Deskripsi terlalu pendek")
+      .min(30, "Deskripsi terlalu pendek")
       .max(500, "Deskripsi terlalu panjang")
       .required("Deskripsi is Required!"),
     category_id: yup.number().min(1, "pilih kategori").required("Required!"),
   });
-
-  console.log(imagePrev);
 
   const handleSubmitProduct = (values) => {
     const formData = new FormData();
@@ -65,46 +65,29 @@ function AddProduct() {
     });
     formData.append("category_id", values.category_id);
 
-    if (values.image === undefined) {
+    if (imagePrev.length === 0) {
       setIsSubmit(true);
       setmsgErr("Pilih Gambar");
     }
-    if (values.image.length > 4) {
-      setIsSubmit(true);
-      setmsgErr("Maksimal upload gambar 4");
-    } else {
-      setIsSubmit(false);
-      AxiosWithAuth(token)
-        .post("/product/add-product", formData, {
-          headers: {
-            "Content-Type": "multipart/form-data",
-          },
-        })
-        .then((res) => {
-          if (res.status === 201) {
-            setSuccess("Produk berhasil diterbitkan.");
-            setTimeout(() => navigate("/product/list"), 5000);
-          }
-          console.log("post success: ", res);
-        })
-        .catch((err) => {
-          console.log("err: ", err);
-          if (err.response.status === 400) {
-            setError("Batas upload produk adalah 4");
-            setTimeout(() => {
-              navigate("/product/list");
-            }, 5000);
-            setTimeout(() => {
-              const newStyle = {
-                opacity: 1,
-                width: `${100}%`,
-              };
-              setStyle(newStyle);
-            }, 100);
-          }
-        });
+    if (imagePrev.length !== 0) {
+      if (imagePrev.length > 4) {
+        setIsSubmit(true);
+        setmsgErr("Maksimal upload gambar 4");
+      }
+      if (imagePrev.length <= 4) {
+        setIsSubmit(false);
+        dispatch(
+          postAddProductSeller(
+            token,
+            formData,
+            setErrorHandler,
+            setSuccessHandler
+          )
+        );
+      }
     }
   };
+
   const handleImagePrev = (e) => {
     const newFiles = [];
     // eslint-disable-next-line no-plusplus
@@ -121,10 +104,37 @@ function AddProduct() {
     }
   };
 
-  console.log(imagePrev, "imagePreview");
+  // Error Handling
+  useEffect(() => {
+    if (successHandler === true) {
+      setSuccess("Produk berhasil diterbitkan.");
+      setTimeout(() => navigate("/product/list"), 5000);
+      setTimeout(() => {
+        const newStyle = {
+          opacity: 1,
+          width: `${100}%`,
+        };
+        setStyle(newStyle);
+      }, 100);
+    }
+    if (errorHandler === true) {
+      setError("Batas upload produk adalah 4");
+      setTimeout(() => {
+        navigate("/product/list");
+      }, 5000);
+      setTimeout(() => {
+        const newStyle = {
+          opacity: 1,
+          width: `${100}%`,
+        };
+        setStyle(newStyle);
+      }, 100);
+    }
+  }, [successHandler, errorHandler]);
+
   return (
     <div className="mt-3">
-      {error && closed && (
+      {errorValidation && closed && (
         <div className="">
           <div
             className="fixed-top"
@@ -154,7 +164,7 @@ function AddProduct() {
               <div className="col-12">
                 <div className={`${Style["progress"]}`}>
                   <div
-                    className={`${Style["progress-done"]}`}
+                    className={`${Style["progress-done-error"]}`}
                     style={style}
                   ></div>
                 </div>
@@ -179,7 +189,7 @@ function AddProduct() {
                   className={`${Style["responsive-alert-success"]} rounded-top d-flex justify-content-between ps-3 pe-3 pt-3 pb-3 align-items-center`}
                 >
                   <p className="m-0 fs-6 text-white">
-                    Batas upload produk adalah 4
+                    Produk telah berhasil ditambahkan
                   </p>
                   <i
                     className="bi bi-x fs-2 ms-2 text-white"
@@ -192,7 +202,7 @@ function AddProduct() {
               <div className="col-12">
                 <div className={`${Style["progress"]}`}>
                   <div
-                    className={`${Style["progress-done"]}`}
+                    className={`${Style["progress-done-success"]}`}
                     style={style}
                   ></div>
                 </div>
@@ -230,7 +240,6 @@ function AddProduct() {
             {({
               errors,
               values,
-              setFieldValue,
               handleChange,
               handleSubmit,
             }) => (
