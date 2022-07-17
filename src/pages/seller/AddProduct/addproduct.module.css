@@ -1,5 +1,7 @@
 .width-left {
     margin-left: -5rem ;
+    cursor: pointer;
+    height: fit-content;
 }
 .width-right {
     margin-left: 5rem ;

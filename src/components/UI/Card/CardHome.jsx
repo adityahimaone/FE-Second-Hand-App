@@ -10,7 +10,7 @@ function CardHome({ item }) {
   const { id, nama, image, harga, category_id, category, product_image } = item;
   return (
     <Card
-      className="card-2 h-100"
+      className="card-1 h-100"
       onClick={() => navigate(`/product/buy/${id}`)}
     >
       <Card.Img

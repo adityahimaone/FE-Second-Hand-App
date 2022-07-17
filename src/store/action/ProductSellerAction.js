@@ -30,11 +30,11 @@ export const postAddProductSeller =
 export const getMyProduct = (token) => (dispatch) => {
   dispatch({ type: `${GET_MY_PRODUCT}_LOADING` });
   AxiosWithAuth(token)
-    .post("/product/my-product")
+    .get("/product/my-product")
     .then((response) => {
       dispatch({
         type: `${GET_MY_PRODUCT}_FULFILLED`,
-        payload: response.status,
+        payload: response.data,
       });
     })
     .catch((error) => {

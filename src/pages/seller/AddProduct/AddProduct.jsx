@@ -45,12 +45,15 @@ function AddProduct() {
   const [successHandler, setSuccessHandler] = useState();
 
   const validationSchema = yup.object({
-    nama: yup.string().required("Name is Required!"),
+    nama: yup
+      .string()
+      .required("Name is Required!")
+      .max(25, "Nama terlalu panjang"),
     harga: yup.number().required("Harga is Required!"),
     deskripsi: yup
       .string()
       .min(30, "Deskripsi terlalu pendek")
-      .max(500, "Deskripsi terlalu panjang")
+      .max(1000, "Deskripsi terlalu panjang")
       .required("Deskripsi is Required!"),
     category_id: yup.number().min(1, "pilih kategori").required("Required!"),
   });
@@ -220,8 +223,8 @@ function AddProduct() {
       <div
         className={`d-flex mt-3 position-absolute start-50 translate-middle-x ${Style["responsive"]}`}
       >
-        <div className={`${Style["width-left"]}`}>
-          <img src="/images/fi_arrow-left.png" alt="" />
+        <div className={`${Style["width-left"]}`} onClick={() => navigate(-1)}>
+          <i className="bi bi-arrow-left fs-4" />
         </div>
         <div className={`${Style["width-right"]} w-100`}>
           <Formik
@@ -237,12 +240,7 @@ function AddProduct() {
               handleSubmitProduct(values);
             }}
           >
-            {({
-              errors,
-              values,
-              handleChange,
-              handleSubmit,
-            }) => (
+            {({ errors, values, handleChange, handleSubmit }) => (
               <Form onSubmit={handleSubmit}>
                 <div className="mb-3">
                   <label className="form-label">Nama Produk</label>

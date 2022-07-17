@@ -13,8 +13,8 @@ import BuyerOffer from "./pages/buyer/BuyerOffer";
 import store from "./store/store";
 import BuyerNotification from "./pages/buyer/BuyerNotification";
 import ProductSellingList from "./pages/ProductSellingList";
-import SellerSemuaProduk from "./pages/seller/SellerSemuaProduk";
-import AddProduct from "./pages/seller/AddProduct";
+import ProductSellerList from "./pages/seller/ProductList/ProductList";
+import AddProduct from "./pages/seller/AddProduct/AddProduct";
 import BuyerHalamanProduk from "./pages/buyer/BuyerHalamanProduk";
 import InfoPenawaran from "./pages/Penawaran/infoPenawaran";
 import InfoProfil from "./pages/InfoProfil";
@@ -36,7 +36,7 @@ function RoutesPage() {
           <Route path="/buyeroffer" element={<BuyerOffer />} />
           <Route path="/notifbuyer" element={<BuyerNotification />} />
           {/* <Route path="/product" element={<ProductSellingList />} /> */}
-          <Route path="/product/list" element={<SellerSemuaProduk />} />
+          <Route path="/product/list" element={<ProductSellerList />} />
           <Route path="/product/sell" element={<AddProduct />} />
           <Route path="/user/profile" element={<InfoProfil />} />
           <Route path="/penawaran" element={<InfoPenawaran />} />

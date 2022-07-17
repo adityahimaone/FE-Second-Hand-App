@@ -3,7 +3,7 @@ import React, { useEffect, useState, useRef } from "react";
 import { useNavigate } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import CloseButton from "react-bootstrap/CloseButton";
-import Style from "./seller/sellersemuaproduk.module.css";
+import Style from "./seller/ProductList/sellersemuaproduk.module.css";
 import { getUserProfile } from "../store/action/profileAction";
 
 function InfoProfil() {

@@ -1,4 +1,3 @@
-/* eslint-disable import/named */
 import { GET_MY_PRODUCT } from "../types";
 
 const initialState = {
