@@ -10,6 +10,18 @@ function NotificationDropdown({ notifSeller, notifBuyer }) {
 
   const [tabsNotif, setTabsNotif] = useState(1);
 
+  // filter item?.createdAt new
+  const newNotifSeller = notifSeller
+    .sort((a, b) => new Date(b.createdAt) - new Date(a.createdAt))
+    .slice(0, 5);
+
+  const newNotifBuyer = notifBuyer
+    .filter((item) => item.data_nego.is_accept === true)
+    .sort((a, b) => new Date(b.createdAt) - new Date(a.createdAt))
+    .slice(0, 5);
+
+  console.log(newNotifBuyer, "newNotifBuyer");
+
   return (
     <Tabs
       defaultActiveKey="notif-seller"
@@ -18,7 +30,7 @@ function NotificationDropdown({ notifSeller, notifBuyer }) {
       fill
     >
       <Tab eventKey="notif-seller" title="Seller">
-        {notifSeller?.map((item) => (
+        {newNotifSeller?.map((item) => (
           <>
             <Dropdown.Item
               key={item.id}
@@ -38,15 +50,20 @@ function NotificationDropdown({ notifSeller, notifBuyer }) {
                 </div>
                 <div className="d-flex flex-column w-100">
                   <div className="d-flex justify-content-between font-10 color-gray">
-                    <span>Penawaran produk</span>
-                    <span>{ConvertToDate(item?.createdAt)}</span>
+                    <span>{item?.description}</span>
+                    <div className="d-flex align-items-center gap-1">
+                      <span>{ConvertToDate(item?.createdAt)}</span>
+                      {!item?.is_read && <div className="shape-notification" />}
+                    </div>
                   </div>
                   <div className="d-flex flex-column font-14 fw-bold">
                     <span>{item?.product_notif?.nama}</span>
                     <span>{ConvertToIDR(item?.product_notif?.harga)}</span>
-                    <span>
-                      Ditawar {ConvertToIDR(item?.data_nego?.harga_tawar)}
-                    </span>
+                    {item?.description === "Penawaran produk" && (
+                      <span>
+                        Ditawar {ConvertToIDR(item?.data_nego?.harga_tawar)}
+                      </span>
+                    )}
                   </div>
                 </div>
               </div>
@@ -56,7 +73,7 @@ function NotificationDropdown({ notifSeller, notifBuyer }) {
         ))}
       </Tab>
       <Tab eventKey="notif-buyer" title="Buyer">
-        {notifBuyer?.map((item) => (
+        {newNotifBuyer?.map((item) => (
           <>
             <Dropdown.Item>
               <div className="d-flex gap-3 p-1">

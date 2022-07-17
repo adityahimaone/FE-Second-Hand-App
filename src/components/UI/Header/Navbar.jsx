@@ -112,6 +112,8 @@ function Navbar() {
 
   console.log(userNav, "userNav");
 
+  const notifLength = notifSeller.length > 0 && notifBuyer.length > 0;
+
   return (
     <nav className={`${Style["nav-header"]}`}>
       <div className="d-flex align-items-center d-xss-none">
@@ -185,8 +187,18 @@ function Navbar() {
                     id="dropdown-basic"
                     align="end"
                     variant="none"
+                    className="position-relative"
                   >
                     <i className="bi bi-bell fs-5" />
+                    {notifLength && (
+                      <div
+                        className="shape-notification position-absolute"
+                        style={{
+                          top: "8px",
+                          right: "12px",
+                        }}
+                      />
+                    )}
                   </Dropdown.Toggle>
                   <Dropdown.Menu
                     className=""
