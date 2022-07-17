@@ -68,11 +68,13 @@ function Login() {
                   <i className="bi bi-arrow-left fs-4" />
                 </button>
                 <h1 className="fw-bold mt-5 mt-xss-0">Masuk</h1>
-                <div>
-                  <p>Email</p>
+                <div className="mb-3">
+                  <label htmlFor="form-email" className="form-label">
+                    Email
+                  </label>
                   <input
+                    id="form-email"
                     className="form-input w-100"
-                    style={{ marginButtom: "1rem" }}
                     placeholder="Contoh: johndee@gmail.com"
                     type="email"
                     name="email"
@@ -82,11 +84,13 @@ function Login() {
                     {errors.email}
                   </span>
                 </div>
-                <div className="position-relative">
-                  <p>Password</p>
+                <div className=" mb-3 position-relative">
+                  <label htmlFor="form-password" className="form-label">
+                    Password
+                  </label>
                   <input
+                    id="form-password"
                     className="form-input w-100"
-                    style={{ marginButtom: "1rem" }}
                     placeholder="Masukkan password"
                     type={showPasword ? "text" : "password"}
                     name="password"
