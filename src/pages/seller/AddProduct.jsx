@@ -29,8 +29,8 @@ function AddProduct() {
   const { isLoading, data: loginData } = useSelector((state) => state.login);
   let token = loginData?.data?.token;
 
-  const [imagePrev, setImagePrev] = useState();
-  const [imagePreview, setImagePreview] = useState();
+  const [imagePrev, setImagePrev] = useState([]);
+  const [imagePreview, setImagePreview] = useState([]);
   const [msgErr, setmsgErr] = useState("");
   const [isSubmit, setIsSubmit] = useState(false);
 
@@ -47,17 +47,23 @@ function AddProduct() {
     harga: yup.number().required("Harga is Required!"),
     deskripsi: yup
       .string()
-      .min(30, "Deskripsi terlalu pendek")
+      // .min(30, "Deskripsi terlalu pendek")
       .max(500, "Deskripsi terlalu panjang")
       .required("Deskripsi is Required!"),
     category_id: yup.number().min(1, "pilih kategori").required("Required!"),
   });
 
-  const handleSubmit = (values) => {
-    values.image = imagePrev;
-    const data = new FormData();
-    data.append("image", imagePrev);
-    console.log(values);
+  console.log(imagePrev);
+
+  const handleSubmitProduct = (values) => {
+    const formData = new FormData();
+    formData.append("nama", values.nama);
+    formData.append("harga", values.harga);
+    formData.append("deskripsi", values.deskripsi);
+    imagePrev.forEach((image) => {
+      formData.append("image", image);
+    });
+    formData.append("category_id", values.category_id);
 
     if (values.image === undefined) {
       setIsSubmit(true);
@@ -69,7 +75,7 @@ function AddProduct() {
     } else {
       setIsSubmit(false);
       AxiosWithAuth(token)
-        .post("/product/add-product", values, {
+        .post("/product/add-product", formData, {
           headers: {
             "Content-Type": "multipart/form-data",
           },
@@ -100,7 +106,13 @@ function AddProduct() {
     }
   };
   const handleImagePrev = (e) => {
-    setImagePrev(e.target.files);
+    const newFiles = [];
+    // eslint-disable-next-line no-plusplus
+    for (let i = 0; i < e.target.files.length; i++) {
+      newFiles.push(e.target.files[i]);
+    }
+    setImagePrev(newFiles);
+    // setImagePrev(e.target.files);
     const file = e.target.files;
     const filesArray = Array.from(file);
     setImagePreview(filesArray);
@@ -108,6 +120,8 @@ function AddProduct() {
       setIsSubmit(false);
     }
   };
+
+  console.log(imagePrev, "imagePreview");
   return (
     <div className="mt-3">
       {error && closed && (
@@ -151,41 +165,41 @@ function AddProduct() {
       )}
       {success && closed && (
         <div className="">
-        <div
-          className="fixed-top"
-          style={{
-            backgroundColor: "rgba(0, 0, 0, 0)",
-            width: "100%",
-            height: "100%",
-          }}
-        >
-          <div className="row mb-0">
-            <div className="col-12">
-              <div
-                className={`${Style["responsive-alert-success"]} rounded-top d-flex justify-content-between ps-3 pe-3 pt-3 pb-3 align-items-center`}
-              >
-                <p className="m-0 fs-6 text-white" >
-                  Batas upload produk adalah 4
-                </p>
-                <i
-                  className="bi bi-x fs-2 ms-2 text-white"
-                  onClick={() => setClosed(navigate("/product/list"))}
-                ></i>
+          <div
+            className="fixed-top"
+            style={{
+              backgroundColor: "rgba(0, 0, 0, 0)",
+              width: "100%",
+              height: "100%",
+            }}
+          >
+            <div className="row mb-0">
+              <div className="col-12">
+                <div
+                  className={`${Style["responsive-alert-success"]} rounded-top d-flex justify-content-between ps-3 pe-3 pt-3 pb-3 align-items-center`}
+                >
+                  <p className="m-0 fs-6 text-white">
+                    Batas upload produk adalah 4
+                  </p>
+                  <i
+                    className="bi bi-x fs-2 ms-2 text-white"
+                    onClick={() => setClosed(navigate("/product/list"))}
+                  ></i>
+                </div>
               </div>
             </div>
-          </div>
-          <div className="row">
-            <div className="col-12">
-              <div className={`${Style["progress"]}`}>
-                <div
-                  className={`${Style["progress-done"]}`}
-                  style={style}
-                ></div>
+            <div className="row">
+              <div className="col-12">
+                <div className={`${Style["progress"]}`}>
+                  <div
+                    className={`${Style["progress-done"]}`}
+                    style={style}
+                  ></div>
+                </div>
               </div>
             </div>
           </div>
         </div>
-      </div>
       )}
       <div
         className={`justify-content-center align-items-center mb-3 ${Style["title-responsive"]}`}
@@ -210,11 +224,17 @@ function AddProduct() {
               image: [],
             }}
             onSubmit={(values) => {
-              handleSubmit(values);
+              handleSubmitProduct(values);
             }}
           >
-            {({ errors, values, setFieldValue, handleChange }) => (
-              <Form>
+            {({
+              errors,
+              values,
+              setFieldValue,
+              handleChange,
+              handleSubmit,
+            }) => (
+              <Form onSubmit={handleSubmit}>
                 <div className="mb-3">
                   <label className="form-label">Nama Produk</label>
                   <input
@@ -246,15 +266,14 @@ function AddProduct() {
                 <div className="mb-3">
                   <label className="form-label">Kategori</label>
                   <select
-                    class="form-select"
+                    className="form-select"
                     name="category_id"
                     placeholder="pilih kategori"
                     onChange={handleChange}
                     value={values.category_id}
+                    defaultValue={0}
                   >
-                    <option value={0} selected>
-                      Pilih Kategori
-                    </option>
+                    <option value={0}>Pilih Kategori</option>
                     <option value={1}>Kaos & Kemeja</option>
                     <option value={2}>Celana</option>
                     <option value={3}>Jakcet & Hodie</option>
@@ -277,7 +296,7 @@ function AddProduct() {
                       onChange={handleChange}
                       value={values.deskripsi}
                     />
-                    <label for="floatingTextarea">Deskripsi</label>
+                    <label>Deskripsi</label>
                     <span className="font-12 text-danger py-1">
                       {errors.deskripsi}
                     </span>
