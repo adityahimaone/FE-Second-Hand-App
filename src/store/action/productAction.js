@@ -1,5 +1,5 @@
 import { AxiosCustom } from "utils/axiosCustom";
-import { GET_ALL_PRODUCT, GET_PRODUCT_BY_ID, GET_MY_PRODUCT } from "../types";
+import { GET_ALL_PRODUCT, GET_PRODUCT_BY_ID } from "../types";
 
 export const getAllProduct = (page, size) => (dispatch) => {
   dispatch({ type: `${GET_ALL_PRODUCT}_LOADING` });
@@ -35,19 +35,3 @@ export const getProductByID = (id) => (dispatch) => {
     });
 };
 
-export const getMyProduct = () => (dispatch) => {
-  dispatch({ type: `${GET_MY_PRODUCT}_LOADING` });
-  AxiosCustom.get("/product/my-product")
-    .then((response) => {
-      dispatch({
-        type: `${GET_MY_PRODUCT}_FULFILLED`,
-        payload: response.data,
-      });
-    })
-    .catch((error) => {
-      dispatch({
-        type: `${GET_MY_PRODUCT}_ERROR`,
-        error: error.message,
-      });
-    });
-};
