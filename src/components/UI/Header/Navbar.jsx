@@ -39,6 +39,7 @@ function Navbar() {
   const [notifBuyer, setnotifBuyer] = useState(initialStateNotif);
   const [titlePage, setTitlePage] = useState("Title");
   const [showSidebar, setShowSidebar] = useState(false);
+  const [searchForm, setSearchForm] = useState("");
 
   const matchHome = useMatch("/");
   const matchProductBuyDetail = useMatch("/product/buy/:id");
@@ -71,6 +72,10 @@ function Navbar() {
 
   const handleSidebarClose = () => setShowSidebar(false);
   const handleSidebarShow = () => setShowSidebar(true);
+
+  const handleChangeSearch = (e) => {
+    setSearchForm(e.target.value);
+  };
 
   console.log(
     matchHome,
@@ -145,15 +150,31 @@ function Navbar() {
               <div className="col-2" />
             </>
           )}
-          <div className="col-4">
+          <div className="col-4 position-relative">
             {userSearch && (
-              <Form.Control
-                type="text"
-                id="inputPassword5"
-                aria-describedby="search"
-                className="form-input-search"
-                placeholder="Cari di sini ..."
-              />
+              <>
+                <Form.Control
+                  type="text"
+                  id="inputPassword5"
+                  aria-describedby="search"
+                  className="form-input-search"
+                  placeholder="Cari di sini ..."
+                  onChange={handleChangeSearch}
+                />
+                <button
+                  onClick={() =>
+                    navigate(`/product/search?search=${searchForm}`)
+                  }
+                  type="button"
+                  className="btn position-absolute"
+                  style={{
+                    top: "-1px",
+                    right: "11px",
+                  }}
+                >
+                  <HiSearch className="fs-5" />
+                </button>
+              </>
             )}
           </div>
           <div className="col-6 d-flex justify-content-end">

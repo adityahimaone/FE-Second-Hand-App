@@ -12,6 +12,7 @@ import acceptReducer from "./acceptReducer";
 import addProductSeller from "./addProductSellerReducer";
 import sellerMyProductReducer from "./sellerMyProductReducer";
 import changeStatusReducer from "./changeStatusReducer";
+import productSearchReducer from "./productSearchReducer";
 
 export default combineReducers({
   login: loginReducer,
@@ -27,4 +28,5 @@ export default combineReducers({
   add_product_seller: addProductSeller,
   seller_my_product: sellerMyProductReducer,
   change_status: changeStatusReducer,
+  product_search: productSearchReducer,
 });

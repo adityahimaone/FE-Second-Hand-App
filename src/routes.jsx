@@ -1,5 +1,6 @@
 import React, { useReducer } from "react";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
+import ProductSearch from "pages/ProductSearch";
 import LayoutDefault from "./components/layout/default";
 import Login from "./pages/Login/Login";
 import Register from "./pages/Register/Register";
@@ -43,6 +44,7 @@ function RoutesPage() {
           <Route path="/product/buy/:id" element={<BuyerHalamanProduk />} />
           <Route path="/notification" element={<NotificationAll />} />
           <Route path="/notification/:id" element={<NotificationSeller />} />
+          <Route path="/product/search" element={<ProductSearch />} />
         </Route>
         <Route path="/status" element={<StatusDiperbarui />} />
         <Route path="/infoproduct" element={<InfoProduct />} />
