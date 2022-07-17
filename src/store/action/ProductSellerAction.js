@@ -1,6 +1,6 @@
 /* eslint-disable import/prefer-default-export */
 import { AxiosWithAuth } from "utils/axiosWithAuth";
-import { POST_PRODUCT_SELLER } from "../types";
+import { POST_PRODUCT_SELLER, GET_MY_PRODUCT } from "../types";
 
 export const postAddProductSeller =
   (token, data, setErrorHandler, setSuccessHandler) => (dispatch) => {
@@ -13,7 +13,7 @@ export const postAddProductSeller =
           payload: response.status,
         });
         if (response.status === 201) {
-          setSuccessHandler(true)
+          setSuccessHandler(true);
         }
       })
       .catch((error) => {
@@ -22,7 +22,25 @@ export const postAddProductSeller =
           error: error.response,
         });
         if (error.response.status === 400) {
-          setErrorHandler(true)
+          setErrorHandler(true);
         }
       });
   };
+
+export const getMyProduct = (token) => (dispatch) => {
+  dispatch({ type: `${GET_MY_PRODUCT}_LOADING` });
+  AxiosWithAuth(token)
+    .post("/product/my-product")
+    .then((response) => {
+      dispatch({
+        type: `${GET_MY_PRODUCT}_FULFILLED`,
+        payload: response.status,
+      });
+    })
+    .catch((error) => {
+      dispatch({
+        type: `${GET_MY_PRODUCT}_ERROR`,
+        error: error.response,
+      });
+    });
+};

@@ -20,7 +20,7 @@ import { Formik, Form } from "formik";
 import * as yup from "yup";
 import ImagePreview from "./ImagePreview";
 import { useNavigate } from "react-router-dom";
-import { postAddProductSeller } from "store/action/addProductSellerAction";
+import { postAddProductSeller } from "store/action/ProductSellerAction";
 
 function AddProduct() {
   const navigate = useNavigate();
