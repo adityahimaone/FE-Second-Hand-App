@@ -39,6 +39,7 @@ function Navbar() {
   const [notifBuyer, setnotifBuyer] = useState(initialStateNotif);
   const [titlePage, setTitlePage] = useState("Title");
   const [showSidebar, setShowSidebar] = useState(false);
+  const [searchForm, setSearchForm] = useState("");
 
   const matchHome = useMatch("/");
   const matchProductBuyDetail = useMatch("/product/buy/:id");
@@ -47,11 +48,11 @@ function Navbar() {
   const matchUserProfile = useMatch("/user/profile");
   const matchNotificationAll = useMatch("/notification");
 
-  const navbarHome = !matchHome && !matchProductBuyDetail;
+  const navbarHome = !matchHome && !matchProductBuyDetail && !matchNotification;
 
   const getTitlePage = () => {
     if (matchNotification) {
-      setTitlePage("Notification");
+      setTitlePage("Info Penawar");
     }
     if (matchProductList) {
       setTitlePage("Daftar Jual Saya");
@@ -71,6 +72,10 @@ function Navbar() {
 
   const handleSidebarClose = () => setShowSidebar(false);
   const handleSidebarShow = () => setShowSidebar(true);
+
+  const handleChangeSearch = (e) => {
+    setSearchForm(e.target.value);
+  };
 
   console.log(
     matchHome,
@@ -96,19 +101,10 @@ function Navbar() {
     getTitlePage();
   }, [showSidebar]);
 
-  console.log(loginState, loginData);
-
-  const userSearch =
-    location.pathname !== "/notification" &&
-    location.pathname !== "/user/profile";
+  const userSearch = !matchNotification && !matchUserProfile;
 
   const userNav =
-    loginState === true &&
-    location.pathname !== "/notification" &&
-    location.pathname !== "/user/profile";
-
-  const pathnameNotification = location.pathname === "/notification";
-  const pathnameUserProfile = location.pathname === "/user/profile";
+    loginState === true && !matchNotification && !matchUserProfile;
 
   console.log(userNav, "userNav");
 
@@ -138,31 +134,47 @@ function Navbar() {
               <img className="w-50" src="/images/loak.id.png" alt="" />
             </Link>
           </div>
-          {pathnameNotification && (
+          {matchNotification && (
             <>
               <div className="col-8 text-center">
-                <span className="fs-6">Notifikasi</span>
+                <span className="fs-6">{titlePage}</span>
               </div>
               <div className="col-2" />
             </>
           )}
-          {pathnameUserProfile && (
+          {matchUserProfile && (
             <>
               <div className="col-8 text-center">
-                <span className="fs-6">Lengkapi Info Akun</span>
+                <span className="fs-6">{titlePage}</span>
               </div>
               <div className="col-2" />
             </>
           )}
-          <div className="col-4">
+          <div className="col-4 position-relative">
             {userSearch && (
-              <Form.Control
-                type="text"
-                id="inputPassword5"
-                aria-describedby="search"
-                className="form-input-search"
-                placeholder="Cari di sini ..."
-              />
+              <>
+                <Form.Control
+                  type="text"
+                  id="inputPassword5"
+                  aria-describedby="search"
+                  className="form-input-search"
+                  placeholder="Cari di sini ..."
+                  onChange={handleChangeSearch}
+                />
+                <button
+                  onClick={() =>
+                    navigate(`/product/search?search=${searchForm}`)
+                  }
+                  type="button"
+                  className="btn position-absolute"
+                  style={{
+                    top: "-1px",
+                    right: "11px",
+                  }}
+                >
+                  <HiSearch className="fs-5" />
+                </button>
+              </>
             )}
           </div>
           <div className="col-6 d-flex justify-content-end">

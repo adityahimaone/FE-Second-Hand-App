@@ -3,17 +3,17 @@ import React, { useState, useEffect } from "react";
 // import "./Login.css";
 // import { useNavigate } from "react-router-dom";
 import { Button } from "react-bootstrap";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, Link } from "react-router-dom";
 import axios from "axios";
 import { useDispatch, useSelector } from "react-redux";
 import * as yup from "yup";
 import { Formik, Form } from "formik";
+import { AiOutlineEye, AiOutlineEyeInvisible } from "react-icons/ai";
 import { postRegister } from "../../store/action/registerAction";
 import Alert from "../../components/UI/Alert/Alert";
 import Style from "./Register.module.css";
 
 function Register() {
-  const token = localStorage.getItem("token");
   const navigate = useNavigate();
 
   const [registerData, setRegisterData] = useState({
@@ -25,6 +25,12 @@ function Register() {
     no_hp: "",
     role: "",
   });
+
+  const [showPasword, setShowPasword] = useState(false);
+
+  const handleClickShowPassword = () => {
+    setShowPasword((prev) => !prev);
+  };
 
   const schema = yup.object().shape({
     nama: yup.string().required("Nama haruw di isi"),
@@ -56,13 +62,13 @@ function Register() {
       });
 
       if (res.status === 201) {
-        localStorage.setItem("role", "buyer", "token", res.data.access_token);
+        // localStorage.setItem("role", "buyer", "token", res.data.access_token);
         navigate("/bproduct", { replace: true });
         console.log(res.data.email);
       }
 
       if (res.status === 201) {
-        localStorage.setItem("role", "seller", "token", res.data.access_token);
+        // localStorage.setItem("role", "seller", "token", res.data.access_token);
         navigate("/", { replace: true });
         console.log(res.data.email);
       }
@@ -76,171 +82,192 @@ function Register() {
 
   return (
     <div className="container-fluid">
-        <div className={`row ${Style["container-register"]}`}>
-          <div className={`col-lg-6 col-12 ${Style["register-bg"]}`}>
-            {/* <img src={loginimg} alt="loginbanner" className="" /> */}
-          </div>
-          <div
-            className="col-lg-6 col-12 d-flex justify-content-center align-items-center"
+      <div className={`row ${Style["container-register"]}`}>
+        <div
+          className={`col-xss-6 d-none d-xss-block ${Style["register-bg"]}`}
+        />
+        <div className="col-xss-6 col-12 d-flex justify-content-center mt-2 mt-xss-0 align-items-start align-items-xss-center position-relative">
+          <Formik
+            validationSchema={schema}
+            initialValues={{
+              nama: "",
+              email: "",
+              password: "",
+              alamat: "",
+              kota: "",
+              no_hp: "",
+            }}
+            onSubmit={(values) => {
+              console.log(values);
+              handleSubmit(values);
+            }}
           >
-            <div
-              className={`${Style[""]} col-10 col-lg-8 d-flex flex-column my-1`}
-            >
-              <Formik
-                validationSchema={schema}
-                initialValues={{
-                  nama: "",
-                  email: "",
-                  password: "",
-                  alamat: "",
-                  kota: "",
-                  no_hp: "",
-                }}
-                onSubmit={(values) => {
-                  console.log(values);
-                  handleSubmit(values);
-                }}
-              >
-                {({ errors }) => (
-                  <Form className="col-10 col-sm-7 d-flex flex-column my-1">
-                    <h1 className="fw-bold">Daftar</h1>
-
-                    <div>
-                      <p>Nama</p>
-                      <input
-                        className="form-input w-100"
-                        style={{ marginButtom: "1rem" }}
-                        placeholder="Contoh: toni"
-                        value={registerData.nama}
-                        onChange={(e) =>
-                          setRegisterData({
-                            ...registerData,
-                            nama: e.target.value,
-                          })
-                        }
-                      />
-                      <span className="font-12 text-danger py-1">
-                        {errors.nama}
+            {({ errors }) => (
+              <Form className="col-10 col-sm-7 d-flex flex-column my-1">
+                <button
+                  type="button"
+                  onClick={() => navigate(-1)}
+                  className="button-icon bg-white rounded-circle d-block d-xss-none"
+                  style={{ top: "10px", left: "5px" }}
+                >
+                  <i className="bi bi-arrow-left fs-4" />
+                </button>
+                <h1 className="fw-bold mt-5 mt-xss-0">Daftar</h1>
+                <div>
+                  <p>Nama</p>
+                  <input
+                    className="form-input w-100"
+                    style={{ marginButtom: "1rem" }}
+                    placeholder="Contoh: toni"
+                    value={registerData.nama}
+                    onChange={(e) =>
+                      setRegisterData({
+                        ...registerData,
+                        nama: e.target.value,
+                      })
+                    }
+                  />
+                  <span className="font-12 text-danger py-1">
+                    {errors.nama}
+                  </span>
+                </div>
+                <div>
+                  <p>No HP</p>
+                  <input
+                    className="form-input w-100"
+                    required
+                    style={{ marginButtom: "1rem" }}
+                    placeholder="Contoh: 081xxxxx"
+                    value={registerData.no_hp}
+                    onChange={(e) =>
+                      setRegisterData({
+                        ...registerData,
+                        no_hp: e.target.value,
+                      })
+                    }
+                  />
+                  <span className="font-12 text-danger py-1">
+                    {errors.no_hp}
+                  </span>
+                </div>
+                <div>
+                  <p>Kota</p>
+                  <input
+                    className="form-input w-100"
+                    required
+                    style={{ marginButtom: "1rem" }}
+                    placeholder="Contoh: semarang"
+                    value={registerData.kota}
+                    onChange={(e) =>
+                      setRegisterData({
+                        ...registerData,
+                        kota: e.target.value,
+                      })
+                    }
+                  />
+                  <span className="font-12 text-danger py-1">
+                    {errors.kota}
+                  </span>
+                </div>
+                <div>
+                  <p>Alamat</p>
+                  <input
+                    className="form-input w-100"
+                    required
+                    style={{ marginButtom: "1rem" }}
+                    placeholder="Contoh:desa"
+                    value={registerData.alamat}
+                    onChange={(e) =>
+                      setRegisterData({
+                        ...registerData,
+                        alamat: e.target.value,
+                      })
+                    }
+                  />
+                  <span className="font-12 text-danger py-1">
+                    {errors.alamat}
+                  </span>
+                </div>
+                <div>
+                  <p>Email</p>
+                  <input
+                    className="form-input w-100"
+                    required
+                    style={{ marginButtom: "1rem" }}
+                    placeholder="Contoh: johndee@gmail.com"
+                    value={registerData.email}
+                    onChange={(e) =>
+                      setRegisterData({
+                        ...registerData,
+                        email: e.target.value,
+                      })
+                    }
+                  />
+                  <span className="font-12 text-danger py-1">
+                    {errors.email}
+                  </span>
+                </div>
+                <div className="position-relative">
+                  <p>Password</p>
+                  <input
+                    className="form-input w-100"
+                    style={{ marginButtom: "1rem" }}
+                    placeholder="contoh:Rudi@12345678"
+                    type={showPasword ? "text" : "password"}
+                    value={registerData.password}
+                    onChange={(e) =>
+                      setRegisterData({
+                        ...registerData,
+                        password: e.target.value,
+                      })
+                    }
+                  />
+                  {showPasword ? (
+                    <AiOutlineEyeInvisible
+                      className="position-absolute fs-5"
+                      style={{ top: "50px", right: "10px" }}
+                      onClick={handleClickShowPassword}
+                    />
+                  ) : (
+                    <AiOutlineEye
+                      className="position-absolute fs-5"
+                      style={{ top: "50px", right: "10px" }}
+                      onClick={handleClickShowPassword}
+                    />
+                  )}
+                  <span className="font-12 text-danger py-1">
+                    {errors.password}
+                  </span>
+                </div>
+                <button
+                  type="submit"
+                  className="button-primary-1 w-100 my-4"
+                  onClick={handleSubmit}
+                >
+                  Daftar
+                </button>
+                <div className="d-flex text-center d-none d-xss-block">
+                  <p clssName="text-center">
+                    Sudah punya akun?
+                    <Link to="/login">
+                      <span className="fw-bold text-decoration-none">
+                        &nbsp; Masuk di sini
                       </span>
-                    </div>
-                    <div>
-                      <p>No HP</p>
-                      <input
-                        className="form-input w-100"
-                        required
-                        style={{ marginButtom: "1rem" }}
-                        placeholder="Contoh: 081xxxxx"
-                        value={registerData.no_hp}
-                        onChange={(e) =>
-                          setRegisterData({
-                            ...registerData,
-                            no_hp: e.target.value,
-                          })
-                        }
-                      />
-                      <span className="font-12 text-danger py-1">
-                        {errors.no_hp}
-                      </span>
-                    </div>
-                    <div>
-                      <p>Kota</p>
-                      <input
-                        className="form-input w-100"
-                        required
-                        style={{ marginButtom: "1rem" }}
-                        placeholder="Contoh: semarang"
-                        value={registerData.kota}
-                        onChange={(e) =>
-                          setRegisterData({
-                            ...registerData,
-                            kota: e.target.value,
-                          })
-                        }
-                      />
-                      <span className="font-12 text-danger py-1">
-                        {errors.kota}
-                      </span>
-                    </div>
-                    <div>
-                      <p>Alamat</p>
-                      <input
-                        className="form-input w-100"
-                        required
-                        style={{ marginButtom: "1rem" }}
-                        placeholder="Contoh:desa"
-                        value={registerData.alamat}
-                        onChange={(e) =>
-                          setRegisterData({
-                            ...registerData,
-                            alamat: e.target.value,
-                          })
-                        }
-                      />
-                      <span className="font-12 text-danger py-1">
-                        {errors.alamat}
-                      </span>
-                    </div>
-                    <div>
-                      <p>Email</p>
-                      <input
-                        className="form-input w-100"
-                        required
-                        style={{ marginButtom: "1rem" }}
-                        placeholder="Contoh: johndee@gmail.com"
-                        value={registerData.email}
-                        onChange={(e) =>
-                          setRegisterData({
-                            ...registerData,
-                            email: e.target.value,
-                          })
-                        }
-                      />
-                      <span className="font-12 text-danger py-1">
-                        {errors.email}
-                      </span>
-                    </div>
-                    <div>
-                      <p>Password</p>
-                      <input
-                        className="form-input w-100"
-                        style={{ marginButtom: "1rem" }}
-                        placeholder="contoh:Rudi@12345678"
-                        type="password"
-                        value={registerData.password}
-                        onChange={(e) =>
-                          setRegisterData({
-                            ...registerData,
-                            password: e.target.value,
-                          })
-                        }
-                      />
-                      <span className="font-12 text-danger py-1">
-                        {errors.password}
-                      </span>
-                    </div>
-
-                    <Button
-                      className="button-primary-1 w-100 my-4"
-                      onClick={handleSubmit}
-                    >
-                      Daftar
-                    </Button>
-                    <div className="account">
-                      <p style={{ textAlign: "center " }}>
-                        Sudah punya akun?{" "}
-                        <a href="login">
-                          {" "}
-                          <span className="fw-bold daftar"> Masuk di sini</span>
-                        </a>
-                      </p>
-                    </div>
-                  </Form>
-                )}
-              </Formik>
-            </div>
-          </div>
+                    </Link>
+                  </p>
+                </div>
+              </Form>
+            )}
+          </Formik>
+        </div>
+        <div className="d-flex my-4 justify-content-center align-items-end text-center d-block d-xss-none">
+          <span clssName="text-center">Sudah punya akun? </span>{" "}
+          <Link to="/login">
+            <span className="fw-bold text-decoration-none"> Masuk di sini</span>
+          </Link>
         </div>
       </div>
+    </div>
   );
 }
 

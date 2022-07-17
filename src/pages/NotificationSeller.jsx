@@ -6,6 +6,8 @@ import { getDetailNotification } from "store/action/notificationAction";
 import ModalAccept from "components/UI/Modal_Accept/ModalAccept";
 import { ConvertToDate } from "utils/helper";
 import { putProductAcceptNegotiation } from "store/action/acceptNegotiationAction";
+import { BsWhatsapp } from "react-icons/bs";
+import ModalChangeStatus from "components/UI/Modal_Status/ModalChangeStatus";
 
 function NotificationSeller() {
   const navigate = useNavigate();
@@ -26,18 +28,22 @@ function NotificationSeller() {
   const [dataNotifByID, setdataNotifByID] = useState(
     notificationByIDData?.data
   );
-  const [show, setShow] = useState(false);
-  const handleShow = () => setShow(true);
-  const handleClose = () => setShow(false);
+  const [modalAcceptShow, setModalAcceptShow] = useState(false);
+  const [modalStatusShow, setmodalStatusShow] = useState(false);
+
+  const handleModalAcceptShow = () => setModalAcceptShow(true);
+  const handleModalAcceptClose = () => setModalAcceptShow(false);
+  const handleModalStatusShow = () => setmodalStatusShow(true);
+  const handleModalStatusClose = () => setmodalStatusShow(false);
 
   useEffect(() => {
     dispatch(getDetailNotification(token, id));
   }, []);
 
-  const handleAcceptNegotation = () => {
+  const onAcceptNegotation = () => {
     dispatch(putProductAcceptNegotiation(token, dataNotifByID?.data_nego?.id));
     if (dataNegotation.status === true) {
-      handleShow();
+      handleModalAcceptShow();
     }
   };
 
@@ -48,8 +54,16 @@ function NotificationSeller() {
     <>
       {ReactDOM.createPortal(
         <ModalAccept
-          show={show}
-          handleClose={handleClose}
+          show={modalAcceptShow}
+          handleClose={handleModalAcceptClose}
+          data={dataNotifByID}
+        />,
+        portalDiv
+      )}
+      {ReactDOM.createPortal(
+        <ModalChangeStatus
+          show={modalStatusShow}
+          handleClose={handleModalStatusClose}
           data={dataNotifByID}
         />,
         portalDiv
@@ -98,7 +112,7 @@ function NotificationSeller() {
                           : "/images/person.png"
                       }
                       className="img-small-product "
-                      alt=""
+                      alt="peoplw"
                     />
                   </div>
                 </div>
@@ -121,16 +135,36 @@ function NotificationSeller() {
                     </span>
                   </div>
                   <div className="d-flex justify-content-end gap-2">
-                    <button type="button" className="button-outline-2 px-5">
-                      Tolak
-                    </button>
-                    <button
-                      type="button"
-                      onClick={handleAcceptNegotation}
-                      className="button-primary-1 px-5"
-                    >
-                      Terima
-                    </button>
+                    {dataNotifByID?.data_nego?.is_accept ? (
+                      <>
+                        <button
+                          onClick={handleModalStatusShow}
+                          type="button"
+                          className="button-outline-2 px-5"
+                        >
+                          Status
+                        </button>
+                        <a
+                          href="/#"
+                          className="d-flex gap-2 button-primary-1 align-items-center text-decoration-none"
+                        >
+                          <span>Hubungi di </span> <BsWhatsapp />
+                        </a>
+                      </>
+                    ) : (
+                      <>
+                        <button type="button" className="button-outline-2 px-5">
+                          Tolak
+                        </button>
+                        <button
+                          type="button"
+                          onClick={onAcceptNegotation}
+                          className="button-primary-1 px-5"
+                        >
+                          Terima
+                        </button>
+                      </>
+                    )}
                   </div>
                 </div>
               </div>

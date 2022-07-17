@@ -4,6 +4,7 @@ import { useNavigate, Link } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { Formik, Form } from "formik";
 import * as yup from "yup";
+import { AiOutlineEye, AiOutlineEyeInvisible } from "react-icons/ai";
 import { authLogin } from "../../store/action/loginAction";
 import Style from "./Login.module.css";
 
@@ -15,6 +16,12 @@ function Login() {
     data: loginData,
     error,
   } = useSelector((state) => state.login);
+
+  const [showPasword, setShowPasword] = useState(false);
+
+  const handleClickShowPassword = () => {
+    setShowPasword((prev) => !prev);
+  };
 
   const schema = yup.object().shape({
     email: yup.string().email().required("Email harus di isi"),
@@ -34,8 +41,8 @@ function Login() {
   return (
     <div className="container-fluid">
       <div className={`row ${Style["container-login"]}`}>
-        <div className={`col-sm-6 col-12 ${Style["login-bg"]}`} />
-        <div className="col-sm-6 col-12 d-flex justify-content-center align-items-center">
+        <div className={`col-xss-6 d-none d-xss-block ${Style["login-bg"]}`} />
+        <div className="col-xss-6 col-12 d-flex justify-content-center mt-2 mt-xss-0 align-items-start align-items-xss-center position-relative">
           <Formik
             validationSchema={schema}
             initialValues={{
@@ -52,12 +59,22 @@ function Login() {
                 onSubmit={handleSubmit}
                 className="col-10 col-sm-7 d-flex flex-column my-1"
               >
-                <h1 className="fw-bold">Masuk</h1>
-                <div>
-                  <p>Email</p>
+                <button
+                  type="button"
+                  onClick={() => navigate(-1)}
+                  className="button-icon bg-white rounded-circle d-block d-xss-none"
+                  style={{ top: "10px", left: "5px" }}
+                >
+                  <i className="bi bi-arrow-left fs-4" />
+                </button>
+                <h1 className="fw-bold mt-5 mt-xss-0">Masuk</h1>
+                <div className="mb-3">
+                  <label htmlFor="form-email" className="form-label">
+                    Email
+                  </label>
                   <input
+                    id="form-email"
                     className="form-input w-100"
-                    style={{ marginButtom: "1rem" }}
                     placeholder="Contoh: johndee@gmail.com"
                     type="email"
                     name="email"
@@ -67,16 +84,31 @@ function Login() {
                     {errors.email}
                   </span>
                 </div>
-                <div>
-                  <p>Password</p>
+                <div className=" mb-3 position-relative">
+                  <label htmlFor="form-password" className="form-label">
+                    Password
+                  </label>
                   <input
+                    id="form-password"
                     className="form-input w-100"
-                    style={{ marginButtom: "1rem" }}
                     placeholder="Masukkan password"
-                    type="password"
+                    type={showPasword ? "text" : "password"}
                     name="password"
                     onChange={handleChange}
                   />
+                  {showPasword ? (
+                    <AiOutlineEyeInvisible
+                      className="position-absolute fs-5"
+                      style={{ top: "50px", right: "10px" }}
+                      onClick={handleClickShowPassword}
+                    />
+                  ) : (
+                    <AiOutlineEye
+                      className="position-absolute fs-5"
+                      style={{ top: "50px", right: "10px" }}
+                      onClick={handleClickShowPassword}
+                    />
+                  )}
                   <span className="font-12 text-danger py-1">
                     {errors.password}
                   </span>
@@ -84,20 +116,30 @@ function Login() {
                 <span className="font-12 text-danger py-2">
                   {error && "Maaf Email atau Password Salah"}
                 </span>
-                <Button className="button-primary-1 w-100 my-4" type="submit">
+                <button className="button-primary-1 w-100 my-4" type="submit">
                   Masuk
-                </Button>
-                <div className="account">
-                  <p style={{ textAlign: "center " }}>
+                </button>
+                <div className="d-flex text-center d-none d-xss-block">
+                  <p clssName="text-center">
                     Belum punya akun?
                     <Link to="/register">
-                      <span className="fw-bold daftar">Daftar di sini</span>
+                      <span className="fw-bold text-decoration-none">
+                        &nbsp; Daftar di sini
+                      </span>
                     </Link>
                   </p>
                 </div>
               </Form>
             )}
           </Formik>
+        </div>
+        <div className="d-flex my-4 justify-content-center align-items-end text-center d-block d-xss-none">
+          <span clssName="text-center">Belum punya akun?</span>
+          <Link to="/register">
+            <span className="fw-bold text-decoration-none">
+              &nbsp; Daftar di sini
+            </span>
+          </Link>
         </div>
       </div>
     </div>
