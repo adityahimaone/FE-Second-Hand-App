@@ -131,6 +131,13 @@ body {
   padding: 0;
 }
 
+.shape-notification {
+  width: 8px;
+  height: 8px;
+  background: #fa2c5a;
+  border-radius: 50%;
+}
+
 .button-outline-2 {
   color: #000;
   border-radius: 16px;
