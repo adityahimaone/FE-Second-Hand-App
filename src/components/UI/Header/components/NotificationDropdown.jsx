@@ -91,7 +91,10 @@ function NotificationDropdown({ notifSeller, notifBuyer }) {
                 <div className="d-flex flex-column w-100">
                   <div className="d-flex justify-content-between font-10 color-gray">
                     <span>Penawaran produk</span>
-                    <span>{ConvertToDate(item?.createdAt)}</span>
+                    <div className="d-flex align-items-center gap-1">
+                      <span>{ConvertToDate(item?.createdAt)}</span>
+                      {!item?.is_read && <div className="shape-notification" />}
+                    </div>
                   </div>
                   <div className="d-flex flex-column font-14 fw-bold">
                     <span>{item?.product_notif?.nama}</span>

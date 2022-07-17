@@ -33,6 +33,15 @@ function NotificationAll() {
     setnotifBuyer(notificationData?.data?.notif_buyer);
   }, []);
 
+  const newNotifSeller = notifSeller
+    .sort((a, b) => new Date(b.createdAt) - new Date(a.createdAt))
+    .slice(0, 10);
+
+  const newNotifBuyer = notifBuyer
+    .filter((item) => item?.data_nego?.is_accept === true)
+    .sort((a, b) => new Date(b.createdAt) - new Date(a.createdAt))
+    .slice(0, 10);
+
   return (
     <div className="container mt-2">
       <Tabs
@@ -42,7 +51,7 @@ function NotificationAll() {
         fill
       >
         <Tab eventKey="notif-seller" title="Seller">
-          {notifSeller?.map((item) => (
+          {newNotifSeller?.map((item) => (
             <>
               <div className="d-flex gap-3 p-1 my-2" key={item.id}>
                 <div>
@@ -53,13 +62,16 @@ function NotificationAll() {
                         : "/images/dummy.png"
                     }
                     className="img-small-product"
-                    alt=""
+                    alt="product notificaton"
                   />
                 </div>
                 <div className="d-flex flex-column w-100">
                   <div className="d-flex justify-content-between font-10 color-gray">
-                    <span>Penawaran produk</span>
-                    <span>{ConvertToDate(item?.createdAt)}</span>
+                    <span>{item?.description}</span>
+                    <div className="d-flex align-items-center gap-1">
+                      <span>{ConvertToDate(item?.createdAt)}</span>
+                      {!item?.is_read && <div className="shape-notification" />}
+                    </div>
                   </div>
                   <div className="d-flex flex-column font-14 fw-bold">
                     <span>{item?.product_notif?.nama}</span>
@@ -75,7 +87,7 @@ function NotificationAll() {
           ))}
         </Tab>
         <Tab eventKey="notif-buyer" title="Buyer">
-          {notifBuyer?.map((item) => (
+          {newNotifBuyer?.map((item) => (
             <>
               <div className="d-flex gap-3 p-1 my-2" key={item.id}>
                 <div>
@@ -92,7 +104,10 @@ function NotificationAll() {
                 <div className="d-flex flex-column w-100">
                   <div className="d-flex justify-content-between font-10 color-gray">
                     <span>Penawaran produk</span>
-                    <span>{ConvertToDate(item?.createdAt)}</span>
+                    <div className="d-flex align-items-center gap-1">
+                      <span>{ConvertToDate(item?.createdAt)}</span>
+                      {!item?.is_read && <div className="shape-notification" />}
+                    </div>
                   </div>
                   <div className="d-flex flex-column font-14 fw-bold">
                     <span>{item?.product_notif?.nama}</span>
