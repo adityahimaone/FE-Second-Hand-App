@@ -38,6 +38,7 @@ function NotificationAll() {
     .slice(0, 10);
 
   const newNotifBuyer = notifBuyer
+  
     .filter((item) => item?.data_nego?.is_accept === true)
     .sort((a, b) => new Date(b.createdAt) - new Date(a.createdAt))
     .slice(0, 10);

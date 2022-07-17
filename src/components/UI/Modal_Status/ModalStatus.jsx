@@ -35,7 +35,7 @@ function ModalStatus() {
                   value="berhasil terjual"
                   onChange={handleTextChange}
                 />
-                <label className="form-check-label">Berhasil Terjual</label>
+                <label className="form-check-label" >Berhasil Terjual</label>
                 <br />
                 <p className="fw-normal text-secondary mt-1">
                   kamu telah sepakat menjual produk ini kepada pembeli
