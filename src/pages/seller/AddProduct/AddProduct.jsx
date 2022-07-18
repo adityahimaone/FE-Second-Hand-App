@@ -1,33 +1,34 @@
-/* eslint-disable react/jsx-no-duplicate-props */
-/* eslint-disable jsx-a11y/control-has-associated-label */
-/* eslint-disable arrow-body-style */
-/* eslint-disable react/button-has-type */
-/* eslint-disable no-param-reassign */
-/* eslint-disable dot-notation */
 /* eslint-disable jsx-a11y/click-events-have-key-events */
 /* eslint-disable jsx-a11y/no-static-element-interactions */
-/* eslint-disable react/self-closing-comp */
-/* eslint-disable prefer-const */
-/* eslint-disable import/order */
-/* eslint-disable import/no-duplicates */
-/* eslint-disable react/no-unknown-property */
-/* eslint-disable jsx-a11y/label-has-associated-control */
-import React, { useEffect } from "react";
-import { useState } from "react";
-import Style from "./addproduct.module.css";
+// /* eslint-disable react/jsx-no-duplicate-props */
+// /* eslint-disable jsx-a11y/control-has-associated-label */
+// /* eslint-disable arrow-body-style */
+// /* eslint-disable react/button-has-type */
+// /* eslint-disable no-param-reassign */
+// /* eslint-disable dot-notation */
+// /* eslint-disable jsx-a11y/click-events-have-key-events */
+// /* eslint-disable jsx-a11y/no-static-element-interactions */
+// /* eslint-disable react/self-closing-comp */
+// /* eslint-disable prefer-const */
+// /* eslint-disable import/order */
+// /* eslint-disable import/no-duplicates */
+// /* eslint-disable react/no-unknown-property */
+// /* eslint-disable jsx-a11y/label-has-associated-control */
+import React, { useEffect, useState } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { Formik, Form } from "formik";
 import * as yup from "yup";
-import ImagePreview from "./ImagePreview";
 import { useNavigate } from "react-router-dom";
 import { postAddProductSeller } from "store/action/ProductSellerAction";
+import ImagePreview from "./ImagePreview";
+import Style from "./addproduct.module.css";
 
 function AddProduct() {
   const navigate = useNavigate();
   const dispatch = useDispatch();
 
   const { data: loginData } = useSelector((state) => state.login);
-  let token = loginData?.data?.token;
+  const token = loginData?.data?.token;
 
   const [imagePrev, setImagePrev] = useState([]);
   const [imagePreview, setImagePreview] = useState([]);
@@ -159,17 +160,17 @@ function AddProduct() {
                     className="bi bi-x fs-2 ms-2"
                     style={{ color: "#842029", cursor: "pointer" }}
                     onClick={() => setClosed(navigate("/product/list"))}
-                  ></i>
+                   />
                 </div>
               </div>
             </div>
             <div className="row">
               <div className="col-12">
-                <div className={`${Style["progress"]}`}>
+                <div className={`${Style.progress}`}>
                   <div
                     className={`${Style["progress-done-error"]}`}
                     style={style}
-                  ></div>
+                   />
                 </div>
               </div>
             </div>
@@ -197,17 +198,17 @@ function AddProduct() {
                   <i
                     className="bi bi-x fs-2 ms-2 text-white"
                     onClick={() => setClosed(navigate("/product/list"))}
-                  ></i>
+                   />
                 </div>
               </div>
             </div>
             <div className="row">
               <div className="col-12">
-                <div className={`${Style["progress"]}`}>
+                <div className={`${Style.progress}`}>
                   <div
                     className={`${Style["progress-done-success"]}`}
                     style={style}
-                  ></div>
+                   />
                 </div>
               </div>
             </div>
@@ -221,7 +222,7 @@ function AddProduct() {
         <p className="m-0 ms-3 fs-6">Lengkapi Detail Produk</p>
       </div>
       <div
-        className={`d-flex mt-3 position-absolute start-50 translate-middle-x ${Style["responsive"]}`}
+        className={`d-flex mt-3 position-absolute start-50 translate-middle-x ${Style.responsive}`}
       >
         <div className={`${Style["width-left"]}`} onClick={() => navigate(-1)}>
           <i className="bi bi-arrow-left fs-4" />
@@ -338,22 +339,20 @@ function AddProduct() {
                   {isSubmit && (
                     <span className="font-12 text-danger py-1">{msgErr}</span>
                   )}
-                  <span className="font-12 text-danger py-1"></span>
+                  <span className="font-12 text-danger py-1" />
                   {myOption === "show" && (
                     // <div className="mt-3">
                     //   <ImagePreview file={imagePrev} />
                     // </div>
                     <div className="mb-3 d-flex flex-wrap">
                       {imagePreview &&
-                        imagePreview.map((image) => {
-                          return (
+                        imagePreview.map((image) => (
                             <div className="pe-3 mt-3">
                               <div key={image} className="image grid">
                                 <ImagePreview file={image} />
                               </div>
                             </div>
-                          );
-                        })}
+                          ))}
                     </div>
                   )}
                 </div>

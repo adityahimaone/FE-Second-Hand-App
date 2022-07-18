@@ -1,5 +1,3 @@
-/* eslint-disable consistent-return */
-/* eslint-disable array-callback-return */
 import React, { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
@@ -39,11 +37,10 @@ function SellerSemuaProduk() {
             Daftar Jual Saya
           </h1>
           <div className="card p-3 mt-3">
-            {/* {dataProfile?.data?.map((item) => { */}
               <div className="d-flex justify-content-between">
                 <div className="d-flex align-items-center">
                   <img
-                    src={dataProfile.data.avatar}
+                    src={dataProfile?.data?.avatar || "/images/person.png"}
                     alt=""
                     className={`${Style.images} rounded`}
                   />

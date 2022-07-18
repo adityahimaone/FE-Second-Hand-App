@@ -1,30 +1,30 @@
-import { POST_PRODUCT_SELLER } from "../types";
+import { POST_UPDATE_PROFILE } from "../types";
 
 const initialState = {
     data: {
       status: false,
       message: "",
-      data: [],
+      data: {},
     },
     isLoading: true,
     error: null,
   };
 
-const addProductSeller = (state = initialState, action) => {
+const profilePostReducer = (state = initialState, action) => {
   const { type, payload, error } = action;
   switch (type) {
-    case `${POST_PRODUCT_SELLER}_LOADING`:
+    case `${POST_UPDATE_PROFILE}_LOADING`:
       return {
         ...state,
       };
 
-    case `${POST_PRODUCT_SELLER}_FULFILLED`:
+    case `${POST_UPDATE_PROFILE}_FULFILLED`:
       return {
         ...state,
         data: payload,
         isLoading: false,
       };
-    case `${POST_PRODUCT_SELLER}_ERROR`:
+    case `${POST_UPDATE_PROFILE}_ERROR`:
       return {
         ...state,
         isLoading: false,
@@ -35,4 +35,4 @@ const addProductSeller = (state = initialState, action) => {
   }
 };
 
-export default addProductSeller;
+export default profilePostReducer;

@@ -1,6 +1,7 @@
 .images {
   width: 48px;
   height: 48px;
+  object-fit: cover;
 }
 
 .option {
@@ -100,10 +101,24 @@
   }
 }
 
+@media only screen and (max-width: 540px) {
+  .card-img{
+    height: 6rem !important;
+  }
+  .padd {
+    padding: 0;
+  }
+}
 @media only screen and (max-width: 450px) {
   .nav {
     width: 100%;
     background: #ffffff;
     box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.15);
+  }
+  .card-img{
+    height: 5rem !important;
+  }
+  .font-title {
+    font-size: 14px;
   }
 }

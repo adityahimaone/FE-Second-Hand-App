@@ -13,6 +13,7 @@ import addProductSeller from "./addProductSellerReducer";
 import sellerMyProductReducer from "./sellerMyProductReducer";
 import changeStatusReducer from "./changeStatusReducer";
 import productSearchReducer from "./productSearchReducer";
+import profilePostReducer from "./profilePostReducer";
 
 export default combineReducers({
   login: loginReducer,
@@ -21,6 +22,7 @@ export default combineReducers({
   product_by_id: productByIdReducer,
   all_product_categories: allProductCategoriesReducer,
   profile: profileReducer,
+  profile_post: profilePostReducer,
   offer: offerReducer,
   notification: notificationReducer,
   notification_by_id: notificationByIDReducer,
