@@ -26,7 +26,7 @@ function AllProduct() {
     dispatch(getMyProduct(token));
   }, []);
 
-  console.log(myProductData.data, "my product");
+  console.log(myProductData?.data, "my product");
   return (
     <div className="row row-cols-2 row-cols-lg-3 g-4 mb-5">
       <div className="col">

@@ -99,13 +99,13 @@ function Login() {
                   {showPasword ? (
                     <AiOutlineEyeInvisible
                       className="position-absolute fs-5"
-                      style={{ top: "50px", right: "10px" }}
+                      style={{ top: "45px", right: "10px" }}
                       onClick={handleClickShowPassword}
                     />
                   ) : (
                     <AiOutlineEye
                       className="position-absolute fs-5"
-                      style={{ top: "50px", right: "10px" }}
+                      style={{ top: "45px", right: "10px" }}
                       onClick={handleClickShowPassword}
                     />
                   )}
@@ -120,7 +120,7 @@ function Login() {
                   Masuk
                 </button>
                 <div className="d-flex text-center d-none d-xss-block">
-                  <p clssName="text-center">
+                  <p className="text-center">
                     Belum punya akun?
                     <Link to="/register">
                       <span className="fw-bold text-decoration-none">
@@ -134,7 +134,7 @@ function Login() {
           </Formik>
         </div>
         <div className="d-flex my-4 justify-content-center align-items-end text-center d-block d-xss-none">
-          <span clssName="text-center">Belum punya akun?</span>
+          <span className="text-center">Belum punya akun?</span>
           <Link to="/register">
             <span className="fw-bold text-decoration-none">
               &nbsp; Daftar di sini

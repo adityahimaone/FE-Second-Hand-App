@@ -12,13 +12,13 @@ function NotificationDropdown({ notifSeller, notifBuyer }) {
 
   // filter item?.createdAt new
   const newNotifSeller = notifSeller
-    .sort((a, b) => new Date(b.createdAt) - new Date(a.createdAt))
-    .slice(0, 5);
+    ?.sort((a, b) => new Date(b.createdAt) - new Date(a.createdAt))
+    ?.slice(0, 5);
 
   const newNotifBuyer = notifBuyer
-    .filter((item) => item.data_nego.is_accept === true)
-    .sort((a, b) => new Date(b.createdAt) - new Date(a.createdAt))
-    .slice(0, 5);
+    ?.filter((item) => item.data_nego.is_accept === true)
+    ?.sort((a, b) => new Date(b.createdAt) - new Date(a.createdAt))
+    ?.slice(0, 5);
 
   console.log(newNotifBuyer, "newNotifBuyer");
 
