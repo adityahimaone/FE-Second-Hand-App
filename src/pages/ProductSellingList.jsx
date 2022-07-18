@@ -96,7 +96,7 @@ function ProductSellingList() {
                 <span>Tambah Produk</span>
               </div>
             </div>
-            {cardData.map((item) => (
+            {cardData?.map((item) => (
               <div key={item.id} className="col">
                 <CardHome
                   title={item.name}

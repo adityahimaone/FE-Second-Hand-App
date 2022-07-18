@@ -5,7 +5,7 @@ import { CHANGE_STATUS_PRODUCT } from "store/types";
 export const putProductChangeStatus = (token, id, status) => (dispatch) => {
   dispatch({ type: `${CHANGE_STATUS_PRODUCT}_LOADING` });
   AxiosWithAuth(token)
-    .put(`/product/update-to-sold/${id}`, {
+    .put(`/product/update-sold/${id}`, {
       is_sold: status,
     })
     .then((response) => {

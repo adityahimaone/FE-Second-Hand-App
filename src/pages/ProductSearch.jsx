@@ -30,7 +30,7 @@ function ProductSearch() {
       </div>
       <div className="my-3 row row-cols-2 row-cols-xss-4 row-cols-lg-6 g-2">
         {data?.data?.map((item) => (
-          <div key={item.id} className="col">
+          <div key={item?.id} className="col">
             <CardHome item={item} />
           </div>
         ))}

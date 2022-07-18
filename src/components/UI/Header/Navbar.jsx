@@ -108,7 +108,7 @@ function Navbar() {
 
   console.log(userNav, "userNav");
 
-  const notifLength = notifSeller.length > 0 && notifBuyer.length > 0;
+  const notifLength = notifSeller?.length > 0 && notifBuyer?.length > 0;
 
   return (
     <nav className={`${Style["nav-header"]}`}>

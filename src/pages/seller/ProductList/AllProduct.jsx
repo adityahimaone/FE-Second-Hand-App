@@ -17,15 +17,15 @@ function AllProduct() {
 
   const [token] = useState(dataLogin?.data?.token);
 
-  myProductData.data
-    .sort((a, b) => new Date(b.createdAt) - new Date(a.createdAt))
-    .slice(0, 5);
+  myProductData?.data
+    ?.sort((a, b) => new Date(b.createdAt) - new Date(a.createdAt))
+    ?.slice(0, 5);
 
   useEffect(() => {
     dispatch(getMyProduct(token));
   }, []);
 
-  console.log(myProductData.data, "my product");
+  console.log(myProductData?.data, "my product");
   return (
     <div className="row row-cols-2 row-cols-lg-3 g-4 mb-5">
       <div className="col">

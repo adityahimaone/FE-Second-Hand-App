@@ -9,10 +9,14 @@ function ModalChangeStatus({ show, handleClose, data }) {
   const radioInput = useId();
   const { id } = useParams();
 
+  console.log(data, "data");
+
   const { data: dataLogin } = useSelector((state) => state.login);
 
   const [radioValue, setRadioValue] = useState(false);
   const [token, setToken] = useState(dataLogin?.data?.token);
+
+  const idDataNego = data?.data_nego?.id;
 
   const onChangeRadio = (e) => {
     setRadioValue(e.target.value);
@@ -20,7 +24,7 @@ function ModalChangeStatus({ show, handleClose, data }) {
 
   const onSubmitChangeStatus = (e) => {
     e.preventDefault();
-    dispatch(putProductChangeStatus(token, id, radioValue));
+    dispatch(putProductChangeStatus(token, idDataNego, radioValue));
     handleClose();
   };
 

@@ -100,7 +100,7 @@ function HomePage() {
             <Pagination>
               <Pagination.First onClick={goFirstPage} />
               <Pagination.Prev onClick={goPrevPage} />
-              {pageItemArray.map((item) => (
+              {pageItemArray?.map((item) => (
                 <Pagination.Item
                   onClick={() => setPageNow(item)}
                   active={item === pageNow}

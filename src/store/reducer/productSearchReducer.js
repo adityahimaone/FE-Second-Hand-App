@@ -4,7 +4,7 @@ const initialState = {
   data: {
     status: false,
     message: "",
-    data: {},
+    data: [],
   },
   isLoading: true,
   error: null,
