@@ -6,6 +6,11 @@ import { useNavigate, useParams } from "react-router-dom";
 import { Modal } from "react-bootstrap";
 import { useDispatch, useSelector } from "react-redux";
 import { getProductByID, getAllProduct } from "store/action/productAction";
+import {
+  getWishlist,
+  addWishlist,
+  deleteWishlist,
+} from "store/action/wishlistAction";
 
 import { ConvertToIDR } from "utils/helper";
 import ModalOffer from "components/UI/Modal_Tawar/ModalOffer";
@@ -18,7 +23,6 @@ function BuyerHalamanProduk() {
   const [text, enableButton] = useState("");
   const navigate = useNavigate();
   // const [openModalTawar, setOpenModalTawar] = useState(false)
-
   const [show, setShow] = useState(false);
   const handleShow = () => setShow(true);
   const handleClose = () => setShow(false);
@@ -29,9 +33,20 @@ function BuyerHalamanProduk() {
     error,
   } = useSelector((state) => state.product_by_id);
 
+  const { data: loginData } = useSelector((state) => state.login);
+  const token = loginData?.data?.token;
+
   useEffect(() => {
     dispatch(getProductByID(id));
   }, []);
+
+  const handleAddWishlist = () => {
+    dispatch(addWishlist(token, id));
+  };
+
+  const handleDeleteWishlist = () => {
+    dispatch(deleteWishlist(token, id));
+  };
 
   console.log(productByIdData, "productByIdData");
 
@@ -88,9 +103,7 @@ function BuyerHalamanProduk() {
                 <h2 className="font-16">{ConvertToIDR(productData?.harga)}</h2>
                 <button
                   type="button"
-                  // onClick={handleShow}
-                  // onClick={() => {setOpenModalTawar(true);
-                  // }}
+                  onClick={handleAddWishlist}
                   className="button-outline-2 d-none my-2 d-xss-block d-inline"
                 >
                   Wishlist
@@ -134,8 +147,6 @@ function BuyerHalamanProduk() {
             <button
               type="button"
               onClick={handleShow}
-              // onClick={() => {setOpenModalTawar(true);
-              // }}
               className="button-primary-1 w-100 d-block d-xss-none "
             >
               Saya Tertarik dan ingin nego
