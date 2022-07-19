@@ -50,7 +50,6 @@ function Login() {
               password: "budi@123",
             }}
             onSubmit={(values) => {
-              console.log(values);
               handleSubmitForm(values);
             }}
           >

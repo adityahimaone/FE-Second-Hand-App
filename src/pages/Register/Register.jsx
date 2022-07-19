@@ -9,6 +9,7 @@ import { useDispatch, useSelector } from "react-redux";
 import * as yup from "yup";
 import { Formik, Form } from "formik";
 import { AiOutlineEye, AiOutlineEyeInvisible } from "react-icons/ai";
+import dataCity from "utils/data-city";
 import { postRegister } from "../../store/action/registerAction";
 import Alert from "../../components/UI/Alert/Alert";
 import Style from "./Register.module.css";
@@ -27,6 +28,7 @@ function Register() {
   });
 
   const [showPasword, setShowPasword] = useState(false);
+  const [errorRegister, setErrorRegister] = useState("");
 
   const handleClickShowPassword = () => {
     setShowPasword((prev) => !prev);
@@ -42,6 +44,7 @@ function Register() {
       .matches(/[a-z]/g, "Should contain at least 1 lowercase")
       .matches(/[A-Z]/g, "Should contain at least 1 uppercase")
       .matches(/[0-9]/g, "Should contain at least 1 number")
+      .matches(/[!@#$%^&*]/g, "Should contain at least 1 special character")
       .matches(/^\S*$/, "Should not contain spaces"),
     alamat: yup.string().required(),
     kota: yup.string().required(),
@@ -52,30 +55,31 @@ function Register() {
       .matches(/[0-9]/g, "Should contain at least 1 number"),
   });
 
-  const handleSubmit = async () => {
-    console.log(registerData);
+  const handleSubmitRegister = async (values) => {
     try {
       const res = await axios({
         method: "POST",
         url: "https://old-but-new.herokuapp.com/api/v1/auth/register",
-        data: registerData,
+        data: values,
       });
 
       if (res.status === 201) {
         // localStorage.setItem("role", "buyer", "token", res.data.access_token);
-        navigate("/bproduct", { replace: true });
-        console.log(res.data.email);
+        navigate("/login", { replace: true });
       }
 
       if (res.status === 201) {
         // localStorage.setItem("role", "seller", "token", res.data.access_token);
         navigate("/", { replace: true });
-        console.log(res.data.email);
+        // console.log(res.data.email);
       }
     } catch (error) {
       console.log(error);
+      setErrorRegister(error.response.data.message);
     }
   };
+
+  console.log(errorRegister);
 
   const dispatch = useDispatch();
   const { isLoading, data: register } = useSelector((state) => state.register);
@@ -99,11 +103,14 @@ function Register() {
             }}
             onSubmit={(values) => {
               console.log(values);
-              handleSubmit(values);
+              handleSubmitRegister(values);
             }}
           >
-            {({ errors }) => (
-              <Form className="col-10 col-sm-7 d-flex flex-column my-1">
+            {({ handleSubmit, errors, handleChange }) => (
+              <Form
+                onSubmit={handleSubmit}
+                className="col-10 col-sm-7 d-flex flex-column my-1"
+              >
                 <button
                   type="button"
                   onClick={() => navigate(-1)}
@@ -119,13 +126,9 @@ function Register() {
                     className="form-input w-100"
                     style={{ marginButtom: "1rem" }}
                     placeholder="Contoh: toni"
-                    value={registerData.nama}
-                    onChange={(e) =>
-                      setRegisterData({
-                        ...registerData,
-                        nama: e.target.value,
-                      })
-                    }
+                    // value={registerData.nama}
+                    name="nama"
+                    onChange={handleChange}
                   />
                   <span className="font-12 text-danger py-1">
                     {errors.nama}
@@ -138,13 +141,10 @@ function Register() {
                     required
                     style={{ marginButtom: "1rem" }}
                     placeholder="Contoh: 081xxxxx"
-                    value={registerData.no_hp}
-                    onChange={(e) =>
-                      setRegisterData({
-                        ...registerData,
-                        no_hp: e.target.value,
-                      })
-                    }
+                    type="number"
+                    // value={registerData.no_hp}
+                    name="no_hp"
+                    onChange={handleChange}
                   />
                   <span className="font-12 text-danger py-1">
                     {errors.no_hp}
@@ -152,19 +152,22 @@ function Register() {
                 </div>
                 <div>
                   <p>Kota</p>
-                  <input
+                  <select
                     className="form-input w-100"
                     required
                     style={{ marginButtom: "1rem" }}
-                    placeholder="Contoh: semarang"
-                    value={registerData.kota}
-                    onChange={(e) =>
-                      setRegisterData({
-                        ...registerData,
-                        kota: e.target.value,
-                      })
-                    }
-                  />
+                    // value={registerData.kota}
+                    name="kota"
+                    onChange={handleChange}
+                  >
+                    <option value="">Pilih Kota</option>
+                    {dataCity.map((item) => (
+                      <option key={item.id} value={item.name}>
+                        {item.name}
+                      </option>
+                    ))}
+                  </select>
+
                   <span className="font-12 text-danger py-1">
                     {errors.kota}
                   </span>
@@ -176,13 +179,9 @@ function Register() {
                     required
                     style={{ marginButtom: "1rem" }}
                     placeholder="Contoh:desa"
-                    value={registerData.alamat}
-                    onChange={(e) =>
-                      setRegisterData({
-                        ...registerData,
-                        alamat: e.target.value,
-                      })
-                    }
+                    // value={registerData.alamat}
+                    name="alamat"
+                    onChange={handleChange}
                   />
                   <span className="font-12 text-danger py-1">
                     {errors.alamat}
@@ -195,13 +194,9 @@ function Register() {
                     required
                     style={{ marginButtom: "1rem" }}
                     placeholder="Contoh: johndee@gmail.com"
-                    value={registerData.email}
-                    onChange={(e) =>
-                      setRegisterData({
-                        ...registerData,
-                        email: e.target.value,
-                      })
-                    }
+                    // value={registerData.email}
+                    name="email"
+                    onChange={handleChange}
                   />
                   <span className="font-12 text-danger py-1">
                     {errors.email}
@@ -214,13 +209,9 @@ function Register() {
                     style={{ marginButtom: "1rem" }}
                     placeholder="contoh:Rudi@12345678"
                     type={showPasword ? "text" : "password"}
-                    value={registerData.password}
-                    onChange={(e) =>
-                      setRegisterData({
-                        ...registerData,
-                        password: e.target.value,
-                      })
-                    }
+                    // value={registerData.password}
+                    name="password"
+                    onChange={handleChange}
                   />
                   {showPasword ? (
                     <AiOutlineEyeInvisible
@@ -239,11 +230,7 @@ function Register() {
                     {errors.password}
                   </span>
                 </div>
-                <button
-                  type="submit"
-                  className="button-primary-1 w-100 my-4"
-                  onClick={handleSubmit}
-                >
+                <button type="submit" className="button-primary-1 w-100 my-4">
                   Daftar
                 </button>
                 <div className="d-flex text-center d-none d-xss-block">
