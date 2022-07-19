@@ -35,7 +35,6 @@ function AddProduct() {
   const [msgErr, setmsgErr] = useState("");
   const [isSubmit, setIsSubmit] = useState(false);
 
-  const [myOption, setMyOption] = useState("");
   const [errorValidation, setError] = useState("");
   const [success, setSuccess] = useState("");
   const [style, setStyle] = useState({});
@@ -88,6 +87,7 @@ function AddProduct() {
             setSuccessHandler
           )
         );
+        console.log(imagePrev)
       }
     }
   };
@@ -106,6 +106,14 @@ function AddProduct() {
     if (e !== undefined) {
       setIsSubmit(false);
     }
+    e.target.value = ""
+  };
+
+  // delete handle
+  const onImageDelete = (image) => {
+    setImagePrev(imagePrev.filter((e) => e !== image))
+    setImagePreview(imagePreview.filter((e) => e !== image))
+    URL.revokeObjectURL(image)
   };
 
   // Error Handling
@@ -310,7 +318,7 @@ function AddProduct() {
                     </span>
                   </div>
                 </div>
-                <div className="mb-3">
+                <div className="mb-0">
                   <label className="form-label">Foto Produk</label>
                   <div className="d-flex">
                     <input
@@ -340,29 +348,22 @@ function AddProduct() {
                     <span className="font-12 text-danger py-1">{msgErr}</span>
                   )}
                   <span className="font-12 text-danger py-1" />
-                  {myOption === "show" && (
-                    // <div className="mt-3">
-                    //   <ImagePreview file={imagePrev} />
-                    // </div>
                     <div className="mb-3 d-flex flex-wrap">
                       {imagePreview &&
                         imagePreview.map((image) => (
-                            <div className="pe-3 mt-3">
-                              <div key={image} className="image grid">
+                            <div className="pe-3 mt-0">
+                              <div key={image} className="img-thumbnail grid">
                                 <ImagePreview file={image} />
                               </div>
+                              <button type="button" className="btn btn-warning mt-2" onClick={() => onImageDelete(image)}>delete</button>
                             </div>
                           ))}
                     </div>
-                  )}
                 </div>
                 <div className="d-flex mt-5 mb-5">
                   <button
                     type="button"
-                    disabled={disable}
-                    // disabled
                     className={`${Style["button-primary-3"]} w-50 me-2 fs-6`}
-                    onClick={() => setMyOption("show")}
                   >
                     Preview
                   </button>

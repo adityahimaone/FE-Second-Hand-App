@@ -29,6 +29,7 @@ function InfoProfil() {
   const [file, setFile] = useState(dataProfile.data.avatar);
   const [token, setToken] = useState(dataLogin?.data?.token);
   const [imageUpload, setImageUpload] = useState();
+  const [errMsg, setErrMsg] = useState(false);
 
   const validationSchema = yup.object({
     kota: yup.string().required("Pilih Kota"),
@@ -47,13 +48,20 @@ function InfoProfil() {
     if (event.target.files && event.target.files[0]) {
       setFile(URL.createObjectURL(event.target.files[0]));
       setImageUpload(event.target.files[0]);
+      setErrMsg(false)
     }
   };
 
   const onImageDelete = () => {
     setFile(dataProfile.data.avatar || "/images/camera1.png");
+    setErrMsg(true)
   };
 
+  const msg = () => {
+    if (imageUpload === undefined) {
+      setErrMsg(true)
+    }
+  }
   const handleSubmitProfil = (values) => {
     const formData = new FormData();
     formData.append("kota", values.kota);
@@ -63,6 +71,7 @@ function InfoProfil() {
     // eslint-disable-next-line no-param-reassign
     values.image = imageUpload;
     dispatch(postProfileAction(token, formData, setSuccessHandler));
+    // console.log(imageUpload)
   };
 
   useEffect(() => {
@@ -128,10 +137,7 @@ function InfoProfil() {
     "Kota Blitar",
     "Kota Kediri",
   ];
-
-  // console.log(dataProfile.data, "dataProfile");
-  // console.log(imageUpload);
-
+  
   return (
     <div>
       {success && (
@@ -214,9 +220,11 @@ function InfoProfil() {
                           onClick={onImageDelete}
                         />
                       </div>
-                      <span className="font-12 text-danger py-1">
-                        {errors.image}
-                      </span>
+                      {errMsg && (
+                        <span className="font-12 text-danger py-1">
+                          Pilih Gambar
+                        </span>
+                      )}
                     </div>
                   </div>
                   <div className="mb-3">
@@ -280,7 +288,11 @@ function InfoProfil() {
                     </span>
                   </div>
                   <div className="d-flex mt-5 mb-5">
-                    <button type="submit" className="button-primary-1 w-100">
+                    <button
+                      type="submit"
+                      className="button-primary-1 w-100"
+                      onClick={msg}
+                    >
                       Simpan
                     </button>
                   </div>

@@ -1,31 +1,46 @@
 import React, { useEffect, useState } from "react";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
-import Style from "./sellersemuaproduk.module.css";
-import AllProduct from "./AllProduct";
+import { getMyProduct } from "store/action/ProductSellerAction";
+import { getProductByID } from "store/action/productAction";
+import { getUserProfile } from "store/action/profileAction";
 import ProductOfInterest from "./ProductOfInterest";
+import AllProduct from "./AllProduct";
 import ProductSold from "./ProductSold";
-import { getUserProfile } from "../../../store/action/profileAction";
+import Style from "./sellersemuaproduk.module.css";
 
 function SellerSemuaProduk() {
   const navigate = useNavigate();
   const dispatch = useDispatch();
+  const id = useParams();
 
   const option = ["produk", "diminati", "terjual"];
   const [myOption, setMyOption] = useState("produk");
 
   const { data: dataLogin } = useSelector((state) => state.login);
+  const [token, setToken] = useState(dataLogin?.data?.token);
+
   const {
     isLoading,
     data: dataProfile,
     error,
   } = useSelector((state) => state.profile);
 
-  const [token, setToken] = useState(dataLogin?.data?.token);
+  const { data: myProductData } = useSelector(
+    (state) => state.seller_my_product
+  );
+
+  myProductData?.data
+    ?.sort((a, b) => new Date(b.createdAt) - new Date(a.createdAt))
+    ?.slice(0, 5);
 
   useEffect(() => {
     dispatch(getUserProfile(token));
+    dispatch(getMyProduct(token));
+    dispatch(getProductByID(id));
   }, []);
+
+  console.log(myProductData?.data, "my product");
 
   console.log(dataProfile.data, "dataProfile");
 
@@ -37,22 +52,30 @@ function SellerSemuaProduk() {
             Daftar Jual Saya
           </h1>
           <div className="card p-3 mt-3">
-              <div className="d-flex justify-content-between">
-                <div className="d-flex align-items-center">
-                  <img
-                    src={dataProfile?.data?.avatar || "/images/person.png"}
-                    alt=""
-                    className={`${Style.images} rounded`}
-                  />
-                  <div className="">
-                    <p className="font-14 m-0 p-0 ms-2">{dataProfile.data.nama || "Nama Penjual"}</p>
-                    <p className="font-10 color-gray m-0 p-0 ms-2">{dataProfile.data.kota || "Kota"}</p>
-                  </div>
+            <div className="d-flex justify-content-between">
+              <div className="d-flex align-items-center">
+                <img
+                  src={dataProfile?.data?.avatar || "/images/person.png"}
+                  alt=""
+                  className={`${Style.images} rounded`}
+                />
+                <div className="">
+                  <p className="font-14 m-0 p-0 ms-2">
+                    {dataProfile.data.nama || "Nama Penjual"}
+                  </p>
+                  <p className="font-10 color-gray m-0 p-0 ms-2">
+                    {dataProfile.data.kota || "Kota"}
+                  </p>
                 </div>
-                <button type="button" className="button-outline-2" onClick={() => navigate("/user/profile")}>
-                  Edit
-                </button>
               </div>
+              <button
+                type="button"
+                className="button-outline-2"
+                onClick={() => navigate("/user/profile")}
+              >
+                Edit
+              </button>
+            </div>
             {/* })} */}
           </div>
         </div>
@@ -124,8 +147,20 @@ function SellerSemuaProduk() {
 
           <div>
             {myOption === "produk" && (
-              <div>
-                <AllProduct />
+              <div className="row ">
+                <div className="col-6 col-sm-6 col-md-6 col-lg-6 col-xl-4 col-xxl-4 mb-3">
+                  <div className="card-dot d-flex flex-column justify-content-center align-items-center h-100 pt-5 pb-5">
+                    <i className="bi bi-plus-lg fs-3" />
+                    <span className={`${Style["font-title"]} font-14`}>
+                      Tambah Produk
+                    </span>
+                  </div>
+                </div>
+                  {myProductData?.data?.map((item) => (
+                    <div className="col-6 col-sm-6 col-md-6 col-lg-6 col-xl-4 col-xxl-4 mb-3">
+                      <AllProduct item={item} />
+                    </div>
+                  ))}
               </div>
             )}
             {myOption === "diminati" && (

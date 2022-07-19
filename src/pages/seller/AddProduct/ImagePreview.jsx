@@ -10,7 +10,7 @@ function ImagePreview({ file }) {
     };
     return (
       <div>
-        <img src={preview} alt="" style={{ width: "300px" }} />
+        <img src={preview} alt="" style={{ maxWidth: "200px", maxHeight:'200px', objectFit: 'cover' }} />
       </div>
     );
   }

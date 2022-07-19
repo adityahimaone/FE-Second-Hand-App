@@ -24,7 +24,7 @@
     border-color: #999;
 }
 .custom-file-input {
-  /* color: transparent; */
+  color: transparent;
   display: flex;
   width: 7rem;
 }
