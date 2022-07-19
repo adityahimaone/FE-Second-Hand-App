@@ -88,10 +88,20 @@ function BuyerHalamanProduk() {
                 <h2 className="font-16">{ConvertToIDR(productData?.harga)}</h2>
                 <button
                   type="button"
+                  // onClick={handleShow}
+                  // onClick={() => {setOpenModalTawar(true);
+                  // }}
+                  className="button-outline-2 d-none my-2 d-xss-block d-inline"
+                >
+                  Wishlist
+                  <i className="bi bi-heart-fill ms-2" />
+                </button>
+                <button
+                  type="button"
                   onClick={handleShow}
                   // onClick={() => {setOpenModalTawar(true);
                   // }}
-                  className="button-primary-1 d-none d-xss-block"
+                  className="button-primary-1 d-none d-xss-block "
                 >
                   Saya Tertarik dan ingin nego
                 </button>
