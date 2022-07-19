@@ -42,7 +42,7 @@ function HomePage() {
     }
 
     if (!errorGetAllCategories) {
-      setCategoryList(productCategoriesData);
+      setCategoryList(productCategoriesData?.data?.sort((a, b) => a.id - b.id));
     }
   }, [pageNow]);
 
@@ -50,8 +50,12 @@ function HomePage() {
 
   // console.log(categoryListMap?.data[1]?.product, "categoryListMap");
 
+  //
+  // const newArr = categoryListMap.data.sort((a, b) => a.id - b.id);
+
   const pageItemArray = [];
-  for (let i = 1; i <= pageTotal; i += 1) {
+  // eslint-disable-next-line no-plusplus
+  for (let i = 1; i <= pageTotal; i++) {
     pageItemArray.push(i);
   }
 
@@ -78,7 +82,10 @@ function HomePage() {
   const handleSidebarClose = () => setShowSidebar(false);
   const handleSidebarShow = () => setShowSidebar(true);
 
+  const dataStatus = "data habis, silahkan kembali ke halaman awal";
+
   function SwitchTabCategory({ idCategory }) {
+    console.log(tabCategory, idCategory, "tabCategory");
     if (tabCategory === 0) {
       return (
         <>
@@ -91,17 +98,26 @@ function HomePage() {
               </div>
             ) : null}
           </div>
-          {productData?.data?.data?.map((item) => (
-            <div key={item.id} className="col">
-              <CardHome item={item} />
+          {productData?.data?.data ? (
+            productData?.data?.data?.map((item) => (
+              <div key={item.id} className="col">
+                <CardHome item={item} />
+              </div>
+            ))
+          ) : (
+            <div className="col">
+              <div className="d-flex justify-content-center">
+                <h1>{dataStatus}</h1>
+              </div>
             </div>
-          ))}
+          )}
           <div className="w-100 d-flex justify-content-end my-5">
             <Pagination>
               <Pagination.First onClick={goFirstPage} />
               <Pagination.Prev onClick={goPrevPage} />
               {pageItemArray?.map((item) => (
                 <Pagination.Item
+                  key={item}
                   onClick={() => setPageNow(item)}
                   active={item === pageNow}
                 >
@@ -127,7 +143,7 @@ function HomePage() {
               </div>
             ) : null}
           </div>
-          {categoryListMap?.data[idCategory - 1]?.product?.map((item) => (
+          {categoryListMap[idCategory - 1]?.product?.map((item) => (
             <div key={item.id} className="col">
               <CardHome item={item} />
             </div>
@@ -195,7 +211,7 @@ function HomePage() {
                   <i className="bi bi-search" />
                   <span className="px-2">Semua</span>
                 </button>
-                {categoryListMap?.data?.map((item) => (
+                {categoryListMap?.map((item) => (
                   <button
                     type="button"
                     key={item.id}
