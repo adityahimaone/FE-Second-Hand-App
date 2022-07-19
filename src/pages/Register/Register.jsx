@@ -1,3 +1,4 @@
+/* eslint-disable react/no-array-index-key */
 import React, { useState, useEffect } from "react";
 // import loginimg from "../../assets/image/loginimg.png";
 // import "./Login.css";
@@ -161,9 +162,9 @@ function Register() {
                     onChange={handleChange}
                   >
                     <option value="">Pilih Kota</option>
-                    {dataCity.map((item) => (
-                      <option key={item.id} value={item.name}>
-                        {item.name}
+                    {dataCity.map((item, idx) => (
+                      <option key={idx + 1} value={item}>
+                        {item}
                       </option>
                     ))}
                   </select>
