@@ -21,9 +21,6 @@
   border-radius: 5px;
   padding: 10px;
 }
-.responsive-option {
-  display: flex;
-}
 .color {
   background-color: #e2d4f0 !important;
   border: none !important;
@@ -53,17 +50,20 @@
 .responsive-text2{
   display: none;
 }
+.grid-option{
+  display: flex;
+}
 
 /* Responsive */
 @media only screen and (max-width: 992px) {
+  .grid-option{
+    display: block;
+  }
   .responsive-text2{
     display: block;
   }
   .responsive-text1{
     display: none;
-  }
-  .responsive-option {
-    display: block;
   }
   .option {
     width: 100%;

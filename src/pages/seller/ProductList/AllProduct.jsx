@@ -1,16 +1,12 @@
 /* eslint-disable jsx-a11y/alt-text */
 /* eslint-disable camelcase */
-import React, { useEffect, useState } from "react";
+import React from "react";
 import { Card } from "react-bootstrap";
-import { useDispatch, useSelector } from "react-redux";
-import { useNavigate, useParams } from "react-router-dom";
-import { getMyProduct } from "store/action/ProductSellerAction";
-import { getProductByID, getAllProduct } from "store/action/productAction";
+import { useNavigate } from "react-router-dom";
 import { ConvertToIDR } from "utils/helper";
 import Style from "./sellersemuaproduk.module.css";
 
 function AllProduct({item}) {
-  const dispatch = useDispatch();
   const navigate = useNavigate();
 
   const { id, nama, image, harga, category_id, category, product_image } = item;
@@ -22,8 +18,8 @@ function AllProduct({item}) {
             onClick={() => navigate(`/product/${id}`)}
           >
             <img
-              className={`${Style['card-img']} rounded`}
-              style={{ maxWidth: "20rem", height: "10rem", objectFit: "cover" }}
+              className={`${Style['card-img']} rounded w-100`}
+              style={{ height: "10rem", objectFit: "cover" }}
               src={
                 product_image? product_image[0]?.url : "/images/detail.png"
               }

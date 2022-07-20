@@ -1,19 +1,3 @@
-/* eslint-disable jsx-a11y/click-events-have-key-events */
-/* eslint-disable jsx-a11y/no-static-element-interactions */
-// /* eslint-disable react/jsx-no-duplicate-props */
-// /* eslint-disable jsx-a11y/control-has-associated-label */
-// /* eslint-disable arrow-body-style */
-// /* eslint-disable react/button-has-type */
-// /* eslint-disable no-param-reassign */
-// /* eslint-disable dot-notation */
-// /* eslint-disable jsx-a11y/click-events-have-key-events */
-// /* eslint-disable jsx-a11y/no-static-element-interactions */
-// /* eslint-disable react/self-closing-comp */
-// /* eslint-disable prefer-const */
-// /* eslint-disable import/order */
-// /* eslint-disable import/no-duplicates */
-// /* eslint-disable react/no-unknown-property */
-// /* eslint-disable jsx-a11y/label-has-associated-control */
 import React, { useEffect, useState } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { Formik, Form } from "formik";
@@ -87,7 +71,7 @@ function AddProduct() {
             setSuccessHandler
           )
         );
-        console.log(imagePrev)
+        console.log(imagePrev);
       }
     }
   };
@@ -106,14 +90,14 @@ function AddProduct() {
     if (e !== undefined) {
       setIsSubmit(false);
     }
-    e.target.value = ""
+    e.target.value = "";
   };
 
   // delete handle
   const onImageDelete = (image) => {
-    setImagePrev(imagePrev.filter((e) => e !== image))
-    setImagePreview(imagePreview.filter((e) => e !== image))
-    URL.revokeObjectURL(image)
+    setImagePrev(imagePrev.filter((e) => e !== image));
+    setImagePreview(imagePreview.filter((e) => e !== image));
+    URL.revokeObjectURL(image);
   };
 
   // Error Handling
@@ -164,11 +148,16 @@ function AddProduct() {
                   <p className="m-0 fs-6 " style={{ color: "#842029" }}>
                     Batas upload produk adalah 4
                   </p>
-                  <i
-                    className="bi bi-x fs-2 ms-2"
-                    style={{ color: "#842029", cursor: "pointer" }}
-                    onClick={() => setClosed(navigate("/product/list"))}
-                   />
+                  <button
+                    type="button"
+                    className="bg-transparent btn"
+                    onClick={() => navigate("/product/list")}
+                  >
+                    <i
+                      className="bi bi-x fs-2 ms-2"
+                      style={{ color: "#842029", cursor: "pointer" }}
+                    />
+                  </button>
                 </div>
               </div>
             </div>
@@ -178,7 +167,7 @@ function AddProduct() {
                   <div
                     className={`${Style["progress-done-error"]}`}
                     style={style}
-                   />
+                  />
                 </div>
               </div>
             </div>
@@ -203,10 +192,13 @@ function AddProduct() {
                   <p className="m-0 fs-6 text-white">
                     Produk telah berhasil ditambahkan
                   </p>
-                  <i
-                    className="bi bi-x fs-2 ms-2 text-white"
-                    onClick={() => setClosed(navigate("/product/list"))}
-                   />
+                  <button
+                    type="button"
+                    className="bg-transparent btn"
+                    onClick={() => navigate("/product/list")}
+                  >
+                    <i className="bi bi-x fs-2 ms-2 text-white" />
+                  </button>
                 </div>
               </div>
             </div>
@@ -216,7 +208,7 @@ function AddProduct() {
                   <div
                     className={`${Style["progress-done-success"]}`}
                     style={style}
-                   />
+                  />
                 </div>
               </div>
             </div>
@@ -232,9 +224,9 @@ function AddProduct() {
       <div
         className={`d-flex mt-3 position-absolute start-50 translate-middle-x ${Style.responsive}`}
       >
-        <div className={`${Style["width-left"]}`} onClick={() => navigate(-1)}>
+        <button type="button" className={`${Style["width-left"]} bg-transparent btn`} onClick={() => navigate(-1)}>
           <i className="bi bi-arrow-left fs-4" />
-        </div>
+        </button>
         <div className={`${Style["width-right"]} w-100`}>
           <Formik
             validationSchema={validationSchema}
@@ -348,17 +340,23 @@ function AddProduct() {
                     <span className="font-12 text-danger py-1">{msgErr}</span>
                   )}
                   <span className="font-12 text-danger py-1" />
-                    <div className="mb-3 d-flex flex-wrap">
-                      {imagePreview &&
-                        imagePreview.map((image) => (
-                            <div className="pe-3 mt-0">
-                              <div key={image} className="img-thumbnail grid">
-                                <ImagePreview file={image} />
-                              </div>
-                              <button type="button" className="btn btn-warning mt-2" onClick={() => onImageDelete(image)}>delete</button>
-                            </div>
-                          ))}
-                    </div>
+                  <div className="mb-3 d-flex flex-wrap">
+                    {imagePreview &&
+                      imagePreview.map((image) => (
+                        <div className="pe-3 mt-0">
+                          <div key={image} className="img-thumbnail grid">
+                            <ImagePreview file={image} />
+                          </div>
+                          <button
+                            type="button"
+                            className="btn btn-warning mt-2"
+                            onClick={() => onImageDelete(image)}
+                          >
+                            delete
+                          </button>
+                        </div>
+                      ))}
+                  </div>
                 </div>
                 <div className="d-flex mt-5 mb-5">
                   <button

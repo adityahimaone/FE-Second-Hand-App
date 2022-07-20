@@ -1,9 +1,14 @@
+/* eslint-disable no-unused-expressions */
+/* eslint-disable no-prototype-builtins */
+/* eslint-disable consistent-return */
+/* eslint-disable no-plusplus */
+/* eslint-disable array-callback-return */
 import React, { useEffect, useState } from "react";
-import { useNavigate, useParams } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
-import { getMyProduct } from "store/action/ProductSellerAction";
-import { getProductByID } from "store/action/productAction";
+import { getMyProduct, getProductSold } from "store/action/ProductSellerAction";
 import { getUserProfile } from "store/action/profileAction";
+import { getWishlist } from "store/action/wishlistAction";
 import ProductOfInterest from "./ProductOfInterest";
 import AllProduct from "./AllProduct";
 import ProductSold from "./ProductSold";
@@ -12,9 +17,10 @@ import Style from "./sellersemuaproduk.module.css";
 function SellerSemuaProduk() {
   const navigate = useNavigate();
   const dispatch = useDispatch();
-  const id = useParams();
 
-  const option = ["produk", "diminati", "terjual"];
+  const option = ["produk"];
+  const option1 = ["diminati"];
+  const option2 = ["terjual"];
   const [myOption, setMyOption] = useState("produk");
 
   const { data: dataLogin } = useSelector((state) => state.login);
@@ -29,6 +35,10 @@ function SellerSemuaProduk() {
   const { data: myProductData } = useSelector(
     (state) => state.seller_my_product
   );
+  const { data: productSold } = useSelector(
+    (state) => state.product_sold_reducer
+  );
+  const { data: myWishList } = useSelector((state) => state.wishlist);
 
   myProductData?.data
     ?.sort((a, b) => new Date(b.createdAt) - new Date(a.createdAt))
@@ -37,13 +47,9 @@ function SellerSemuaProduk() {
   useEffect(() => {
     dispatch(getUserProfile(token));
     dispatch(getMyProduct(token));
-    dispatch(getProductByID(id));
+    dispatch(getProductSold(token));
+    dispatch(getWishlist(token));
   }, []);
-
-  console.log(myProductData?.data, "my product");
-
-  console.log(dataProfile.data, "dataProfile");
-
   return (
     <section>
       <div className="container w-75">
@@ -76,10 +82,9 @@ function SellerSemuaProduk() {
                 Edit
               </button>
             </div>
-            {/* })} */}
           </div>
         </div>
-        <div className={`mt-3 ${Style["responsive-option"]}`}>
+        <div className={`${Style["grid-option"]} w-100 mt-3`}>
           <div className={Style.category__wrapper}>
             <div className={Style["category__overflow-scroll-x"]}>
               <div className="w-100">
@@ -108,7 +113,7 @@ function SellerSemuaProduk() {
                   </button>
                   <button
                     type="button"
-                    key={option}
+                    key={option1}
                     onClick={() => setMyOption("diminati")}
                     className={`${
                       myOption === "diminati" && `${Style["color-purple-4"]}`
@@ -124,7 +129,7 @@ function SellerSemuaProduk() {
                   </button>
                   <button
                     type="button"
-                    key={option}
+                    key={option2}
                     onClick={() => setMyOption("terjual")}
                     className={`${
                       myOption === "terjual" && `${Style["color-purple-4"]}`
@@ -145,32 +150,84 @@ function SellerSemuaProduk() {
             </div>
           </div>
 
-          <div>
+          <div className="w-100">
             {myOption === "produk" && (
               <div className="row ">
-                <div className="col-6 col-sm-6 col-md-6 col-lg-6 col-xl-4 col-xxl-4 mb-3">
-                  <div className="card-dot d-flex flex-column justify-content-center align-items-center h-100 pt-5 pb-5">
+                <div className="col-6 col-sm-6 col-md-6 col-lg-6 col-xl-4 col-xxl-4 mb-3 ">
+                  <button
+                    type="button"
+                    onClick={() => navigate("/product/sell")}
+                    className="bg-transparent card-dot d-flex flex-column justify-content-center align-items-center h-100 p-5 w-100"
+                  >
                     <i className="bi bi-plus-lg fs-3" />
                     <span className={`${Style["font-title"]} font-14`}>
                       Tambah Produk
                     </span>
-                  </div>
+                  </button>
                 </div>
-                  {myProductData?.data?.map((item) => (
-                    <div className="col-6 col-sm-6 col-md-6 col-lg-6 col-xl-4 col-xxl-4 mb-3">
-                      <AllProduct item={item} />
-                    </div>
-                  ))}
+                {myProductData?.data.map((item) => {
+                  if (item?.is_sold === false) {
+                    return (
+                      <div className="col-6 col-sm-6 col-md-6 col-lg-6 col-xl-4 col-xxl-4 mb-3">
+                        <AllProduct item={item} />
+                      </div>
+                    );
+                  }
+                })}
               </div>
             )}
             {myOption === "diminati" && (
-              <div>
-                <ProductOfInterest />
+              <div className="row">
+                {/* <div className="col-4">
+                  {myWishList?.data?.map((item) => (
+                    <div>
+                      <ProductOfInterest item={item.wishlist} />
+                    </div>
+                  ))}
+                </div> */}
+                {myWishList?.data?.length >= 1 ? (
+                  myWishList?.data?.map((item) => (
+                    <div className="col-4">
+                      <ProductOfInterest item={item.wishlist} />
+                    </div>
+                  ))
+                ) : (
+                  <div className="text-center">
+                    <img
+                      src="/images/undraw_selection_re_ycpo 1.png"
+                      alt=""
+                      style={{ width: "300px" }}
+                    />
+                    <p className="mt-3">
+                      Kamu belum menambahkan produk di Wishlist
+                    </p>
+                  </div>
+                )}
               </div>
             )}
             {myOption === "terjual" && (
               <div>
-                <ProductSold />
+                <div className="row">
+                  {productSold?.data?.length >= 1 ? (
+                    productSold?.data?.map((item) => (
+                      <div className="col-4">
+                        <ProductSold item={item} />
+                      </div>
+                    ))
+                  ) : (
+                    <div className="text-center">
+                      <img
+                        src="/images/undraw_selection_re_ycpo 1.png"
+                        alt=""
+                        style={{ width: "300px" }}
+                      />
+                      <p className="mt-3">
+                        Belum ada produkmu yang terjual nih, <br /> Sabar ya
+                        rejeki nggak kemana kok
+                      </p>
+                    </div>
+                  )}
+                </div>
               </div>
             )}
           </div>

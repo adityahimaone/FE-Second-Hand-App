@@ -15,6 +15,7 @@ import changeStatusReducer from "./changeStatusReducer";
 import productSearchReducer from "./productSearchReducer";
 import profilePostReducer from "./profilePostReducer";
 import wishlistReducer from "./wishlistReducer";
+import productSoldReducer from "./productSoldReducer"
 
 export default combineReducers({
   login: loginReducer,
@@ -33,4 +34,5 @@ export default combineReducers({
   change_status: changeStatusReducer,
   product_search: productSearchReducer,
   wishlist: wishlistReducer,
+  product_sold_reducer : productSoldReducer,
 });

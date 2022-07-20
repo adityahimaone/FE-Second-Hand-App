@@ -44,7 +44,8 @@ function ProductDetail() {
                     ? productData.product_image[0].url
                     : "/images/detail.png"
                 }
-                className="img-fluid rounded-4"
+                className="img-detail"
+                style={{objectFit: 'cover'}}
                 alt=""
               />
             </div>

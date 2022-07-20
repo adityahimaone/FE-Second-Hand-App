@@ -4,7 +4,7 @@ import { GET_WISHLIST, POST_WISHLIST, DELETE_WISHLIST } from "../types";
 export const getWishlist = (token) => (dispatch) => {
   dispatch({ type: `${GET_WISHLIST}_LOADING` });
   AxiosWithAuth(token)
-    .get("/wishlist")
+    .get("/wishlist/all-wishlist")
     .then((response) => {
       dispatch({
         type: `${GET_WISHLIST}_FULFILLED`,
