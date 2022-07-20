@@ -1,6 +1,6 @@
 /* eslint-disable import/prefer-default-export */
 import { AxiosWithAuth } from "utils/axiosWithAuth";
-import { POST_PRODUCT_SELLER, GET_MY_PRODUCT, GET_PRODUCT_SOLD } from "../types";
+import { POST_PRODUCT_SELLER, GET_MY_PRODUCT, GET_PRODUCT_SOLD, DELETE_PRODUCT_SELLER } from "../types";
 
 export const postAddProductSeller =
   (token, data, setErrorHandler, setSuccessHandler) => (dispatch) => {
@@ -59,6 +59,24 @@ export const getProductSold = (token) => (dispatch) => {
       dispatch({
         type: `${GET_PRODUCT_SOLD}_ERROR`,
         error: error.response,
+      });
+    });
+};
+
+export const deleteProductSeller = (token, id) => (dispatch) => {
+  dispatch({ type: `${DELETE_PRODUCT_SELLER}_LOADING` });
+  AxiosWithAuth(token)
+    .delete(`/wishlist/delete-wishlist/${id}`)
+    .then((response) => {
+      dispatch({
+        type: `${DELETE_PRODUCT_SELLER}_FULFILLED`,
+        payload: response.data,
+      });
+    })
+    .catch((error) => {
+      dispatch({
+        type: `${DELETE_PRODUCT_SELLER}_ERROR`,
+        error: error.message,
       });
     });
 };
