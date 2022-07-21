@@ -145,8 +145,10 @@ function NotificationSeller() {
                           Status
                         </button>
                         <a
-                          href="/#"
+                          target="_blank"
+                          href={`https://wa.me/${dataNotifByID?.buyer?.no_hp}?text=Halo%20Admin%20Saya%20mau%20konfirmasi%20status%20pembayaran%20produk%20ini`}
                           className="d-flex gap-2 button-primary-1 align-items-center text-decoration-none"
+                          rel="noreferrer"
                         >
                           <span>Hubungi di </span> <BsWhatsapp />
                         </a>

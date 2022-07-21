@@ -8,7 +8,8 @@ import { BsWhatsapp } from "react-icons/bs";
 function ModalAccept({ show, handleClose, data }) {
   const dispatch = useDispatch();
 
-  const { product_image, deskripsi, id, seller_id, nama, harga } = data;
+  const { product_image, deskripsi, id, seller_id, nama, harga, buyer } = data;
+
   return (
     <Modal
       show={show}
@@ -78,12 +79,14 @@ function ModalAccept({ show, handleClose, data }) {
           <div className="mt-3" />
         </Modal.Body>
         <Modal.Footer className="border-0 pt-0">
-          <button
+          <a
+            target="_blank"
+            rel="noreferrer"
+            href={`https://wa.me/${buyer?.no_hp}?text=Halo%20Admin%20Saya%20mau%20konfirmasi%20status%20pembayaran%20produk%20ini`}
             className="d-inline gap-2 button-primary-1 w-100"
-            type="submit"
           >
             <span>Hubungi via Whatsapp </span> <BsWhatsapp />
-          </button>
+          </a>
         </Modal.Footer>
       </form>
     </Modal>
