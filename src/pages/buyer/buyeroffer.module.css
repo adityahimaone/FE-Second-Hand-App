@@ -1,0 +1,204 @@
+.product-buyer {
+    background-image: url("../../assets/image/watch\ buyer.png");
+    position: absolute;
+    width: 600px;
+    height: 436px;
+    left: 236px;
+    top: 124px;
+    /* background: url(.jpg), #FFE9CA; */
+    border-radius: 16px;
+}
+
+.detail {
+    position: absolute;
+    width: 336px !important;
+    height: 204px;
+    left: 868px;
+    top: 124px;
+
+    background: #FFFFFF;
+    /* Shadow/High */
+
+    box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.15);
+    border-radius: 16px;
+}
+
+.detail h4 {
+    /* position: absolute; */
+    width: 296px;
+    height: 24px;
+    left: 892px;
+    top: 140px;
+
+    /* Title/16/Medium */
+
+    font-family: 'Poppins';
+    font-style: normal;
+    font-weight: 500;
+    font-size: 16px;
+    line-height: 24px;
+    /* identical to box height, or 150% */
+    color: #000000;
+}
+
+.detail p {
+    /* position: absolute; */
+    width: 140px;
+    height: 20px;
+    left: 892px;
+    top: 172px;
+
+    /* Body/14/Regular */
+
+    font-family: 'Poppins';
+    font-style: normal;
+    font-weight: 400;
+    font-size: 14px;
+    line-height: 20px;
+    /* identical to box height, or 143% */
+
+
+    /* Neutral/03 */
+
+    color: #8A8A8A;
+}
+
+.detail h2 {
+    width: 295px;
+    height: 24px;
+    left: 892px;
+    top: 208px;
+
+    /* Title/16/Regular */
+
+    font-family: 'Poppins';
+    font-style: normal;
+    font-weight: 400;
+    font-size: 16px;
+    line-height: 24px;
+    /* identical to box height, or 150% */
+
+
+    color: #000000;
+}
+
+.Identity {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    padding: 16px 0px 16px 16px;
+    gap: 10px;
+
+    position: absolute;
+    width: 336px !important;
+    height: 80px;
+    left: 868px;
+    top: 352px;
+
+    /* Neutral/01 */
+
+    background: #FFFFFF;
+    /* Shadow/Low */
+
+    box-shadow: 0px 0px 4px rgba(0, 0, 0, 0.15);
+    border-radius: 16px;
+}
+
+.disabled {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    padding: 12px 24px;
+    gap: 4px;
+
+    /* position: absolute; */
+    width: 304px;
+    height: 48px;
+    left: 884px;
+    top: 256px;
+
+    /* Neutral/02 */
+
+    background: #D0D0D0 !important;
+    border-radius: 16px;
+}
+
+.disabled p {
+    font-family: 'Poppins';
+    font-style: normal;
+    font-weight: 500;
+    font-size: 14px;
+    line-height: 20px;
+    /* identical to box height, or 143% */
+
+    text-align: center !important;
+
+    /* Neutral/01 */
+
+    color: #FFFFFF;
+
+
+    /* Inside auto layout */
+
+    flex: none;
+    order: 0;
+    flex-grow: 1;
+}
+
+.jam {
+    /* position: absolute; */
+    width: 336px;
+    height: 204px;
+    /* left: 900px; */
+    top: 2px;
+
+    background: #FFFFFF;
+    /* Shadow/High */
+
+    box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.15);
+    border-radius: 16px;
+}
+
+.seller {
+
+    /* align-items: flex-start; */
+    padding: 16px 0px 16px 16px;
+    /* gap: 10px; */
+    /* 
+    position: absolute; */
+    width: 336px;
+    height: 80px;
+    /* left: 868px; */
+    top: 2px;
+
+    /* Neutral/01 */
+
+    background: #FFFFFF;
+    /* Shadow/Low */
+
+    box-shadow: 0px 0px 4px rgba(0, 0, 0, 0.15);
+    border-radius: 16px;
+}
+
+/* <-- responsive css -->  */
+/* 
+@media screen and (max-width: 425px) {
+    .jam {
+        display: flex;
+        flex-direction: row;
+        align-items: center;
+        padding: 12px 24px;
+        gap: 4px;
+
+        /* position: absolute; */
+        /* width: 328px; */
+        /* height: 48px; */
+        /* left: 16px; */
+        /* top: 634px; */
+
+        /* Neutral/02 */
+
+        /* background: #D0D0D0;
+        border-radius: 16px; */
+    /* } */
+/* } */ 
