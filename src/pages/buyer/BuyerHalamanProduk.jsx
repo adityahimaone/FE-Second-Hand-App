@@ -5,7 +5,11 @@ import Button from "react-bootstrap/esm/Button";
 import { useNavigate, useParams } from "react-router-dom";
 import { Modal } from "react-bootstrap";
 import { useDispatch, useSelector } from "react-redux";
-import { getProductByID, getAllProduct } from "store/action/productAction";
+import {
+  getProductByID,
+  getAllProduct,
+  getProductByIDWithAuth,
+} from "store/action/productAction";
 import {
   getWishlist,
   addWishlist,
@@ -37,7 +41,11 @@ function BuyerHalamanProduk() {
   const token = loginData?.data?.token;
 
   useEffect(() => {
-    dispatch(getProductByID(id));
+    if (token) {
+      dispatch(getProductByIDWithAuth(id, token));
+    } else {
+      dispatch(getProductByID(id));
+    }
   }, []);
 
   const handleAddWishlist = () => {
@@ -101,23 +109,35 @@ function BuyerHalamanProduk() {
                   {productData?.category?.nama}
                 </h3>
                 <h2 className="font-16">{ConvertToIDR(productData?.harga)}</h2>
-                <button
-                  type="button"
-                  onClick={handleAddWishlist}
-                  className="button-outline-2 d-none my-2 d-xss-block d-inline"
-                >
-                  Wishlist
-                  <i className="bi bi-heart-fill ms-2" />
-                </button>
-                <button
-                  type="button"
-                  onClick={handleShow}
-                  // onClick={() => {setOpenModalTawar(true);
-                  // }}
-                  className="button-primary-1 d-none d-xss-block "
-                >
-                  Saya Tertarik dan ingin nego
-                </button>
+                {token ? (
+                  <button
+                    type="button"
+                    onClick={handleAddWishlist}
+                    className="button-outline-2 d-none my-2 d-xss-block d-inline"
+                  >
+                    Wishlist
+                    <i className="bi bi-heart-fill ms-2" />
+                  </button>
+                ) : null}
+                {token ? (
+                  <button
+                    type="button"
+                    onClick={handleShow}
+                    // onClick={() => {setOpenModalTawar(true);
+                    // }}
+                    className="button-primary-1 d-none d-xss-block "
+                  >
+                    Saya Tertarik dan ingin nego
+                  </button>
+                ) : (
+                  <button
+                    type="button"
+                    onClick={() => navigate("/login")}
+                    className="button-primary-1 d-none d-xss-block "
+                  >
+                    Login untuk Nego
+                  </button>
+                )}
                 {/* {openModalTawar && <ModalTawar setOpenModalTawar={setOpenModalTawar} />} */}
               </div>
               <div className="card p-3 mt-2 d-flex flex-row justify-content-start align-items-center gap-3">
