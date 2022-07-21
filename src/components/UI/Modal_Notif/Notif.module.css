@@ -1,21 +1,34 @@
 .card-notif {
-    width: 23.5rem;
-    height: auto;
+     /* width: 23.5rem;
+    height: auto;  */
     right: 0;
     margin-right: 10vw;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 16px;
+
+    position: absolute;
+    width: 376px;
+    height: 271px;
+    left: 960px;
+    top: 40px;
 }
+
 .txt {
     margin-left: 7rem !important;
 }
+
 .img {
     width: 3rem;
     height: 3rem;
 }
+
 /* Responsive */
-@media only screen and (max-width: 360px) {
+@media only screen and (max-width: 425px) {
     .card-notif {
         margin-right: -10px;
         border: none !important;
         border-radius: 0 !important;
     }
-  }
+}
