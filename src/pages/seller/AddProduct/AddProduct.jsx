@@ -4,8 +4,14 @@ import { Formik, Form } from "formik";
 import * as yup from "yup";
 import { useNavigate } from "react-router-dom";
 import { postAddProductSeller } from "store/action/ProductSellerAction";
+import { injectStyle } from "react-toastify/dist/inject-style";
+import { ToastContainer, toast } from "react-toastify";
 import ImagePreview from "./ImagePreview";
 import Style from "./addproduct.module.css";
+
+if (typeof window !== "undefined") {
+  injectStyle();
+}
 
 function AddProduct() {
   const navigate = useNavigate();
@@ -19,10 +25,6 @@ function AddProduct() {
   const [msgErr, setmsgErr] = useState("");
   const [isSubmit, setIsSubmit] = useState(false);
 
-  const [errorValidation, setError] = useState("");
-  const [success, setSuccess] = useState("");
-  const [style, setStyle] = useState({});
-  const [closed, setClosed] = useState(true);
   const [disable, setDisable] = useState(true);
 
   const [errorHandler, setErrorHandler] = useState();
@@ -66,16 +68,14 @@ function AddProduct() {
         dispatch(
           postAddProductSeller(
             token,
-            formData,
-            setErrorHandler,
-            setSuccessHandler
+            formData
           )
         );
-        console.log(imagePrev);
       }
     }
   };
 
+  // Image Upload & Preview handle
   const handleImagePrev = (e) => {
     const newFiles = [];
     // eslint-disable-next-line no-plusplus
@@ -100,121 +100,9 @@ function AddProduct() {
     URL.revokeObjectURL(image);
   };
 
-  // Error Handling
-  useEffect(() => {
-    if (successHandler === true) {
-      setSuccess("Produk berhasil diterbitkan.");
-      setTimeout(() => navigate("/product/list"), 5000);
-      setTimeout(() => {
-        const newStyle = {
-          opacity: 1,
-          width: `${100}%`,
-        };
-        setStyle(newStyle);
-      }, 100);
-    }
-    if (errorHandler === true) {
-      setError("Batas upload produk adalah 4");
-      setTimeout(() => {
-        navigate("/product/list");
-      }, 5000);
-      setTimeout(() => {
-        const newStyle = {
-          opacity: 1,
-          width: `${100}%`,
-        };
-        setStyle(newStyle);
-      }, 100);
-    }
-  }, [successHandler, errorHandler]);
-
   return (
     <div className="mt-3">
-      {errorValidation && closed && (
-        <div className="">
-          <div
-            className="fixed-top"
-            style={{
-              backgroundColor: "rgba(0, 0, 0, 0)",
-              width: "100%",
-              height: "100%",
-            }}
-          >
-            <div className="row mb-0">
-              <div className="col-12">
-                <div
-                  className={`${Style["responsive-alert"]} rounded-top d-flex justify-content-between ps-3 pe-3 pt-3 pb-3 align-items-center`}
-                >
-                  <p className="m-0 fs-6 " style={{ color: "#842029" }}>
-                    Batas upload produk adalah 4
-                  </p>
-                  <button
-                    type="button"
-                    className="bg-transparent btn"
-                    onClick={() => navigate("/product/list")}
-                  >
-                    <i
-                      className="bi bi-x fs-2 ms-2"
-                      style={{ color: "#842029", cursor: "pointer" }}
-                    />
-                  </button>
-                </div>
-              </div>
-            </div>
-            <div className="row">
-              <div className="col-12">
-                <div className={`${Style.progress}`}>
-                  <div
-                    className={`${Style["progress-done-error"]}`}
-                    style={style}
-                  />
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-      )}
-      {success && closed && (
-        <div className="">
-          <div
-            className="fixed-top"
-            style={{
-              backgroundColor: "rgba(0, 0, 0, 0)",
-              width: "100%",
-              height: "100%",
-            }}
-          >
-            <div className="row mb-0">
-              <div className="col-12">
-                <div
-                  className={`${Style["responsive-alert-success"]} rounded-top d-flex justify-content-between ps-3 pe-3 pt-3 pb-3 align-items-center`}
-                >
-                  <p className="m-0 fs-6 text-white">
-                    Produk telah berhasil ditambahkan
-                  </p>
-                  <button
-                    type="button"
-                    className="bg-transparent btn"
-                    onClick={() => navigate("/product/list")}
-                  >
-                    <i className="bi bi-x fs-2 ms-2 text-white" />
-                  </button>
-                </div>
-              </div>
-            </div>
-            <div className="row">
-              <div className="col-12">
-                <div className={`${Style.progress}`}>
-                  <div
-                    className={`${Style["progress-done-success"]}`}
-                    style={style}
-                  />
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-      )}
+      <ToastContainer />
       <div
         className={`justify-content-center align-items-center mb-3 ${Style["title-responsive"]}`}
       >
@@ -224,7 +112,11 @@ function AddProduct() {
       <div
         className={`d-flex mt-3 position-absolute start-50 translate-middle-x ${Style.responsive}`}
       >
-        <button type="button" className={`${Style["width-left"]} bg-transparent btn`} onClick={() => navigate(-1)}>
+        <button
+          type="button"
+          className={`${Style["width-left"]} bg-transparent btn`}
+          onClick={() => navigate(-1)}
+        >
           <i className="bi bi-arrow-left fs-4" />
         </button>
         <div className={`${Style["width-right"]} w-100`}>
@@ -237,8 +129,9 @@ function AddProduct() {
               category_id: 0,
               image: [],
             }}
-            onSubmit={(values) => {
+            onSubmit={(values, { resetForm }) => {
               handleSubmitProduct(values);
+              resetForm(" ");
             }}
           >
             {({ errors, values, handleChange, handleSubmit }) => (

@@ -1,9 +1,10 @@
 import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { getProductByID } from "store/action/productAction";
-import { deleteProductSeller } from "store/action/ProductSellerAction";
+import { deleteProductSeller, getProductByID } from "store/action/ProductSellerAction";
 import { ConvertToIDR } from "utils/helper";
+import { ToastContainer } from "react-toastify";
 import { useNavigate, useParams } from "react-router-dom";
+import DeleteProduct from "./seller/AddProduct/DeleteProduct";
 
 function ProductDetail() {
   const dispatch = useDispatch();
@@ -25,72 +26,25 @@ function ProductDetail() {
 
   const result = {};
   useEffect(() => {
-    dispatch(getProductByID(id));
+    dispatch(getProductByID(token, id));
+    
   }, []);
 
   const handleDeleteProductSeller = () => {
     dispatch(deleteProductSeller(token, id));
+    setShow(false)
   };
 
   console.log(result, "result");
 
   return (
     <div className="container position-relative">
+      <ToastContainer />
       {show && (
-        // <div className="fixed">
-        //   <div
-        //   className="position-absolute top-50 start-50 translate-middle"
-        //   style={{ zIndex: "1" }}
-        // >
-        //   <div className="card p-3" style={{ width: "20rem" }}>
-        //     <p className="m-0 fs-6">Apakah kamu yakin untuk delete product?</p>
-        //     <button
-        //       type="button"
-        //       className="button-outline-2 mt-2"
-        //       onClick={() => setShow(false)}
-        //     >
-        //       Tidak
-        //     </button>
-        //     <button type="button" className="button-primary-1 mt-2">
-        //       Ya
-        //     </button>
-        //   </div>
-        // </div>
-        // </div>
-        <div
-          className="fixed-top"
-          style={{
-            backgroundColor: "rgba(0, 0, 0, 0.5)",
-            width: "100%",
-            height: "100%",
-          }}
-        >
-          <div className="row mb-0">
-            <div className="col-12">
-              <div
-                className="rounded-top d-flex justify-content-center ps-3 pe-3 pt-3 pb-3 align-items-center"
-                style={{ marginTop: "40vh" }}
-              >
-                <div className="card p-4">
-                  <p className="m-0 fs-6">Apakah anda yakin untuk menghapus produk ini?</p>
-                  <button
-                    type="button"
-                    className="button-outline-2 mt-3"
-                    onClick={() => setShow(false)}
-                  >
-                    Tidak
-                  </button>
-                  <button
-                    type="button"
-                    className="button-primary-1 mt-3"
-                  >
-                    Ya
-                  </button>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
+        <DeleteProduct
+          setShow={() => setShow(false)}
+          setDelete={handleDeleteProductSeller}
+        />
       )}
       <div className="w-max-968 mx-auto w-100 my-lg-5">
         <div className="row">

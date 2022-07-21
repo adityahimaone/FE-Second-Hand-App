@@ -9,6 +9,8 @@ import { useDispatch, useSelector } from "react-redux";
 import { getMyProduct, getProductSold } from "store/action/ProductSellerAction";
 import { getUserProfile } from "store/action/profileAction";
 import { getWishlist } from "store/action/wishlistAction";
+import { injectStyle } from "react-toastify/dist/inject-style";
+import { ToastContainer } from "react-toastify";
 import ProductOfInterest from "./ProductOfInterest";
 import AllProduct from "./AllProduct";
 import ProductSold from "./ProductSold";
@@ -52,6 +54,7 @@ function SellerSemuaProduk() {
   }, []);
   return (
     <section>
+      <ToastContainer/>
       <div className="container w-75">
         <div className={`${Style.profile}`}>
           <h1 className="fw-bold fs-4 mt-3 d-none d-xss-block">

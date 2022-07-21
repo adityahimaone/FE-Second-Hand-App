@@ -21,7 +21,7 @@ export const getUserProfile = (token) => (dispatch) => {
 };
 
 export const postProfileAction =
-  (token, data, setSuccessHandler) => (dispatch) => {
+  (token, data, setSuccessHandler, setErrorHandler) => (dispatch) => {
     dispatch({ type: `${POST_UPDATE_PROFILE}_LOADING` });
     AxiosWithAuth(token)
       .post("/profile/update-profile", data)
@@ -39,5 +39,8 @@ export const postProfileAction =
           type: `${POST_UPDATE_PROFILE}_ERROR`,
           error: error.response,
         });
+        if (error.response.status === 401) {
+          setErrorHandler(true);
+        }
       });
   };

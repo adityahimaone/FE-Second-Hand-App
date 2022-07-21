@@ -6,9 +6,15 @@ import { useDispatch, useSelector } from "react-redux";
 import CloseButton from "react-bootstrap/CloseButton";
 import { Formik, Form } from "formik";
 import * as yup from "yup";
+import { injectStyle } from "react-toastify/dist/inject-style";
+import { ToastContainer, toast } from "react-toastify";
 import { postProfileAction } from "store/action/profileAction";
 import { getUserProfile } from "../store/action/profileAction";
 import Style from "./seller/ProductList/sellersemuaproduk.module.css";
+
+if (typeof window !== "undefined") {
+  injectStyle();
+}
 
 function InfoProfil() {
   const navigate = useNavigate();
@@ -24,7 +30,6 @@ function InfoProfil() {
   } = useSelector((state) => state.profile);
 
   const [successHandler, setSuccessHandler] = useState();
-  const [success, setSuccess] = useState(false);
 
   const [file, setFile] = useState(dataProfile.data.avatar);
   const [token, setToken] = useState(dataLogin?.data?.token);
@@ -48,20 +53,20 @@ function InfoProfil() {
     if (event.target.files && event.target.files[0]) {
       setFile(URL.createObjectURL(event.target.files[0]));
       setImageUpload(event.target.files[0]);
-      setErrMsg(false)
+      setErrMsg(false);
     }
   };
 
   const onImageDelete = () => {
     setFile(dataProfile.data.avatar || "/images/camera1.png");
-    setErrMsg(true)
+    setErrMsg(true);
   };
 
   const msg = () => {
     if (imageUpload === undefined) {
-      setErrMsg(true)
+      setErrMsg(true);
     }
-  }
+  };
   const handleSubmitProfil = (values) => {
     const formData = new FormData();
     formData.append("kota", values.kota);
@@ -70,7 +75,9 @@ function InfoProfil() {
     formData.append("image", imageUpload);
     // eslint-disable-next-line no-param-reassign
     values.image = imageUpload;
-    dispatch(postProfileAction(token, formData, setSuccessHandler));
+    if (errMsg === false) {
+      dispatch(postProfileAction(token, formData, setSuccessHandler));
+    }
     // console.log(imageUpload)
   };
 
@@ -78,8 +85,9 @@ function InfoProfil() {
     dispatch(getUserProfile(token));
 
     if (successHandler === true) {
-      setSuccess(true);
-      setTimeout(() => navigate(setSuccess(false)), 5000);
+      toast.success("Profile berhasil disimpan", {
+        position: toast.POSITION.TOP_CENTER,
+      });
     }
   }, [successHandler]);
 
@@ -137,28 +145,10 @@ function InfoProfil() {
     "Kota Blitar",
     "Kota Kediri",
   ];
-  
+
   return (
     <div>
-      {success && (
-        <div
-          className="position-absolute bottom-0 start-50 translate-middle-x me-5 mb-5 w-50"
-          style={{ zIndex: "2" }}
-        >
-          <div className="alert alert-success" role="alert">
-            <div className="rounded d-flex justify-content-between align-items-center">
-              <p className="text-center m-0">
-                Produk telah berhasil ditambahkan
-              </p>
-              <i
-                className="bi bi-x fs-2 ms-2 text-center"
-                style={{ cursor: "pointer" }}
-                onClick={() => setSuccess(false)}
-              />
-            </div>
-          </div>
-        </div>
-      )}
+      <ToastContainer />
       <div className="container d-flex justify-content-center">
         <div className="d-flex w-max-570 mt-5 w-100 position-relative">
           <button
@@ -196,10 +186,6 @@ function InfoProfil() {
                           accept="image/*"
                           ref={inputRef}
                           className="d-none"
-                          // onChange={onImageChange}
-                          // onChange={(e) => {
-                          //   setFieldValue("image", e.target.files[0])
-                          // }}
                           onChange={(e) => onImageChange(e)}
                         />
                         <img
