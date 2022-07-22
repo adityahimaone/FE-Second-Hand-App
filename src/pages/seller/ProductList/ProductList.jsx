@@ -194,7 +194,7 @@ function SellerSemuaProduk() {
               <div className="row">
                 {myWishList?.data?.length >= 1 ? (
                   myWishList?.data?.map((item) => {
-                    if (item?.id === null) {
+                    if (item?.wishlist === null) {
                       return "";
                     }
                     return (
