@@ -8,7 +8,7 @@ import Style from "./sellersemuaproduk.module.css";
 
 function AllProduct({item}) {
   const navigate = useNavigate();
-
+  
   const { id, nama, image, harga, category_id, category, product_image } = item;
 
   return (

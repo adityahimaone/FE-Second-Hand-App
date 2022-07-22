@@ -119,7 +119,7 @@
         width: 5rem;
     }
 }
-@media only screen and (max-width: 720px) {
+@media only screen and (max-width: 767px) {
     .custom-file-input::before{
         width: 4.5rem;
     }

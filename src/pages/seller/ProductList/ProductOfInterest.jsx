@@ -2,14 +2,14 @@
 /* eslint-disable camelcase */
 import React from "react";
 import { Card } from "react-bootstrap";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 import { ConvertToIDR } from "utils/helper";
 import Style from "./sellersemuaproduk.module.css";
 
-function ProductOfInterest({item}) {
+function ProductOfInterest({item, params}) {
   const navigate = useNavigate()
-
-  const { id, nama, image, harga, category_id, category, product_image } = item;
+  const {  nama, image, harga, category_id, category, product_image } = item;
+  const id = params
 
   return (
           <Card

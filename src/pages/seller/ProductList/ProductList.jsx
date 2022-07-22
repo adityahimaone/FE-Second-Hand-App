@@ -1,15 +1,18 @@
+/* eslint-disable jsx-a11y/click-events-have-key-events */
+/* eslint-disable jsx-a11y/no-static-element-interactions */
 /* eslint-disable no-unused-expressions */
 /* eslint-disable no-prototype-builtins */
 /* eslint-disable consistent-return */
 /* eslint-disable no-plusplus */
 /* eslint-disable array-callback-return */
 import React, { useEffect, useState } from "react";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { getMyProduct, getProductSold } from "store/action/ProductSellerAction";
 import { getUserProfile } from "store/action/profileAction";
 import { getWishlist } from "store/action/wishlistAction";
 import { injectStyle } from "react-toastify/dist/inject-style";
+import { Spinner } from "react-bootstrap";
 import { ToastContainer } from "react-toastify";
 import ProductOfInterest from "./ProductOfInterest";
 import AllProduct from "./AllProduct";
@@ -28,13 +31,9 @@ function SellerSemuaProduk() {
   const { data: dataLogin } = useSelector((state) => state.login);
   const [token, setToken] = useState(dataLogin?.data?.token);
 
-  const {
-    isLoading,
-    data: dataProfile,
-    error,
-  } = useSelector((state) => state.profile);
+  const { data: dataProfile } = useSelector((state) => state.profile);
 
-  const { data: myProductData } = useSelector(
+  const { isLoading: isLodaingMyProduct, data: myProductData } = useSelector(
     (state) => state.seller_my_product
   );
   const { data: productSold } = useSelector(
@@ -54,7 +53,7 @@ function SellerSemuaProduk() {
   }, []);
   return (
     <section>
-      <ToastContainer/>
+      <ToastContainer />
       <div className="container w-75">
         <div className={`${Style.profile}`}>
           <h1 className="fw-bold fs-4 mt-3 d-none d-xss-block">
@@ -156,6 +155,15 @@ function SellerSemuaProduk() {
           <div className="w-100">
             {myOption === "produk" && (
               <div className="row ">
+                <div className="w-100 d-flex justify-content-center">
+                  {isLodaingMyProduct ? (
+                    <div className="gap-2">
+                      <Spinner animation="grow" variant="primary" />
+                      <Spinner animation="grow" variant="primary" />
+                      <Spinner animation="grow" variant="primary" />
+                    </div>
+                  ) : null}
+                </div>
                 <div className="col-6 col-sm-6 col-md-6 col-lg-6 col-xl-4 col-xxl-4 mb-3 ">
                   <button
                     type="button"
@@ -171,7 +179,10 @@ function SellerSemuaProduk() {
                 {myProductData?.data.map((item) => {
                   if (item?.is_sold === false) {
                     return (
-                      <div className="col-6 col-sm-6 col-md-6 col-lg-6 col-xl-4 col-xxl-4 mb-3">
+                      <div
+                        key={item?.id}
+                        className="col-6 col-sm-6 col-md-6 col-lg-6 col-xl-4 col-xxl-4 mb-3"
+                      >
                         <AllProduct item={item} />
                       </div>
                     );
@@ -181,19 +192,20 @@ function SellerSemuaProduk() {
             )}
             {myOption === "diminati" && (
               <div className="row">
-                {/* <div className="col-4">
-                  {myWishList?.data?.map((item) => (
-                    <div>
-                      <ProductOfInterest item={item.wishlist} />
-                    </div>
-                  ))}
-                </div> */}
                 {myWishList?.data?.length >= 1 ? (
-                  myWishList?.data?.map((item) => (
-                    <div className="col-4">
-                      <ProductOfInterest item={item.wishlist} />
-                    </div>
-                  ))
+                  myWishList?.data?.map((item) => {
+                    if (item?.id === null) {
+                      return "";
+                    }
+                    return (
+                      <div key={item?.id} className="col-4">
+                        <ProductOfInterest
+                          item={item.wishlist}
+                          params={item?.product_id}
+                        />
+                      </div>
+                    );
+                  })
                 ) : (
                   <div className="text-center">
                     <img
@@ -213,7 +225,7 @@ function SellerSemuaProduk() {
                 <div className="row">
                   {productSold?.data?.length >= 1 ? (
                     productSold?.data?.map((item) => (
-                      <div className="col-4">
+                      <div key={item?.id} className="col-4">
                         <ProductSold item={item} />
                       </div>
                     ))

@@ -2,8 +2,8 @@ import React, { useEffect, useState } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { Formik, Form } from "formik";
 import * as yup from "yup";
-import { useNavigate } from "react-router-dom";
-import { postAddProductSeller } from "store/action/ProductSellerAction";
+import { useNavigate, useParams } from "react-router-dom";
+import { postAddProductSeller} from "store/action/ProductSellerAction";
 import { injectStyle } from "react-toastify/dist/inject-style";
 import { ToastContainer, toast } from "react-toastify";
 import ImagePreview from "./ImagePreview";
@@ -17,6 +17,7 @@ function AddProduct() {
   const navigate = useNavigate();
   const dispatch = useDispatch();
 
+  const [isUpdate, setIsUpdate] = useState(false)
   const { data: loginData } = useSelector((state) => state.login);
   const token = loginData?.data?.token;
 
@@ -25,10 +26,10 @@ function AddProduct() {
   const [msgErr, setmsgErr] = useState("");
   const [isSubmit, setIsSubmit] = useState(false);
 
-  const [disable, setDisable] = useState(true);
+  const [success, setSuccess] = useState(false)
+  const [errorhandler, setErrorhandler] = useState(false)
 
-  const [errorHandler, setErrorHandler] = useState();
-  const [successHandler, setSuccessHandler] = useState();
+  const [disable, setDisable] = useState(true);
 
   const validationSchema = yup.object({
     nama: yup
@@ -65,12 +66,7 @@ function AddProduct() {
       }
       if (imagePrev.length <= 4) {
         setIsSubmit(false);
-        dispatch(
-          postAddProductSeller(
-            token,
-            formData
-          )
-        );
+        dispatch(postAddProductSeller(token, formData, setSuccess, setErrorhandler));
       }
     }
   };
@@ -83,7 +79,6 @@ function AddProduct() {
       newFiles.push(e.target.files[i]);
     }
     setImagePrev(newFiles);
-    // setImagePrev(e.target.files);
     const file = e.target.files;
     const filesArray = Array.from(file);
     setImagePreview(filesArray);
@@ -100,13 +95,34 @@ function AddProduct() {
     URL.revokeObjectURL(image);
   };
 
+  useEffect(() => {
+    if (success === true) {
+      setTimeout(() => (navigate("/product/list")), 4000)
+      toast.success("Produk berhasil diterbitkan", {
+        position: toast.POSITION.TOP_CENTER,
+      });
+    }
+    if (errorhandler === true) {
+      setTimeout(() => (navigate("/product/list")), 4000)
+      toast.error("Produkmu sudah ada 4", {
+        position: toast.POSITION.TOP_CENTER,
+      });
+    }
+  })
+
   return (
     <div className="mt-3">
       <ToastContainer />
       <div
         className={`justify-content-center align-items-center mb-3 ${Style["title-responsive"]}`}
       >
-        <img src="/images/fi_arrow-left.png" alt="" />
+        <button
+          type="button"
+          className={`${Style["width-left"]} bg-transparent btn`}
+          onClick={() => navigate(-1)}
+        >
+          <i className="bi bi-arrow-left fs-4" />
+        </button>
         <p className="m-0 ms-3 fs-6">Lengkapi Detail Produk</p>
       </div>
       <div
@@ -114,7 +130,7 @@ function AddProduct() {
       >
         <button
           type="button"
-          className={`${Style["width-left"]} bg-transparent btn`}
+          className={`${Style["width-left"]} bg-transparent btn d-none d-md-block d-lg-block d-xl-block d-xxl-block`}
           onClick={() => navigate(-1)}
         >
           <i className="bi bi-arrow-left fs-4" />
@@ -262,7 +278,7 @@ function AddProduct() {
                     type="submit"
                     className="button-primary-1 w-50 ms-2 fs-6"
                   >
-                    Submit
+                    {isUpdate ? "Update" : "Submit"}
                   </button>
                 </div>
               </Form>

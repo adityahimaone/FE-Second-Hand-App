@@ -1,8 +1,10 @@
 import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { deleteProductSeller, getProductByID } from "store/action/ProductSellerAction";
+import { deleteProductSeller } from "store/action/ProductSellerAction";
+import { getProductByIDWithAuth } from "store/action/productAction";
 import { ConvertToIDR } from "utils/helper";
-import { ToastContainer } from "react-toastify";
+import { toast, ToastContainer } from "react-toastify";
+import { Spinner } from "react-bootstrap";
 import { useNavigate, useParams } from "react-router-dom";
 import DeleteProduct from "./seller/AddProduct/DeleteProduct";
 
@@ -13,7 +15,7 @@ function ProductDetail() {
   const { id } = useParams();
 
   const {
-    isLoading,
+    isLoading: isLoadingDataById,
     data: productByIdData,
     error,
   } = useSelector((state) => state.product_by_id);
@@ -24,15 +26,21 @@ function ProductDetail() {
   const productData = productByIdData?.data;
   const ownerData = productByIdData?.data?.owner;
 
+  const [success, setSuccess] = useState(false);
+
   const result = {};
   useEffect(() => {
-    dispatch(getProductByID(token, id));
-    
-  }, []);
+    dispatch(getProductByIDWithAuth(id, token));
+    if (success === true) {
+      toast.success("Produk berhasil dihapus", {
+        position: toast.POSITION.TOP_CENTER,
+      });
+    }
+  }, [success]);
 
   const handleDeleteProductSeller = () => {
-    dispatch(deleteProductSeller(token, id));
-    setShow(false)
+    dispatch(deleteProductSeller(token, id, setSuccess));
+    setShow(false);
   };
 
   console.log(result, "result");
@@ -40,6 +48,15 @@ function ProductDetail() {
   return (
     <div className="container position-relative">
       <ToastContainer />
+      <div className="w-100 d-flex justify-content-center">
+        {isLoadingDataById ? (
+          <div className="gap-2">
+            <Spinner animation="grow" variant="primary" />
+            <Spinner animation="grow" variant="primary" />
+            <Spinner animation="grow" variant="primary" />
+          </div>
+        ) : null}
+      </div>
       {show && (
         <DeleteProduct
           setShow={() => setShow(false)}
@@ -90,6 +107,7 @@ function ProductDetail() {
               <button
                 type="button"
                 className="button-primary-1 d-none d-xss-block mt-3"
+                onClick={() => navigate(`/product/edit/${id}`)}
               >
                 Edit
               </button>

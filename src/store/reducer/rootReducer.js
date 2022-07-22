@@ -16,6 +16,7 @@ import productSearchReducer from "./productSearchReducer";
 import profilePostReducer from "./profilePostReducer";
 import wishlistReducer from "./wishlistReducer";
 import productSoldReducer from "./productSoldReducer"
+import editProductReducer from "./editProductReducer";
 
 export default combineReducers({
   login: loginReducer,
@@ -35,4 +36,5 @@ export default combineReducers({
   product_search: productSearchReducer,
   wishlist: wishlistReducer,
   product_sold_reducer : productSoldReducer,
+  edit_product_reducer : editProductReducer,
 });

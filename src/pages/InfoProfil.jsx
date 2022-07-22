@@ -146,6 +146,8 @@ function InfoProfil() {
     "Kota Kediri",
   ];
 
+  console.log(dataProfile?.data)
+
   return (
     <div>
       <ToastContainer />
@@ -163,9 +165,9 @@ function InfoProfil() {
             <Formik
               validationSchema={validationSchema}
               initialValues={{
-                kota: "",
-                alamat: "",
-                no_hp: "",
+                kota: dataProfile?.data.kota,
+                alamat: dataProfile?.data.alamat,
+                no_hp: dataProfile?.data.no_hp,
                 image: null,
               }}
               onSubmit={(values) => {
@@ -247,10 +249,7 @@ function InfoProfil() {
                       className="form-control rounded-3"
                       name="alamat"
                       onChange={handleChange}
-                      placeholder={
-                        dataProfile?.data?.alamat ||
-                        "contoh: jl. Jambangan no. 5"
-                      }
+                      value={values.alamat}
                       style={{ height: "5rem" }}
                     />
                     <span className="font-12 text-danger py-1">
