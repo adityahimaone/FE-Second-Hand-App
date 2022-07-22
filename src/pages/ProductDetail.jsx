@@ -32,6 +32,7 @@ function ProductDetail() {
   useEffect(() => {
     dispatch(getProductByIDWithAuth(id, token));
     if (success === true) {
+      setTimeout(() => (navigate(-1)), 4000)
       toast.success("Produk berhasil dihapus", {
         position: toast.POSITION.TOP_CENTER,
       });

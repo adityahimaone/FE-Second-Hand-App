@@ -30,7 +30,6 @@ function EditProduct() {
   useEffect(() => {
     dispatch(getProductByIDWithAuth(id, token));
     if (success === true) {
-      setTimeout(() => (navigate(-1)), 5000)
       toast.success("Produk berhasil diUpdate", {
         position: toast.POSITION.TOP_CENTER,
       });
