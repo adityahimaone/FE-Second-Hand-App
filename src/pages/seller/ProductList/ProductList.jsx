@@ -198,7 +198,7 @@ function SellerSemuaProduk() {
                       return "";
                     }
                     return (
-                      <div key={item?.id} className="col-4">
+                      <div key={item?.id} className="col-6 col-sm-6 col-md-6 col-lg-6 col-xl-4 col-xxl-4 mb-3">
                         <ProductOfInterest
                           item={item.wishlist}
                           params={item?.product_id}
@@ -225,7 +225,7 @@ function SellerSemuaProduk() {
                 <div className="row">
                   {productSold?.data?.length >= 1 ? (
                     productSold?.data?.map((item) => (
-                      <div key={item?.id} className="col-4">
+                      <div key={item?.id} className="col-6 col-sm-6 col-md-6 col-lg-6 col-xl-4 col-xxl-4 mb-3">
                         <ProductSold item={item} />
                       </div>
                     ))
