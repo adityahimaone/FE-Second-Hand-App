@@ -1,6 +1,7 @@
 import React, { useReducer } from "react";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import ProductSearch from "pages/ProductSearch";
+import UserMiddleware from "middleware/userMiddleware";
 import LayoutDefault from "./components/layout/default";
 import Login from "./pages/Login/Login";
 import Register from "./pages/Register/Register";
@@ -34,22 +35,92 @@ function RoutesPage() {
       <Routes>
         <Route path="/" element={<LayoutDefault />}>
           <Route index element={<HomePage />} />
-          <Route path="product/:id" element={<ProductDetail />} />
+          <Route
+            path="product/:id"
+            element={
+              <UserMiddleware>
+                <ProductDetail />
+              </UserMiddleware>
+            }
+          />
           <Route path="/buyeroffer" element={<BuyerOffer />} />
           <Route path="/notifbuyer" element={<BuyerNotification />} />
           {/* <Route path="/product" element={<ProductSellingList />} /> */}
-          <Route path="/product/list" element={<ProductSellerList />} />
-          <Route path="/product/sell" element={<AddProduct />} />
-          <Route path="/product/edit/:id" element={<EditProduct />} />
-          <Route path="/user/profile" element={<InfoProfil />} />
-          <Route path="/penawaran" element={<InfoPenawaran />} />
+          <Route
+            path="/product/list"
+            element={
+              <UserMiddleware>
+                <ProductSellerList />
+              </UserMiddleware>
+            }
+          />
+          <Route
+            path="/product/sell"
+            element={
+              <UserMiddleware>
+                <AddProduct />
+              </UserMiddleware>
+            }
+          />
+          <Route
+            path="/product/edit/:id"
+            element={
+              <UserMiddleware>
+                <EditProduct />
+              </UserMiddleware>
+            }
+          />
+          <Route
+            path="/user/profile"
+            element={
+              <UserMiddleware>
+                <InfoProfil />
+              </UserMiddleware>
+            }
+          />
+          <Route
+            path="/penawaran"
+            element={
+              <UserMiddleware>
+                <InfoPenawaran />
+              </UserMiddleware>
+            }
+          />
           <Route path="/product/buy/:id" element={<BuyerHalamanProduk />} />
-          <Route path="/notification" element={<NotificationAll />} />
-          <Route path="/notification/:id" element={<NotificationSeller />} />
+          <Route
+            path="/notification"
+            element={
+              <UserMiddleware>
+                <NotificationAll />
+              </UserMiddleware>
+            }
+          />
+          <Route
+            path="/notification/:id"
+            element={
+              <UserMiddleware>
+                <NotificationSeller />
+              </UserMiddleware>
+            }
+          />
           <Route path="/product/search" element={<ProductSearch />} />
         </Route>
-        <Route path="/status" element={<StatusDiperbarui />} />
-        <Route path="/infoproduct" element={<InfoProduct />} />
+        <Route
+          path="/status"
+          element={
+            <UserMiddleware>
+              <StatusDiperbarui />
+            </UserMiddleware>
+          }
+        />
+        <Route
+          path="/infoproduct"
+          element={
+            <UserMiddleware>
+              <InfoProduct />
+            </UserMiddleware>
+          }
+        />
         <Route path="/login" element={<Login />} />
         <Route path="/register" element={<Register />} />
       </Routes>

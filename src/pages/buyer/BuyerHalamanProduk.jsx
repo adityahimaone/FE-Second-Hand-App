@@ -64,6 +64,15 @@ function BuyerHalamanProduk() {
   console.log(productData, ownerData, "ownerData");
   const portalDiv = document.getElementById("modal");
 
+  const wishConditional =
+    token && !productByIdData?.data?.user_wishlist?.length > 0;
+
+  console.log(
+    wishConditional,
+    productByIdData?.data?.user_wishlist?.length > 0,
+    "wishConditional"
+  );
+
   return (
     <>
       {ReactDOM.createPortal(
@@ -109,7 +118,7 @@ function BuyerHalamanProduk() {
                   {productData?.category?.nama}
                 </h3>
                 <h2 className="font-16">{ConvertToIDR(productData?.harga)}</h2>
-                {token ? (
+                {wishConditional ? (
                   <button
                     type="button"
                     onClick={handleAddWishlist}
@@ -118,7 +127,16 @@ function BuyerHalamanProduk() {
                     Wishlist
                     <i className="bi bi-heart-fill ms-2" />
                   </button>
-                ) : null}
+                ) : (
+                  <button
+                    type="button"
+                    onClick={handleDeleteWishlist}
+                    className="button-outline-2 d-none my-2 d-xss-block d-inline"
+                  >
+                    Unwishlist
+                    <i className="bi bi-heart-fill ms-2" />
+                  </button>
+                )}
                 {token ? (
                   <button
                     type="button"
