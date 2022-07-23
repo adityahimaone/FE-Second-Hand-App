@@ -30,6 +30,7 @@ function BuyerHalamanProduk() {
   const [show, setShow] = useState(false);
   const handleShow = () => setShow(true);
   const handleClose = () => setShow(false);
+  const [refreshPage, setRefreshPage] = useState(false);
 
   const {
     isLoading,
@@ -40,20 +41,16 @@ function BuyerHalamanProduk() {
   const { data: loginData } = useSelector((state) => state.login);
   const token = loginData?.data?.token;
 
-  useEffect(() => {
-    if (token) {
-      dispatch(getProductByIDWithAuth(id, token));
-    } else {
-      dispatch(getProductByID(id));
-    }
-  }, []);
+  const wishistID = productByIdData?.data?.user_wishlist[0]?.id;
 
   const handleAddWishlist = () => {
     dispatch(addWishlist(token, id));
+    setRefreshPage((prev) => !prev);
   };
 
   const handleDeleteWishlist = () => {
-    dispatch(deleteWishlist(token, id));
+    dispatch(deleteWishlist(token, wishistID));
+    setRefreshPage((prev) => !prev);
   };
 
   console.log(productByIdData, "productByIdData");
@@ -72,6 +69,14 @@ function BuyerHalamanProduk() {
     productByIdData?.data?.user_wishlist?.length > 0,
     "wishConditional"
   );
+
+  useEffect(() => {
+    if (token) {
+      dispatch(getProductByIDWithAuth(id, token));
+    } else {
+      dispatch(getProductByID(id));
+    }
+  }, [refreshPage]);
 
   return (
     <>
