@@ -41,14 +41,13 @@ function BuyerHalamanProduk() {
   const { data: loginData } = useSelector((state) => state.login);
   const token = loginData?.data?.token;
 
-  const wishistID = productByIdData?.data?.user_wishlist[0]?.id;
-
   const handleAddWishlist = () => {
     dispatch(addWishlist(token, id));
     setRefreshPage((prev) => !prev);
   };
 
   const handleDeleteWishlist = () => {
+    const wishistID = productByIdData?.data?.user_wishlist[0]?.id;
     dispatch(deleteWishlist(token, wishistID));
     setRefreshPage((prev) => !prev);
   };
@@ -61,14 +60,11 @@ function BuyerHalamanProduk() {
   console.log(productData, ownerData, "ownerData");
   const portalDiv = document.getElementById("modal");
 
-  const wishConditional =
-    token && !productByIdData?.data?.user_wishlist?.length > 0;
+  const wishTrueConditional =
+    token !== null && !productByIdData?.data?.user_wishlist?.length > 0;
 
-  console.log(
-    wishConditional,
-    productByIdData?.data?.user_wishlist?.length > 0,
-    "wishConditional"
-  );
+  const wishFalseConditional =
+    token !== null && productByIdData?.data?.user_wishlist?.length > 0;
 
   useEffect(() => {
     if (token) {
@@ -123,7 +119,7 @@ function BuyerHalamanProduk() {
                   {productData?.category?.nama}
                 </h3>
                 <h2 className="font-16">{ConvertToIDR(productData?.harga)}</h2>
-                {wishConditional ? (
+                {wishTrueConditional ? (
                   <button
                     type="button"
                     onClick={handleAddWishlist}
@@ -132,7 +128,8 @@ function BuyerHalamanProduk() {
                     Wishlist
                     <i className="bi bi-heart-fill ms-2" />
                   </button>
-                ) : (
+                ) : null}
+                {wishFalseConditional ? (
                   <button
                     type="button"
                     onClick={handleDeleteWishlist}
@@ -141,7 +138,7 @@ function BuyerHalamanProduk() {
                     Unwishlist
                     <i className="bi bi-heart-fill ms-2" />
                   </button>
-                )}
+                ) : null}
                 {token ? (
                   <button
                     type="button"
